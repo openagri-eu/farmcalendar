@@ -65,7 +65,7 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
 
-ROOT_URLCONF = 'openagri_farm_calendar.urls'
+ROOT_URLCONF = 'farm_calendar.urls'
 
 TEMPLATES = [
     {
@@ -83,7 +83,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'openagri_farm_calendar.wsgi.application'
+WSGI_APPLICATION = 'farm_calendar.wsgi.application'
 
 
 # Database
