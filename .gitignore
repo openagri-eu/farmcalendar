@@ -1,0 +1,30 @@
+# Folders
+**/.git/
+**/__pycache__/
+**/.venv*/
+**/.idea/
+**/staticfiles/
+**/assets/
+
+# Files
+.env
+*.sqlite3
+*.pdf
+*.txt
+!requirements.txt
+*.log
+
+# Ignore all migration files, then re-include __init__.py
+**/migrations/*
+!**/migrations/__init__.py
+
+# Image files - Ignore all, except in the 'static' folder
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.svg
+*.webp
+*.bmp
+!static/**/*.*
+
