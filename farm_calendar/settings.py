@@ -10,7 +10,6 @@ load_dotenv()  # Load environment variables from .env file
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 def get_env_var(var_name):
     try:
         return os.environ[var_name]
@@ -58,6 +57,15 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
+AUTH_USER_MODEL = "harvesthand.DefaultAuthUserExtend"
+
+# https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
+# LOGIN_REDIRECT_URL = "users:redirect"
+
+# https://docs.djangoproject.com/en/dev/ref/settings/#login-url
+LOGIN_URL = "login"
+
+
 SITE_ID = 1
 
 MIDDLEWARE = [
@@ -77,7 +85,7 @@ ROOT_URLCONF = 'farm_calendar.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [str(BASE_DIR / "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
