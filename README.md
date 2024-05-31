@@ -1,11 +1,11 @@
 # Farm Calendar Application Setup
 
-This README provides detailed instructions on setting up the PostgreSQL database and pgAdmin for the Farm Calendar 
+This README provides detailed instructions on setting up the PostgreSQL database and pgAdmin for the Farm Calendar
 application using Docker.
 
 ## Prerequisites
 
-Before you start, make sure Docker and Docker Compose are installed on your system. You will also need to create a 
+Before you start, make sure Docker and Docker Compose are installed on your system. You will also need to create a
 Docker network named `shared_network_fc` if it's marked as external in the Docker Compose configuration.
 
 ## Services Setup
@@ -62,7 +62,7 @@ networks:
 
 ### 2. Environment File
 
-Create a .env file in the same directory as your docker-compose.yml with the following environment variables:
+Copy the `example.env` file to a new file called `.env` in the same directory as your docker-compose.yml with the following environment variables:
 
 ```
 POSTGRES_DB=farm_calendar
