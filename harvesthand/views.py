@@ -11,7 +11,8 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect(f"{settings.LOGIN_URL}?next={request.path}")
+            next = settings.LOGIN_REDIRECT_URL
+            return redirect(f"{next}")
         else:
             messages.error(request, 'Invalid username or password')
     return render(request, 'auth/login.html')
