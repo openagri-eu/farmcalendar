@@ -1,0 +1,32 @@
+FROM python:3.12
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+ENV PIP_VERSION_TO_INSTALL="24.0"
+
+# install essential OS libs
+RUN apt-get update && \
+    apt-get install -y \
+    wget \
+    unzip \
+    git \
+    cmake \
+    pkg-config \
+    build-essential \
+    libpq-dev \
+    && apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    pip install -U pip==${PIP_VERSION_TO_INSTALL} && \
+    rm -rf /tmp/pip* /root/.cache
+
+# Set the working directory to /var/www
+WORKDIR /var/www
+
+COPY requirements.txt /var/www/
+RUN pip install -r requirements.txt && \
+    rm -rf /tmp/pip* /root/.cache
+
+# Copy the current directory contents into the container at /var/www
+COPY . /var/www
