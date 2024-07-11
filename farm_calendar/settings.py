@@ -46,16 +46,13 @@ LOCAL_APPS =[
 THIRD_PARTY_APPS = [
     # allauth apps
     'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
 AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
+    # 'django.contrib.auth.backends.ModelBackend',
+    'farm_calendar.utils.auth_backends.CustomJWTAuthenticationBackend',
 )
 
 AUTH_USER_MODEL = "harvesthand.DefaultAuthUserExtend"
@@ -65,6 +62,27 @@ LOGIN_REDIRECT_URL = "home"
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
 LOGIN_URL = "login"
+
+GATEKEEPER_LOGIN_URL = os.environ.get('GATEKEEPER_LOGIN_URL', None)
+
+JWT_USER_ID_FIELD = 'user_id'
+JWT_ALG = 'HS256'
+
+# for HMAC this is the same as the verifying key
+JWT_SIGNING_KEY = get_env_var('JWT_SIGNING_KEY')
+JWT_LOCAL_USER_ID_FIELD = 'email'
+
+#lets igore RSA-based signing for now...
+# with open(str(BASE_DIR / 'public.pem'), 'r') as f:
+#     JWT_PUBLIC_KEY = f.read()
+# with open(str(BASE_DIR / 'private.pem'), 'r') as f:
+#     JWT_PRIVATE_KEY = f.read()
+
+"""
+-----BEGIN PUBLIC KEY-----
+...
+-----END PUBLIC KEY-----
+"""
 
 
 SITE_ID = 1
@@ -77,8 +95,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    'allauth.account.middleware.AccountMiddleware',
+    'farm_calendar.utils.auth_middlewares.JWTAuthenticationMiddleware',
 ]
 
 ROOT_URLCONF = 'farm_calendar.urls'

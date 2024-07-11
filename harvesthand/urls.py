@@ -22,5 +22,5 @@ from . import views
 
 urlpatterns = [
     path('login/', views.login_view, name='login'),
-    path('', login_required(TemplateView.as_view(template_name="index.html")), name='home'),
+    path('', views.index_view, name='home'),
 ]
