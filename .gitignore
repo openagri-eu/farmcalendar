@@ -23,5 +23,5 @@
 *.webp
 *.bmp
 !static/**/*.*
-staticroot/*
+static_root/*
 logs/*
