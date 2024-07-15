@@ -19,7 +19,6 @@ def login_view(request):
         redirect_back_param = {'next': 'farm_calendar'}
         url_with_param = f"{settings.GATEKEEPER_LOGIN_URL}?{urlencode(redirect_back_param)}"
         return redirect(url_with_param)
-
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']

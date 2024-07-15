@@ -5,19 +5,51 @@ application using Docker.
 
 ## Prerequisites
 
-Before you start, make sure Docker and Docker Compose are installed on your system. You will also need to create a
-Docker network named `shared_network_fc` if it's marked as external in the Docker Compose configuration.
+Before you start, make sure Docker and Docker Compose are installed on your system.
+Later versions of Docker also include now Docker Compose, but it is used as `docker compose` instead of `docker-compose`.
 
-## Services Setup
+## Service Setup
 
-This setup includes two main services:
+### Setting up Configurations (.env file)
+If you wish to start up this Farm Calendar service from this repository, you'll need to first copy the `.env.sample` file into a new file called `.env`, which will be the source of all configurations for this service, and its database.
 
-1. **PostgreSQL** - The database server.
-2. **pgAdmin 4** - A web-based administration tool for PostgreSQL.
+In this new `.env` file you should change the configurations of the service to meet your deployment scenario. We strongly suggest changing configurations for the default usernames and passwords of the services used.
 
-## Configuration
+## Running
+There is already a simple and ready to use `docker-compose.yml` file for your convinience. Nonetheless, you should be able to use the existing file as a base, and adapt it to your own deployment setup.
 
-### 1. Docker Compose
+To run the service, execute the following command:
+```
+$ docker compose up -d
+```
+
+## Stopping/Restarting
+
+To stop the service related containers, run:
+
+```commandline
+docker compose stop
+```
+And to start again the stopped containers:
+
+```commandline
+docker compose start
+```
+
+To stop and remove the containers, use:
+
+```commandline
+docker-compose down
+```
+
+## More Examples of Setup
+As mentioned before, you can extend the existing `docker-compose.yml` to be more complex and to best fit your deployment scenario. The following setup includes a PgAdmin4 service in addition to the DB and FarmCalendar, while using a named (shared_network_fc) shared bridge network in docker. This setup also exemplifies the use of a external volume to hold the database data, therefore removing the database container will not remove the database information.
+
+This setup also requires the addition of the following configurations to your `.env` file (replacing the placeholder values with the actual ones):
+```
+PGADMIN_DEFAULT_EMAIL=<YourEmailHere>
+PGADMIN_DEFAULT_PASSWORD=<YourPasswordHere>
+```
 
 Here's the `docker-compose.yml` for setting up PostgreSQL and pgAdmin:
 
@@ -51,6 +83,20 @@ services:
     depends_on:
       - postgres_fc
 
+  farm_calendar:
+    build: .
+    image: ghcr.io/openagri-eu/farmcalendar:latest
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres_fc
+    environment:
+      POSTGRES_HOST: postgres_fc
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
 volumes:
   postgres_data_fc: {}
 
@@ -60,44 +106,7 @@ networks:
     external: true
 ```
 
-### 2. Environment File
-
-Copy the `example.env` file to a new file called `.env` in the same directory as your docker-compose.yml with the following environment variables:
-
-```
-POSTGRES_DB=farm_calendar
-POSTGRES_USER=farm_calendar_admin
-POSTGRES_PASSWORD=<YourPasswordHere>
-
-PGADMIN_DEFAULT_EMAIL=<YourEmailHere>
-PGADMIN_DEFAULT_PASSWORD=<YourPasswordHere>
-```
-Replace <YourPasswordHere> and <YourEmailHere> with your actual credentials.
-
-
-### 3. Network Setup
-
-If the network shared_network_fc does not exist, you must create it manually using the following Docker command:
-
-```commandline
-docker network create shared_network_fc
-```
-
-This network allows your Docker containers to communicate internally while isolating them from external access.
-
-
-# Running the Services
-
-To start the services, navigate to the directory containing your docker-compose.yml and run:
-
-```commandline
-docker-compose up -d
-```
-
-This command starts the containers in detached mode.
-
-
-# Accessing pgAdmin
+### Accessing pgAdmin
 
 After starting the services, pgAdmin will be accessible through your web browser at:
 
@@ -107,20 +116,6 @@ http://localhost:8088
 
 Use the email and password specified in the .env file to log in.
 
-
-# Stopping the Services
-
-To stop and remove the containers, use:
-
-```commandline
-docker-compose down
-```
-
-# Volume Management
-
-The data for PostgreSQL is persisted in a Docker volume (postgres_data_fc). This ensures that your database data remains intact even after the container is stopped or removed.
-
-
-# Additional Information
-
-For additional configuration options or more detailed information on using PostgreSQL and pgAdmin with Docker, refer to the official documentation for PostgreSQL and pgAdmin.
+# License
+This project code is licensed under the EUPL 1.2 license, see the LICENSE file for more details.
+Please note that each service may have different licenses, which can be found their specific source code repository.

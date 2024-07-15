@@ -36,6 +36,7 @@ DEFAULT_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
 ]
 
@@ -45,15 +46,19 @@ LOCAL_APPS =[
 
 THIRD_PARTY_APPS = [
     # allauth apps
-    'django.contrib.sites',
+    'rest_framework',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
+GATEKEEPER_LOGIN_URL = os.environ.get('GATEKEEPER_LOGIN_URL', None)
+
 AUTHENTICATION_BACKENDS = (
-    # 'django.contrib.auth.backends.ModelBackend',
     'farm_calendar.utils.auth_backends.CustomJWTAuthenticationBackend',
 )
+if GATEKEEPER_LOGIN_URL is None:
+    AUTHENTICATION_BACKENDS = AUTHENTICATION_BACKENDS + ('django.contrib.auth.backends.ModelBackend',)
+
 
 AUTH_USER_MODEL = "harvesthand.DefaultAuthUserExtend"
 
@@ -63,7 +68,6 @@ LOGIN_REDIRECT_URL = "home"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
 LOGIN_URL = "login"
 
-GATEKEEPER_LOGIN_URL = os.environ.get('GATEKEEPER_LOGIN_URL', None)
 
 JWT_USER_ID_FIELD = 'user_id'
 JWT_ALG = 'HS256'
@@ -78,12 +82,10 @@ JWT_LOCAL_USER_ID_FIELD = 'email'
 # with open(str(BASE_DIR / 'private.pem'), 'r') as f:
 #     JWT_PRIVATE_KEY = f.read()
 
-"""
------BEGIN PUBLIC KEY-----
-...
------END PUBLIC KEY-----
-"""
-
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
 
 SITE_ID = 1
 
