@@ -15,6 +15,11 @@ If you wish to start up this Farm Calendar service from this repository, you'll 
 
 In this new `.env` file you should change the configurations of the service to meet your deployment scenario. We strongly suggest changing configurations for the default usernames and passwords of the services used.
 
+The details for the configuration variables that are not self-explanatory are:
+* **GATEKEEPER_LOGIN_URL**: This should be set to the OpenAgri Gatekeeper login endpoint if you wish to use this as the authentication method. Alternativelly, not setting this variable will fall-back to a local session based user authentication on this FarmCalendar service.
+* **JWT_SIGNING_KEY**: If using the Gatekeeper for authentication, this should be set to the JWT signing key used by the Gatekeeper.
+
+
 ## Running
 There is already a simple and ready to use `docker-compose.yml` file for your convinience. Nonetheless, you should be able to use the existing file as a base, and adapt it to your own deployment setup.
 
