@@ -24,8 +24,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-GK_LOGIN_URL = 'http://web:8001/login'
-
 # Application definition
 DEFAULT_APPS = [
     'django.contrib.admin',
