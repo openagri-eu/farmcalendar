@@ -26,5 +26,6 @@ services:
       LOGGING_LEVEL: ${LOGGING_LEVEL}
       GATEKEEPER_LOGIN_URL: ${GATEKEEPER_LOGIN_URL}
       JWT_SIGNING_KEY: ${JWT_SIGNING_KEY}
+      JWT_COOKIE_NAME: ${JWT_COOKIE_NAME}
     # volumes:
     #   - ./:/var/www

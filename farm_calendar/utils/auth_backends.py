@@ -19,4 +19,16 @@ class CustomJWTAuthenticationBackend(BaseBackend):
         try:
             return User.objects.get(**{settings.JWT_LOCAL_USER_ID_FIELD: user_id})
         except User.DoesNotExist:
+            if settings.AUTO_CREATE_AUTH_USER:
+                password = User.objects.make_random_password()
+                new_user = User.objects.create_user(**{
+                    settings.JWT_LOCAL_USER_ID_FIELD: user_id,
+                    'password': password
+                })
+                try:
+                    new_user.save()
+                except Exception:
+                    pass
+                else:
+                    return new_user
             return None
