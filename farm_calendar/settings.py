@@ -5,17 +5,13 @@ from django.core.exceptions import ImproperlyConfigured
 from django.contrib.messages import constants as messages
 from dotenv import load_dotenv
 
+from .env_helpers import get_env_var
+
 load_dotenv()  # Load environment variables from .env file
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_ROOT = str(BASE_DIR / "static")
-
-def get_env_var(var_name):
-    try:
-        return os.environ[var_name]
-    except KeyError:
-        raise ImproperlyConfigured(f'"{var_name}" was not set as a env variable.')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -28,6 +24,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+GK_LOGIN_URL = 'http://web:8001/login'
 
 # Application definition
 DEFAULT_APPS = [
