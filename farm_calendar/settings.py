@@ -69,7 +69,10 @@ JWT_ALG = 'HS256'
 
 # for HMAC this is the same as the verifying key
 JWT_SIGNING_KEY = get_env_var('JWT_SIGNING_KEY')
-JWT_LOCAL_USER_ID_FIELD = 'email'
+JWT_COOKIE_NAME = get_env_var('JWT_COOKIE_NAME')
+JWT_LOCAL_USER_ID_FIELD = os.environ.get('JWT_LOCAL_USER_ID_FIELD', 'username')
+AUTO_CREATE_AUTH_USER = os.environ.get('AUTO_CREATE_AUTH_USER', 'True').lower() == 'true'
+print(f"AUTO_CREATE_AUTH_USER: {AUTO_CREATE_AUTH_USER}")
 
 #lets igore RSA-based signing for now...
 # with open(str(BASE_DIR / 'public.pem'), 'r') as f:

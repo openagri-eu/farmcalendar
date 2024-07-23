@@ -18,7 +18,8 @@ In this new `.env` file you should change the configurations of the service to m
 The details for the configuration variables that are not self-explanatory are:
 * **GATEKEEPER_LOGIN_URL**: This should be set to the OpenAgri Gatekeeper login endpoint if you wish to use this as the authentication method. Alternativelly, not setting this variable will fall-back to a local session based user authentication on this FarmCalendar service.
 * **JWT_SIGNING_KEY**: If using the Gatekeeper for authentication, this should be set to the JWT signing key used by the Gatekeeper.
-
+* **JWT_COOKIE_NAME**: Name of the auth cookie that will carry the JWT token (when using the Web User Interface). Eg: OpenAgriAuth. For the REST API endpoints, the JWT token is expected to be passed in the request header instead.
+* **AUTO_CREATE_AUTH_USER**: True or False, if the FarmCalendar service should automatically create a user if it receives a request with an authenticated user token that does not exist in its local database. If set to false, it will not authenticate the non-existing local using, if its set to true (default) it will create the user and successfully authenticate it.
 
 ## Running
 There is already a simple and ready to use `docker-compose.yml` file for your convinience. Nonetheless, you should be able to use the existing file as a base, and adapt it to your own deployment setup.

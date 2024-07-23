@@ -1,52 +1,31 @@
 version: '3.9'
 
 services:
-  postgres_fc:
-    image: postgres:latest
-    restart: always
-    container_name: postgres_farm_calendar
-    env_file:
-      - .env
+  db:
+    image: postgres:16.3
     ports:
       - "5432:5432"
-    volumes:
-      - postgres_data_fc:/var/lib/postgresql/data
-      - ./sql_scripts:/docker-entrypoint-initdb.d/  # Mounting SQL scripts
-    networks:
-      - shared_network_gatekeeper
-
-  pgadmin_fc:
-    image: dpage/pgadmin4
-    container_name: pgadmin_farm_calendar
-    restart: always
-    env_file:
-      - .env
-    ports:
-      - "8088:80"
-    networks:
-      - shared_network_gatekeeper
-    depends_on:
-      - postgres_fc
-
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
   farm_calendar:
     build: .
-    container_name: django_farm_calendar
-    restart: no
+    image: ghcr.io/openagri-eu/farmcalendar:latest
+    command: /var/www/entrypoint.sh
     ports:
-      - "8002:8000"
+      - "8000:8000"
     depends_on:
-      - postgres_fc
-    env_file:
-      - .env
+      - db
     environment:
-      POSTGRES_HOST: postgres_fc
-    networks:
-      - shared_network_gatekeeper
-
-volumes:
-  postgres_data_fc: {}
-
-networks:
-  shared_network_gatekeeper:
-    external: true
-    driver: bridge
+      POSTGRES_HOST: db
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+      LOGGING_LEVEL: ${LOGGING_LEVEL}
+      GATEKEEPER_LOGIN_URL: ${GATEKEEPER_LOGIN_URL}
+      JWT_SIGNING_KEY: ${JWT_SIGNING_KEY}
+      JWT_COOKIE_NAME: ${JWT_COOKIE_NAME}
+    # volumes:
+    #   - ./:/var/www
