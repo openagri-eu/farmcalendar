@@ -30,4 +30,10 @@ RUN pip install -r requirements.txt && \
 
 # Copy the current directory contents into the container at /var/www
 COPY . /var/www
-CMD /var/www/entrypoint.sh
+
+# Add the entrypoint script and set the execute permissions
+COPY entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Set the entrypoint script
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

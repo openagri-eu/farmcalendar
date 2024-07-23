@@ -4,7 +4,7 @@ services:
   postgres_fc:
     image: postgres:latest
     restart: always
-    container_name: postgres_fc_container
+    container_name: postgres_farm_calendar
     env_file:
       - .env
     ports:
@@ -13,18 +13,18 @@ services:
       - postgres_data_fc:/var/lib/postgresql/data
       - ./sql_scripts:/docker-entrypoint-initdb.d/  # Mounting SQL scripts
     networks:
-      - shared_network_fc
+      - shared_network_gatekeeper
 
   pgadmin_fc:
     image: dpage/pgadmin4
-    container_name: pgadmin_fc_container
+    container_name: pgadmin_farm_calendar
     restart: always
     env_file:
       - .env
     ports:
       - "8088:80"
     networks:
-      - shared_network_fc
+      - shared_network_gatekeeper
     depends_on:
       - postgres_fc
 
@@ -32,6 +32,6 @@ volumes:
   postgres_data_fc: {}
 
 networks:
-  shared_network_fc:
+  shared_network_gatekeeper:
     driver: bridge
     external: true

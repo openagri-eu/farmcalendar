@@ -7,11 +7,11 @@ from waitress import serve
 from farm_calendar.wsgi import application
 
 host = os.getenv('APP_HOST', '0.0.0.0')
-port = int(os.getenv('APP_PORT', '9000'))
-LOGGIN_LEVEL = os.getenv('LOGGIN_LEVEL', 'DEBUG')
+port = int(os.getenv('APP_PORT', '8002'))
+LOGGING_LEVEL = os.getenv('LOGGING_LEVEL', 'DEBUG')
 
 
-logging.basicConfig(filename='logs/waitress.log', level=getattr(logging, LOGGIN_LEVEL))
+logging.basicConfig(filename='logs/waitress.log', level=getattr(logging, LOGGING_LEVEL))
 
 warnings.filterwarnings("ignore")
 
