@@ -9,8 +9,11 @@ from django.shortcuts import render, redirect
 # from farm_calendar.utils.jwt_utils import get_user_id_from_jwt_request
 # from farm_calendar.utils.auth_decorators import jwt_required
 
-@login_required
 def index_view(request):
+    return render(request, 'index.html')
+
+@login_required
+def need_permission_view(request):
     return render(request, 'index.html')
 
 
