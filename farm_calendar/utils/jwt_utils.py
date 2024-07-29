@@ -29,6 +29,16 @@ def get_user_id_from_token(token):
         return decoded_token.get(settings.JWT_USER_ID_FIELD)
 
 
+def get_token_from_jwt_request(request):
+    auth_header = request.headers.get('Authorization')
+    token = None
+    if auth_header is not None:
+        token = auth_header.split(" ")[1]  # Assumes 'Bearer <token>'
+    else:
+        token = get_token_from_cookie(request)
+    return token
+
+
 def get_user_id_from_jwt_request(request):
     auth_header = request.headers.get('Authorization')
     decoded_token = None
