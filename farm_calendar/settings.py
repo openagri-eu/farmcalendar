@@ -22,7 +22,13 @@ SECRET_KEY = get_env_var('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]']
+
+EXTRA_ALLOWED_HOSTS = os.environ.get('EXTRA_ALLOWED_HOSTS', None)
+if EXTRA_ALLOWED_HOSTS is not None:
+    EXTRA_ALLOWED_HOSTS = EXTRA_ALLOWED_HOSTS.split(',')
+    ALLOWED_HOSTS.extend(EXTRA_ALLOWED_HOSTS)
 
 # Application definition
 DEFAULT_APPS = [
