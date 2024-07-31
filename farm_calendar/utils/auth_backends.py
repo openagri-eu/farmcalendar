@@ -23,6 +23,7 @@ class CustomJWTAuthenticationBackend(BaseBackend):
                 password = User.objects.make_random_password()
                 new_user = User.objects.create_user(**{
                     settings.JWT_LOCAL_USER_ID_FIELD: user_id,
+                    'email': f'{user_id}@farm.calendar',
                     'password': password
                 })
                 try:
