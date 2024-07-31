@@ -31,7 +31,7 @@ def post_authentication(request):
 
 def login_view(request):
     if settings.GATEKEEPER_LOGIN_URL is not None:
-        redirect_back_param = {'next': 'farm_calendar'}
+        redirect_back_param = {'next': 'FarmCalendar'}
         url_with_param = f"{settings.GATEKEEPER_LOGIN_URL}?{urlencode(redirect_back_param)}"
         return redirect(url_with_param)
     if request.method == 'POST':
