@@ -26,8 +26,8 @@ token = jwt.encode(payload, settings.JWT_SIGNING_KEY, algorithm=settings.JWT_ALG
 # url = 'http://localhost:8002/test_perm'
 # url = 'http://localhost:8002/api/FarmPlants/'
 # url = 'http://localhost:8000/api/resources/FarmPlants/'
-# url = 'http://localhost:8000/api/resources/FarmPlants/'
-url = 'http://localhost:8000/api/resources/WeeklyWeatherForecast/'
+url = 'http://localhost:8001/api/resources/FarmPlants/'
+# url = 'http://localhost:8001/api/resources/WeeklyWeatherForecast/'
 
 # url = 'http://localhost:8002/post_auth'
 
