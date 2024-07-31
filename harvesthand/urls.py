@@ -31,7 +31,8 @@ router.register(r'FarmPlants', views.FarmPlantViewSet)
 
 urlpatterns = [
     path('login/', views.login_view, name='login'),
+    path('post_auth/', views.post_authentication, name='post_auth'),
     path('', views.index_view, name='home'),
-    path('test_perm', views.need_permission_view, name='need_permission'),
+    path('test_perm/', views.need_permission_view, name='need_permission'),
     path('api/', include(router.urls)),
 ]
