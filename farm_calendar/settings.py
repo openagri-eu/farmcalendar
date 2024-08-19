@@ -47,6 +47,7 @@ LOCAL_APPS =[
 
 THIRD_PARTY_APPS = [
     'rest_framework',
+    'simple_history',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_PARTY_APPS
@@ -60,7 +61,7 @@ if GATEKEEPER_LOGIN_URL is None:
     AUTHENTICATION_BACKENDS = AUTHENTICATION_BACKENDS + ('django.contrib.auth.backends.ModelBackend',)
 
 
-AUTH_USER_MODEL = "harvesthand.DefaultAuthUserExtend"
+# AUTH_USER_MODEL = "harvesthand.DefaultAuthUserExtend"
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
 LOGIN_REDIRECT_URL = "home"
@@ -99,6 +100,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
     'farm_calendar.utils.auth_middlewares.JWTAuthenticationMiddleware',
 ]
 
