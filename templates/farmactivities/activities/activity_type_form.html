@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css">
+
+<style>
+    .pickr-container {
+        display: inline-block;
+        margin-left: 10px;
+    }
+</style>
+{% endblock %}
+
+
+{% block page_content_title %}Add New Activity Type{% endblock %}
+
+{% block page_content_rows %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+{% endblock %}
+
+
+
+
+{% block body_end_extra_scripts %}
+<script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+{% endblock body_end_extra_scripts %}
+
+
+{% block on_dom_load_js %}
+
+
+const pickrs_input = document.querySelectorAll('.color-picker');
+
+pickrs_input.forEach(input => {
+    const pickrContainer = document.createElement('div');
+    pickrContainer.classList.add('pickr-container');
+    // Insert the new <div> after the input field
+
+    input.style.display = 'none';
+    input.parentNode.insertBefore(pickrContainer, input.nextSibling);
+
+    const pickr = Pickr.create({
+        el: pickrContainer,  // Use the new <div> as the Pickr container
+        theme: 'classic',
+        default: input.value || '#ffffff',  // Set default color if available
+        components: {
+            preview: true,
+            opacity: true,
+            hue: true,
+            interaction: {
+                hex: true,
+                rgba: true,
+                input: true,
+                save: true
+            }
+        }
+    });
+    pickr.on('save', (color) => {
+        const defaultColor = '#ffffff'; // Replace with your desired default color
+        const colorValue = color ? color.toHEXA().toString() : defaultColor;
+        input.setAttribute("value", colorValue);
+    });
+});
+{% endblock on_dom_load_js %}

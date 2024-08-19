@@ -22,6 +22,8 @@
 
     <!-- main styles theme for this template-->
     <link href="{% static 'css/themes/sb-admin-2.min.css' %}" rel="stylesheet"/>
+
+    {% block extra_css %}{% endblock extra_css %}
     <!-- Custom styles for this template-->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
 
@@ -254,6 +256,13 @@
     <script src="{% static 'js/themes/sb-admin-2.min.js' %}"></script>
 
     {% block body_end_extra_scripts %}{% endblock body_end_extra_scripts %}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            {% block on_dom_load_js %}
+            {% endblock on_dom_load_js %}
+        });
+    </script>
 
     <script>
         window.onload = function() {
