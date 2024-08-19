@@ -6,9 +6,8 @@ class FarmPlantSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = FarmPlant
         fields = [
-            'area', 'species', 'variety',
-            'planting_date', 'harvesting_date',
-            'quantity', 'unit',
+            'description','area', 'geo_id',
+            'species', 'variety',
             'status', 'created_at', 'updated_at', 'deleted_at',
         ]
 
