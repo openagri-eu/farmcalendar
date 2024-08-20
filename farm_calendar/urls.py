@@ -18,9 +18,25 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
 from django.urls import path, include
 
+from rest_framework import routers
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("harvesthand.urls")),
     path("", include("farmactivities.urls")),
 ]
+
+# should be on an apis app
+from harvesthand.views import FarmPlantViewSet
+from farmactivities.views import ActivityViewSet, ActivityTypeViewSet
+
+router = routers.DefaultRouter()
+router.register(r'FarmPlants', FarmPlantViewSet)
+router.register(r'FarmActivities', ActivityViewSet)
+router.register(r'FarmActivityTypes', ActivityTypeViewSet)
+
+urlpatterns += [
+    path('api/', include(router.urls)),
+]
+
 urlpatterns += staticfiles_urlpatterns()

@@ -65,7 +65,7 @@ if GATEKEEPER_LOGIN_URL is None:
 # AUTH_USER_MODEL = "harvesthand.DefaultAuthUserExtend"
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
-LOGIN_REDIRECT_URL = "home"
+LOGIN_REDIRECT_URL = "calendar"
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
 LOGIN_URL = "login"

@@ -16,6 +16,7 @@ payload = {
     'jti': str(uuid4()),
 }
 
+# token = jwt.encode(payload, settings.JWT_SIGNING_KEY+'1', algorithm=settings.JWT_ALG)
 token = jwt.encode(payload, settings.JWT_SIGNING_KEY, algorithm=settings.JWT_ALG)
 
 # eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3MjIzNjc4MjcsImlhdCI6MTcyMjM2NDIyN30.c-BHVCmclu7wZBo875wTwl3gIchTvVbGYA6P5M-BfWA
@@ -25,8 +26,9 @@ token = jwt.encode(payload, settings.JWT_SIGNING_KEY, algorithm=settings.JWT_ALG
 # url = 'http://localhost:8000/'
 # url = 'http://localhost:8002/test_perm'
 # url = 'http://localhost:8002/api/FarmPlants/'
-# url = 'http://localhost:8000/api/resources/FarmPlants/'
-url = 'http://localhost:8001/api/resources/FarmPlants/'
+# url = 'http://localhost:8002/api/FarmActivities/'
+url = 'http://localhost:8000/api/resources/FarmActivities/'
+# url = 'http://localhost:8001/api/resources/FarmPlants/'
 # url = 'http://localhost:8001/api/resources/WeeklyWeatherForecast/'
 
 # url = 'http://localhost:8002/post_auth'
