@@ -43,7 +43,8 @@ DEFAULT_APPS = [
 
 LOCAL_APPS =[
     "harvesthand.apps.HarvesthandConfig",
-    "farmactivities.apps.FarmactivitiesConfig"
+    "farmactivities.apps.FarmactivitiesConfig",
+    "apis.apps.ApisConfig"
 ]
 
 THIRD_PARTY_APPS = [
