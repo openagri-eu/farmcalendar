@@ -55,7 +55,21 @@
                 <li class="nav-item{% if not active_page %} active{% endif %}">
                     <a class="nav-link" href="/">
                         <i class="fas fa-fw fa-calendar-alt"></i>
-                        <span>Home</span></a>
+                        <span>Calendar</span></a>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Farm Location
+                </div>
+                <!-- Nav Item - Livestock -->
+                <li class="nav-item{% if active_page == 'farm_area' %} active{% endif %}">
+                    <a class="nav-link" href="/">
+                        <i class="fas fa-fw fa-map"></i>
+                        <span>Farm Parcels</span></a>
                 </li>
 
                 <!-- Divider -->
@@ -71,7 +85,7 @@
                 <li class="nav-item{% if active_page == 'livestock' %} active{% endif %}">
                     <a class="nav-link" href="/">
                         <i class="fas fa-fw fa-horse-head"></i>
-                        <span>Livestock</span></a>
+                        <span>Animals</span></a>
                 </li>
                 <li class="nav-item{% if active_page == 'plants' %} active{% endif %}">
                     <a class="nav-link" href="/">
@@ -79,13 +93,19 @@
                         <span>Plants</span></a>
                 </li>
 
-                <!-- Nav Item - Subs -->
+                <!-- Nav Item -->
                 <li class="nav-item{% if active_page == 'equipment' %} active{% endif %}">
                     <a class="nav-link" href="/">
                         <i class="fas fa-fw fa-tractor"></i>
                         <span>Equipment</span></a>
                 </li>
 
+                <!-- Nav Item  -->
+                <li class="nav-item{% if active_page == 'sensors' %} active{% endif %}">
+                    <a class="nav-link" href="/">
+                        <i class="fas fa-fw fa-satellite-dish"></i>
+                        <span>Sensors</span></a>
+                </li>
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
 

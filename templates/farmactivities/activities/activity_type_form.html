@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css">
+<link rel="stylesheet" href="{% static 'vendor/pickr/themes/classic.min.css' %}">
 
 <style>
     .pickr-container {
@@ -28,7 +29,7 @@
 
 
 {% block body_end_extra_scripts %}
-<script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+<script src="{% static 'vendor/pickr/pickr.min.js' %}"></script>
 {% endblock body_end_extra_scripts %}
 
 
