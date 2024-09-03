@@ -7,7 +7,7 @@ from .base import NamedHistoricalBaseModel
 class FarmAsset(NamedHistoricalBaseModel):
     description = models.TextField(blank=True, null=True)
 
-    geo_id = models.UUIDField(_('Geographic Data ID'), unique=False, blank=True)
+    geo_id = models.UUIDField(_('Geographic Data ID'), unique=False, blank=True, null=True)
 
     area = models.ForeignKey('FarmArea', on_delete=models.SET_NULL,blank=True, null=True, related_name="%(class)ss")
 

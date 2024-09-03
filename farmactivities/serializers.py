@@ -1,10 +1,10 @@
 from rest_framework import serializers
 
-from farmactivities.models import ActivityType, Activity
+from farmactivities.models import FarmActivityType, FarmActivity
 
-class ActivitySerializer(serializers.HyperlinkedModelSerializer):
+class FarmActivitySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Activity
+        model = FarmActivity
 
         fields = [
             'activity_type', 'title', 'details',
@@ -14,9 +14,9 @@ class ActivitySerializer(serializers.HyperlinkedModelSerializer):
 
 
 
-class ActivityTypeSerializer(serializers.HyperlinkedModelSerializer):
+class FarmActivityTypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = ActivityType
+        model = FarmActivityType
 
         fields = [
             'name', 'description',

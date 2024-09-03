@@ -1,23 +1,23 @@
 from rest_framework import permissions, viewsets
 
-from farmactivities.models import Activity, ActivityType
-from farmactivities.serializers import ActivitySerializer, ActivityTypeSerializer
+from farmactivities.models import FarmActivity, FarmActivityType
+from farmactivities.serializers import FarmActivitySerializer, FarmActivityTypeSerializer
 
 
-class ActivityViewSet(viewsets.ModelViewSet):
+class FarmActivityViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows FarmActivity to be viewed or edited.
     """
-    queryset = Activity.objects.all().order_by('-start_time')
-    serializer_class = ActivitySerializer
+    queryset = FarmActivity.objects.all().order_by('-start_time')
+    serializer_class = FarmActivitySerializer
     permission_classes = [permissions.IsAuthenticated]
 
 
-class ActivityTypeViewSet(viewsets.ModelViewSet):
+class FarmActivityTypeViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows FarmActivityType to be viewed or edited.
     """
-    queryset = ActivityType.objects.all().order_by('-name')
-    serializer_class = ActivityTypeSerializer
+    queryset = FarmActivityType.objects.all().order_by('-name')
+    serializer_class = FarmActivityTypeSerializer
     permission_classes = [permissions.IsAuthenticated]
 

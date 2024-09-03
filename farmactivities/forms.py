@@ -1,9 +1,10 @@
 from django import forms
-from .models import ActivityType, Activity
+from .models import FarmActivityType, FarmActivity
 
-class ActivityTypeForm(forms.ModelForm):
+
+class FarmActivityTypeForm(forms.ModelForm):
     class Meta:
-        model = ActivityType
+        model = FarmActivityType
         fields = ['name', 'background_color', 'border_color', 'text_color']
         widgets = {
             'background_color': forms.TextInput(attrs={'class': 'color-picker'}),
@@ -12,9 +13,9 @@ class ActivityTypeForm(forms.ModelForm):
         }
 
 
-class ActivityForm(forms.ModelForm):
+class FarmActivityForm(forms.ModelForm):
     class Meta:
-        model = Activity
+        model = FarmActivity
         fields = ['activity_type', 'title', 'start_time', 'end_time', 'details']
         widgets = {
             'start_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
