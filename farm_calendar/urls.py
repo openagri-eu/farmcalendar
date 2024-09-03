@@ -27,14 +27,16 @@ urlpatterns = [
 ]
 
 # should be on an apis app
-from harvesthand.views import FarmPlantViewSet, FarmAnimalViewSet
-from farmactivities.views import ActivityViewSet, ActivityTypeViewSet
+from harvesthand.views import FarmAreaViewSet, FarmPlantViewSet, FarmAnimalViewSet, FarmEquipmentViewSet
+from farmactivities.views import FarmActivityViewSet, FarmActivityTypeViewSet
 
 router = routers.DefaultRouter()
+router.register(r'FarmAreas', FarmAreaViewSet)
 router.register(r'FarmPlants', FarmPlantViewSet)
 router.register(r'FarmAnimals', FarmAnimalViewSet)
-router.register(r'FarmActivities', ActivityViewSet)
-router.register(r'FarmActivityTypes', ActivityTypeViewSet)
+router.register(r'FarmEquipments', FarmEquipmentViewSet)
+router.register(r'FarmActivities', FarmActivityViewSet)
+router.register(r'FarmActivityTypes', FarmActivityTypeViewSet)
 
 urlpatterns += [
     path('api/', include(router.urls)),
