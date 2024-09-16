@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block page_content_title %}Register New Activity{% endblock %}
+
+{% block page_content_rows %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Save</button>
+</form>
+
+{% endblock %}

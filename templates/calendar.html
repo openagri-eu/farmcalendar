@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Calendar{% endblock title %}
+
+
+{% block page_content_title %}Farm Calendar{% endblock %}
+
+{% block page_content_rows %}
+
+        <!-- Page Content Rows with Card -->
+        <div class="row">
+          <div class="col-xl-12 col-lg-12">
+              <div class="card shadow mb-4">
+                  <!-- Card Header - Dropdown -->
+                  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                      <h6 class="m-0 font-weight-bold text-primary">Farm Activities Calendar</h6>
+                      {% block card_header_action %}
+                      <!-- Optional Action Buttons or Dropdowns -->
+                      {% endblock %}
+                  </div>
+
+                  <!-- Card Body -->
+                  <div class="card-body">
+                    <a href="{% url 'create_activity_type' %}" class="btn btn-primary mb-3">Register New Activity Type</a>
+                    <a href="{% url 'create_activity' %}" class="btn btn-primary mb-3">Register New Activity</a>
+                    <div id='calendar'></div>
+                  </div>
+              </div>
+          </div>
+
+
+{% endblock %}
+
+
+
+{% block on_dom_load_js %}
+var calendarEl = document.getElementById('calendar');
+
+var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    events: '{% url 'activity_list' %}',  // Fetch activities (events in FullCalendar) from the Django view
+    headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+    },
+    height: 'auto',  // Adjust height to fit content
+    contentHeight: 'auto', // Alternatively, you can use a specific height like '600px'
+    eventClick: function(info) {
+        alert('Event: ' + info.event.title + '\nDetails: ' + info.event.extendedProps.details);
+    },
+});
+
+calendar.render();
+
+{% endblock on_dom_load_js %}
+
+{% block body_end_extra_scripts %}
+<script src="{% static 'vendor/fullcalendar-6.1.15/dist/index.global.min.js' %}"></script>
+{% endblock body_end_extra_scripts %}
+
+

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock title %}
+
+{% block page_content_title %}Login{% endblock %}
+
+{% block page_content_rows %}
+
+
+<div class="col-xl-3 col-lg-3">
+    <div class="card shadow mb-4">
+
+        <!-- Card Header - Dropdown -->
+        <div
+            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Login with your credentials:</h6>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <form name="login" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username: </label>
+                    <input type="text" id="username" name="username" class="form-control form-control-user" required>
+
+                    <label for="password">Password: </label>
+                    <input type="password" id="password" name="password" class="form-control form-control-user" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
