@@ -9,7 +9,7 @@ class FarmAsset(NamedHistoricalBaseModel):
 
     geo_id = models.UUIDField(_('Geographic Data ID'), unique=False, blank=True, null=True)
 
-    area = models.ForeignKey('FarmArea', on_delete=models.SET_NULL,blank=True, null=True, related_name="%(class)ss")
+    area = models.ForeignKey('FarmParcel', on_delete=models.SET_NULL,blank=True, null=True, related_name="%(class)ss")
 
 
     class Meta:

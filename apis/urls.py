@@ -2,7 +2,7 @@ from django.urls import path, include
 from rest_framework import routers
 
 from .views import (
-    FarmAreaViewSet,
+    FarmParcelViewSet,
     FarmPlantViewSet,
     FarmAnimalViewSet,
     FarmEquipmentViewSet,
@@ -11,7 +11,7 @@ from .views import (
 )
 
 router = routers.DefaultRouter()
-router.register(r'FarmAreas', FarmAreaViewSet)
+router.register(r'FarmParcel', FarmParcelViewSet)
 router.register(r'FarmPlants', FarmPlantViewSet)
 router.register(r'FarmAnimals', FarmAnimalViewSet)
 router.register(r'FarmEquipments', FarmEquipmentViewSet)
