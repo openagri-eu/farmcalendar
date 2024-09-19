@@ -3,7 +3,7 @@ from rest_framework import routers
 
 from .views import (
     FarmParcelViewSet,
-    FarmPlantViewSet,
+    FarmCropViewSet,
     FarmAnimalViewSet,
     FarmEquipmentViewSet,
     FarmActivityViewSet,
@@ -11,8 +11,8 @@ from .views import (
 )
 
 router = routers.DefaultRouter()
-router.register(r'FarmParcel', FarmParcelViewSet)
-router.register(r'FarmPlants', FarmPlantViewSet)
+router.register(r'FarmParcels', FarmParcelViewSet)
+router.register(r'FarmCrops', FarmCropViewSet)
 router.register(r'FarmAnimals', FarmAnimalViewSet)
 router.register(r'FarmEquipments', FarmEquipmentViewSet)
 router.register(r'FarmActivities', FarmActivityViewSet)

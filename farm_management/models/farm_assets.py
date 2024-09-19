@@ -19,7 +19,7 @@ class FarmAsset(NamedHistoricalBaseModel):
         abstract = True
 
 
-class FarmPlant(FarmAsset):
+class FarmCrop(FarmAsset):
 
     class Meta:
         verbose_name = "Farm Plant"
