@@ -1,9 +1,9 @@
 from rest_framework import permissions, viewsets
 
-from harvesthand.models import (
+from farm_management.models import (
     FarmArea,
 )
-from harvesthand.serializers import (
+from farm_management.serializers import (
     FarmAreaSerializer,
 )
 

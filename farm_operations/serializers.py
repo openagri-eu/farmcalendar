@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from farmactivities.models import FarmActivityType, FarmActivity
+from .models import FarmActivityType, FarmActivity
 
 class FarmActivitySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

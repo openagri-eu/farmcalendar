@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from harvesthand.models import FarmArea, FarmPlant, FarmAnimal, FarmEquipment
+from .models import FarmArea, FarmPlant, FarmAnimal, FarmEquipment
 
 
 class FarmAreaSerializer(serializers.HyperlinkedModelSerializer):

@@ -22,8 +22,8 @@ from rest_framework import routers
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", include("harvesthand.urls")),
-    path("", include("farmactivities.urls")),
+    path("", include("farm_management.urls")),
+    path("", include("farm_operations.urls")),
     path("", include("apis.urls")),
 ]
 

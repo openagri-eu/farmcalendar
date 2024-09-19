@@ -1,7 +1,7 @@
 from rest_framework import permissions, viewsets
 
-from farmactivities.models import FarmActivity, FarmActivityType
-from farmactivities.serializers import FarmActivitySerializer, FarmActivityTypeSerializer
+from farm_operations.models import FarmActivity, FarmActivityType
+from farm_operations.serializers import FarmActivitySerializer, FarmActivityTypeSerializer
 
 
 class FarmActivityViewSet(viewsets.ModelViewSet):

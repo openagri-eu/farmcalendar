@@ -42,8 +42,8 @@ DEFAULT_APPS = [
 ]
 
 LOCAL_APPS =[
-    "harvesthand.apps.HarvesthandConfig",
-    "farmactivities.apps.FarmactivitiesConfig",
+    "farm_management.apps.FarmManagementConfig",
+    "farm_operations.apps.FarmOperationsConfig",
     "apis.apps.ApisConfig"
 ]
 

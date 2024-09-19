@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
                 ('start_time', models.DateTimeField()),
                 ('end_time', models.DateTimeField()),
                 ('details', models.TextField(blank=True, null=True)),
-                ('activity_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='farmactivities.farmactivitytype')),
+                ('activity_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='farm_operations.farmactivitytype')),
             ],
         ),
     ]

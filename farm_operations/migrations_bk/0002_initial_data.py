@@ -5,7 +5,7 @@ from django.db import migrations
 
 
 def setup_initial_data(apps, schema_editor):
-    FarmActivityType = apps.get_model("farmactivities", "FarmActivityType")
+    FarmActivityType = apps.get_model("farm_operations", "FarmActivityType")
     harvesting_activity = FarmActivityType(
         name='Harvesting',
         description='Plant harvesting activity',
