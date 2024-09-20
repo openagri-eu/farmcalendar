@@ -1,0 +1,68 @@
+[
+    {
+        "model": "farm_operations.farmoperationtype",
+        "pk": 1,
+        "fields": {
+            "name": "Harvesting",
+            "description": "Plant harvesting operation",
+            "background_color": "#F5E8C7",
+            "border_color": "#8B4513",
+            "text_color": "#2F4F4F"
+        }
+    },
+    {
+        "model": "farm_operations.farmoperationtype",
+        "pk": 2,
+        "fields": {
+            "name": "Planting",
+            "description": "Planting operation",
+            "background_color": "#C4E17F",
+            "border_color": "#228B22",
+            "text_color": "#2C5F2D"
+        }
+    },
+    {
+        "model": "farm_operations.farmoperationtype",
+        "pk": 3,
+        "fields": {
+            "name": "Compost Monitoring",
+            "description": "Compost monitoring operation",
+            "background_color": "#FFD700",
+            "border_color": "#8B4513",
+            "text_color": "#4B5320"
+        }
+    },
+    {
+        "model": "farm_operations.farmoperationtype",
+        "pk": 4,
+        "fields": {
+            "name": "Water Trough Monitoring",
+            "description": "Water Trough monitoring operation",
+            "background_color": "#ADD8E6",
+            "border_color": "#4682B4",
+            "text_color": "#2F4F4F"
+        }
+    },
+    {
+        "model": "farm_operations.farmoperationtype",
+        "pk": 5,
+        "fields": {
+            "name": "Insecticide Spraying",
+            "description": "Spraying operation",
+            "background_color": "#FF6347",
+            "border_color": "#8B0000",
+            "text_color": "#FFFFFF"
+        }
+    },
+    {
+        "model": "farm_operations.farmoperation",
+        "pk": 1,
+        "fields": {
+            "operation_type": 3,
+            "title": "Check the compost",
+            "start_time": "2024-09-20T00:15:00Z",
+            "end_time": "2024-09-20T10:18:00Z",
+            "details": ""
+        }
+    }
+]
