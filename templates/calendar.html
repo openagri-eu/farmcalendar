@@ -22,8 +22,8 @@
 
                   <!-- Card Body -->
                   <div class="card-body">
-                    <a href="{% url 'create_activity_type' %}" class="btn btn-primary mb-3">Register New Activity Type</a>
-                    <a href="{% url 'create_activity' %}" class="btn btn-primary mb-3">Register New Activity</a>
+                    <a href="{% url 'create_operation_type' %}" class="btn btn-primary mb-3">Register New Operation Type</a>
+                    <a href="{% url 'create_operation' %}" class="btn btn-primary mb-3">Register New Operation</a>
                     <div id='calendar'></div>
                   </div>
               </div>
@@ -39,7 +39,7 @@ var calendarEl = document.getElementById('calendar');
 
 var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
-    events: '{% url 'activity_list' %}',  // Fetch activities (events in FullCalendar) from the Django view
+    events: '{% url 'operation_list' %}',  // Fetch operations (events in FullCalendar) from the Django view
     headerToolbar: {
         left: 'prev,next today',
         center: 'title',

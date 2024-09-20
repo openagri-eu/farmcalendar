@@ -1,50 +1,50 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import FarmActivity, FarmActivityType
-from .forms import FarmActivityTypeForm, FarmActivityForm
+from .models import FarmOperation
+from .forms import FarmOperationTypeForm, FarmOperationForm
 
 class CalendarView(View):
     def get(self, request):
         return render(request, 'calendar.html')
 
-class FarmActivityTypeCreateView(View):
+class FarmOperationTypeCreateView(View):
     def get(self, request):
-        form = FarmActivityTypeForm()
-        return render(request, 'farmactivities/activities/activity_type_form.html', {'form': form})
+        form = FarmOperationTypeForm()
+        return render(request, 'farm_operations/operations/operation_type_form.html', {'form': form})
 
     def post(self, request):
-        form = FarmActivityTypeForm(request.POST)
+        form = FarmOperationTypeForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('calendar')
-        return render(request, 'farmactivities/activities/activity_type_form.html', {'form': form})
+        return render(request, 'farm_operations/operations/operation_type_form.html', {'form': form})
 
-class FarmActivityCreateView(View):
+class FarmOperationCreateView(View):
     def get(self, request):
-        form = FarmActivityForm()
-        return render(request, 'farmactivities/activities/activity_form.html', {'form': form})
+        form = FarmOperationForm()
+        return render(request, 'farm_operations/operations/operation_form.html', {'form': form})
 
     def post(self, request):
-        form = FarmActivityForm(request.POST)
+        form = FarmOperationForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('calendar')
-        return render(request, 'farmactivities/activities/activity_form.html', {'form': form})
+        return render(request, 'farm_operations/operations/operation_form.html', {'form': form})
 
 
-class FarmActivityListView(View):
+class FarmOperationListView(View):
     def get(self, request):
-        activities_json_data = []
-        for activity in FarmActivity.objects.select_related('activity_type').all():
-            activities_json_data.append({
-                'title': activity.title,
-                'start': activity.start_time.isoformat(),
-                'end': activity.end_time.isoformat(),
-                'details': activity.details,
-                'backgroundColor': activity.activity_type.background_color,
-                'borderColor': activity.activity_type.border_color,
-                'textColor': activity.activity_type.text_color,
-                'details': activity.details,
+        operations_json_data = []
+        for operation in FarmOperation.objects.select_related('operation_type').all():
+            operations_json_data.append({
+                'title': operation.title,
+                'start': operation.start_time.isoformat(),
+                'end': operation.end_time.isoformat(),
+                'details': operation.details,
+                'backgroundColor': operation.operation_type.background_color,
+                'borderColor': operation.operation_type.border_color,
+                'textColor': operation.operation_type.text_color,
+                'details': operation.details,
             })
-        return JsonResponse(activities_json_data, safe=False)
+        return JsonResponse(operations_json_data, safe=False)

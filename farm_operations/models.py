@@ -2,7 +2,7 @@ from django.db import models
 from django.core.validators import RegexValidator
 
 
-class FarmActivityType(models.Model):
+class FarmOperationType(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     # Fields for color codes
@@ -25,8 +25,8 @@ class FarmActivityType(models.Model):
     def __str__(self):
         return self.name
 
-class FarmActivity(models.Model):
-    activity_type = models.ForeignKey(FarmActivityType, on_delete=models.CASCADE)
+class FarmOperation(models.Model):
+    operation_type = models.ForeignKey(FarmOperationType, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()

@@ -4,15 +4,15 @@ from django.contrib.auth.decorators import login_required
 
 from .views import (
     CalendarView,
-    FarmActivityCreateView, FarmActivityListView,
-    FarmActivityTypeCreateView,
+    FarmOperationCreateView, FarmOperationListView,
+    FarmOperationTypeCreateView,
 )
 
 
 
 urlpatterns = [
     path('', login_required(CalendarView.as_view()), name='calendar'),
-    path('create/', FarmActivityCreateView.as_view(), name='create_activity'),
-    path('activities/', login_required(FarmActivityListView.as_view()), name='activity_list'),
-    path('activity-type/create/', FarmActivityTypeCreateView.as_view(), name='create_activity_type'),
+    path('create/', FarmOperationCreateView.as_view(), name='create_operation'),
+    path('operations/', login_required(FarmOperationListView.as_view()), name='operation_list'),
+    path('operation-type/create/', FarmOperationTypeCreateView.as_view(), name='create_operation_type'),
 ]

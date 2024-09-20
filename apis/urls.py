@@ -6,8 +6,8 @@ from .views import (
     FarmCropViewSet,
     FarmAnimalViewSet,
     AgriculturalMachineViewSet,
-    FarmActivityViewSet,
-    FarmActivityTypeViewSet,
+    FarmOperationViewSet,
+    FarmOperationTypeViewSet,
 )
 
 router = routers.DefaultRouter()
@@ -15,8 +15,8 @@ router.register(r'FarmParcels', FarmParcelViewSet)
 router.register(r'FarmCrops', FarmCropViewSet)
 router.register(r'FarmAnimals', FarmAnimalViewSet)
 router.register(r'FarmEquipments', AgriculturalMachineViewSet)
-router.register(r'FarmActivities', FarmActivityViewSet)
-router.register(r'FarmActivityTypes', FarmActivityTypeViewSet)
+router.register(r'FarmOperations', FarmOperationViewSet)
+router.register(r'FarmOperationTypes', FarmOperationTypeViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
