@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 from .env_helpers import get_env_var
 
 load_dotenv()  # Load environment variables from .env file
+from decouple import config, Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -199,5 +200,16 @@ STATICFILES_DIRS = [str(BASE_DIR / "static")]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 FIXTURE_DIRS = [(BASE_DIR / "fixtures")]
+
+
+
+DEFAULT_OPERATION_TYPES = {
+    'fertilization': {
+        'name': 'Fertilization',
+        'description': 'Fertilization operation',
+        "background_color": "#F5E8C7",
+        "border_color": "#8B4513",
+        "text_color": "#2F4F4F"
+    },
+}
