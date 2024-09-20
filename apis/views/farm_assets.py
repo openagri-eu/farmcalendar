@@ -3,12 +3,12 @@ from rest_framework import permissions, viewsets
 from farm_management.models import (
     FarmCrop,
     FarmAnimal,
-    FarmEquipment,
+    AgriculturalMachine,
 )
 from farm_management.serializers import (
     FarmCropSerializer,
     FarmAnimalSerializer,
-    FarmEquipmentSerializer,
+    AgriculturalMachineSerializer,
 )
 
 
@@ -31,11 +31,11 @@ class FarmAnimalViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class FarmEquipmentViewSet(viewsets.ModelViewSet):
+class AgriculturalMachineViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows FarmEquipment to be viewed or edited.
+    API endpoint that allows AgriculturalMachine to be viewed or edited.
     """
-    queryset = FarmEquipment.objects.all().order_by('-created_at')
-    serializer_class = FarmEquipmentSerializer
+    queryset = AgriculturalMachine.objects.all().order_by('-created_at')
+    serializer_class = AgriculturalMachineSerializer
     permission_classes = [permissions.IsAuthenticated]
 

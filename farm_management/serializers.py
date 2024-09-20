@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import FarmParcel, FarmCrop, FarmAnimal, FarmEquipment
+from .models import FarmParcel, FarmCrop, FarmAnimal, AgriculturalMachine
 
 
 class FarmParcelSerializer(serializers.HyperlinkedModelSerializer):
@@ -33,9 +33,9 @@ class FarmAnimalSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class FarmEquipmentSerializer(serializers.HyperlinkedModelSerializer):
+class AgriculturalMachineSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = FarmEquipment
+        model = AgriculturalMachine
         fields = [
             'name', 'description','area', 'geo_id',
             'purchase_date', 'manufacturer', 'model', 'seria_number',

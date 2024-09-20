@@ -55,7 +55,7 @@ class FarmAnimal(FarmAsset):
         return f"{self.name} - {self.species} - {self.breed}"
 
 
-class FarmEquipment(FarmAsset):
+class AgriculturalMachine(FarmAsset):
     class Meta:
         verbose_name = "Farm Equipment"
         verbose_name_plural = "Farm Equipments"

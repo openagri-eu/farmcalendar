@@ -5,7 +5,7 @@ from .views import (
     FarmParcelViewSet,
     FarmCropViewSet,
     FarmAnimalViewSet,
-    FarmEquipmentViewSet,
+    AgriculturalMachineViewSet,
     FarmActivityViewSet,
     FarmActivityTypeViewSet,
 )
@@ -14,7 +14,7 @@ router = routers.DefaultRouter()
 router.register(r'FarmParcels', FarmParcelViewSet)
 router.register(r'FarmCrops', FarmCropViewSet)
 router.register(r'FarmAnimals', FarmAnimalViewSet)
-router.register(r'FarmEquipments', FarmEquipmentViewSet)
+router.register(r'FarmEquipments', AgriculturalMachineViewSet)
 router.register(r'FarmActivities', FarmActivityViewSet)
 router.register(r'FarmActivityTypes', FarmActivityTypeViewSet)
 
