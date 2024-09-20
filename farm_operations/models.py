@@ -39,14 +39,14 @@ class FarmOperation(models.Model):
         return f"{self.title} ({self.start_time.strftime('%Y-%m-%d %H:%M')})"
 
 
-# class FertilizationOperation(FarmOperation):
-#     treated_area = models.IntegerField(blank=True, null=True)
-#     application_method = models.CharField(max_length=255, blank=True, null=True)
-#     fertilization_type = models.CharField(max_length=255, blank=True, null=True)
-#     fertilizer = models.ForeignKey('farm_management.Fertilizer', on_delete=models.SET_NULL, blank=True, null=True)
-#     def save(self, *args, **kwargs):
-#         # Set activity_type to Fertilization automatically
-#         self.activity_type, _ = FarmOperationType.get_or_create(name=settings.DEFAULT_OPERATION_TYPES['fertilization']['name'])
-#         super().save(*args, **kwargs)
+class FertilizationOperation(FarmOperation):
+    treated_area = models.IntegerField(blank=True, null=True)
+    application_method = models.CharField(max_length=255, blank=True, null=True)
+    fertilization_type = models.CharField(max_length=255, blank=True, null=True)
+    fertilizer = models.ForeignKey('farm_management.Fertilizer', on_delete=models.SET_NULL, blank=True, null=True)
+    def save(self, *args, **kwargs):
+        # Set activity_type to Fertilization automatically
+        self.activity_type, _ = FarmOperationType.get_or_create(name=settings.DEFAULT_OPERATION_TYPES['fertilization']['name'])
+        super().save(*args, **kwargs)
 
 
