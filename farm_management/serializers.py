@@ -1,6 +1,16 @@
 from rest_framework import serializers
 
-from .models import FarmParcel, FarmCrop, FarmAnimal, AgriculturalMachine
+from .models import Farm, FarmParcel, FarmCrop, FarmAnimal, AgriculturalMachine, Fertilizer
+
+
+class FarmSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Farm
+
+        fields = [
+            'name',
+            'status', 'created_at', 'updated_at', 'deleted_at',
+        ]
 
 
 class FarmParcelSerializer(serializers.HyperlinkedModelSerializer):
@@ -8,6 +18,7 @@ class FarmParcelSerializer(serializers.HyperlinkedModelSerializer):
         model = FarmParcel
 
         fields = [
+            'farm',
             'name', 'description', 'geo_id',
             'status', 'created_at', 'updated_at', 'deleted_at',
         ]
@@ -39,6 +50,17 @@ class AgriculturalMachineSerializer(serializers.HyperlinkedModelSerializer):
         fields = [
             'name', 'description','parcel', 'geo_id',
             'purchase_date', 'manufacturer', 'model', 'seria_number',
+            'status', 'created_at', 'updated_at', 'deleted_at',
+        ]
+
+
+class FertilizerSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Fertilizer
+        fields = [
+            'name', 'description',
+            'cost', 'price_unit', 'active_substance', 'targeted_towards',
+            'nutrient_concentration',
             'status', 'created_at', 'updated_at', 'deleted_at',
         ]
 

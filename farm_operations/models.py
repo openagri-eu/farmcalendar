@@ -40,13 +40,17 @@ class FarmOperation(models.Model):
 
 
 class FertilizationOperation(FarmOperation):
-    treated_area = models.IntegerField(blank=True, null=True)
+    # treated_area = models.IntegerField(blank=True, null=True)
+    # fertilization_type = models.CharField(max_length=255, blank=True, null=True)
+    applied_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    applied_amount_unit = models.CharField(max_length=255)
     application_method = models.CharField(max_length=255, blank=True, null=True)
-    fertilization_type = models.CharField(max_length=255, blank=True, null=True)
+
+    operated_on = models.ForeignKey('farm_management.FarmParcel', on_delete=models.CASCADE)
     fertilizer = models.ForeignKey('farm_management.Fertilizer', on_delete=models.SET_NULL, blank=True, null=True)
+    # TreatmentPlan
     def save(self, *args, **kwargs):
-        # Set activity_type to Fertilization automatically
-        self.activity_type, _ = FarmOperationType.get_or_create(name=settings.DEFAULT_OPERATION_TYPES['fertilization']['name'])
+        self.operation_type, _ = FarmOperationType.objects.get_or_create(name=settings.DEFAULT_OPERATION_TYPES['fertilization']['name'])
         super().save(*args, **kwargs)
 
 

@@ -8,7 +8,7 @@ class TreatmentMaterials(NamedHistoricalBaseModel):
 
     description = models.TextField(blank=True, null=True)
 
-    cost = models.DecimalField(max_digits=6, decimal_places=2)
+    cost = models.DecimalField(max_digits=10, decimal_places=2)
     price_unit = models.CharField(max_length=255)
     active_substance = models.CharField(max_length=255)
     targeted_towards = models.CharField(max_length=255)
@@ -25,7 +25,7 @@ class TreatmentMaterials(NamedHistoricalBaseModel):
 
 class Fertilizer(TreatmentMaterials):
 
-    nutrient_concentration = models.DecimalField(max_digits=3, decimal_places=2)
+    nutrient_concentration = models.DecimalField(max_digits=5, decimal_places=2)
 
     class Meta:
         verbose_name = "Fertilizer"
