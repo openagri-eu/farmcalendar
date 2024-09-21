@@ -26,5 +26,5 @@ router.register(r'FertilizationOperation', FertilizationOperationViewSet)
 router.register(r'Fertilizer', FertilizerViewSet)
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+    path('api/<str:version>/', include(router.urls)),
 ]
