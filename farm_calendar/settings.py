@@ -51,6 +51,7 @@ LOCAL_APPS =[
 THIRD_PARTY_APPS = [
     'rest_framework',
     'simple_history',
+    'drf_spectacular',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_PARTY_APPS
@@ -88,13 +89,25 @@ AUTO_CREATE_AUTH_USER = os.environ.get('AUTO_CREATE_AUTH_USER', 'True').lower() 
 # with open(str(BASE_DIR / 'private.pem'), 'r') as f:
 #     JWT_PRIVATE_KEY = f.read()
 
+DEFAULT_API_VERSION = config('DEFAULT_API_VERSION', default='1.0.0')
+SHORT_API_VERSION = f'v{DEFAULT_API_VERSION.split(".")[0]}'
+
+
 REST_FRAMEWORK = {
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
-    'DEFAULT_VERSION': 'v1',
+    'DEFAULT_VERSION': SHORT_API_VERSION,
     'ALLOWED_VERSIONS': ['v1',],
     'VERSION_PARAM': 'version',
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'OpenAgri Farm Calendar API',
+    'DESCRIPTION': 'API for farm assets and other farm related things.',
+    'VERSION': DEFAULT_API_VERSION,
+    'SERVE_INCLUDE_SCHEMA': True,
 }
 
 SITE_ID = 1
