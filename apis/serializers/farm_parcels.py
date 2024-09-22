@@ -1,6 +1,5 @@
 
 from farm_management.models import Farm, FarmParcel
-from ..schemas import OCSM_SCHEMA
 from .base import JSONLDSerializer
 
 
