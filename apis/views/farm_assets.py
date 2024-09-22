@@ -5,7 +5,7 @@ from farm_management.models import (
     FarmAnimal,
     AgriculturalMachine,
 )
-from farm_management.serializers import (
+from ..serializers import (
     FarmCropSerializer,
     FarmAnimalSerializer,
     AgriculturalMachineSerializer,

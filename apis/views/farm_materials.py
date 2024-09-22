@@ -3,7 +3,7 @@ from rest_framework import permissions, viewsets
 from farm_management.models import (
     Fertilizer,
 )
-from farm_management.serializers import (
+from ..serializers import (
     FertilizerSerializer
 )
 
