@@ -3,6 +3,9 @@
 # Exit script on error
 set -e
 
+# re-generating schema.yml
+python3 manage.py spectacular --validate --color --file schema.yml
+
 # Run initial_setup file
 echo "Running initial setup"
 python3 manage.py initial_setup
