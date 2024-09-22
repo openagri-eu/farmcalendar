@@ -18,7 +18,6 @@ class FarmViewSet(viewsets.ModelViewSet):
     queryset = Farm.objects.all().order_by('-created_at')
     serializer_class = FarmSerializer
     permission_classes = [permissions.IsAuthenticated]
-    # renderer_classes = [JSONLDRenderer, ]
 
 
 

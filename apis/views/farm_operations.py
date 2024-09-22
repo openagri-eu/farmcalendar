@@ -2,7 +2,6 @@ from rest_framework import permissions, viewsets
 
 from farm_operations.models import FarmOperation, FarmOperationType, FertilizationOperation
 from ..serializers import FarmOperationSerializer, FarmOperationTypeSerializer, FertilizationOperationSerializer
-# from apis.renderer import JSONLDRenderer
 
 
 class FarmOperationViewSet(viewsets.ModelViewSet):
@@ -31,5 +30,4 @@ class FertilizationOperationViewSet(viewsets.ModelViewSet):
     serializer_class = FertilizationOperationSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-    # renderer_classes = [JSONLDRenderer, ]
 
