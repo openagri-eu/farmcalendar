@@ -1,0 +1,3050 @@
+openapi: 3.0.3
+info:
+  title: OpenAgri Farm Calendar API
+  version: 1.0.0
+  description: API for farm assets and other farm related things.
+paths:
+  /api/v1/Farm/:
+    get:
+      operationId: api_v1_Farm_list
+      description: API endpoint that allows Farm to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFarmList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFarmList'
+          description: ''
+    post:
+      operationId: api_v1_Farm_create
+      description: API endpoint that allows Farm to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Farm'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Farm'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Farm'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '201':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Farm'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Farm'
+          description: ''
+  /api/v1/Farm/{id}/:
+    get:
+      operationId: api_v1_Farm_retrieve
+      description: API endpoint that allows Farm to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Farm.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Farm'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Farm'
+          description: ''
+    put:
+      operationId: api_v1_Farm_update
+      description: API endpoint that allows Farm to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Farm.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Farm'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Farm'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Farm'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Farm'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Farm'
+          description: ''
+    patch:
+      operationId: api_v1_Farm_partial_update
+      description: API endpoint that allows Farm to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Farm.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedFarm'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedFarm'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedFarm'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Farm'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Farm'
+          description: ''
+    delete:
+      operationId: api_v1_Farm_destroy
+      description: API endpoint that allows Farm to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Farm.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/FarmAnimals/:
+    get:
+      operationId: api_v1_FarmAnimals_list
+      description: API endpoint that allows FarmAnimal to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFarmAnimalList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFarmAnimalList'
+          description: ''
+    post:
+      operationId: api_v1_FarmAnimals_create
+      description: API endpoint that allows FarmAnimal to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FarmAnimal'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/FarmAnimal'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FarmAnimal'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '201':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/FarmAnimal'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FarmAnimal'
+          description: ''
+  /api/v1/FarmAnimals/{id}/:
+    get:
+      operationId: api_v1_FarmAnimals_retrieve
+      description: API endpoint that allows FarmAnimal to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Farm Animal.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/FarmAnimal'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FarmAnimal'
+          description: ''
+    put:
+      operationId: api_v1_FarmAnimals_update
+      description: API endpoint that allows FarmAnimal to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Farm Animal.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FarmAnimal'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/FarmAnimal'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FarmAnimal'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/FarmAnimal'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FarmAnimal'
+          description: ''
+    patch:
+      operationId: api_v1_FarmAnimals_partial_update
+      description: API endpoint that allows FarmAnimal to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Farm Animal.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedFarmAnimal'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedFarmAnimal'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedFarmAnimal'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/FarmAnimal'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FarmAnimal'
+          description: ''
+    delete:
+      operationId: api_v1_FarmAnimals_destroy
+      description: API endpoint that allows FarmAnimal to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Farm Animal.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/FarmCrops/:
+    get:
+      operationId: api_v1_FarmCrops_list
+      description: API endpoint that allows FarmCrop to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFarmCropList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFarmCropList'
+          description: ''
+    post:
+      operationId: api_v1_FarmCrops_create
+      description: API endpoint that allows FarmCrop to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FarmCrop'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/FarmCrop'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FarmCrop'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '201':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/FarmCrop'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FarmCrop'
+          description: ''
+  /api/v1/FarmCrops/{id}/:
+    get:
+      operationId: api_v1_FarmCrops_retrieve
+      description: API endpoint that allows FarmCrop to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Farm Plant.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/FarmCrop'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FarmCrop'
+          description: ''
+    put:
+      operationId: api_v1_FarmCrops_update
+      description: API endpoint that allows FarmCrop to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Farm Plant.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FarmCrop'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/FarmCrop'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FarmCrop'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/FarmCrop'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FarmCrop'
+          description: ''
+    patch:
+      operationId: api_v1_FarmCrops_partial_update
+      description: API endpoint that allows FarmCrop to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Farm Plant.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedFarmCrop'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedFarmCrop'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedFarmCrop'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/FarmCrop'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FarmCrop'
+          description: ''
+    delete:
+      operationId: api_v1_FarmCrops_destroy
+      description: API endpoint that allows FarmCrop to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Farm Plant.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/FarmEquipments/:
+    get:
+      operationId: api_v1_FarmEquipments_list
+      description: API endpoint that allows AgriculturalMachine to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAgriculturalMachineList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAgriculturalMachineList'
+          description: ''
+    post:
+      operationId: api_v1_FarmEquipments_create
+      description: API endpoint that allows AgriculturalMachine to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgriculturalMachine'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AgriculturalMachine'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AgriculturalMachine'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '201':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AgriculturalMachine'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgriculturalMachine'
+          description: ''
+  /api/v1/FarmEquipments/{id}/:
+    get:
+      operationId: api_v1_FarmEquipments_retrieve
+      description: API endpoint that allows AgriculturalMachine to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Farm Equipment.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AgriculturalMachine'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgriculturalMachine'
+          description: ''
+    put:
+      operationId: api_v1_FarmEquipments_update
+      description: API endpoint that allows AgriculturalMachine to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Farm Equipment.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgriculturalMachine'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AgriculturalMachine'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AgriculturalMachine'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AgriculturalMachine'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgriculturalMachine'
+          description: ''
+    patch:
+      operationId: api_v1_FarmEquipments_partial_update
+      description: API endpoint that allows AgriculturalMachine to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Farm Equipment.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAgriculturalMachine'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedAgriculturalMachine'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedAgriculturalMachine'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AgriculturalMachine'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgriculturalMachine'
+          description: ''
+    delete:
+      operationId: api_v1_FarmEquipments_destroy
+      description: API endpoint that allows AgriculturalMachine to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Farm Equipment.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/FarmOperationTypes/:
+    get:
+      operationId: api_v1_FarmOperationTypes_list
+      description: API endpoint that allows FarmOperationType to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFarmOperationTypeList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFarmOperationTypeList'
+          description: ''
+    post:
+      operationId: api_v1_FarmOperationTypes_create
+      description: API endpoint that allows FarmOperationType to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FarmOperationType'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/FarmOperationType'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FarmOperationType'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '201':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/FarmOperationType'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FarmOperationType'
+          description: ''
+  /api/v1/FarmOperationTypes/{id}/:
+    get:
+      operationId: api_v1_FarmOperationTypes_retrieve
+      description: API endpoint that allows FarmOperationType to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this farm operation type.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/FarmOperationType'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FarmOperationType'
+          description: ''
+    put:
+      operationId: api_v1_FarmOperationTypes_update
+      description: API endpoint that allows FarmOperationType to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this farm operation type.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FarmOperationType'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/FarmOperationType'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FarmOperationType'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/FarmOperationType'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FarmOperationType'
+          description: ''
+    patch:
+      operationId: api_v1_FarmOperationTypes_partial_update
+      description: API endpoint that allows FarmOperationType to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this farm operation type.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedFarmOperationType'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedFarmOperationType'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedFarmOperationType'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/FarmOperationType'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FarmOperationType'
+          description: ''
+    delete:
+      operationId: api_v1_FarmOperationTypes_destroy
+      description: API endpoint that allows FarmOperationType to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this farm operation type.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/FarmOperations/:
+    get:
+      operationId: api_v1_FarmOperations_list
+      description: API endpoint that allows FarmOperation to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFarmOperationList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFarmOperationList'
+          description: ''
+    post:
+      operationId: api_v1_FarmOperations_create
+      description: API endpoint that allows FarmOperation to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FarmOperation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/FarmOperation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FarmOperation'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '201':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/FarmOperation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FarmOperation'
+          description: ''
+  /api/v1/FarmOperations/{id}/:
+    get:
+      operationId: api_v1_FarmOperations_retrieve
+      description: API endpoint that allows FarmOperation to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this farm operation.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/FarmOperation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FarmOperation'
+          description: ''
+    put:
+      operationId: api_v1_FarmOperations_update
+      description: API endpoint that allows FarmOperation to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this farm operation.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FarmOperation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/FarmOperation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FarmOperation'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/FarmOperation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FarmOperation'
+          description: ''
+    patch:
+      operationId: api_v1_FarmOperations_partial_update
+      description: API endpoint that allows FarmOperation to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this farm operation.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedFarmOperation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedFarmOperation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedFarmOperation'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/FarmOperation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FarmOperation'
+          description: ''
+    delete:
+      operationId: api_v1_FarmOperations_destroy
+      description: API endpoint that allows FarmOperation to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this farm operation.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/FarmParcels/:
+    get:
+      operationId: api_v1_FarmParcels_list
+      description: API endpoint that allows FarmParcel to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFarmParcelList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFarmParcelList'
+          description: ''
+    post:
+      operationId: api_v1_FarmParcels_create
+      description: API endpoint that allows FarmParcel to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FarmParcel'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/FarmParcel'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FarmParcel'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '201':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/FarmParcel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FarmParcel'
+          description: ''
+  /api/v1/FarmParcels/{id}/:
+    get:
+      operationId: api_v1_FarmParcels_retrieve
+      description: API endpoint that allows FarmParcel to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Farm Parcel.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/FarmParcel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FarmParcel'
+          description: ''
+    put:
+      operationId: api_v1_FarmParcels_update
+      description: API endpoint that allows FarmParcel to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Farm Parcel.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FarmParcel'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/FarmParcel'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FarmParcel'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/FarmParcel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FarmParcel'
+          description: ''
+    patch:
+      operationId: api_v1_FarmParcels_partial_update
+      description: API endpoint that allows FarmParcel to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Farm Parcel.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedFarmParcel'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedFarmParcel'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedFarmParcel'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/FarmParcel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FarmParcel'
+          description: ''
+    delete:
+      operationId: api_v1_FarmParcels_destroy
+      description: API endpoint that allows FarmParcel to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Farm Parcel.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/FertilizationOperation/:
+    get:
+      operationId: api_v1_FertilizationOperation_list
+      description: API endpoint that allows FertilizationOperation to be viewed or
+        edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFertilizationOperationList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFertilizationOperationList'
+          description: ''
+    post:
+      operationId: api_v1_FertilizationOperation_create
+      description: API endpoint that allows FertilizationOperation to be viewed or
+        edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FertilizationOperation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/FertilizationOperation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FertilizationOperation'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '201':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/FertilizationOperation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FertilizationOperation'
+          description: ''
+  /api/v1/FertilizationOperation/{id}/:
+    get:
+      operationId: api_v1_FertilizationOperation_retrieve
+      description: API endpoint that allows FertilizationOperation to be viewed or
+        edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this fertilization operation.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/FertilizationOperation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FertilizationOperation'
+          description: ''
+    put:
+      operationId: api_v1_FertilizationOperation_update
+      description: API endpoint that allows FertilizationOperation to be viewed or
+        edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this fertilization operation.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FertilizationOperation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/FertilizationOperation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FertilizationOperation'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/FertilizationOperation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FertilizationOperation'
+          description: ''
+    patch:
+      operationId: api_v1_FertilizationOperation_partial_update
+      description: API endpoint that allows FertilizationOperation to be viewed or
+        edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this fertilization operation.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedFertilizationOperation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedFertilizationOperation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedFertilizationOperation'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/FertilizationOperation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FertilizationOperation'
+          description: ''
+    delete:
+      operationId: api_v1_FertilizationOperation_destroy
+      description: API endpoint that allows FertilizationOperation to be viewed or
+        edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this fertilization operation.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/Fertilizer/:
+    get:
+      operationId: api_v1_Fertilizer_list
+      description: API endpoint that allows Fertilizer to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFertilizerList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFertilizerList'
+          description: ''
+    post:
+      operationId: api_v1_Fertilizer_create
+      description: API endpoint that allows Fertilizer to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Fertilizer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Fertilizer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Fertilizer'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '201':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Fertilizer'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fertilizer'
+          description: ''
+  /api/v1/Fertilizer/{id}/:
+    get:
+      operationId: api_v1_Fertilizer_retrieve
+      description: API endpoint that allows Fertilizer to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Fertilizer.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Fertilizer'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fertilizer'
+          description: ''
+    put:
+      operationId: api_v1_Fertilizer_update
+      description: API endpoint that allows Fertilizer to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Fertilizer.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Fertilizer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Fertilizer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Fertilizer'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Fertilizer'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fertilizer'
+          description: ''
+    patch:
+      operationId: api_v1_Fertilizer_partial_update
+      description: API endpoint that allows Fertilizer to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Fertilizer.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedFertilizer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedFertilizer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedFertilizer'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Fertilizer'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fertilizer'
+          description: ''
+    delete:
+      operationId: api_v1_Fertilizer_destroy
+      description: API endpoint that allows Fertilizer to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Fertilizer.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/schema/:
+    get:
+      operationId: api_v1_schema_retrieve
+      description: |-
+        OpenApi3 schema for this API. Format can be selected via content negotiation.
+
+        - YAML: application/vnd.oai.openapi
+        - JSON: application/vnd.oai.openapi+json
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - yaml
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - af
+          - ar
+          - ar-dz
+          - ast
+          - az
+          - be
+          - bg
+          - bn
+          - br
+          - bs
+          - ca
+          - ckb
+          - cs
+          - cy
+          - da
+          - de
+          - dsb
+          - el
+          - en
+          - en-au
+          - en-gb
+          - eo
+          - es
+          - es-ar
+          - es-co
+          - es-mx
+          - es-ni
+          - es-ve
+          - et
+          - eu
+          - fa
+          - fi
+          - fr
+          - fy
+          - ga
+          - gd
+          - gl
+          - he
+          - hi
+          - hr
+          - hsb
+          - hu
+          - hy
+          - ia
+          - id
+          - ig
+          - io
+          - is
+          - it
+          - ja
+          - ka
+          - kab
+          - kk
+          - km
+          - kn
+          - ko
+          - ky
+          - lb
+          - lt
+          - lv
+          - mk
+          - ml
+          - mn
+          - mr
+          - ms
+          - my
+          - nb
+          - ne
+          - nl
+          - nn
+          - os
+          - pa
+          - pl
+          - pt
+          - pt-br
+          - ro
+          - ru
+          - sk
+          - sl
+          - sq
+          - sr
+          - sr-latn
+          - sv
+          - sw
+          - ta
+          - te
+          - tg
+          - th
+          - tk
+          - tr
+          - tt
+          - udm
+          - ug
+          - uk
+          - ur
+          - uz
+          - vi
+          - zh-hans
+          - zh-hant
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/yaml:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/vnd.oai.openapi+json:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+components:
+  schemas:
+    AgriculturalMachine:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+        parcel:
+          type: string
+          format: uri
+          nullable: true
+        geo_id:
+          type: string
+          format: uuid
+          nullable: true
+          title: Geographic Data ID
+        purchase_date:
+          type: string
+          format: date
+        manufacturer:
+          type: string
+          maxLength: 255
+        model:
+          type: string
+          maxLength: 255
+        seria_number:
+          type: string
+          maxLength: 255
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+      - created_at
+      - id
+      - manufacturer
+      - model
+      - name
+      - purchase_date
+      - seria_number
+      - updated_at
+    Farm:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+      - created_at
+      - id
+      - name
+      - updated_at
+    FarmAnimal:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+        parcel:
+          type: string
+          format: uri
+          nullable: true
+        geo_id:
+          type: string
+          format: uuid
+          nullable: true
+          title: Geographic Data ID
+        sex:
+          allOf:
+          - $ref: '#/components/schemas/SexEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        castrated:
+          type: boolean
+        species:
+          type: string
+          maxLength: 255
+        breed:
+          type: string
+          nullable: true
+          maxLength: 255
+        birth_date:
+          type: string
+          format: date-time
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+      - birth_date
+      - created_at
+      - id
+      - name
+      - species
+      - updated_at
+    FarmCrop:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+        parcel:
+          type: string
+          format: uri
+          nullable: true
+        geo_id:
+          type: string
+          format: uuid
+          nullable: true
+          title: Geographic Data ID
+        species:
+          type: string
+          maxLength: 255
+        variety:
+          type: string
+          nullable: true
+          maxLength: 255
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+      - created_at
+      - id
+      - name
+      - species
+      - updated_at
+    FarmOperation:
+      type: object
+      properties:
+        operation_type:
+          type: string
+          format: uri
+        title:
+          type: string
+          maxLength: 200
+        details:
+          type: string
+          nullable: true
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+      required:
+      - end_time
+      - operation_type
+      - start_time
+      - title
+    FarmOperationType:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+        background_color:
+          type: string
+          pattern: ^#[0-9A-Fa-f]{6}$
+          maxLength: 7
+        border_color:
+          type: string
+          pattern: ^#[0-9A-Fa-f]{6}$
+          maxLength: 7
+        text_color:
+          type: string
+          pattern: ^#[0-9A-Fa-f]{6}$
+          maxLength: 7
+      required:
+      - name
+    FarmParcel:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        geo_id:
+          type: string
+          format: uuid
+          nullable: true
+          title: Georaphic Data ID
+        farm:
+          type: string
+          format: uri
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+      - created_at
+      - farm
+      - id
+      - name
+      - updated_at
+    FertilizationOperation:
+      type: object
+      properties:
+        operation_type:
+          type: string
+          format: uri
+        title:
+          type: string
+          maxLength: 200
+        details:
+          type: string
+          nullable: true
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+        applied_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        applied_amount_unit:
+          type: string
+          maxLength: 255
+        application_method:
+          type: string
+          nullable: true
+          maxLength: 255
+        fertilizer:
+          type: string
+          format: uri
+          nullable: true
+        operated_on:
+          type: string
+          format: uri
+      required:
+      - applied_amount
+      - applied_amount_unit
+      - end_time
+      - operated_on
+      - operation_type
+      - start_time
+      - title
+    Fertilizer:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+        cost:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        price_unit:
+          type: string
+          maxLength: 255
+        active_substance:
+          type: string
+          maxLength: 255
+        targeted_towards:
+          type: string
+          maxLength: 255
+        nutrient_concentration:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,3}(?:\.\d{0,2})?$
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+      - active_substance
+      - cost
+      - created_at
+      - name
+      - nutrient_concentration
+      - price_unit
+      - targeted_towards
+      - updated_at
+    PaginatedAgriculturalMachineList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgriculturalMachine'
+    PaginatedFarmAnimalList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/FarmAnimal'
+    PaginatedFarmCropList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/FarmCrop'
+    PaginatedFarmList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Farm'
+    PaginatedFarmOperationList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/FarmOperation'
+    PaginatedFarmOperationTypeList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/FarmOperationType'
+    PaginatedFarmParcelList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/FarmParcel'
+    PaginatedFertilizationOperationList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/FertilizationOperation'
+    PaginatedFertilizerList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Fertilizer'
+    PatchedAgriculturalMachine:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+        parcel:
+          type: string
+          format: uri
+          nullable: true
+        geo_id:
+          type: string
+          format: uuid
+          nullable: true
+          title: Geographic Data ID
+        purchase_date:
+          type: string
+          format: date
+        manufacturer:
+          type: string
+          maxLength: 255
+        model:
+          type: string
+          maxLength: 255
+        seria_number:
+          type: string
+          maxLength: 255
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+    PatchedFarm:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+    PatchedFarmAnimal:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+        parcel:
+          type: string
+          format: uri
+          nullable: true
+        geo_id:
+          type: string
+          format: uuid
+          nullable: true
+          title: Geographic Data ID
+        sex:
+          allOf:
+          - $ref: '#/components/schemas/SexEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        castrated:
+          type: boolean
+        species:
+          type: string
+          maxLength: 255
+        breed:
+          type: string
+          nullable: true
+          maxLength: 255
+        birth_date:
+          type: string
+          format: date-time
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+    PatchedFarmCrop:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+        parcel:
+          type: string
+          format: uri
+          nullable: true
+        geo_id:
+          type: string
+          format: uuid
+          nullable: true
+          title: Geographic Data ID
+        species:
+          type: string
+          maxLength: 255
+        variety:
+          type: string
+          nullable: true
+          maxLength: 255
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+    PatchedFarmOperation:
+      type: object
+      properties:
+        operation_type:
+          type: string
+          format: uri
+        title:
+          type: string
+          maxLength: 200
+        details:
+          type: string
+          nullable: true
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+    PatchedFarmOperationType:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+        background_color:
+          type: string
+          pattern: ^#[0-9A-Fa-f]{6}$
+          maxLength: 7
+        border_color:
+          type: string
+          pattern: ^#[0-9A-Fa-f]{6}$
+          maxLength: 7
+        text_color:
+          type: string
+          pattern: ^#[0-9A-Fa-f]{6}$
+          maxLength: 7
+    PatchedFarmParcel:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        geo_id:
+          type: string
+          format: uuid
+          nullable: true
+          title: Georaphic Data ID
+        farm:
+          type: string
+          format: uri
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+    PatchedFertilizationOperation:
+      type: object
+      properties:
+        operation_type:
+          type: string
+          format: uri
+        title:
+          type: string
+          maxLength: 200
+        details:
+          type: string
+          nullable: true
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+        applied_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        applied_amount_unit:
+          type: string
+          maxLength: 255
+        application_method:
+          type: string
+          nullable: true
+          maxLength: 255
+        fertilizer:
+          type: string
+          format: uri
+          nullable: true
+        operated_on:
+          type: string
+          format: uri
+    PatchedFertilizer:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+        cost:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        price_unit:
+          type: string
+          maxLength: 255
+        active_substance:
+          type: string
+          maxLength: 255
+        targeted_towards:
+          type: string
+          maxLength: 255
+        nutrient_concentration:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,3}(?:\.\d{0,2})?$
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+    SexEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      description: |-
+        * `0` - N/A
+        * `1` - Female
+        * `2` - Male
+    StatusEnum:
+      enum:
+      - 0
+      - 1
+      type: integer
+      description: |-
+        * `0` - Active
+        * `1` - Deleted
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
