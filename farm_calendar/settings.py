@@ -1,3 +1,4 @@
+import json
 import os
 from pathlib import Path
 
@@ -101,6 +102,12 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+
+    'DEFAULT_RENDERER_CLASSES': [
+        'apis.renderers.JSONLDRenderer',
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
 }
 
 SPECTACULAR_SETTINGS = {
@@ -108,6 +115,26 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': 'API for farm assets and other farm related things.',
     'VERSION': DEFAULT_API_VERSION,
     'SERVE_INCLUDE_SCHEMA': True,
+}
+
+
+
+DEFAULT_OCSM_JSONLD_CONTEXT_FILE = (
+    BASE_DIR / 'apis' / 'default_ocsm_context'
+        / 'v0' / 'ocsm-profile-context.jsonld'
+)
+
+OCSM_JSONLD_CONTEXT_FILE = config('OCSM_JSONLD_CONTEXT_FILE', default=DEFAULT_OCSM_JSONLD_CONTEXT_FILE)
+
+# with open(OCSM_JSONLD_CONTEXT_FILE, 'r') as f:
+#     OCSM_JSONLD_CONTEXT = json.load(f)
+
+# leave like this for now, it keeps response small and I dont really have
+# full knowledge what I can add/remove from the full context
+OCSM_JSONLD_CONTEXT  = {
+  	"@context": [
+	  	"https://w3id.org/ocsm/main-context.jsonld"
+   	]
 }
 
 SITE_ID = 1

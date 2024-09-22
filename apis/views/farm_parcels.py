@@ -9,7 +9,7 @@ from ..serializers import (
     FarmParcelSerializer,
 )
 
-from farm_calendar.renderer import JSONLDRenderer
+# from apis.renderer import JSONLDRenderer
 
 class FarmViewSet(viewsets.ModelViewSet):
     """
@@ -18,7 +18,7 @@ class FarmViewSet(viewsets.ModelViewSet):
     queryset = Farm.objects.all().order_by('-created_at')
     serializer_class = FarmSerializer
     permission_classes = [permissions.IsAuthenticated]
-    renderer_classes = [JSONLDRenderer, ]
+    # renderer_classes = [JSONLDRenderer, ]
 
 
 
