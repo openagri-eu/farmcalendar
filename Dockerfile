@@ -34,6 +34,3 @@ COPY . /var/www
 # Add the entrypoint script and set the execute permissions
 COPY entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
-
-# Set the entrypoint script
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

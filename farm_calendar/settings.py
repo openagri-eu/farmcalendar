@@ -59,6 +59,9 @@ INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
 GATEKEEPER_LOGIN_URL = os.environ.get('GATEKEEPER_LOGIN_URL', None)
 
+if GATEKEEPER_LOGIN_URL == '':
+    GATEKEEPER_LOGIN_URL = None
+
 AUTHENTICATION_BACKENDS = (
     'farm_calendar.utils.auth_backends.CustomJWTAuthenticationBackend',
 )
