@@ -1,7 +1,9 @@
-# Farm Calendar Application Setup
+# OpenAgri Digital Farm Calendar
 
-This README provides detailed instructions on setting up the PostgreSQL database and pgAdmin for the Farm Calendar
-application using Docker.
+The “OpenAgri Digital Farm Calendar” service addresses the data capture needs of farms including the manual recording of: farmers operations, farmers observations, parcels properties and recording of farms’ assets. The Farm Calendar follows a mixed model (edge-cloud) approach, offering (reduced) functionality even without internet connectivity.
+A Web User Interface (UI) is provided which allows the users the visualize and navigate through the farm calendar of activities and to facilitate the management of the farm assets.
+Moreover, all these operations and farm assets can be managed through a REST API, which provides these resources in a linked data format (i.e., using JSON-LD) and conforms to the OpenAgri Common Semantic Model (OCSM).
+
 
 ## Prerequisites
 
@@ -48,79 +50,23 @@ To stop and remove the containers, use:
 docker-compose down
 ```
 
-## More Examples of Setup
-As mentioned before, you can extend the existing `docker-compose.yml` to be more complex and to best fit your deployment scenario. The following setup includes a PgAdmin4 service in addition to the DB and FarmCalendar, while using a named (shared_network_fc) shared bridge network in docker. This setup also exemplifies the use of a external volume to hold the database data, therefore removing the database container will not remove the database information.
-
-This setup also requires the addition of the following configurations to your `.env` file (replacing the placeholder values with the actual ones):
+## Local Admin User (No Gatekeeper)
+if you are not using the OpenAgri Gatekeeper service to provide authentication and user management, then you should remove the `GATEKEEPER_LOGIN_URL` configuration from your `.env` file. This will make your Farm Calendar service work with its own internal user authentication (using Django's auth and password process). In this case, to create your admin user you should run:
 ```
-PGADMIN_DEFAULT_EMAIL=<YourEmailHere>
-PGADMIN_DEFAULT_PASSWORD=<YourPasswordHere>
+$ docker compose run --rm web python3 manage.py createsuperuser
 ```
+this will present you with inputs that will guide your creation of your admin user.
 
-Here's the `docker-compose.yml` for setting up PostgreSQL and pgAdmin:
 
-```yaml
-version: '3.9'
+### Accessing your local Farm Calendar
 
-services:
-  postgres_fc:
-    image: postgres:latest
-    restart: always
-    container_name: postgres_fc_container
-    env_file:
-      - .env
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data_fc:/var/lib/postgresql/data
-    networks:
-      - shared_network_fc
+After starting the services, the Farm Calendar Web UI will be available at: [http://localhost:8002/](http://localhost:8002/)
 
-  pgadmin_fc:
-    image: dpage/pgadmin4
-    container_name: pgadmin_fc_container
-    restart: always
-    env_file:
-      - .env
-    ports:
-      - "8088:80"
-    networks:
-      - shared_network_fc
-    depends_on:
-      - postgres_fc
+Meanwhile, the REST API root is available at: [http://localhost:8002/api/v1/](http://localhost:8002/api/v1/)
 
-  farm_calendar:
-    build: .
-    image: ghcr.io/openagri-eu/farmcalendar:latest
-    command: python manage.py runserver 0.0.0.0:8000
-    ports:
-      - "8000:8000"
-    depends_on:
-      - postgres_fc
-    environment:
-      POSTGRES_HOST: postgres_fc
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+Both the Web UI and REST API are only available after login in in the OpenAgri Gatekeeper, or if no Gatekeeper is bying used, then username and password of the local admin user sould be used.
 
-volumes:
-  postgres_data_fc: {}
 
-networks:
-  shared_network_fc:
-    driver: bridge
-    external: true
-```
-
-### Accessing pgAdmin
-
-After starting the services, pgAdmin will be accessible through your web browser at:
-
-```commandline
-http://localhost:8088
-```
-
-Use the email and password specified in the .env file to log in.
 
 # License
 This project code is licensed under the EUPL 1.2 license, see the LICENSE file for more details.
