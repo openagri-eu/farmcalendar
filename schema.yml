@@ -4,6 +4,222 @@ info:
   version: 1.0.0
   description: API for farm assets and other farm related things.
 paths:
+  /api/v1/AgriculturalMachines/:
+    get:
+      operationId: api_v1_AgriculturalMachines_list
+      description: API endpoint that allows AgriculturalMachine to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAgriculturalMachineList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAgriculturalMachineList'
+          description: ''
+    post:
+      operationId: api_v1_AgriculturalMachines_create
+      description: API endpoint that allows AgriculturalMachine to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgriculturalMachine'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AgriculturalMachine'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AgriculturalMachine'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '201':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AgriculturalMachine'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgriculturalMachine'
+          description: ''
+  /api/v1/AgriculturalMachines/{id}/:
+    get:
+      operationId: api_v1_AgriculturalMachines_retrieve
+      description: API endpoint that allows AgriculturalMachine to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Farm Equipment.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AgriculturalMachine'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgriculturalMachine'
+          description: ''
+    put:
+      operationId: api_v1_AgriculturalMachines_update
+      description: API endpoint that allows AgriculturalMachine to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Farm Equipment.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgriculturalMachine'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AgriculturalMachine'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AgriculturalMachine'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AgriculturalMachine'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgriculturalMachine'
+          description: ''
+    patch:
+      operationId: api_v1_AgriculturalMachines_partial_update
+      description: API endpoint that allows AgriculturalMachine to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Farm Equipment.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAgriculturalMachine'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedAgriculturalMachine'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedAgriculturalMachine'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AgriculturalMachine'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgriculturalMachine'
+          description: ''
+    delete:
+      operationId: api_v1_AgriculturalMachines_destroy
+      description: API endpoint that allows AgriculturalMachine to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Farm Equipment.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
   /api/v1/Farm/:
     get:
       operationId: api_v1_Farm_list
@@ -643,222 +859,6 @@ paths:
         schema:
           type: integer
         description: A unique integer value identifying this Farm Plant.
-        required: true
-      tags:
-      - api
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      responses:
-        '204':
-          description: No response body
-  /api/v1/FarmEquipments/:
-    get:
-      operationId: api_v1_FarmEquipments_list
-      description: API endpoint that allows AgriculturalMachine to be viewed or edited.
-      parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
-      tags:
-      - api
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      responses:
-        '200':
-          content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/PaginatedAgriculturalMachineList'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaginatedAgriculturalMachineList'
-          description: ''
-    post:
-      operationId: api_v1_FarmEquipments_create
-      description: API endpoint that allows AgriculturalMachine to be viewed or edited.
-      parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
-      tags:
-      - api
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AgriculturalMachine'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/AgriculturalMachine'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/AgriculturalMachine'
-        required: true
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      responses:
-        '201':
-          content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/AgriculturalMachine'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgriculturalMachine'
-          description: ''
-  /api/v1/FarmEquipments/{id}/:
-    get:
-      operationId: api_v1_FarmEquipments_retrieve
-      description: API endpoint that allows AgriculturalMachine to be viewed or edited.
-      parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Farm Equipment.
-        required: true
-      tags:
-      - api
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      responses:
-        '200':
-          content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/AgriculturalMachine'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgriculturalMachine'
-          description: ''
-    put:
-      operationId: api_v1_FarmEquipments_update
-      description: API endpoint that allows AgriculturalMachine to be viewed or edited.
-      parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Farm Equipment.
-        required: true
-      tags:
-      - api
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AgriculturalMachine'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/AgriculturalMachine'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/AgriculturalMachine'
-        required: true
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      responses:
-        '200':
-          content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/AgriculturalMachine'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgriculturalMachine'
-          description: ''
-    patch:
-      operationId: api_v1_FarmEquipments_partial_update
-      description: API endpoint that allows AgriculturalMachine to be viewed or edited.
-      parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Farm Equipment.
-        required: true
-      tags:
-      - api
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedAgriculturalMachine'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/PatchedAgriculturalMachine'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/PatchedAgriculturalMachine'
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      responses:
-        '200':
-          content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/AgriculturalMachine'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgriculturalMachine'
-          description: ''
-    delete:
-      operationId: api_v1_FarmEquipments_destroy
-      description: API endpoint that allows AgriculturalMachine to be viewed or edited.
-      parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
-      - in: path
-        name: id
-        schema:
-          type: integer
-        description: A unique integer value identifying this Farm Equipment.
         required: true
       tags:
       - api
