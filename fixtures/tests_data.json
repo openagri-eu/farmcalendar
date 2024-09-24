@@ -1,0 +1,110 @@
+[
+    {
+        "model": "farm_management.farm",
+        "pk": 1,
+        "fields": {
+            "name": "Farm Olives and Oils",
+            "status": 0,
+            "deleted_at": null,
+            "created_at": "2024-09-24T09:06:16.749Z",
+            "updated_at": "2024-09-24T09:06:16.749Z"
+        }
+    },
+    {
+        "model": "farm_management.farmparcel",
+        "pk": 1,
+        "fields": {
+            "name": "Olive Orchard 123",
+            "status": 0,
+            "deleted_at": null,
+            "created_at": "2024-09-24T09:07:55.288Z",
+            "updated_at": "2024-09-24T09:07:55.288Z",
+            "farm": 1,
+            "geo_id": null,
+            "description": null
+        }
+    },
+    {
+        "model": "farm_management.fertilizer",
+        "pk": 1,
+        "fields": {
+            "name": "ENTEC 20-8-10",
+            "status": 0,
+            "deleted_at": null,
+            "created_at": "2024-09-24T09:03:11.714Z",
+            "updated_at": "2024-09-24T09:03:11.714Z",
+            "description": "complex NPK fertilizer that combines the excellent properties of nitrophoska fertilizers (perfect granulation, no dust, low cadmium content, no N in ureic form and high solubility), with one of the most efficient fertilizer technologies to improve the absorption of nutrients, especially nitrogen.",
+            "cost": "10.00",
+            "price_unit": "EUR",
+            "active_substance": "+2Mgo+3S",
+            "targeted_towards": "Olive trees or citrus fruits",
+            "nutrient_concentration": "20.00"
+        }
+    },
+    {
+        "model": "farm_operations.farmoperationtype",
+        "pk": 1,
+        "fields": {
+            "name": "Fertilization",
+            "description": "Fertilization operation",
+            "background_color": "#F5E8C7",
+            "border_color": "#8B4513",
+            "text_color": "#2F4F4F"
+        }
+    },
+    {
+        "model": "farm_operations.farmoperationtype",
+        "pk": 2,
+        "fields": {
+            "name": "Crop Irrigation Operation",
+            "description": "Irrigation operation",
+            "background_color": "#ADD8E6",
+            "border_color": "#4682B4",
+            "text_color": "#2F4F4F"
+        }
+    },
+    {
+        "model": "farm_operations.farmoperation",
+        "pk": 1,
+        "fields": {
+            "operation_type": 1,
+            "title": "Fertilization of Olive Orchards",
+            "start_time": "2024-09-24T03:08:00Z",
+            "end_time": "2024-09-24T04:09:00Z",
+            "details": "Fertilization of olive orchards"
+        }
+    },
+    {
+        "model": "farm_operations.fertilizationoperation",
+        "pk": 1,
+        "fields": {
+            "applied_amount": "4.00",
+            "applied_amount_unit": "https://w3id.org/ocsm/KiloGM-PER-PLANT",
+            "application_method": "dispersion",
+            "operated_on": 1,
+            "fertilizer": 1
+        }
+    },
+    {
+        "model": "farm_operations.farmoperation",
+        "pk": 2,
+        "fields": {
+            "operation_type": 2,
+            "title": "Crop Irrigation",
+            "start_time": "2024-09-24T10:08:00Z",
+            "end_time": "2024-09-24T10:30:00Z",
+            "details": ""
+        }
+    },
+    {
+        "model": "farm_operations.farmoperation",
+        "pk": 3,
+        "fields": {
+            "operation_type": 2,
+            "title": "Crop Irrigation",
+            "start_time": "2024-09-25T10:08:00Z",
+            "end_time": "2024-09-25T10:30:00Z",
+            "details": ""
+        }
+    }
+]

@@ -1,17 +1,6 @@
 [
     {
         "model": "farm_operations.farmoperationtype",
-        "pk": 1,
-        "fields": {
-            "name": "Harvesting",
-            "description": "Plant harvesting operation",
-            "background_color": "#F5E8C7",
-            "border_color": "#8B4513",
-            "text_color": "#2F4F4F"
-        }
-    },
-    {
-        "model": "farm_operations.farmoperationtype",
         "pk": 2,
         "fields": {
             "name": "Planting",
