@@ -15,6 +15,8 @@ class FarmCalendarActivityType(models.Model):
     during development. However, the user may add their own generic activity type that is not
     covered by the defaults.
     """
+    id = models.AutoField(primary_key=True, db_index=True, editable=False, unique=True,
+                          blank=False, null=False, verbose_name='ID')
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     # Fields for color codes
@@ -48,7 +50,15 @@ class FarmCalendarActivity(models.Model):
     title = models.CharField(max_length=200)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField(blank=True, null=True)
+    id = models.AutoField(primary_key=True, db_index=True, editable=False, unique=True,
+                          blank=False, null=False, verbose_name='ID')
+
+    title = models.CharField(max_length=200)
     details = models.TextField(blank=True, null=True)
+
+    responsible_agent = models.CharField(blank=True, null=True)
+    agricultural_machinery = models.ManyToManyField('farm_management.AgriculturalMachine', related_name='used_in_operations', blank=True, null=True)
+    # weather_observation = models.ManyToManyField('farm_management.AgriculturalMachine', related_name='used_in_operations', blank=True, null=True)?
 
     def __str__(self):
         return f"{self.title} ({self.start_time.strftime('%Y-%m-%d %H:%M')})"
