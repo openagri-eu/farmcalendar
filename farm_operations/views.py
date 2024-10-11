@@ -39,8 +39,8 @@ class FarmOperationListView(View):
         for operation in FarmOperation.objects.select_related('operation_type').all():
             operations_json_data.append({
                 'title': operation.title,
-                'start': operation.start_time.isoformat(),
-                'end': operation.end_time.isoformat(),
+                'start': operation.start_datetime.isoformat(),
+                'end': operation.end_datetime.isoformat(),
                 'details': operation.details,
                 'backgroundColor': operation.operation_type.background_color,
                 'borderColor': operation.operation_type.border_color,

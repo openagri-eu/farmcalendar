@@ -16,8 +16,8 @@ class FarmOperationTypeForm(forms.ModelForm):
 class FarmOperationForm(forms.ModelForm):
     class Meta:
         model = FarmOperation
-        fields = ['operation_type', 'title', 'start_time', 'end_time', 'details']
+        fields = ['operation_type', 'title', 'start_datetime', 'end_datetime', 'details']
         widgets = {
-            'start_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
-            'end_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'start_datetime': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'end_datetime': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
         }

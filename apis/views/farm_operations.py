@@ -8,7 +8,7 @@ class FarmOperationViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows FarmOperation to be viewed or edited.
     """
-    queryset = FarmOperation.objects.all().order_by('-start_time')
+    queryset = FarmOperation.objects.all().order_by('-start_datetime')
     serializer_class = FarmOperationSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -26,7 +26,7 @@ class FertilizationOperationViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows FertilizationOperation to be viewed or edited.
     """
-    queryset = FertilizationOperation.objects.all().order_by('-start_time')
+    queryset = FertilizationOperation.objects.all().order_by('-start_datetime')
     serializer_class = FertilizationOperationSerializer
     permission_classes = [permissions.IsAuthenticated]
 

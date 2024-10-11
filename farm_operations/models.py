@@ -55,6 +55,7 @@ class FertilizationOperation(FarmOperation):
     # fertilization_type = models.CharField(max_length=255, blank=True, null=True)
     applied_amount = models.DecimalField(max_digits=10, decimal_places=2)
     applied_amount_unit = models.CharField(max_length=255)
+
     application_method = models.CharField(max_length=255, blank=True, null=True)
 
     operated_on = models.ForeignKey('farm_management.FarmParcel', on_delete=models.CASCADE)
@@ -63,5 +64,3 @@ class FertilizationOperation(FarmOperation):
     def save(self, *args, **kwargs):
         self.operation_type, _ = FarmOperationType.objects.get_or_create(name=settings.DEFAULT_OPERATION_TYPES['fertilization']['name'])
         super().save(*args, **kwargs)
-
-

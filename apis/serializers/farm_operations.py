@@ -2,6 +2,10 @@ from rest_framework import serializers
 
 from farm_operations.models import FarmOperationType, FarmOperation, FertilizationOperation
 
+from .base import JSONLDSerializer
+from ..schemas import QuantityValueModel
+
+
 
 class FarmOperationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -9,7 +13,7 @@ class FarmOperationSerializer(serializers.HyperlinkedModelSerializer):
 
         fields = [
             'operation_type', 'title', 'details',
-            'start_time', 'end_time',
+            'start_datetime', 'end_datetime',
         ]
         # 'status', 'created_at', 'updated_at', 'deleted_at',
 
@@ -24,18 +28,22 @@ class FarmOperationTypeSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-
-class FertilizationOperationSerializer(serializers.HyperlinkedModelSerializer):
+class FertilizationOperationSerializer(JSONLDSerializer):
     class Meta:
         model = FertilizationOperation
 
         fields = [
+            'id',
             'operation_type', 'title', 'details',
-            'start_time', 'end_time',
+            'start_datetime', 'end_datetime',
             'applied_amount', 'applied_amount_unit',
             'application_method',
             'fertilizer', 'operated_on'
         ]
+
+    def to_representation(self, instance):
+        instance.has_applied_amount = QuantityValueModel(instance.applied_amount, instance.applied_amount_unit)
+        return super().to_representation(instance)
 
     # def to_representation(self, instance):
     #     representation = super().to_representation(instance)
