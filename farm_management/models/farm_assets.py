@@ -5,22 +5,18 @@ from .base import NamedHistoricalBaseModel
 
 
 class FarmAsset(NamedHistoricalBaseModel):
-    description = models.TextField(blank=True, null=True)
-
-    geo_id = models.UUIDField(_('Geographic Data ID'), unique=False, blank=True, null=True)
-
-    parcel = models.ForeignKey('FarmParcel', on_delete=models.SET_NULL,blank=True, null=True, related_name="%(class)ss")
-
-
     class Meta:
         # keep as abstract for now, maybe if we need to query
         # all assets in general, then it would make sense to have a
         # table for this model
         abstract = True
 
+    description = models.TextField(blank=True, null=True)
+    geo_id = models.UUIDField(_('Geographic Data ID'), unique=False, blank=True, null=True)
+    parcel = models.ForeignKey('FarmParcel', on_delete=models.SET_NULL,blank=True, null=True, related_name="%(class)ss")
+
 
 class FarmCrop(FarmAsset):
-
     class Meta:
         verbose_name = "Farm Plant"
         verbose_name_plural = "Farm Plants"
@@ -41,7 +37,6 @@ class FarmAnimal(FarmAsset):
         NONE = 0, _('N/A')
         FEMALE = 1, _('Female')
         MALE = 2, _('Male')
-
 
     sex = models.IntegerField(choices=SexChoices, default=SexChoices.NONE)
     castrated = models.BooleanField(default=False)
