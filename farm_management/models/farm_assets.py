@@ -38,16 +38,17 @@ class FarmAnimal(FarmAsset):
         FEMALE = 1, _('Female')
         MALE = 2, _('Male')
 
-    sex = models.IntegerField(choices=SexChoices, default=SexChoices.NONE)
-    castrated = models.BooleanField(default=False)
-    # probably add later parents m2m field to self
-
     species = models.CharField(max_length=255)
     breed = models.CharField(max_length=255, blank=True, null=True)
     birth_date = models.DateTimeField()
+    sex = models.IntegerField(choices=SexChoices.choices, default=SexChoices.NONE)
+    age = models.IntegerField()  # Age in months
+    number_of_animals = models.IntegerField(default=1)
+    castrated = models.BooleanField(default=False)
+    # probably add later parents m2m field to self
 
     def __str__(self):
-        return f"{self.name} - {self.species} - {self.breed}"
+        return f"{self.species} - {self.breed} ({self.number_of_animals} animals)"
 
 
 class AgriculturalMachine(FarmAsset):
