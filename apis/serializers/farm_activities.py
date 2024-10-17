@@ -1,22 +1,22 @@
 from rest_framework import serializers
 
-from farm_operations.models import FarmOperationType, FarmOperation, FertilizationOperation
+from farm_activities.models import FarmCalendarActivityType, FarmCalendarActivity, FertilizationOperation
 
 
-class FarmOperationSerializer(serializers.HyperlinkedModelSerializer):
+class FarmCalendarActivitySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = FarmOperation
+        model = FarmCalendarActivity
 
         fields = [
-            'operation_type', 'title', 'details',
+            'activity_type', 'title', 'details',
             'start_time', 'end_time',
         ]
         # 'status', 'created_at', 'updated_at', 'deleted_at',
 
 
-class FarmOperationTypeSerializer(serializers.HyperlinkedModelSerializer):
+class FarmCalendarActivityTypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = FarmOperationType
+        model = FarmCalendarActivityType
 
         fields = [
             'name', 'description',
@@ -30,7 +30,7 @@ class FertilizationOperationSerializer(serializers.HyperlinkedModelSerializer):
         model = FertilizationOperation
 
         fields = [
-            'operation_type', 'title', 'details',
+            'activity_type', 'title', 'details',
             'start_time', 'end_time',
             'applied_amount', 'applied_amount_unit',
             'application_method',

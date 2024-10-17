@@ -1,10 +1,10 @@
 from django import forms
-from .models import FarmOperationType, FarmOperation
+from .models import FarmCalendarActivityType, FarmCalendarActivity
 
 
-class FarmOperationTypeForm(forms.ModelForm):
+class FarmCalendarActivityTypeForm(forms.ModelForm):
     class Meta:
-        model = FarmOperationType
+        model = FarmCalendarActivityType
         fields = ['name', 'background_color', 'border_color', 'text_color']
         widgets = {
             'background_color': forms.TextInput(attrs={'class': 'color-picker'}),
@@ -13,10 +13,10 @@ class FarmOperationTypeForm(forms.ModelForm):
         }
 
 
-class FarmOperationForm(forms.ModelForm):
+class FarmCalendarActivityForm(forms.ModelForm):
     class Meta:
-        model = FarmOperation
-        fields = ['operation_type', 'title', 'start_time', 'end_time', 'details']
+        model = FarmCalendarActivity
+        fields = ['activity_type', 'title', 'start_time', 'end_time', 'details']
         widgets = {
             'start_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
             'end_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
