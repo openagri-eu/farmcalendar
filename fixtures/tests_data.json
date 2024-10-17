@@ -42,7 +42,7 @@
         }
     },
     {
-        "model": "farm_operations.farmoperationtype",
+        "model": "farm_activities.farmcalendaractivitytype",
         "pk": 1,
         "fields": {
             "name": "Fertilization",
@@ -53,7 +53,7 @@
         }
     },
     {
-        "model": "farm_operations.farmoperationtype",
+        "model": "farm_activities.farmcalendaractivitytype",
         "pk": 2,
         "fields": {
             "name": "Crop Irrigation Operation",
@@ -64,10 +64,10 @@
         }
     },
     {
-        "model": "farm_operations.farmoperation",
+        "model": "farm_activities.farmcalendaractivity",
         "pk": 1,
         "fields": {
-            "operation_type": 1,
+            "activity_type": 1,
             "title": "Fertilization of Olive Orchards",
             "start_time": "2024-09-24T03:08:00Z",
             "end_time": "2024-09-24T04:09:00Z",
@@ -75,7 +75,7 @@
         }
     },
     {
-        "model": "farm_operations.fertilizationoperation",
+        "model": "farm_activities.fertilizationoperation",
         "pk": 1,
         "fields": {
             "applied_amount": "4.00",
@@ -86,10 +86,10 @@
         }
     },
     {
-        "model": "farm_operations.farmoperation",
+        "model": "farm_activities.farmcalendaractivity",
         "pk": 2,
         "fields": {
-            "operation_type": 2,
+            "activity_type": 2,
             "title": "Crop Irrigation",
             "start_time": "2024-09-24T10:08:00Z",
             "end_time": "2024-09-24T10:30:00Z",
@@ -97,10 +97,10 @@
         }
     },
     {
-        "model": "farm_operations.farmoperation",
+        "model": "farm_activities.farmcalendaractivity",
         "pk": 3,
         "fields": {
-            "operation_type": 2,
+            "activity_type": 2,
             "title": "Crop Irrigation",
             "start_time": "2024-09-25T10:08:00Z",
             "end_time": "2024-09-25T10:30:00Z",

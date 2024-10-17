@@ -45,7 +45,7 @@ DEFAULT_APPS = [
 
 LOCAL_APPS =[
     "farm_management.apps.FarmManagementConfig",
-    "farm_operations.apps.FarmOperationsConfig",
+    "farm_activities.apps.FarmActivitiesConfig",
     "apis.apps.ApisConfig"
 ]
 
@@ -251,7 +251,7 @@ FIXTURE_DIRS = [(BASE_DIR / "fixtures")]
 
 
 
-DEFAULT_OPERATION_TYPES = {
+DEFAULT_CALENDAR_ACTIVITY_TYPES = {
     'fertilization': {
         'name': 'Fertilization',
         'description': 'Fertilization operation',
