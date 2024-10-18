@@ -37,10 +37,10 @@ class FarmCalendarActivityListView(View):
     def get(self, request):
         activities_json_data = []
         for activity in FarmCalendarActivity.objects.select_related('activity_type').all():
-            end_time = activity.end_time.isoformat() if activity.end_time else None
+            end_time = activity.end_datetime.isoformat() if activity.end_datetime else None
             activities_json_data.append({
                 'title': activity.title,
-                'start': activity.start_time.isoformat(),
+                'start': activity.start_datetime.isoformat(),
                 'end': end_time,
                 'details': activity.details,
                 'backgroundColor': activity.activity_type.background_color,

@@ -48,8 +48,8 @@ class FarmCalendarActivity(models.Model):
     """
     activity_type = models.ForeignKey(FarmCalendarActivityType, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField(blank=True, null=True)
+    start_datetime = models.DateTimeField()
+    end_datetime = models.DateTimeField(blank=True, null=True)
     id = models.AutoField(primary_key=True, db_index=True, editable=False, unique=True,
                           blank=False, null=False, verbose_name='ID')
 
