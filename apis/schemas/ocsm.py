@@ -6,8 +6,8 @@ from farm_management.models import (
     Farm, FarmParcel
 )
 
-from farm_operations.models import (
-    FarmOperation,
+from farm_activities.models import (
+    FarmCalendarActivity,
     FertilizationOperation
 )
 
@@ -49,26 +49,27 @@ class FarmParcelSchema(NamedHistoricalBaseModelSchema):
 
 
 
-class FarmOperationSchema(JsonLDSchema):
+class FarmCalendarActivitySchema(JsonLDSchema):
     id = fields.Id()
-    # plan?
 
-    operation_type = fields.IRI(ocsm_namespace.operationType)
+    activity_type = fields.IRI(ocsm_namespace.activityType)
     details = fields.String(ocsm_namespace.description)
     start_datetime = fields.DateTime(ocsm_namespace.hasStartDatetime)
     end_datetime = fields.DateTime(ocsm_namespace.hasEndDatetime)
 
+
+    class Meta:
+        rdf_type = ocsm_namespace.FarmCalendarActivity
+        model = FarmCalendarActivity
+
+
+class FertilizationOperationSchema(FarmCalendarActivitySchema):
+
+    # plan?
     # responsible_agent = fields.IRI(ocsm_namespace.Agent)
 
     # agricultural_machinery = fields.IRI(ocsm_namespace.AgriculturalMachine, many=True)
-
-    class Meta:
-        rdf_type = ocsm_namespace.FarmOperation
-        model = FarmOperation
-
-
-class FertilizationOperationSchema(FarmOperationSchema):
-
+    activity_type = fields.IRI(ocsm_namespace.operationType)
     application_method = fields.String(ocsm_namespace.hasApplicationMethod)
 
     operated_on = fields.IRI(ocsm_namespace.isOperatedOn)
