@@ -21,6 +21,8 @@
             "updated_at": "2024-09-24T09:07:55.288Z",
             "farm": 1,
             "geo_id": null,
+            "coordinates":"123,456",
+            "area": 12.00,
             "description": null
         }
     },
