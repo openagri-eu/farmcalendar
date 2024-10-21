@@ -12,8 +12,8 @@ from .views import (
     FarmCropViewSet,
     FarmAnimalViewSet,
     AgriculturalMachineViewSet,
-    FarmOperationViewSet,
-    FarmOperationTypeViewSet,
+    FarmCalendarActivityViewSet,
+    FarmCalendarActivityTypeViewSet,
     FertilizationOperationViewSet,
     FertilizerViewSet,
 )
@@ -25,8 +25,8 @@ router.register(r'FarmParcels', FarmParcelViewSet)
 router.register(r'FarmCrops', FarmCropViewSet)
 router.register(r'FarmAnimals', FarmAnimalViewSet)
 router.register(r'AgriculturalMachines', AgriculturalMachineViewSet)
-router.register(r'FarmOperations', FarmOperationViewSet)
-router.register(r'FarmOperationTypes', FarmOperationTypeViewSet)
+router.register(r'FarmCalendarActivities', FarmCalendarActivityViewSet)
+router.register(r'FarmCalendarActivityTypes', FarmCalendarActivityTypeViewSet)
 router.register(r'FertilizationOperation', FertilizationOperationViewSet)
 router.register(r'Fertilizer', FertilizerViewSet)
 

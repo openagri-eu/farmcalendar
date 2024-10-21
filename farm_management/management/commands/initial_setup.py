@@ -6,7 +6,7 @@ from django.db.migrations.recorder import MigrationRecorder
 
 from django.conf import settings
 
-from farm_operations.models import FarmOperationType
+from farm_activities.models import FarmCalendarActivityType
 
 
 
@@ -15,11 +15,11 @@ class Command(BaseCommand):
 
 
     def check_for_initial_data(self):
-        return len(FarmOperationType.objects.all()) == 0
+        return len(FarmCalendarActivityType.objects.all()) == 0
 
     def setup_initial_data(self):
-        for def_operation_type in settings.DEFAULT_OPERATION_TYPES.values():
-            operation = FarmOperationType(
+        for def_operation_type in settings.DEFAULT_CALENDAR_ACTIVITY_TYPES.values():
+            operation = FarmCalendarActivityType(
                 **def_operation_type,
             ).save()
 
