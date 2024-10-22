@@ -13,7 +13,8 @@ class FarmAsset(NamedHistoricalBaseModel):
 
     description = models.TextField(blank=True, null=True)
     geo_id = models.UUIDField(_('Geographic Data ID'), unique=False, blank=True, null=True)
-    parcel = models.ForeignKey('FarmParcel', on_delete=models.SET_NULL,blank=True, null=True, related_name="%(class)ss")
+    parcel = models.ForeignKey('FarmParcel', on_delete=models.SET_NULL,blank=True, null=True,
+                               related_name="%(class)ss")
 
 
 class FarmCrop(FarmAsset):
@@ -42,7 +43,7 @@ class FarmAnimal(FarmAsset):
     breed = models.CharField(max_length=255, blank=True, null=True)
     birth_date = models.DateTimeField()
     sex = models.IntegerField(choices=SexChoices.choices, default=SexChoices.NONE)
-    age = models.IntegerField()  # Age in months
+    age = models.IntegerField(default=0)
     number_of_animals = models.IntegerField(default=1)
     castrated = models.BooleanField(default=False)
     # probably add later parents m2m field to self

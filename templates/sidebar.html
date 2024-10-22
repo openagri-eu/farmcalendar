@@ -1,0 +1,54 @@
+<!-- Sidebar -->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+        <div class="sidebar-brand-icon">
+            OpenAgri
+        </div>
+        <div class="sidebar-brand-text mx-3"><i class="fas fa-fw fa-calendar-alt"></i></div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Render the menu dynamically -->
+    {% for item in admin_menu %}
+        {% if not item.parent_id %}
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                {{ item.menu_name }}
+            </div>
+
+            <!-- Nav Item for main menu -->
+            <li class="nav-item">
+                <a class="nav-link" href="{% if item.submenus.all %}#{% else %}/{{ item.menu_route }}{% endif %}">
+                    <i class="fas fa-fw fa-{{ item.menu_icon }}"></i>
+                    <span>{{ item.menu_name }}</span>
+                </a>
+            </li>
+
+            <!-- Render submenus if any -->
+            {% if item.submenus.all %}
+                <ul class="navbar-nav ml-3">
+                    {% for submenu in item.submenus.all %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/{{ submenu.menu_route }}">
+                                <i class="fas fa-fw fa-{{ submenu.menu_icon }}"></i>
+                                <span>{{ submenu.menu_name }}</span>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+        {% endif %}
+    {% endfor %}
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+</ul>
+<!-- End of Sidebar -->

@@ -26,8 +26,8 @@ class FarmParcel(NamedHistoricalBaseModel):
     farm = models.ForeignKey('Farm', on_delete=models.CASCADE, blank=False, null=False, related_name="%(class)ss")
     geo_id = models.UUIDField(_('Georaphic Data ID'), unique=False, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    coordinates = models.CharField(max_length=255)  # store in lat/lon format
-    area = models.DecimalField(max_digits=10, decimal_places=2)  # Area in hectares
+    coordinates = models.CharField(max_length=255, default=0.0)  # store in lat/lon format
+    area = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)  # Area in hectares
     cultivation_type = models.CharField(max_length=50, choices=CultivationTypeChoices.choices,
                                         default=CultivationTypeChoices.GRAPES)
 

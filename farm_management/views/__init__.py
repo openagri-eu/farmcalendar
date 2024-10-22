@@ -1,2 +1,2 @@
-# from .rest_api import *
 from .web_ui import *
+from .FarmParcelV import FarmParcelView

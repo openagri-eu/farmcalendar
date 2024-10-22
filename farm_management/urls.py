@@ -14,12 +14,9 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import path, include
-from django.contrib.auth.decorators import login_required
-from django.views.generic import TemplateView
-
-
+from django.urls import path
 from . import views
+from .views import FarmParcelView
 
 
 
@@ -32,4 +29,6 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('post_auth/', views.post_authentication, name='post_auth'),
     path('test_perm/', views.need_permission_view, name='need_permission'),
+
+    path('farm-parcels/', FarmParcelView.as_view(), name="farm-parcels")
 ]
