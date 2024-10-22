@@ -55,17 +55,6 @@
         }
     },
     {
-        "model": "farm_activities.farmcalendaractivitytype",
-        "pk": 2,
-        "fields": {
-            "name": "Crop Irrigation Operation",
-            "description": "Irrigation operation",
-            "background_color": "#ADD8E6",
-            "border_color": "#4682B4",
-            "text_color": "#2F4F4F"
-        }
-    },
-    {
         "model": "farm_activities.farmcalendaractivity",
         "pk": 1,
         "fields": {
@@ -95,18 +84,17 @@
             "title": "Crop Irrigation",
             "start_datetime": "2024-09-24T10:08:00Z",
             "end_datetime": "2024-09-24T10:30:00Z",
-            "details": ""
+            "details": "Irrigation of olive orchards"
         }
     },
     {
-        "model": "farm_activities.farmcalendaractivity",
-        "pk": 3,
+        "model": "farm_activities.irrigationoperation",
+        "pk": 2,
         "fields": {
-            "activity_type": 2,
-            "title": "Crop Irrigation",
-            "start_datetime": "2024-09-25T10:08:00Z",
-            "end_datetime": "2024-09-25T10:30:00Z",
-            "details": ""
+            "applied_amount": "4.00",
+            "applied_amount_unit": "https://w3id.org/ocsm/KiloGM-PER-PLANT",
+            "operated_on": 1,
+            "irrigation_system": "centre_pivot"
         }
     }
 ]

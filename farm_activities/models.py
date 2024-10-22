@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from django.core.validators import RegexValidator
 
 from django.conf import settings
@@ -46,12 +47,17 @@ class FarmCalendarActivity(models.Model):
     This will be the base for both the operations and observations, as in
     how they are presented in a calendar and what type of activity (or event) this is about.
     """
+    class Meta:
+        verbose_name = "Farm Activity"
+        verbose_name_plural = "Farm Activities"
+
+    id = models.AutoField(primary_key=True, db_index=True, editable=False, unique=True,
+                          blank=False, null=False, verbose_name='ID')
+
     activity_type = models.ForeignKey(FarmCalendarActivityType, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     start_datetime = models.DateTimeField()
     end_datetime = models.DateTimeField(blank=True, null=True)
-    id = models.AutoField(primary_key=True, db_index=True, editable=False, unique=True,
-                          blank=False, null=False, verbose_name='ID')
 
     title = models.CharField(max_length=200)
     details = models.TextField(blank=True, null=True)
@@ -65,6 +71,10 @@ class FarmCalendarActivity(models.Model):
 
 
 class FertilizationOperation(FarmCalendarActivity):
+    class Meta:
+        verbose_name = "Fertilization Operation"
+        verbose_name_plural = "Fertilization Operations"
+
     # treated_area = models.IntegerField(blank=True, null=True)
     # fertilization_type = models.CharField(max_length=255, blank=True, null=True)
     applied_amount = models.DecimalField(max_digits=10, decimal_places=2)
@@ -78,3 +88,34 @@ class FertilizationOperation(FarmCalendarActivity):
     def save(self, *args, **kwargs):
         self.activity_type, _ = FarmCalendarActivityType.objects.get_or_create(name=settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['fertilization']['name'])
         super().save(*args, **kwargs)
+
+
+
+class IrrigationOperation(FarmCalendarActivity):
+
+    class Meta:
+        verbose_name = "Irrigation Operation"
+        verbose_name_plural = "Irrigation Operations"
+
+    class IrrigationSystemChoices(models.TextChoices):
+        SPRINKLER = 'sprinkler', _('Sprinkler')
+        DRIP = 'drip', _('Drip')
+        CENTRE_PIVOT  = 'centre_pivot', _('Centre Pivot')
+        FURROW  = 'furrow', _('Furrow')
+        TERRACED  = 'terraced', _('Terraced')
+
+    applied_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    applied_amount_unit = models.CharField(max_length=255)
+
+    operated_on = models.ForeignKey('farm_management.FarmParcel', on_delete=models.CASCADE)
+
+    # cycle_duration = models.DecimalField(max_digits=10, decimal_places=2)
+    irrigation_system = models.CharField(max_length=50, choices=IrrigationSystemChoices.choices,
+                                        default=IrrigationSystemChoices.SPRINKLER)
+
+    # TreatmentPlan
+    def save(self, *args, **kwargs):
+        self.activity_type, _ = FarmCalendarActivityType.objects.get_or_create(name=settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['irrigation']['name'])
+        super().save(*args, **kwargs)
+
+

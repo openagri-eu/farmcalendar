@@ -1,7 +1,17 @@
 from rest_framework import permissions, viewsets
 
-from farm_activities.models import FarmCalendarActivity, FarmCalendarActivityType, FertilizationOperation
-from ..serializers import FarmCalendarActivitySerializer, FarmCalendarActivityTypeSerializer, FertilizationOperationSerializer
+from farm_activities.models import (
+    FarmCalendarActivity,
+    FarmCalendarActivityType,
+    FertilizationOperation,
+    IrrigationOperation,
+)
+from ..serializers import (
+    FarmCalendarActivitySerializer,
+    FarmCalendarActivityTypeSerializer,
+    FertilizationOperationSerializer,
+    IrrigationOperationSerializer,
+)
 
 
 class FarmCalendarActivityViewSet(viewsets.ModelViewSet):
@@ -28,6 +38,15 @@ class FertilizationOperationViewSet(viewsets.ModelViewSet):
     """
     queryset = FertilizationOperation.objects.all().order_by('-start_datetime')
     serializer_class = FertilizationOperationSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class IrrigationOperationViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows IrrigationOperation to be viewed or edited.
+    """
+    queryset = IrrigationOperation.objects.all().order_by('-start_datetime')
+    serializer_class = IrrigationOperationSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 

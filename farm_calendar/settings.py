@@ -259,4 +259,11 @@ DEFAULT_CALENDAR_ACTIVITY_TYPES = {
         "border_color": "#8B4513",
         "text_color": "#2F4F4F"
     },
+    'irrigation': {
+        'name': 'Irrigation',
+        'description': 'Irrigation operation',
+        'background_color': '#B3E5FC',
+        'border_color': '#0288D1',
+        'text_color': '#01579B'
+    },
 }
