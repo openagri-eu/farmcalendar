@@ -276,8 +276,15 @@ DEFAULT_CALENDAR_ACTIVITY_TYPES = {
     'crop_stress_indicator':{
         'name': 'Crop Stress Indicator',
         'description': 'Crop Stress Indicator Observation',
-        'background_color': '#FFCCCB',  # Light red for stress
-        'border_color': '#C62828',       # Darker red for emphasis
-        'text_color': '#BF360C',         # Dark red for text readability
+        'background_color': '#FFCCCB',
+        'border_color': '#C62828',
+        'text_color': '#BF360C',
+    },
+    'crop_growth_stage':{
+        'name': 'Crop Growth Stage Observation',
+        'description': 'Crop Stress Indicator Observation',
+        "background_color": "#F5E8C7",
+        "border_color": "#8B4513",
+        "text_color": "#2F4F4F"
     }
 }

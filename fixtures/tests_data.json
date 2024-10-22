@@ -35,12 +35,13 @@
             "status": 0,
             "deleted_at": null,
             "created_at": "2024-10-22T11:51:22.187Z",
-            "updated_at": "2024-10-22T11:51:22.187Z",
+            "updated_at": "2024-10-22T12:27:45.929Z",
             "description": "Olives",
             "geo_id": null,
             "parcel": 1,
             "species": "Olive",
-            "variety": "Green"
+            "variety": "Green",
+            "growth_stage": "Stem Elongation"
         }
     },
     {
@@ -122,6 +123,17 @@
         }
     },
     {
+        "model": "farm_activities.farmcalendaractivitytype",
+        "pk": 5,
+        "fields": {
+            "name": "Crop Growth Stage Observation",
+            "description": "Crop Stress Indicator Observation",
+            "background_color": "#F5E8C7",
+            "border_color": "#8B4513",
+            "text_color": "#2F4F4F"
+        }
+    },
+    {
         "model": "farm_activities.farmcalendaractivity",
         "pk": 1,
         "fields": {
@@ -174,6 +186,19 @@
         }
     },
     {
+        "model": "farm_activities.farmcalendaractivity",
+        "pk": 5,
+        "fields": {
+            "activity_type": 5,
+            "start_datetime": "2024-09-26T00:24:00Z",
+            "end_datetime": null,
+            "title": "Growth stage Observation",
+            "details": "observing growth of orchards",
+            "responsible_agent": "",
+            "agricultural_machinery": []
+        }
+    },
+    {
         "model": "farm_activities.fertilizationoperation",
         "pk": 1,
         "fields": {
@@ -214,8 +239,24 @@
         }
     },
     {
+        "model": "farm_activities.observation",
+        "pk": 5,
+        "fields": {
+            "value": "Stem Elongation",
+            "value_unit": "Growth",
+            "observed_property": "GrowthStage"
+        }
+    },
+    {
         "model": "farm_activities.cropstressindicatorobservation",
         "pk": 4,
+        "fields": {
+            "crop": 1
+        }
+    },
+    {
+        "model": "farm_activities.cropgrowthstageobservation",
+        "pk": 5,
         "fields": {
             "crop": 1
         }

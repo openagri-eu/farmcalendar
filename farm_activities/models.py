@@ -147,7 +147,7 @@ class Observation(FarmCalendarActivity):
         verbose_name = "Observation"
         verbose_name_plural = "Observations"
 
-    value = models.DecimalField(max_digits=10, decimal_places=2)
+    value = models.CharField(max_length=255)
     value_unit = models.CharField(max_length=255)
     observed_property = models.CharField(max_length=255)
 
@@ -162,4 +162,20 @@ class CropStressIndicatorObservation(Observation):
 
     def save(self, *args, **kwargs):
         self.activity_type, _ = FarmCalendarActivityType.objects.get_or_create(name=settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['crop_stress_indicator']['name'])
+        super().save(*args, **kwargs)
+
+
+class CropGrowthStageObservation(Observation):
+
+    class Meta:
+        verbose_name = "Crop Growth Stage Observation"
+        verbose_name_plural = "Crop Growth Stage Observations"
+
+    crop = models.ForeignKey('farm_management.FarmCrop', on_delete=models.CASCADE, blank=False, null=False)
+
+    def save(self, *args, **kwargs):
+        self.activity_type, _ = FarmCalendarActivityType.objects.get_or_create(name=settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['crop_growth_stage']['name'])
+        # todo: fix this so that only change if this is the latest observation from that crop
+        self.crop.growth_stage = self.value
+        self.crop.save()
         super().save(*args, **kwargs)

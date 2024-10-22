@@ -24,8 +24,10 @@ class FarmCrop(FarmAsset):
     species = models.CharField(max_length=255)
     variety = models.CharField(max_length=255, blank=True, null=True)
 
+    growth_stage = models.CharField(max_length=255, blank=True, null=True)
+
     def __str__(self):
-        return f"{self.name} - {self.species} - {self.variety}"
+        return f"{self.name} - {self.species} - {self.variety} - {self.growth_stage}"
 
 
 class FarmAnimal(FarmAsset):
