@@ -271,6 +271,13 @@ DEFAULT_CALENDAR_ACTIVITY_TYPES = {
         'description': 'Pesticide application',
         'background_color': '#C5E1A5',
         'border_color': '#8E7F2F',
-        'text_color': '#4E342E'
+        'text_color': '#4E342E',
+    },
+    'crop_stress_indicator':{
+        'name': 'Crop Stress Indicator',
+        'description': 'Crop Stress Indicator Observation',
+        'background_color': '#FFCCCB',  # Light red for stress
+        'border_color': '#C62828',       # Darker red for emphasis
+        'text_color': '#BF360C',         # Dark red for text readability
     }
 }

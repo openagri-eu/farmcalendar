@@ -1,4 +1,7 @@
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import RegexValidator
 
@@ -63,6 +66,7 @@ class FarmCalendarActivity(models.Model):
     details = models.TextField(blank=True, null=True)
 
     responsible_agent = models.CharField(blank=True, null=True)
+    # need to change this into a operation model instead...
     agricultural_machinery = models.ManyToManyField('farm_management.AgriculturalMachine', related_name='used_in_operations', blank=True, null=True)
     # weather_observation = models.ManyToManyField('farm_management.AgriculturalMachine', related_name='used_in_operations', blank=True, null=True)?
 
@@ -138,3 +142,24 @@ class CropProtectionOperation(FarmCalendarActivity):
         super().save(*args, **kwargs)
 
 
+class Observation(FarmCalendarActivity):
+    class Meta:
+        verbose_name = "Observation"
+        verbose_name_plural = "Observations"
+
+    value = models.DecimalField(max_digits=10, decimal_places=2)
+    value_unit = models.CharField(max_length=255)
+    observed_property = models.CharField(max_length=255)
+
+
+class CropStressIndicatorObservation(Observation):
+
+    class Meta:
+        verbose_name = "Crop Stress Indicator Observation"
+        verbose_name_plural = "Crop Stress Indicator Observations"
+
+    crop = models.ForeignKey('farm_management.FarmCrop', on_delete=models.CASCADE, blank=False, null=False)
+
+    def save(self, *args, **kwargs):
+        self.activity_type, _ = FarmCalendarActivityType.objects.get_or_create(name=settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['crop_stress_indicator']['name'])
+        super().save(*args, **kwargs)

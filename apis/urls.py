@@ -19,6 +19,8 @@ from .views import (
     IrrigationOperationViewSet,
     CropProtectionOperationViewSet,
     PesticideViewSet,
+    ObservationViewSet,
+    CropStressIndicatorObservationViewSet
 )
 
 router = routers.DefaultRouter()
@@ -35,6 +37,9 @@ router.register(r'Fertilizers', FertilizerViewSet)
 router.register(r'IrrigationOperations', IrrigationOperationViewSet)
 router.register(r'CropProtectionOperations', CropProtectionOperationViewSet)
 router.register(r'Pesticides', PesticideViewSet)
+router.register(r'Observations', ObservationViewSet)
+router.register(r'CropStressIndicatorObservations', CropStressIndicatorObservationViewSet)
+
 
 
 

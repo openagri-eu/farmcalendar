@@ -6,6 +6,8 @@ from farm_activities.models import (
     FertilizationOperation,
     IrrigationOperation,
     CropProtectionOperation,
+    Observation,
+    CropStressIndicatorObservation,
 )
 from ..serializers import (
     FarmCalendarActivitySerializer,
@@ -13,6 +15,8 @@ from ..serializers import (
     FertilizationOperationSerializer,
     IrrigationOperationSerializer,
     CropProtectionOperationSerializer,
+    ObservationSerializer,
+    CropStressIndicatorObservationSerializer,
 )
 
 
@@ -58,6 +62,26 @@ class CropProtectionOperationViewSet(viewsets.ModelViewSet):
     """
     queryset = CropProtectionOperation.objects.all().order_by('-start_datetime')
     serializer_class = CropProtectionOperationSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+
+class ObservationViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Observation to be viewed or edited.
+    """
+    queryset = Observation.objects.all().order_by('-start_datetime')
+    serializer_class = ObservationSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+
+class CropStressIndicatorObservationViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows CropStressIndicator to be viewed or edited.
+    """
+    queryset = CropStressIndicatorObservation.objects.all().order_by('-start_datetime')
+    serializer_class = CropStressIndicatorObservationSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 

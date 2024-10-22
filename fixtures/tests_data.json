@@ -21,9 +21,26 @@
             "updated_at": "2024-09-24T09:07:55.288Z",
             "farm": 1,
             "geo_id": null,
-            "coordinates":"123,456",
-            "area": 12.00,
-            "description": null
+            "description": null,
+            "coordinates": "123,456",
+            "area": "12.00",
+            "cultivation_type": "grapes"
+        }
+    },
+    {
+        "model": "farm_management.farmcrop",
+        "pk": 1,
+        "fields": {
+            "name": "Olive",
+            "status": 0,
+            "deleted_at": null,
+            "created_at": "2024-10-22T11:51:22.187Z",
+            "updated_at": "2024-10-22T11:51:22.187Z",
+            "description": "Olives",
+            "geo_id": null,
+            "parcel": 1,
+            "species": "Olive",
+            "variety": "Green"
         }
     },
     {
@@ -44,60 +61,6 @@
         }
     },
     {
-        "model": "farm_activities.farmcalendaractivitytype",
-        "pk": 1,
-        "fields": {
-            "name": "Fertilization",
-            "description": "Fertilization operation",
-            "background_color": "#F5E8C7",
-            "border_color": "#8B4513",
-            "text_color": "#2F4F4F"
-        }
-    },
-    {
-        "model": "farm_activities.farmcalendaractivity",
-        "pk": 1,
-        "fields": {
-            "activity_type": 1,
-            "title": "Fertilization of Olive Orchards",
-            "start_datetime": "2024-09-24T03:08:00Z",
-            "end_datetime": "2024-09-24T04:09:00Z",
-            "details": "Fertilization of olive orchards"
-        }
-    },
-    {
-        "model": "farm_activities.fertilizationoperation",
-        "pk": 1,
-        "fields": {
-            "applied_amount": "4.00",
-            "applied_amount_unit": "https://w3id.org/ocsm/KiloGM-PER-PLANT",
-            "application_method": "dispersion",
-            "operated_on": 1,
-            "fertilizer": 1
-        }
-    },
-    {
-        "model": "farm_activities.farmcalendaractivity",
-        "pk": 2,
-        "fields": {
-            "activity_type": 2,
-            "title": "Crop Irrigation",
-            "start_datetime": "2024-09-24T10:08:00Z",
-            "end_datetime": "2024-09-24T10:30:00Z",
-            "details": "Irrigation of olive orchards"
-        }
-    },
-    {
-        "model": "farm_activities.irrigationoperation",
-        "pk": 2,
-        "fields": {
-            "applied_amount": "4.00",
-            "applied_amount_unit": "https://w3id.org/ocsm/KiloGM-PER-PLANT",
-            "operated_on": 1,
-            "irrigation_system": "centre_pivot"
-        }
-    },
-    {
         "model": "farm_management.pesticide",
         "pk": 1,
         "fields": {
@@ -115,18 +78,124 @@
         }
     },
     {
+        "model": "farm_activities.farmcalendaractivitytype",
+        "pk": 1,
+        "fields": {
+            "name": "Fertilization",
+            "description": "Fertilization operation",
+            "background_color": "#F5E8C7",
+            "border_color": "#8B4513",
+            "text_color": "#2F4F4F"
+        }
+    },
+    {
+        "model": "farm_activities.farmcalendaractivitytype",
+        "pk": 2,
+        "fields": {
+            "name": "Irrigation",
+            "description": "Irrigation operation",
+            "background_color": "#B3E5FC",
+            "border_color": "#0288D1",
+            "text_color": "#01579B"
+        }
+    },
+    {
+        "model": "farm_activities.farmcalendaractivitytype",
+        "pk": 3,
+        "fields": {
+            "name": "Pesticides",
+            "description": "Pesticide application",
+            "background_color": "#C5E1A5",
+            "border_color": "#8E7F2F",
+            "text_color": "#4E342E"
+        }
+    },
+    {
+        "model": "farm_activities.farmcalendaractivitytype",
+        "pk": 4,
+        "fields": {
+            "name": "Crop Stress Indicator",
+            "description": "Crop Stress Indicator Observation",
+            "background_color": "#FFCCCB",
+            "border_color": "#C62828",
+            "text_color": "#BF360C"
+        }
+    },
+    {
+        "model": "farm_activities.farmcalendaractivity",
+        "pk": 1,
+        "fields": {
+            "activity_type": 1,
+            "start_datetime": "2024-09-24T03:08:00Z",
+            "end_datetime": "2024-09-24T04:09:00Z",
+            "title": "Fertilization of Olive Orchards",
+            "details": "Fertilization of olive orchards",
+            "responsible_agent": null,
+            "agricultural_machinery": []
+        }
+    },
+    {
+        "model": "farm_activities.farmcalendaractivity",
+        "pk": 2,
+        "fields": {
+            "activity_type": 2,
+            "start_datetime": "2024-09-24T10:08:00Z",
+            "end_datetime": "2024-09-24T10:30:00Z",
+            "title": "Crop Irrigation",
+            "details": "Irrigation of olive orchards",
+            "responsible_agent": null,
+            "agricultural_machinery": []
+        }
+    },
+    {
         "model": "farm_activities.farmcalendaractivity",
         "pk": 3,
         "fields": {
             "activity_type": 3,
-            "title": "Crop Protection",
             "start_datetime": "2024-09-25T10:08:00Z",
             "end_datetime": "2024-09-25T10:30:00Z",
-            "details": "Pesticide spraying of olive orchards"
+            "title": "Crop Protection",
+            "details": "Pesticide spraying of olive orchards",
+            "responsible_agent": null,
+            "agricultural_machinery": []
         }
     },
     {
-        "model": "farm_activities.CropProtectionOperation",
+        "model": "farm_activities.farmcalendaractivity",
+        "pk": 4,
+        "fields": {
+            "activity_type": 4,
+            "start_datetime": "2024-09-27T13:51:00Z",
+            "end_datetime": null,
+            "title": "Olive Orchards Stress Indicator",
+            "details": "Observation on the number of detected diseases",
+            "responsible_agent": "",
+            "agricultural_machinery": []
+        }
+    },
+    {
+        "model": "farm_activities.fertilizationoperation",
+        "pk": 1,
+        "fields": {
+            "applied_amount": "4.00",
+            "applied_amount_unit": "https://w3id.org/ocsm/KiloGM-PER-PLANT",
+            "application_method": "dispersion",
+            "operated_on": 1,
+            "fertilizer": 1
+        }
+    },
+    {
+        "model": "farm_activities.irrigationoperation",
+        "pk": 2,
+        "fields": {
+            "applied_amount": "4.00",
+            "applied_amount_unit": "https://w3id.org/ocsm/KiloGM-PER-PLANT",
+            "operated_on": 1,
+            "irrigation_system": "centre_pivot"
+        }
+    },
+    {
+        "model": "farm_activities.cropprotectionoperation",
         "pk": 3,
         "fields": {
             "applied_amount": "4.00",
@@ -134,5 +203,21 @@
             "operated_on": 1,
             "pesticide": 1
         }
+    },
+    {
+        "model": "farm_activities.observation",
+        "pk": 4,
+        "fields": {
+            "value": "50.00",
+            "value_unit": "percentage",
+            "observed_property": "infestation"
+        }
+    },
+    {
+        "model": "farm_activities.cropstressindicatorobservation",
+        "pk": 4,
+        "fields": {
+            "crop": 1
+        }
     }
-]
+    ]
