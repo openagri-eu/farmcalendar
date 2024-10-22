@@ -5,6 +5,7 @@ from farm_activities.models import (
     FarmCalendarActivity,
     FertilizationOperation,
     IrrigationOperation,
+    CropProtectionOperation
 )
 
 from .base import JSONLDSerializer
@@ -55,3 +56,12 @@ class IrrigationOperationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = IrrigationOperation
         fields = '__all__'
+
+
+class CropProtectionOperationSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = CropProtectionOperation
+        fields = '__all__'
+
+
+

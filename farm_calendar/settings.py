@@ -266,4 +266,11 @@ DEFAULT_CALENDAR_ACTIVITY_TYPES = {
         'border_color': '#0288D1',
         'text_color': '#01579B'
     },
+    'crop_protection':{
+        'name': 'Pesticides',
+        'description': 'Pesticide application',
+        'background_color': '#C5E1A5',
+        'border_color': '#8E7F2F',
+        'text_color': '#4E342E'
+    }
 }

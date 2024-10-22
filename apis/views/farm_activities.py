@@ -5,12 +5,14 @@ from farm_activities.models import (
     FarmCalendarActivityType,
     FertilizationOperation,
     IrrigationOperation,
+    CropProtectionOperation,
 )
 from ..serializers import (
     FarmCalendarActivitySerializer,
     FarmCalendarActivityTypeSerializer,
     FertilizationOperationSerializer,
     IrrigationOperationSerializer,
+    CropProtectionOperationSerializer,
 )
 
 
@@ -47,6 +49,15 @@ class IrrigationOperationViewSet(viewsets.ModelViewSet):
     """
     queryset = IrrigationOperation.objects.all().order_by('-start_datetime')
     serializer_class = IrrigationOperationSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class CropProtectionOperationViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows CropProtectionOperation to be viewed or edited.
+    """
+    queryset = CropProtectionOperation.objects.all().order_by('-start_datetime')
+    serializer_class = CropProtectionOperationSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 
