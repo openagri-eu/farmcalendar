@@ -1,7 +1,6 @@
 from django.core.validators import (RegexValidator)
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
 from simple_history.models import HistoricalRecords
 
 
@@ -31,6 +30,9 @@ class AdminMenuMaster(BaseModel):
                                    validators=[RegexValidator(regex=r'^[a-zA-Z0-9\s-]+$', message="Invalid characters")])
     menu_order = models.SmallIntegerField(null=True, blank=True,
                                           validators=[RegexValidator(regex=r'^[0-9]+$', message="Invalid characters")])
+
+    # Adding historical tracking
+    history = HistoricalRecords(inherit=True, table_name='admin_menu_master_history', user_related_name='+')
 
     def __str__(self):
         return f"{self.menu_name} ({self.menu_route})"
