@@ -1,0 +1,52 @@
+[
+    {
+        "menu_name": "Calendar",
+        "menu_icon": "calendar",
+        "menu_route": "calendar",
+        "menu_access": "calendar",
+        "menu_order": 1,
+        "status": true,
+        "deleted": false,
+        "parent_id": null
+    },
+    {
+        "menu_name": "Farm Assets",
+        "menu_icon": "list",
+        "menu_route": "farm-assets",
+        "menu_access": "farm-assets",
+        "menu_order": 3,
+        "status": true,
+        "deleted": false,
+        "parent_id": null
+    },
+    {
+        "menu_name": "Animals",
+        "menu_icon": "dog",
+        "menu_route": "farm-animals",
+        "menu_access": "farm-animals",
+        "menu_order": 1,
+        "status": true,
+        "deleted": false,
+        "parent_id": 2
+    },
+    {
+        "menu_name": "Crops",
+        "menu_icon": "carrot",
+        "menu_route": "farm-crops",
+        "menu_access": "farm-crops",
+        "menu_order": 2,
+        "status": true,
+        "deleted": false,
+        "parent_id": 2
+    },
+    {
+        "menu_name": "Farm Parcels",
+        "menu_icon": "list",
+        "menu_route": "farm-parcels",
+        "menu_access": "farm-parcels",
+        "menu_order": 2,
+        "status": true,
+        "deleted": false,
+        "parent_id": null
+    }
+]
