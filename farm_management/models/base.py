@@ -5,6 +5,10 @@ from simple_history.models import HistoricalRecords
 
 
 class BaseModel(models.Model):
+    id = models.AutoField(primary_key=True, db_column='id', db_index=True, editable=False, unique=True, blank=False,
+                          null=False, verbose_name='ID')
+    name = models.CharField(max_length=100)
+
     status = models.BooleanField(default=True, verbose_name='Status')
     deleted = models.BooleanField(default=False, verbose_name='Is Deleted')
     deleted_at = models.DateTimeField(null=True, blank=True, verbose_name='Deleted At')
@@ -13,6 +17,9 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
+
+    def __str__(self):
+        return self.name
 
 
 class AdminMenuMaster(BaseModel):
@@ -27,12 +34,12 @@ class AdminMenuMaster(BaseModel):
     menu_route = models.CharField(max_length=30, null=True, blank=True,
                                   validators=[RegexValidator(regex=r'^[a-zA-Z0-9\s-]+$', message="Invalid characters")])
     menu_access = models.CharField(max_length=30, null=True, blank=True,
-                                   validators=[RegexValidator(regex=r'^[a-zA-Z0-9\s-]+$', message="Invalid characters")])
-    menu_order = models.SmallIntegerField(null=True, blank=True,
-                                          validators=[RegexValidator(regex=r'^[0-9]+$', message="Invalid characters")])
+                                   validators=[RegexValidator(regex=r'^[a-zA-Z0-9\s-]+$',
+                                                              message="Invalid characters")])
+    menu_order = models.SmallIntegerField(null=True, blank=True)
 
     # Adding historical tracking
-    history = HistoricalRecords(inherit=True, table_name='admin_menu_master_history', user_related_name='+')
+    history = HistoricalRecords(table_name='admin_menu_master_history', user_related_name='+')
 
     def __str__(self):
         return f"{self.menu_name} ({self.menu_route})"
