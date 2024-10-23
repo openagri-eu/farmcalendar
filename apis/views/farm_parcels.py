@@ -9,7 +9,6 @@ from ..serializers import (
     FarmParcelSerializer,
 )
 
-# from apis.renderer import JSONLDRenderer
 
 class FarmViewSet(viewsets.ModelViewSet):
     """

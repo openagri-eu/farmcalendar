@@ -2317,16 +2317,16 @@ components:
         details:
           type: string
           nullable: true
-        start_time:
+        start_datetime:
           type: string
           format: date-time
-        end_time:
+        end_datetime:
           type: string
           format: date-time
       required:
-      - end_time
+      - end_datetime
       - operation_type
-      - start_time
+      - start_datetime
       - title
     FarmOperationType:
       type: object
@@ -2394,6 +2394,9 @@ components:
     FertilizationOperation:
       type: object
       properties:
+        id:
+          type: integer
+          readOnly: true
         operation_type:
           type: string
           format: uri
@@ -2403,10 +2406,10 @@ components:
         details:
           type: string
           nullable: true
-        start_time:
+        start_datetime:
           type: string
           format: date-time
-        end_time:
+        end_datetime:
           type: string
           format: date-time
         applied_amount:
@@ -2430,10 +2433,11 @@ components:
       required:
       - applied_amount
       - applied_amount_unit
-      - end_time
+      - end_datetime
+      - id
       - operated_on
       - operation_type
-      - start_time
+      - start_datetime
       - title
     Fertilizer:
       type: object
@@ -2882,10 +2886,10 @@ components:
         details:
           type: string
           nullable: true
-        start_time:
+        start_datetime:
           type: string
           format: date-time
-        end_time:
+        end_datetime:
           type: string
           format: date-time
     PatchedFarmOperationType:
@@ -2946,6 +2950,9 @@ components:
     PatchedFertilizationOperation:
       type: object
       properties:
+        id:
+          type: integer
+          readOnly: true
         operation_type:
           type: string
           format: uri
@@ -2955,10 +2962,10 @@ components:
         details:
           type: string
           nullable: true
-        start_time:
+        start_datetime:
           type: string
           format: date-time
-        end_time:
+        end_datetime:
           type: string
           format: date-time
         applied_amount:

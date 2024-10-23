@@ -1,7 +1,9 @@
 from rest_framework import serializers
 
-from farm_management.models import Fertilizer
-
+from farm_management.models import (
+    Fertilizer,
+    Pesticide
+)
 
 
 
@@ -16,3 +18,7 @@ class FertilizerSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
+class PesticideSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Pesticide
+        fields = '__all__'

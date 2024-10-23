@@ -1,6 +1,19 @@
 from rest_framework import serializers
 
-from farm_activities.models import FarmCalendarActivityType, FarmCalendarActivity, FertilizationOperation
+from farm_activities.models import (
+    FarmCalendarActivityType,
+    FarmCalendarActivity,
+    FertilizationOperation,
+    IrrigationOperation,
+    CropProtectionOperation,
+    Observation,
+    CropStressIndicatorObservation,
+    CropGrowthStageObservation,
+)
+
+from .base import JSONLDSerializer
+from ..schemas import QuantityValueModel
+
 
 
 class FarmCalendarActivitySerializer(serializers.HyperlinkedModelSerializer):
@@ -9,7 +22,7 @@ class FarmCalendarActivitySerializer(serializers.HyperlinkedModelSerializer):
 
         fields = [
             'activity_type', 'title', 'details',
-            'start_time', 'end_time',
+            'start_datetime', 'end_datetime',
         ]
         # 'status', 'created_at', 'updated_at', 'deleted_at',
 
@@ -24,58 +37,49 @@ class FarmCalendarActivityTypeSerializer(serializers.HyperlinkedModelSerializer)
         ]
 
 
-
-class FertilizationOperationSerializer(serializers.HyperlinkedModelSerializer):
+class FertilizationOperationSerializer(JSONLDSerializer):
     class Meta:
         model = FertilizationOperation
 
         fields = [
             'activity_type', 'title', 'details',
-            'start_time', 'end_time',
+            'id',
+            'start_datetime', 'end_datetime',
             'applied_amount', 'applied_amount_unit',
             'application_method',
             'fertilizer', 'operated_on'
         ]
 
-    # def to_representation(self, instance):
-    #     representation = super().to_representation(instance)
+    def to_representation(self, instance):
+        instance.has_applied_amount = QuantityValueModel(instance.applied_amount, instance.applied_amount_unit)
+        return super().to_representation(instance)
 
-    #     return {
-    #         "@context": [
-    #             "https://w3id.org/ocsm/main-context.jsonld"  # or your custom context
-    #         ],
-    #         "@graph": [
-    #             {
-    #                 "@id": f"urn:openagri:fertilization:{instance.id}",
-    #                 "@type": "FertilizationOperation",
-    #                 "description": representation["details"],
-    #                 "hasTimestamp": representation["start_time"],
-    #                 "usesFertilizer": {
-    #                     "@id": f"urn:openagri:fertilization:product:{instance.fertilizer.id}",
-    #                     "@type": "Fertilizer",
-    #                     "hasCommercialName": "Your Commercial Name Here"  # Update as needed
-    #                 },
-    #                 "hasAppliedAmount": {
-    #                     "@id": f"urn:openagri:fertilization:amount:{instance.id}",
-    #                     "@type": "QuantityValue",
-    #                     "numericValue": float(representation['applied_amount']),
-    #                     "unit": representation['applied_amount_unit']
-    #                 },
-    #                 "hasApplicationMethod": representation["application_method"],
-    #                 "operationType": f"urn:openagri:operationType:{instance.operation_type.id}",  # Update as needed
-    #                 "isOperatedOn": f"urn:openagri:parcel:{instance.operated_on.id}"  # Update as needed
-    #             }
-    #         ]
-    #     }
 
-    # def to_representation(self, instance):
-    #     class_key = __class__.__name__
-    #     class_schema_details = fertilization_operation_schema[class_key]
-    #     represntation = {}
-    #     representation = super().to_representation(instance)
-    #     for property, prop_detail in class_schema_details['properties'].items():
+class IrrigationOperationSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = IrrigationOperation
+        fields = '__all__'
 
-    #     # Add JSON-LD prop_detailfic properties here
-    #     representation["@id"] = f"urn:openagri:fertilization:{instance.id}"
-    #     representation["@type"] = "FertilizationOperation"
-    #     return representation
+
+class CropProtectionOperationSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = CropProtectionOperation
+        fields = '__all__'
+
+class ObservationSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Observation
+        fields = '__all__'
+
+
+class CropStressIndicatorObservationSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = CropStressIndicatorObservation
+        fields = '__all__'
+
+
+class CropGrowthStageObservationSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = CropGrowthStageObservation
+        fields = '__all__'
+

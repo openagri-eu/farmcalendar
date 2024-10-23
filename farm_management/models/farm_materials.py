@@ -29,3 +29,14 @@ class Fertilizer(TreatmentMaterials):
 
     def __str__(self):
         return f'{self.name} - {self.active_substance} - {self.nutrient_concentration}'
+
+
+class Pesticide(TreatmentMaterials):
+    class Meta:
+        verbose_name = "Pesticide"
+        verbose_name_plural = "Pesticides"
+
+    preharvest_interval = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f'{self.name} - {self.active_substance} - {self.preharvest_interval}'

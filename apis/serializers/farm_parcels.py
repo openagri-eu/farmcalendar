@@ -28,6 +28,7 @@ class FarmParcelSerializer(JSONLDSerializer):
             'id', 'name',
             'geo_id',
             'farm',
+            'cultivation_type',
             'status', 'created_at', 'updated_at', 'deleted_at',
         ]
 

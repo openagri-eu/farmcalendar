@@ -16,6 +16,12 @@ from .views import (
     FarmCalendarActivityTypeViewSet,
     FertilizationOperationViewSet,
     FertilizerViewSet,
+    IrrigationOperationViewSet,
+    CropProtectionOperationViewSet,
+    PesticideViewSet,
+    ObservationViewSet,
+    CropStressIndicatorObservationViewSet,
+    CropGrowthStageObservationViewSet,
 )
 
 router = routers.DefaultRouter()
@@ -27,8 +33,16 @@ router.register(r'FarmAnimals', FarmAnimalViewSet)
 router.register(r'AgriculturalMachines', AgriculturalMachineViewSet)
 router.register(r'FarmCalendarActivities', FarmCalendarActivityViewSet)
 router.register(r'FarmCalendarActivityTypes', FarmCalendarActivityTypeViewSet)
-router.register(r'FertilizationOperation', FertilizationOperationViewSet)
-router.register(r'Fertilizer', FertilizerViewSet)
+router.register(r'FertilizationOperations', FertilizationOperationViewSet)
+router.register(r'Fertilizers', FertilizerViewSet)
+router.register(r'IrrigationOperations', IrrigationOperationViewSet)
+router.register(r'CropProtectionOperations', CropProtectionOperationViewSet)
+router.register(r'Pesticides', PesticideViewSet)
+router.register(r'Observations', ObservationViewSet)
+router.register(r'CropStressIndicatorObservations', CropStressIndicatorObservationViewSet)
+router.register(r'CropGrowthStageObservations', CropGrowthStageObservationViewSet)
+
+
 
 
 urlpatterns = [
