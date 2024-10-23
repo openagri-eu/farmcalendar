@@ -10,8 +10,6 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    volumes:
-      - oa_fc_postgres_data:/var/lib/postgresql/data
     restart: no
 
   oa_fc_pgadmin:
@@ -25,8 +23,6 @@ services:
     depends_on:
       - oa_fc_postgres
     restart: no
-    volumes:
-      - oa_fc_pgadmin_data:/var/lib/pgadmin
 
 #  web:
 #    build: .
@@ -48,9 +44,3 @@ services:
 #      JWT_COOKIE_NAME: ${JWT_COOKIE_NAME}
     # volumes:
     #   - ./:/var/www
-
-volumes:
-  oa_fc_postgres_data:
-    driver: local
-  oa_fc_pgadmin_data:
-    driver: local
