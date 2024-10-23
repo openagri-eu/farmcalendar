@@ -27,7 +27,7 @@ class FarmParcel(BaseModel):
     related_name="%(class)ss" dynamically sets the related name using the model's class name. But it may not always 
     produce a meaningful or intuitive related name. Thus, I changed it to more descriptive and specific name.
     '''
-    geo_id = models.UUIDField(_('Georaphic Data ID'), unique=False, blank=True, null=True)
+    geo_id = models.UUIDField(_('Geographic Data ID'), unique=False, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     coordinates = models.CharField(max_length=255, default="0.0,0.0")  # Default as lat/lon format
     area = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)  # Area in hectares
