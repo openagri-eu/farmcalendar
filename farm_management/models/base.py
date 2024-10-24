@@ -1,21 +1,34 @@
 from django.core.validators import (RegexValidator)
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from simple_history.models import HistoricalRecords
 
 
 class BaseModel(models.Model):
+    class BaseModelStatus(models.IntegerChoices):
+        INACTIVE = 0, 'Inactive'
+        ACTIVE = 1, 'Active'
+        DELETED = 2, 'Deleted'
+
     id = models.AutoField(primary_key=True, db_column='id', db_index=True, editable=False, unique=True, blank=False,
                           null=False, verbose_name='ID')
 
-    status = models.BooleanField(default=True, verbose_name='Status')
-    deleted = models.BooleanField(default=False, verbose_name='Is Deleted')
+    status = models.IntegerField(choices=BaseModelStatus.choices, default=BaseModelStatus.ACTIVE, verbose_name='Status')
     deleted_at = models.DateTimeField(null=True, blank=True, verbose_name='Deleted At')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created At')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Updated At')
 
+    # Dynamically set the history table name based on the model name
+    history = HistoricalRecords(inherit=True)
+
     class Meta:
         abstract = True
+
+    def soft_delete(self):
+        self.status = self.BaseModelStatus.DELETED
+        self.deleted_at = timezone.now()
+        self.save()
 
 
 class AdminMenuMaster(BaseModel):
@@ -33,9 +46,6 @@ class AdminMenuMaster(BaseModel):
                                    validators=[RegexValidator(regex=r'^[a-zA-Z0-9\s-]+$',
                                                               message="Invalid characters")])
     menu_order = models.SmallIntegerField(null=True, blank=True)
-
-    # Adding historical tracking
-    history = HistoricalRecords(table_name='admin_menu_master_history', user_related_name='+')
 
     def __str__(self):
         return f"{self.menu_name} ({self.menu_route})"

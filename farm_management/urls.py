@@ -16,19 +16,15 @@ Including another URLconf
 """
 from django.urls import path
 from . import views
-from .views import FarmParcelView
-
-
-
-# router = routers.DefaultRouter()
-# router.register(r'FarmPlants', views.FarmPlantViewSet)
-
-
+from .views import FarmParcelView, FarmMasterView
 
 urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('post_auth/', views.post_authentication, name='post_auth'),
     path('test_perm/', views.need_permission_view, name='need_permission'),
+
+    path('farms/', FarmMasterView.as_view(), name="farms"),
+    path("farms/edit/<int:pk>/", view=FarmMasterView.as_view(), name="farm_edit"),
 
     path('farm-parcels/', FarmParcelView.as_view(), name="farm-parcels")
 ]

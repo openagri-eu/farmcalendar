@@ -1,4 +1,3 @@
-<!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
@@ -10,45 +9,81 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Calendar
+    </div>
+    <!-- Nav Item for main menu -->
+    <li class="nav-item">
+        <a class="nav-link" href="/calendar">
+            <i class="fas fa-fw fa-calendar"></i>
+            <span>Calendar</span>
+        </a>
+    </li>
 
-    <!-- Render the menu dynamically -->
-    {% for item in admin_menu %}
-        {% if not item.parent_id %}
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                {{ item.menu_name }}
-            </div>
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Farms
+    </div>
+    <!-- Nav Item for main menu -->
+    <li class="nav-item">
+        <a class="nav-link" href="/farms">
+            <i class="fas fa-fw fa-leaf"></i>
+            <span>Farms</span>
+        </a>
+    </li>
 
-            <!-- Nav Item for main menu -->
-            <li class="nav-item">
-                <a class="nav-link" href="{% if item.submenus.all %}#{% else %}/{{ item.menu_route }}{% endif %}">
-                    <i class="fas fa-fw fa-{{ item.menu_icon }}"></i>
-                    <span>{{ item.menu_name }}</span>
-                </a>
-            </li>
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Farm Parcels
+    </div>
+    <!-- Nav Item for main menu -->
+    <li class="nav-item">
+        <a class="nav-link" href="/farm-parcels">
+            <i class="fas fa-fw fa-list"></i>
+            <span>Farm Parcels</span>
+        </a>
+    </li>
 
-            <!-- Render submenus if any -->
-            {% if item.submenus.all %}
-                <ul class="navbar-nav ml-3">
-                    {% for submenu in item.submenus.all %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="/{{ submenu.menu_route }}">
-                                <i class="fas fa-fw fa-{{ submenu.menu_icon }}"></i>
-                                <span>{{ submenu.menu_name }}</span>
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Farm Assets
+    </div>
+    <!-- Nav Item for main menu -->
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fas fa-fw fa-list"></i>
+            <span>Farm Assets</span>
+        </a>
+    </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-        {% endif %}
-    {% endfor %}
+    <ul class="navbar-nav ml-3">
+        <li class="nav-item">
+            <a class="nav-link" href="/farm-crops">
+                <i class="fas fa-fw fa-carrot"></i>
+                <span>Crops</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/farm-animals">
+                <i class="fas fa-fw fa-dog"></i>
+                <span>Animals</span>
+            </a>
+        </li>
+    </ul>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
 </ul>
-<!-- End of Sidebar -->

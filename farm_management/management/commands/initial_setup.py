@@ -11,7 +11,6 @@ from django.db.migrations.recorder import MigrationRecorder
 from django.conf import settings
 
 from farm_activities.models import FarmCalendarActivityType
-from farm_management.models.base import AdminMenuMaster
 
 # Set up logging
 logger = logging.getLogger(__name__)
@@ -23,23 +22,7 @@ class Command(BaseCommand):
 
     # Check if there is any existing data for AdminMenuMaster or FarmCalendarActivityType
     def check_for_initial_data(self):
-        return not FarmCalendarActivityType.objects.exists() or not AdminMenuMaster.objects.exists()
-
-    # Load initial data from JSON file
-    def load_initial_data_from_file(self):
-        json_file_path = os.path.join(os.path.dirname(__file__), 'config', 'initial_admin_menu_data.json')
-        if not os.path.exists(json_file_path):
-            self.stdout.write(self.style.ERROR(f'Initial data file {json_file_path} not found.'))
-            logger.error(f'Initial data file {json_file_path} not found.')
-            return None
-
-        try:
-            with open(json_file_path, 'r') as json_file:
-                return json.load(json_file)
-        except json.JSONDecodeError as e:
-            self.stdout.write(self.style.ERROR(f'Error decoding JSON: {e}'))
-            logger.error(f'Error decoding JSON: {e}')
-            return None
+        return not FarmCalendarActivityType.objects.exists()
 
     def setup_initial_data(self):
         # Populate FarmCalendarActivityType
@@ -47,27 +30,6 @@ class Command(BaseCommand):
         for def_operation_type in settings.DEFAULT_CALENDAR_ACTIVITY_TYPES.values():
             operation = FarmCalendarActivityType(**def_operation_type)
             operation.save()
-
-        # Load initial data for AdminMenuMaster from the JSON file
-        initial_admin_menu_data = self.load_initial_data_from_file()
-        if initial_admin_menu_data is None:
-            self.stdout.write(self.style.ERROR('Failed to load initial AdminMenuMaster data.'))
-            return
-
-        # Populate AdminMenuMaster using the loaded data with batch insertion for better performance
-        self.stdout.write(self.style.SUCCESS('Setting up AdminMenuMaster data...'))
-        new_entries = [
-            AdminMenuMaster(**menu_data)
-            for menu_data in initial_admin_menu_data
-            if not AdminMenuMaster.objects.filter(menu_name=menu_data['menu_name']).exists()
-        ]
-        try:
-            AdminMenuMaster.objects.bulk_create(new_entries, ignore_conflicts=True)
-            self.stdout.write(self.style.SUCCESS(f'Successfully added {len(new_entries)} AdminMenuMaster entries.'))
-            logger.info(f'Successfully added {len(new_entries)} AdminMenuMaster entries.')
-        except Exception as e:
-            self.stdout.write(self.style.ERROR(f'Failed to create AdminMenuMaster entries. Error: {e}'))
-            logger.error(f'Failed to create AdminMenuMaster entries. Error: {e}')
 
     # Check for pending migrations
     def check_pending_migrations(self):

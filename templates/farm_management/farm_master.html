@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Farm Parcel{% endblock title %}
+
+{% block extra_css %}
+{% endblock extra_css %}
+
+{% block page_content %}
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <h4 class="mb-sm-0 font-size-18">{% if farm %}Edit Farm{% else %}Add Farm{% endif %}</h4>
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Farms</a></li>
+                                    <li class="breadcrumb-item active">{% if farm %}Edit{% else %}Add{% endif %} Farm</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h4 class="card-title mb-0">{% if farm %}Edit Farm{% else %}Add Farm{% endif %}</h4>
+                                <!-- Toggle button to show/hide the form -->
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#farmFormCollapse"
+                                        aria-expanded="true" aria-controls="farmFormCollapse">
+                                    <i class="fas fa-chevron-down"></i> <!-- Icon for collapsing -->
+                                </button>
+                            </div>
+
+                            {% if form.non_field_errors %}
+                                <ul>
+                                {% for error in form.non_field_errors %}
+                                    <li style="color: #e83e8c;">{{ error }}</li>
+                                {% endfor %}
+                                </ul>
+                            {% endif %}
+
+                            <!-- Collapsible form body -->
+                            <div id="farmFormCollapse" class="collapse show">
+                                <div class="card-body">
+                                    <form class="needs-validation" id="farmForm" name="farmForm" novalidate method="POST"
+                                          action="{% if farm %}{% url 'farm_edit' pk=farm.pk %}{% else %}{% url 'farms' %}{% endif %}"
+                                          enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            {% for field in form %}
+                                            <div class="col-sm-4 mb-3">
+                                                {{ field.label_tag }}
+                                                {{ field }}
+                                                {% if field.errors %}
+                                                    <div style="color: #e83e8c;">
+                                                        {{ field.errors }}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="d-flex flex-wrap gap-2">
+                                                {% if farm %}
+                                                    <!-- Show Update button for edit mode -->
+                                                    <button class="btn btn-primary w-md" type="submit" id="submit_btn">Update</button>
+                                                    <button type="button" class="btn btn-danger w-md" onclick="location.href='{% url 'farm_list' %}'">Cancel</button>
+                                                {% else %}
+                                                    <!-- Show Submit button for add mode -->
+                                                    <button class="btn btn-primary w-md" type="submit" id="submit_btn">Submit</button>
+                                                    <button class="btn btn-secondary w-md" type="button" id="reset">Reset</button>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if not farm %}
+                <!-- Farm DataTable - Only displayed in add mode -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Farms Available</h4>
+                            </div>
+                            <div class="card-body">
+                                <table id="datatable" class="table table-bordered dt-responsive nowrap w-100"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+{% endblock extra_js %}
