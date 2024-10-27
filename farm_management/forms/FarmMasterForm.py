@@ -1,4 +1,3 @@
-# forms.py
 from django import forms
 from ..models import Farm
 
@@ -7,15 +6,15 @@ class FarmMasterForm(forms.ModelForm):
     # Including foreign key fields in the form
     admin_unit_l1 = forms.CharField(
         max_length=255, required=False, label="Admin Unit L1",
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Admin Unit L1'})
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Greece'})
     )
     admin_unit_l2 = forms.CharField(
         max_length=255, required=False, label="Admin Unit L2",
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Admin Unit L2'})
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Country X'})
     )
     address_area = forms.CharField(
         max_length=255, required=False, label="Address Area",
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Address Area'})
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'District'})
     )
     municipality = forms.CharField(
         max_length=255, required=False, label="Municipality",
@@ -27,7 +26,7 @@ class FarmMasterForm(forms.ModelForm):
     )
     locator_name = forms.CharField(
         max_length=255, required=False, label="Locator Name",
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Locator Name'})
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Name of the place'})
     )
 
     class Meta:
@@ -37,9 +36,18 @@ class FarmMasterForm(forms.ModelForm):
             'contact_person_firstname', 'contact_person_lastname',
             'telephone', 'vat_id'
         ]
+        labels = {
+            'name': 'Farm Name',
+            'description': 'Farm Description',
+            'administrator': 'Farm Administrator',
+            'contact_person_firstname': 'Contact Person First Name',
+            'contact_person_lastname': 'Contact Person Last Name',
+            'telephone': 'Contact Telephone',
+            'vat_id': 'VAT ID',
+        }
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Farm Name'}),
-            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Description', 'rows': 3}),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Farm Name', 'label': 'Farm Name'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Vineyard 219521', 'rows': 3}),
             'administrator': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Administrator'}),
             'contact_person_firstname': forms.TextInput(
                 attrs={'class': 'form-control', 'placeholder': 'Contact First Name'}),

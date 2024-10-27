@@ -52,6 +52,7 @@
                                           enctype="multipart/form-data">
                                         {% csrf_token %}
                                         <div class="row">
+                                            <!-- Render the main form fields -->
                                             {% for field in form %}
                                             <div class="col-sm-4 mb-3">
                                                 {{ field.label_tag }}
@@ -73,8 +74,8 @@
                                                     <button type="button" class="btn btn-danger w-md" onclick="location.href='{% url 'farm_list' %}'">Cancel</button>
                                                 {% else %}
                                                     <!-- Show Submit button for add mode -->
-                                                    <button class="btn btn-primary w-md" type="submit" id="submit_btn">Submit</button>
-                                                    <button class="btn btn-secondary w-md" type="button" id="reset">Reset</button>
+                                                    <button class="btn btn-success w-md" type="submit" id="submit_btn">Submit</button>
+                                                    <button class="btn btn-secondary w-md" type="reset" id="reset">Reset</button>
                                                 {% endif %}
                                             </div>
                                         </div>

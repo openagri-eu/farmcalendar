@@ -168,7 +168,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.static',
                 'django.contrib.messages.context_processors.messages',
-                'farm_calendar.context_processors.get_admin_menu'
             ],
         },
     },

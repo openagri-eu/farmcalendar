@@ -1,5 +1,3 @@
-import json
-import os
 import logging
 
 from django.core.management import call_command

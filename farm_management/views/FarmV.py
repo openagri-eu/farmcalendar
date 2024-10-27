@@ -1,6 +1,5 @@
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
-from django.db import DatabaseError, IntegrityError, transaction
-from django.http import JsonResponse
+from django.db import DatabaseError, IntegrityError
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator

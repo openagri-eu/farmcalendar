@@ -1,9 +1,12 @@
+import re
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from simple_history.models import HistoricalRecords
 
 from .base import BaseModel
+from .validators import *
 
 
 class Farm(BaseModel):
@@ -23,6 +26,51 @@ class Farm(BaseModel):
     def __str__(self):
         return f"{self.name}"
 
+    def clean(self):
+        errors = {}
+        cleaned_data = super().clean()
+
+        name_pattern = r'^[a-zA-Z0-9.,_()\[\]{}\-\*\&\@\:\;\ ]+$'
+
+        name_validator = RegexValidator(
+            regex=name_pattern,
+            message="This field must contain only letters, numbers, spaces, and . , _ - () [] {} ; : & @ *",
+            code='invalid_name'
+        )
+
+        # Validate fields with the name pattern
+        fields_to_validate = {
+            'name': self.name,
+            'administrator': self.administrator,
+            'contact_person_firstname': self.contact_person_firstname,
+            'contact_person_lastname': self.contact_person_lastname
+        }
+
+        for field_name, value in fields_to_validate.items():
+            if value:
+                try:
+                    validate_name_field(value)
+                except ValidationError as e:
+                    errors[field_name] = e.messages
+
+        # Validate telephone
+        if self.telephone:
+            try:
+                validate_phone_number(self.telephone)
+            except ValidationError as e:
+                errors['telephone'] = e.messages
+
+        # Validate VAT ID
+        if self.vat_id:
+            try:
+                validate_vat_id(self.vat_id)
+            except ValidationError as e:
+                errors['vat_id'] = e.messages
+
+        # Raise ValidationError if any errors exist
+        if errors:
+            raise ValidationError(errors)
+
 
 class FarmAddress(BaseModel):
     farm = models.OneToOneField(Farm, on_delete=models.CASCADE, related_name="address")
@@ -40,6 +88,12 @@ class FarmAddress(BaseModel):
 
     def __str__(self):
         return f"Farm address for {self.farm.name}"
+
+    def clean(self):
+        if not self.admin_unit_l1:
+            raise ValidationError("Admin Unit L1 is required.")
+        if not self.municipality:
+            raise ValidationError("Municipality is required.")
 
 
 class FarmParcel(BaseModel):

@@ -5,3 +5,12 @@
 .row {
     margin-bottom: 30px;
 }
+
+.errorlist {
+    list-style-type: none;
+    font-size: 13px;
+    padding: 0;
+    margin: 2px 0 0 0;
+}
+
+
