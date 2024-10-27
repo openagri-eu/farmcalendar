@@ -1,4 +1,4 @@
-Django==5.0.4
+Django>=5.0.9
 python-dotenv==1.0.1
 django-simple-history==3.5.0
 waitress==3.0.0
