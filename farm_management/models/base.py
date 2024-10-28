@@ -1,4 +1,3 @@
-from django.core.validators import (RegexValidator)
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -59,31 +58,6 @@ class ActivePageManager(models.Manager):
     def get_queryset(self):
         # Exclude records with status set to DELETED (status=2)
         return super().get_queryset().filter(status__lt=BaseModel.BaseModelStatus.DELETED)
-
-
-class AdminMenuMaster(BaseModel):
-    id = models.SmallAutoField(primary_key=True, db_column='id', db_index=True, editable=False, unique=True,
-                               blank=False, null=False, verbose_name='ID')
-    parent_id = models.ForeignKey('self', null=True, blank=True, related_name='submenus', db_column='parent_id',
-                                  on_delete=models.CASCADE)
-    menu_name = models.CharField(max_length=30, null=False, blank=False, unique=True,
-                                 validators=[RegexValidator(regex=r'^[a-zA-Z0-9()\s]+$', message="Invalid characters")])
-    menu_icon = models.CharField(max_length=20, null=True, blank=True, default='list',
-                                 validators=[RegexValidator(regex=r'^[a-z0-9-]+$', message="Invalid characters")])
-    menu_route = models.CharField(max_length=30, null=True, blank=True,
-                                  validators=[RegexValidator(regex=r'^[a-zA-Z0-9\s-]+$', message="Invalid characters")])
-    menu_access = models.CharField(max_length=30, null=True, blank=True,
-                                   validators=[RegexValidator(regex=r'^[a-zA-Z0-9\s-]+$',
-                                                              message="Invalid characters")])
-    menu_order = models.SmallIntegerField(null=True, blank=True)
-
-    def __str__(self):
-        return f"{self.menu_name} ({self.menu_route})"
-
-    class Meta:
-        db_table = "admin_menu_master"
-        verbose_name = "Admin Menu"
-        verbose_name_plural = "Admin Menus"
 
 
 class NamedHistoricalBaseModel(models.Model):
