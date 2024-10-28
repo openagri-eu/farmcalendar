@@ -4,6 +4,18 @@
 {% block title %}Farm Parcel{% endblock title %}
 
 {% block extra_css %}
+    <!-- Page-specific stylesheets -->
+    <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+    <link href="{% static 'libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet">
+
+    <!-- Responsive datatable examples -->
+    <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <!-- alertifyjs Css -->
+    <link href="{% static 'libs/alertifyjs/build/css/alertify.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <!-- alertifyjs default themes  Css -->
+    <link href="{% static 'libs/alertifyjs/build/css/themes/default.min.css' %}" rel="stylesheet" type="text/css" />
 {% endblock extra_css %}
 
 {% block page_content %}
@@ -48,7 +60,7 @@
                             <div id="farmFormCollapse" class="collapse show">
                                 <div class="card-body">
                                     <form class="needs-validation" id="farmForm" name="farmForm" novalidate method="POST"
-                                          action="{% if farm %}{% url 'farm_edit' pk=farm.pk %}{% else %}{% url 'farms' %}{% endif %}"
+                                          action="{% if is_edit %}{% url 'farm_edit' pk=form.instance.pk %}{% else %}{% url 'farms' %}{% endif %}"
                                           enctype="multipart/form-data">
                                         {% csrf_token %}
                                         <div class="row">
@@ -68,10 +80,10 @@
 
                                         <div class="row">
                                             <div class="d-flex flex-wrap gap-2">
-                                                {% if farm %}
+                                                {% if is_edit %}
                                                     <!-- Show Update button for edit mode -->
                                                     <button class="btn btn-primary w-md" type="submit" id="submit_btn">Update</button>
-                                                    <button type="button" class="btn btn-danger w-md" onclick="location.href='{% url 'farm_list' %}'">Cancel</button>
+                                                    <button type="button" class="btn btn-danger w-md" onclick="location.href='{% url 'farms' %}'">Cancel</button>
                                                 {% else %}
                                                     <!-- Show Submit button for add mode -->
                                                     <button class="btn btn-success w-md" type="submit" id="submit_btn">Submit</button>
@@ -154,7 +166,7 @@
                     render: function(data, type, row) {
                         const admin_unit_l1 = row.fields.admin_unit_l1 || '';
                         const admin_unit_l2 = row.fields.admin_unit_l2 || '';
-                        return `${admin_unit_l1} ${admin_unit_l2}`.trim();
+                        return `${admin_unit_l1}, ${admin_unit_l2}`.trim();
                     }
                 },
                 {
@@ -164,7 +176,7 @@
                         const address_area = row.fields.address_area || '';
                         const municipality = row.fields.municipality || '';
                         const community = row.fields.community || '';
-                        return `${address_area} ${municipality} ${community}`.trim();
+                        return `${address_area}, ${municipality}, ${community}`.trim();
                     }
                 },
                 {
@@ -173,9 +185,9 @@
                     render: function(data, type, row) {
                         const buttonClass = row.fields.status ? 'btn-success' : 'btn-danger';
                         return `
-                            <button class="btn btn-primary btn-sm edit-farm" data-id="${row.pk}"><i class="mdi mdi-pencil d-block font-size-16"></i></button>
-                            <button class="btn btn-danger btn-sm delete-farm" data-id="${row.pk}"><i class="mdi mdi-trash-can d-block font-size-16"></i></button>
-                            <button class="btn btn-sm toggle-active ${buttonClass}" data-id="${row.pk}"><i class="mdi mdi-check d-block font-size-16"></i></button>
+                            <button class="btn btn-primary btn-sm edit-farm p-2" data-id="${row.pk}"><i class="fas fa-pencil-alt d-block font-size-16"></i></button>
+                            <button class="btn btn-danger btn-sm delete-farm p-2" data-id="${row.pk}"><i class="fas fa-trash-alt d-block font-size-16"></i></button>
+                            <button class="btn btn-sm toggle-active p-2 ${buttonClass}" data-id="${row.pk}"><i class="fas fa-check d-block font-size-16"></i></button>
                         `;
                     }
                 },
@@ -189,7 +201,58 @@
                     }
                 }
             ]
-        }).on('click', '.edit-farm', function() {
+        }).on('click', '.toggle-active', function() {
+                const pk = $(this).data('id');
+                const $this = $(this);
+                const isActive = $this.hasClass('btn-success');
+
+                // Toggle state visually
+                $this.toggleClass('btn-success btn-danger');
+
+                const newStatus = !isActive;
+
+                $.ajax({
+                    url: `/farms/ajax/toggle-status/${pk}/`,
+                    method: 'POST',
+                    data: {'status': newStatus},
+                    success: function(response) {
+                        if (response.farm_status === 1) {
+                            $this.removeClass('btn-danger').addClass('btn-success');
+                        } else {
+                            $this.removeClass('btn-success').addClass('btn-danger');
+                        }
+                        alertify.success(response.message);
+                    },
+                    error: function(xhr, status, error) {
+                        let errorMessage = "Status update failed.";
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            errorMessage = xhr.responseJSON.message;
+                        }
+                        alertify.error(errorMessage);
+                    }
+                });
+            }).on('click', '.delete-farm', function() {
+                const pk = $(this).data('id');
+                const $row = $(this).closest('tr');
+                // Confirmation dialog
+                if (confirm('Are you sure you want to delete this farm? This will remove all related records.')) {
+                    $.ajax({
+                        url: `/farms/ajax/delete/${pk}/`,
+                        method: 'POST',
+                        success: function(response) {
+                            alertify.success(response.message);
+                            $('#datatable').DataTable().row($row).remove().draw();
+                        },
+                        error: function(xhr, status, error) {
+                            let errorMessage = "Deletion failed.";
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                errorMessage = xhr.responseJSON.message;
+                            }
+                            alertify.error(errorMessage);
+                        }
+                    });
+                }
+            }).on('click', '.edit-farm', function() {
             const pk = $(this).data('id');
             window.location.href = '/farms/edit/' + pk;
         });

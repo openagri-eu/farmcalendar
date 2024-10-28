@@ -25,10 +25,10 @@
         <link href="{% static 'css/themes/sb-admin-2.min.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/custom_styles.css' %}" rel="stylesheet" type="text/css" />
 
-        {% block extra_css %}{% endblock extra_css %}
-
         <!-- Custom styles for this template-->
         <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+        {% block extra_css %}{% endblock extra_css %}
 
         {% block extra_head %}{% endblock extra_head %}
         <meta name="csrf-token" content="{{ csrf_token }}">
@@ -40,6 +40,25 @@
         <div id="wrapper">
             <!-- Sidebar -->
             {% include 'sidebar.html' %}
+
+            {% if messages %}
+            {% for message in messages %}
+            <input type="hidden" id="login-msg" value="{{message}}">
+            <button type="button" class="btn btn-primary" id="borderedToast1Btn" hidden>Primary toast</button>
+            <div style="z-index: 11">
+                <div id="borderedToast1" class="toast overflow-hidden mt-3 position-absolute top-0 end-0" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="align-items-center text-white bg-primary border-0">
+                        <div class="d-flex">
+                            <div class="toast-body">
+                                {{message}}
+                            </div>
+                            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
 
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
@@ -198,6 +217,8 @@
                 {% endblock on_dom_load_js %}
             });
         </script>
+
+        <script src="{% static 'js/common.js' %}"></script>
     </body>
 
 </html>

@@ -16,12 +16,15 @@ Including another URLconf
 """
 from django.urls import path
 from . import views
-from .views import FarmParcelView, FarmMasterView
+from .views import FarmParcelView, FarmMasterView, AjaxHandlerView
 
 urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('post_auth/', views.post_authentication, name='post_auth'),
     path('test_perm/', views.need_permission_view, name='need_permission'),
+
+    # Ajax routes for toggling status and deletion
+    path('<str:prefix>/ajax/<str:action>/<int:pk>/', view=AjaxHandlerView.as_view(), name='action'),
 
     path('farms/', FarmMasterView.as_view(), name="farms"),
     path("farms/edit/<int:pk>/", view=FarmMasterView.as_view(), name="farm_edit"),

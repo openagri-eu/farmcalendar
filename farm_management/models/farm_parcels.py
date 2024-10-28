@@ -1,5 +1,3 @@
-import re
-
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -74,6 +72,9 @@ class FarmAddress(BaseModel):
     municipality = models.CharField(max_length=255, blank=True, null=True)
     community = models.CharField(max_length=255, blank=True, null=True)
     locator_name = models.CharField(max_length=255, blank=True, null=True)
+
+    objects = models.Manager()
+    active_objects = ActivePageManager()
 
     class Meta:
         db_table = "farm_address"
