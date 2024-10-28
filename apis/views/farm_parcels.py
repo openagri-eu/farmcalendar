@@ -1,7 +1,6 @@
 from rest_framework import permissions, viewsets
-
 from farm_management.models import (
-    Farm,
+    FarmMaster,
     FarmParcel,
 )
 from ..serializers import (
@@ -14,10 +13,9 @@ class FarmViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows Farm to be viewed or edited.
     """
-    queryset = Farm.objects.all().order_by('-created_at')
+    queryset = FarmMaster.objects.all().order_by('-created_at')
     serializer_class = FarmSerializer
     permission_classes = [permissions.IsAuthenticated]
-
 
 
 class FarmParcelViewSet(viewsets.ModelViewSet):

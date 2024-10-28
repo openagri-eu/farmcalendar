@@ -86,7 +86,7 @@
                     </div>
                 </div>
 
-                {% if not farm %}
+                {% if not is_edit %}
                 <!-- Farm DataTable - Only displayed in add mode -->
                 <div class="row">
                     <div class="col-12">
@@ -106,5 +106,92 @@
     </div>
 {% endblock %}
 
-{% block extra_js %}
-{% endblock extra_js %}
+{% block body_end_extra_scripts %}
+    <!-- Required datatable js -->
+    <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+
+    <!-- Responsive datatables -->
+    <script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
+
+    <script src="{% static 'libs/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
+
+    <!-- Column visibility -->
+    <script src="{% static 'libs/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
+
+    <!-- alertifyjs js -->
+    <script src="{% static 'libs/alertifyjs/build/alertify.min.js' %}"></script>
+
+    <!-- moment JS for datetime -->
+    <script src="{% static 'libs/moment/js/moment.min.js' %}"></script>
+
+    <script>
+        const farms = JSON.parse('{{ farms|safe }}');
+
+        $('#datatable').DataTable({
+            data: farms,
+            rowId: 'pk',
+            columns: [
+                { data: 'fields.name', title: 'Name' },
+                { data: 'fields.description', title: 'Description' },
+                { data: 'fields.administrator', title: 'Administrator' },
+                {
+                    data: null,
+                    title: 'Contact Person',
+                    render: function(data, type, row) {
+                        const firstName = row.fields.contact_person_firstname || '';
+                        const lastName = row.fields.contact_person_lastname || '';
+                        return `${firstName} ${lastName}`.trim();
+                    }
+                },
+                { data: 'fields.telephone', title: 'Telephone' },
+                { data: 'fields.vat_id', title: 'VAT ID' },
+                {
+                    data: null,
+                    title: 'Admin Unit (L1 + L2)',
+                    render: function(data, type, row) {
+                        const admin_unit_l1 = row.fields.admin_unit_l1 || '';
+                        const admin_unit_l2 = row.fields.admin_unit_l2 || '';
+                        return `${admin_unit_l1} ${admin_unit_l2}`.trim();
+                    }
+                },
+                {
+                    data: null,
+                    title: 'Address',
+                    render: function(data, type, row) {
+                        const address_area = row.fields.address_area || '';
+                        const municipality = row.fields.municipality || '';
+                        const community = row.fields.community || '';
+                        return `${address_area} ${municipality} ${community}`.trim();
+                    }
+                },
+                {
+                    data: null,
+                    title: 'Operations',
+                    render: function(data, type, row) {
+                        const buttonClass = row.fields.status ? 'btn-success' : 'btn-danger';
+                        return `
+                            <button class="btn btn-primary btn-sm edit-farm" data-id="${row.pk}"><i class="mdi mdi-pencil d-block font-size-16"></i></button>
+                            <button class="btn btn-danger btn-sm delete-farm" data-id="${row.pk}"><i class="mdi mdi-trash-can d-block font-size-16"></i></button>
+                            <button class="btn btn-sm toggle-active ${buttonClass}" data-id="${row.pk}"><i class="mdi mdi-check d-block font-size-16"></i></button>
+                        `;
+                    }
+                },
+                {
+                    data: null,
+                    title: 'Timestamp',
+                    render: function(data, type, row) {
+                        let createdAt = moment(row.fields.created_at).format('dddd, D MMMM YYYY HH:mm:ss.SSS');
+                        let updatedAt = moment(row.fields.updated_at).format('dddd, D MMMM YYYY HH:mm:ss.SSS');
+                        return `Created: ${createdAt}<br>Updated: ${updatedAt}`;
+                    }
+                }
+            ]
+        }).on('click', '.edit-farm', function() {
+            const pk = $(this).data('id');
+            window.location.href = '/farms/edit/' + pk;
+        });
+    </script>
+{% endblock body_end_extra_scripts %}

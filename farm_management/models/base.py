@@ -31,6 +31,12 @@ class BaseModel(models.Model):
         self.save()
 
 
+class ActivePageManager(models.Manager):
+    def get_queryset(self):
+        # Exclude records with status set to DELETED (status=2)
+        return super().get_queryset().filter(status__lt=BaseModel.BaseModelStatus.DELETED)
+
+
 class AdminMenuMaster(BaseModel):
     id = models.SmallAutoField(primary_key=True, db_column='id', db_index=True, editable=False, unique=True,
                                blank=False, null=False, verbose_name='ID')

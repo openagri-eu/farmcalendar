@@ -1,11 +1,11 @@
 
-from farm_management.models import Farm, FarmParcel
+from farm_management.models import FarmMaster, FarmParcel
 from .base import JSONLDSerializer
 
 
 class FarmSerializer(JSONLDSerializer):
     class Meta:
-        model = Farm
+        model = FarmMaster
 
         fields = [
             'id', 'name',
@@ -19,6 +19,7 @@ class FarmSerializer(JSONLDSerializer):
     #     json_ld_representation = ClassSchema().dump(representation)
 
     #     return json_ld_representation
+
 
 class FarmParcelSerializer(JSONLDSerializer):
     class Meta:

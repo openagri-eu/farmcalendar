@@ -1,5 +1,5 @@
 from django import forms
-from ..models import Farm
+from ..models import FarmMaster
 
 
 class FarmMasterForm(forms.ModelForm):
@@ -30,7 +30,7 @@ class FarmMasterForm(forms.ModelForm):
     )
 
     class Meta:
-        model = Farm
+        model = FarmMaster
         fields = [
             'name', 'description', 'administrator',
             'contact_person_firstname', 'contact_person_lastname',
@@ -46,8 +46,12 @@ class FarmMasterForm(forms.ModelForm):
             'vat_id': 'VAT ID',
         }
         widgets = {
+            'description': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Vineyard 219521',
+                'style': 'width: 100%; height: 100px; overflow-y: scroll;'
+            }),
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Farm Name', 'label': 'Farm Name'}),
-            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Vineyard 219521', 'rows': 3}),
             'administrator': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Administrator'}),
             'contact_person_firstname': forms.TextInput(
                 attrs={'class': 'form-control', 'placeholder': 'Contact First Name'}),

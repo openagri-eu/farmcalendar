@@ -5,11 +5,11 @@ from django.utils.translation import gettext_lazy as _
 
 from simple_history.models import HistoricalRecords
 
-from .base import BaseModel
+from .base import BaseModel, ActivePageManager
 from .validators import *
 
 
-class Farm(BaseModel):
+class FarmMaster(BaseModel):
     name = models.CharField(max_length=255, unique=True, blank=False, null=False, default="Unnamed")
     description = models.TextField(blank=True, null=True)
     administrator = models.CharField(max_length=255, blank=True, null=True)
@@ -17,6 +17,9 @@ class Farm(BaseModel):
     contact_person_lastname = models.CharField(max_length=255, blank=True, null=True)
     telephone = models.CharField(max_length=20, blank=True, null=True)
     vat_id = models.CharField(max_length=50, blank=True, null=True)
+
+    objects = models.Manager()
+    active_objects = ActivePageManager()
 
     class Meta:
         db_table = "farm_master"
@@ -28,15 +31,6 @@ class Farm(BaseModel):
 
     def clean(self):
         errors = {}
-        cleaned_data = super().clean()
-
-        name_pattern = r'^[a-zA-Z0-9.,_()\[\]{}\-\*\&\@\:\;\ ]+$'
-
-        name_validator = RegexValidator(
-            regex=name_pattern,
-            message="This field must contain only letters, numbers, spaces, and . , _ - () [] {} ; : & @ *",
-            code='invalid_name'
-        )
 
         # Validate fields with the name pattern
         fields_to_validate = {
@@ -73,7 +67,7 @@ class Farm(BaseModel):
 
 
 class FarmAddress(BaseModel):
-    farm = models.OneToOneField(Farm, on_delete=models.CASCADE, related_name="address")
+    farm = models.OneToOneField(FarmMaster, on_delete=models.CASCADE, related_name="address")
     admin_unit_l1 = models.CharField(max_length=255, blank=True, null=True)
     admin_unit_l2 = models.CharField(max_length=255, blank=True, null=True)
     address_area = models.CharField(max_length=255, blank=True, null=True)
@@ -102,7 +96,7 @@ class FarmParcel(BaseModel):
         ARABLE = 'arable', _('Arable')
         VINEYARD = 'vineyard', _('Vineyard')
 
-    farm = models.ForeignKey('Farm', on_delete=models.CASCADE, blank=False, null=False, related_name="farm_parcels")
+    farm = models.ForeignKey('FarmMaster', on_delete=models.CASCADE, blank=False, null=False, related_name="farm_parcels")
     '''
     What do you think about this?
     related_name="%(class)ss" dynamically sets the related name using the model's class name. But it may not always 
