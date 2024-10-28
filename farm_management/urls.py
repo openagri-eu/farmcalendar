@@ -29,5 +29,6 @@ urlpatterns = [
     path('farms/', FarmMasterView.as_view(), name="farms"),
     path("farms/edit/<int:pk>/", view=FarmMasterView.as_view(), name="farm_edit"),
 
-    path('farm-parcels/', FarmParcelView.as_view(), name="farm-parcels")
+    path('farm-parcels/', FarmParcelView.as_view(), name="farm-parcels"),
+    path("farm-parcels/edit/<int:pk>/", view=FarmParcelView.as_view(), name="farm-parcel_edit"),
 ]

@@ -4,7 +4,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.generic import TemplateView
 
-from farm_management.models import FarmParcel
+from farm_management.models import FarmParcel, FarmMaster
 from farm_management.forms.FarmParcelsForm import FarmParcelsForm
 
 
@@ -24,8 +24,10 @@ class FarmParcelView(TemplateView):
             farm_parcel = None
             form = FarmParcelsForm()
 
-        context['form'] = form
-        context['farm_parcel'] = farm_parcel
+        context.update({
+            'form': form,
+            'farm_parcel': farm_parcel
+        })
         return context
 
     def get(self, request, *args, **kwargs):

@@ -95,7 +95,8 @@ class FarmParcel(BaseModel):
         ARABLE = 'arable', _('Arable')
         VINEYARD = 'vineyard', _('Vineyard')
 
-    farm = models.ForeignKey('FarmMaster', on_delete=models.CASCADE, blank=False, null=False, related_name="farm_parcels")
+    farm = models.ForeignKey('FarmMaster', on_delete=models.CASCADE, blank=False, null=False,
+                             related_name="farm_parcels")
     '''
     What do you think about this?
     related_name="%(class)ss" dynamically sets the related name using the model's class name. But it may not always 
