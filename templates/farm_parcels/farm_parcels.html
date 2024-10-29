@@ -16,6 +16,8 @@
 
     <!-- alertifyjs default themes  Css -->
     <link href="{% static 'libs/alertifyjs/build/css/themes/default.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <link href="{% static 'libs/flatpickr/flatpickr.min.css' %}" rel="stylesheet" type="text/css" />
 {% endblock extra_css %}
 
 {% block page_content %}
@@ -131,122 +133,125 @@
     <!-- moment JS for datetime -->
     <script src="{% static 'libs/moment/js/moment.min.js' %}"></script>
 
+    <script src="{% static 'libs/flatpickr/flatpickr_v4.6.13.js' %}"></script>
+
     <script>
-        const farms = JSON.parse('{{ farms|safe }}');
+        const farm_parcels = JSON.parse('{{ farm_parcels|safe }}');
 
-        $('#datatable').DataTable({
-            data: farms,
-            rowId: 'pk',
-            columns: [
-                { data: 'fields.name', title: 'Name' },
-                { data: 'fields.description', title: 'Description' },
-                { data: 'fields.administrator', title: 'Administrator' },
-                {
-                    data: null,
-                    title: 'Contact Person',
-                    render: function(data, type, row) {
-                        const firstName = row.fields.contact_person_firstname || '';
-                        const lastName = row.fields.contact_person_lastname || '';
-                        return `${firstName} ${lastName}`.trim();
-                    }
-                },
-                { data: 'fields.telephone', title: 'Telephone' },
-                { data: 'fields.vat_id', title: 'VAT ID' },
-                {
-                    data: null,
-                    title: 'Admin Unit (L1 + L2)',
-                    render: function(data, type, row) {
-                        const admin_unit_l1 = row.fields.admin_unit_l1 || '';
-                        const admin_unit_l2 = row.fields.admin_unit_l2 || '';
-                        return `${admin_unit_l1}, ${admin_unit_l2}`.trim();
-                    }
-                },
-                {
-                    data: null,
-                    title: 'Address',
-                    render: function(data, type, row) {
-                        const address_area = row.fields.address_area || '';
-                        const municipality = row.fields.municipality || '';
-                        const community = row.fields.community || '';
-                        return `${address_area}, ${municipality}, ${community}`.trim();
-                    }
-                },
-                {
-                    data: null,
-                    title: 'Operations',
-                    render: function(data, type, row) {
-                        const buttonClass = row.fields.status ? 'btn-success' : 'btn-danger';
-                        return `
-                            <button class="btn btn-primary btn-sm edit-farm p-2" data-id="${row.pk}"><i class="fas fa-pencil-alt d-block font-size-16"></i></button>
-                            <button class="btn btn-danger btn-sm delete-farm p-2" data-id="${row.pk}"><i class="fas fa-trash-alt d-block font-size-16"></i></button>
-                            <button class="btn btn-sm toggle-active p-2 ${buttonClass}" data-id="${row.pk}"><i class="fas fa-check d-block font-size-16"></i></button>
-                        `;
-                    }
-                },
-                {
-                    data: null,
-                    title: 'Timestamp',
-                    render: function(data, type, row) {
-                        let createdAt = moment(row.fields.created_at).format('dddd, D MMMM YYYY HH:mm:ss.SSS');
-                        let updatedAt = moment(row.fields.updated_at).format('dddd, D MMMM YYYY HH:mm:ss.SSS');
-                        return `Created: ${createdAt}<br>Updated: ${updatedAt}`;
-                    }
-                }
-            ]
-        }).on('click', '.toggle-active', function() {
-                const pk = $(this).data('id');
-                const $this = $(this);
-                const isActive = $this.hasClass('btn-success');
-
-                // Toggle state visually
-                $this.toggleClass('btn-success btn-danger');
-
-                const newStatus = !isActive;
-
-                $.ajax({
-                    url: `/farms/ajax/toggle-status/${pk}/`,
-                    method: 'POST',
-                    data: {'status': newStatus},
-                    success: function(response) {
-                        if (response.farm_status === 1) {
-                            $this.removeClass('btn-danger').addClass('btn-success');
-                        } else {
-                            $this.removeClass('btn-success').addClass('btn-danger');
+            $('#datatable').DataTable({
+                data: farm_parcels,
+                rowId: 'pk',
+                columns: [
+                    { data: 'farm_name', title: 'Farm' },
+                    { data: 'identifier', title: 'Identifier' },
+                    { data: 'category', title: 'Category' },
+                    {
+                        data: null,
+                        title: 'Valid from - Valid till',
+                        render: function(data, type, row) {
+                            const valid_from = row.valid_from || '';
+                            const valid_to = row.valid_to || '';
+                            return `${valid_from} ${valid_to}`.trim();
                         }
-                        alertify.success(response.message);
                     },
-                    error: function(xhr, status, error) {
-                        let errorMessage = "Status update failed.";
-                        if (xhr.responseJSON && xhr.responseJSON.message) {
-                            errorMessage = xhr.responseJSON.message;
+                    { data: 'coordinates', title: 'Coordinates' },
+                    {
+                        data: null,
+                        title: 'Operations',
+                        render: function(data, type, row) {
+                            const buttonClass = row.status ? 'btn-success' : 'btn-danger';
+                            return `
+                                <button class="btn btn-primary btn-sm edit-farm p-2" data-id="${row.pk}"><i class="fas fa-pencil-alt d-block font-size-16"></i></button>
+                                <button class="btn btn-danger btn-sm delete-farm p-2" data-id="${row.pk}"><i class="fas fa-trash-alt d-block font-size-16"></i></button>
+                                <button class="btn btn-sm toggle-active p-2 ${buttonClass}" data-id="${row.pk}"><i class="fas fa-check d-block font-size-16"></i></button>
+                            `;
                         }
-                        alertify.error(errorMessage);
+                    },
+                    {
+                        data: null,
+                        title: 'Timestamp',
+                        render: function(data, type, row) {
+                            let createdAt = moment(row.created_at).format('dddd, D MMMM YYYY HH:mm:ss.SSS');
+                            let updatedAt = moment(row.updated_at).format('dddd, D MMMM YYYY HH:mm:ss.SSS');
+                            return `Created: ${createdAt}<br>Updated: ${updatedAt}`;
+                        }
                     }
-                });
-            }).on('click', '.delete-farm', function() {
-                const pk = $(this).data('id');
-                const $row = $(this).closest('tr');
-                // Confirmation dialog
-                if (confirm('Are you sure you want to delete this farm? This will remove all related records.')) {
+                ]
+            }).on('click', '.toggle-active', function() {
+                    const pk = $(this).data('id');
+                    const $this = $(this);
+                    const isActive = $this.hasClass('btn-success');
+
+                    // Toggle state visually
+                    $this.toggleClass('btn-success btn-danger');
+
+                    const newStatus = !isActive;
+
                     $.ajax({
-                        url: `/farms/ajax/delete/${pk}/`,
+                        url: `/farm-parcel/ajax/toggle-status/${pk}/`,
                         method: 'POST',
+                        data: {'status': newStatus},
                         success: function(response) {
+                            if (response.farm_status === 1) {
+                                $this.removeClass('btn-danger').addClass('btn-success');
+                            } else {
+                                $this.removeClass('btn-success').addClass('btn-danger');
+                            }
                             alertify.success(response.message);
-                            $('#datatable').DataTable().row($row).remove().draw();
                         },
                         error: function(xhr, status, error) {
-                            let errorMessage = "Deletion failed.";
+                            let errorMessage = "Status update failed.";
                             if (xhr.responseJSON && xhr.responseJSON.message) {
                                 errorMessage = xhr.responseJSON.message;
                             }
                             alertify.error(errorMessage);
                         }
                     });
+                }).on('click', '.delete-farm', function() {
+                    const pk = $(this).data('id');
+                    const $row = $(this).closest('tr');
+                    // Confirmation dialog
+                    if (confirm('Are you sure you want to delete this farm? This will remove all related records.')) {
+                        $.ajax({
+                            url: `/farm-parcel/ajax/delete/${pk}/`,
+                            method: 'POST',
+                            success: function(response) {
+                                alertify.success(response.message);
+                                $('#datatable').DataTable().row($row).remove().draw();
+                            },
+                            error: function(xhr, status, error) {
+                                let errorMessage = "Deletion failed.";
+                                if (xhr.responseJSON && xhr.responseJSON.message) {
+                                    errorMessage = xhr.responseJSON.message;
+                                }
+                                alertify.error(errorMessage);
+                            }
+                        });
+                    }
+                }).on('click', '.edit-farm', function() {
+                const pk = $(this).data('id');
+                window.location.href = '/farms/edit/' + pk;
+            });
+
+        $(function() {
+            // Initialize Flatpickr on #id_valid_from
+            $("#id_valid_from").flatpickr({
+                enableTime: true,
+                dateFormat: "Y-m-d H:i:S",
+                allowInput: false,
+                onChange: function(selectedDates, dateStr, instance) {
+                    const validToPicker = $("#id_valid_to").flatpickr();
+                    validToPicker.set("minDate", dateStr);
                 }
-            }).on('click', '.edit-farm', function() {
-            const pk = $(this).data('id');
-            window.location.href = '/farms/edit/' + pk;
+            });
+
+            // Initialize Flatpickr on #id_valid_to
+            $("#id_valid_to").flatpickr({
+                enableTime: true,
+                dateFormat: "Y-m-d H:i:S",
+                allowInput: false,
+                minDate: $("#id_valid_from").val()
+            });
         });
     </script>
 {% endblock body_end_extra_scripts %}

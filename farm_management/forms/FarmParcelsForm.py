@@ -32,11 +32,13 @@ class FarmParcelsForm(forms.ModelForm):
     )
     valid_from = forms.DateTimeField(
         required=False, label="Valid From",
-        widget=forms.DateTimeInput(attrs={'class': 'form-control', 'placeholder': 'YYYY-MM-DD HH:MM:SS'})
+        widget=forms.DateTimeInput(attrs={'class': 'form-control',
+                                          'placeholder': 'YYYY-MM-DD HH:MM:SS'})
     )
     valid_to = forms.DateTimeField(
         required=False, label="Valid To",
-        widget=forms.DateTimeInput(attrs={'class': 'form-control', 'placeholder': 'YYYY-MM-DD HH:MM:SS'})
+        widget=forms.DateTimeInput(attrs={'class': 'form-control',
+                                          'placeholder': 'YYYY-MM-DD HH:MM:SS'})
     )
     in_region = forms.CharField(
         max_length=255, required=False, label="Region",
@@ -48,7 +50,7 @@ class FarmParcelsForm(forms.ModelForm):
     )
     area = forms.DecimalField(
         max_digits=15, decimal_places=2, required=False, label="Area (sq. meters)",
-        widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '0.0'})
+        widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '0.0', 'value': 0.0})
     )
     is_nitro_area = forms.BooleanField(
         required=False, label="Nitro Area",

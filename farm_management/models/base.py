@@ -31,27 +31,27 @@ class BaseModel(models.Model):
         # self.save()
 
         # Perform cascading soft delete on related objects
-        for related in self._meta.related_objects:
-            related_name = related.get_accessor_name()
-            related_manager_or_obj = getattr(self, related_name, None)
-
-            # For ForeignKey or ManyToMany relationships
-            if isinstance(related_manager_or_obj, models.Manager):
-                for related_obj in related_manager_or_obj.all():
-                    if hasattr(related_obj, 'soft_delete') and related_obj.status != self.BaseModelStatus.DELETED:
-                        # Check if the related object is shared by other instances
-                        is_shared = related.related_model.objects.filter(
-                            **{related.field.name: related_obj}).exclude(pk=self.pk).exists()
-                        if not is_shared:
-                            related_obj.soft_delete()
-            # For OneToOne relationships
-            elif isinstance(related_manager_or_obj,
-                            BaseModel) and related_manager_or_obj.status != self.BaseModelStatus.DELETED:
-                # Check if the OneToOneField instance is shared by any other model or object
-                is_shared = type(related_manager_or_obj).objects.filter(pk=related_manager_or_obj.pk).exclude(
-                    farm=self.pk).exists()  # Adjust `farm` based on your actual foreign key name if necessary
-                if not is_shared:
-                    related_manager_or_obj.soft_delete()
+        # for related in self._meta.related_objects:
+        #     related_name = related.get_accessor_name()
+        #     related_manager_or_obj = getattr(self, related_name, None)
+        #
+        #     # For ForeignKey or ManyToMany relationships
+        #     if isinstance(related_manager_or_obj, models.Manager):
+        #         for related_obj in related_manager_or_obj.all():
+        #             if hasattr(related_obj, 'soft_delete') and related_obj.status != self.BaseModelStatus.DELETED:
+        #                 # Check if the related object is shared by other instances
+        #                 is_shared = related.related_model.objects.filter(
+        #                     **{related.field.name: related_obj}).exclude(pk=self.pk).exists()
+        #                 if not is_shared:
+        #                     related_obj.soft_delete()
+        #     # For OneToOne relationships
+        #     elif isinstance(related_manager_or_obj,
+        #                     BaseModel) and related_manager_or_obj.status != self.BaseModelStatus.DELETED:
+        #         # Check if the OneToOneField instance is shared by any other model or object
+        #         is_shared = type(related_manager_or_obj).objects.filter(pk=related_manager_or_obj.pk).exclude(
+        #             farm=self.pk).exists()  # Adjust `farm` based on your actual foreign key name if necessary
+        #         if not is_shared:
+        #             related_manager_or_obj.soft_delete()
 
 
 class ActivePageManager(models.Manager):
