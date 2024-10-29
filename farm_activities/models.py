@@ -1,3 +1,4 @@
+import datetime
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -21,7 +22,7 @@ class FarmCalendarActivityType(models.Model):
     """
     id = models.AutoField(primary_key=True, db_index=True, editable=False, unique=True,
                           blank=False, null=False, verbose_name='ID')
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     description = models.TextField(blank=True, null=True)
     # Fields for color codes
     background_color = models.CharField(
@@ -37,7 +38,7 @@ class FarmCalendarActivityType(models.Model):
     text_color = models.CharField(
         max_length=7,
         validators=[RegexValidator(regex='^#[0-9A-Fa-f]{6}$', message='Enter a valid hex color code.')],
-        default='#ffffff',  # Default text color
+        default='#000000',  # Default text color
     )
 
     def __str__(self):
@@ -59,7 +60,7 @@ class FarmCalendarActivity(models.Model):
 
     activity_type = models.ForeignKey(FarmCalendarActivityType, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    start_datetime = models.DateTimeField()
+    start_datetime = models.DateTimeField(default=datetime.datetime.now)
     end_datetime = models.DateTimeField(blank=True, null=True)
 
     title = models.CharField(max_length=200)
@@ -113,7 +114,6 @@ class IrrigationOperation(FarmCalendarActivity):
 
     operated_on = models.ForeignKey('farm_management.FarmParcel', on_delete=models.CASCADE)
 
-    # cycle_duration = models.DecimalField(max_digits=10, decimal_places=2)
     irrigation_system = models.CharField(max_length=50, choices=IrrigationSystemChoices.choices,
                                         default=IrrigationSystemChoices.SPRINKLER)
 

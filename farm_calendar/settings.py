@@ -53,11 +53,17 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'simple_history',
     'drf_spectacular',
+    'crispy_forms',
+    'crispy_bootstrap5',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
 GATEKEEPER_LOGIN_URL = os.environ.get('GATEKEEPER_LOGIN_URL', None)
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 if GATEKEEPER_LOGIN_URL == '':
     GATEKEEPER_LOGIN_URL = None
