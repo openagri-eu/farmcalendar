@@ -39,6 +39,11 @@ def validate_vat_id(value):
 
 def validate_datetime_format(value):
     """Validate datetime field to accept multiple date and time formats."""
+
+    # If value is already a datetime object, no need to validate format
+    if isinstance(value, datetime):
+        return
+
     # List of accepted datetime formats
     datetime_formats = [
         '%Y-%m-%d %H:%M:%S',  # yyyy-mm-dd hh:mm:ss

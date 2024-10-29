@@ -151,7 +151,7 @@
                         render: function(data, type, row) {
                             const valid_from = row.valid_from || '';
                             const valid_to = row.valid_to || '';
-                            return `${valid_from} ${valid_to}`.trim();
+                            return `From: ${valid_from} <br>Until: ${valid_to}`.trim();
                         }
                     },
                     { data: 'coordinates', title: 'Coordinates' },
@@ -161,7 +161,7 @@
                         render: function(data, type, row) {
                             const buttonClass = row.status ? 'btn-success' : 'btn-danger';
                             return `
-                                <button class="btn btn-primary btn-sm edit-farm p-2" data-id="${row.pk}"><i class="fas fa-pencil-alt d-block font-size-16"></i></button>
+                                <button class="btn btn-primary btn-sm edit-farm-parcel p-2" data-id="${row.pk}"><i class="fas fa-pencil-alt d-block font-size-16"></i></button>
                                 <button class="btn btn-danger btn-sm delete-farm p-2" data-id="${row.pk}"><i class="fas fa-trash-alt d-block font-size-16"></i></button>
                                 <button class="btn btn-sm toggle-active p-2 ${buttonClass}" data-id="${row.pk}"><i class="fas fa-check d-block font-size-16"></i></button>
                             `;
@@ -228,9 +228,9 @@
                             }
                         });
                     }
-                }).on('click', '.edit-farm', function() {
+                }).on('click', '.edit-farm-parcel', function() {
                 const pk = $(this).data('id');
-                window.location.href = '/farms/edit/' + pk;
+                window.location.href = '/farm-parcels/edit/' + pk;
             });
 
         $(function() {
