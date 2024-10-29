@@ -21,7 +21,7 @@ class FarmCalendarActivityType(models.Model):
     """
     id = models.AutoField(primary_key=True, db_index=True, editable=False, unique=True,
                           blank=False, null=False, verbose_name='ID')
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     description = models.TextField(blank=True, null=True)
     # Fields for color codes
     background_color = models.CharField(
@@ -113,7 +113,6 @@ class IrrigationOperation(FarmCalendarActivity):
 
     operated_on = models.ForeignKey('farm_management.FarmParcel', on_delete=models.CASCADE)
 
-    # cycle_duration = models.DecimalField(max_digits=10, decimal_places=2)
     irrigation_system = models.CharField(max_length=50, choices=IrrigationSystemChoices.choices,
                                         default=IrrigationSystemChoices.SPRINKLER)
 
