@@ -1,3 +1,4 @@
+import datetime
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -37,7 +38,7 @@ class FarmCalendarActivityType(models.Model):
     text_color = models.CharField(
         max_length=7,
         validators=[RegexValidator(regex='^#[0-9A-Fa-f]{6}$', message='Enter a valid hex color code.')],
-        default='#ffffff',  # Default text color
+        default='#000000',  # Default text color
     )
 
     def __str__(self):
@@ -59,7 +60,7 @@ class FarmCalendarActivity(models.Model):
 
     activity_type = models.ForeignKey(FarmCalendarActivityType, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    start_datetime = models.DateTimeField()
+    start_datetime = models.DateTimeField(default=datetime.datetime.now)
     end_datetime = models.DateTimeField(blank=True, null=True)
 
     title = models.CharField(max_length=200)

@@ -54,19 +54,18 @@ def get_generic_farm_calendar_activity_form(activity_type):
         settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['crop_stress_indicator']['name']: CropStressIndicatorObservation,
         settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['crop_growth_stage']['name']: CropGrowthStageObservation,
     }
-    ActivityModel = activity_type_model_map.get(activity_type, None)
-    if ActivityModel is not None:
-        GenericActivityForm = modelform_factory(
-            ActivityModel,
-            fields="__all__",
-            exclude=['id'],
-            widgets={
-                'start_datetime': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
-                'end_datetime': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
-                'activity_type': forms.Select(attrs={'disabled': 'disabled'}),
-            },
-        )
-        return GenericActivityForm
+    ActivityModel = activity_type_model_map.get(activity_type, FarmCalendarActivity)
+    GenericActivityForm = modelform_factory(
+        ActivityModel,
+        fields="__all__",
+        exclude=['id'],
+        widgets={
+            'start_datetime': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'activity_type': forms.HiddenInput(),
+            'end_datetime': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        },
+    )
+    return GenericActivityForm
 
 
 class FarmCalendarActivityTypeSelectionForm(forms.Form):
