@@ -11,7 +11,6 @@ class FarmParcelsForm(forms.ModelForm):
         widget=forms.Select(attrs={'class': 'form-control', 'required': 'required'})
     )
 
-    # Define form fields with custom widgets and attributes as per the requirements
     identifier = forms.CharField(
         max_length=100, required=True, label="Parcel Identifier",
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Identifier for the parcel'})

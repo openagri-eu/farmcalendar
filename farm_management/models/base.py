@@ -49,7 +49,7 @@ class BaseModel(models.Model):
         #                     BaseModel) and related_manager_or_obj.status != self.BaseModelStatus.DELETED:
         #         # Check if the OneToOneField instance is shared by any other model or object
         #         is_shared = type(related_manager_or_obj).objects.filter(pk=related_manager_or_obj.pk).exclude(
-        #             farm=self.pk).exists()  # Adjust `farm` based on your actual foreign key name if necessary
+        #             farm=self.pk).exists()  # Adjust `farm` based on actual foreign key name if necessary
         #         if not is_shared:
         #             related_manager_or_obj.soft_delete()
 
