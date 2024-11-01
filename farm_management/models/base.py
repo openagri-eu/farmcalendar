@@ -54,6 +54,16 @@ class BaseModel(models.Model):
         #             related_manager_or_obj.soft_delete()
 
 
+class LocationBaseModel(models.Model):
+    latitude = models.DecimalField(_('Latitude'), max_digits=15, decimal_places=2, blank=True, null=True)
+    longitude = models.DecimalField(_('Longitude'), max_digits=15, decimal_places=2, blank=True, null=True)
+
+    geometry = models.TextField(_('Geometry (WKT)'), blank=True, null=True)
+
+    class Meta:
+        abstract = True
+
+
 class ActivePageManager(models.Manager):
     def get_queryset(self):
         # Exclude records with status set to DELETED (status=2)

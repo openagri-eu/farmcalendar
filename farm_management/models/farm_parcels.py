@@ -64,7 +64,7 @@ class FarmParcel(BaseModel):
                              related_name="farm_parcels")
     '''
     What do you think about this?
-    related_name="%(class)ss" dynamically sets the related name using the model's class name. But it may not always 
+    related_name="%(class)ss" dynamically sets the related name using the model's class name. But it may not always
     produce a meaningful or intuitive related name. Thus, I changed it to more descriptive and specific name.
     '''
     identifier = models.CharField(max_length=100, unique=True, blank=False, null=False, default="Unnamed",
@@ -85,7 +85,7 @@ class FarmParcel(BaseModel):
     is_ground_slope = models.BooleanField(default=False)
     depiction = models.URLField(max_length=500, blank=True, null=True)
     # irrigation_system = models.ForeignKey(IrrigationSystem, on_delete=models.SET_NULL, null=True, blank=True, related_name="parcels")
-    irrigation_flow = models.FloatField(blank=True, null=True, validators=[validate_positive])
+    irrigation_flow = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True, validators=[validate_positive])
     # crop = models.ForeignKey(Crop, on_delete=models.SET_NULL, null=True, blank=True, related_name="parcels")
     geo_id = models.UUIDField(_('Geographic Data ID'), unique=False, blank=True, null=True)
     coordinates = models.CharField(max_length=255, default="0.0,0.0", validators=[validate_coordinates])
@@ -136,42 +136,3 @@ class FarmLocation(BaseModel):
 
     def __str__(self):
         return f"Farm Location for {self.farm_parcel.identifier}"
-
-
-# Uncomment these models when ready to use irrigation and crop functionalities
-#
-# class IrrigationSystem(BaseModel):
-#     name = models.CharField(max_length=255, blank=False, null=False)
-#
-#     class Meta:
-#         verbose_name = "Irrigation System"
-#         verbose_name_plural = "Irrigation Systems"
-#
-#     def __str__(self):
-#         return self.name
-#
-#
-# class CropSpecies(BaseModel):
-#     name = models.CharField(max_length=255, blank=False, null=False)
-#     alternate_name = models.CharField(max_length=255, blank=True, null=True)
-#     agro_voc_concept = models.URLField(max_length=500, blank=True, null=True)
-#
-#     class Meta:
-#         verbose_name = "Crop Species"
-#         verbose_name_plural = "Crop Species"
-#
-#     def __str__(self):
-#         return self.name
-#
-#
-# class Crop(BaseModel):
-#     name = models.CharField(max_length=255, blank=False, null=False)
-#     species = models.ForeignKey(CropSpecies, on_delete=models.CASCADE, related_name="crops")
-#     is_meant_for = models.CharField(max_length=255, blank=True, null=True)  # E.g., "table olives"
-#
-#     class Meta:
-#         verbose_name = "Crop"
-#         verbose_name_plural = "Crops"
-#
-#     def __str__(self):
-#         return f"{self.name} ({self.species.name})"
