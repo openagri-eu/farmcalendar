@@ -12,7 +12,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.generic import TemplateView
 
-from farm_management.models import FarmMaster, FarmAddress
+from farm_management.models import FarmMaster
 from farm_management.forms.FarmMasterForm import FarmMasterForm
 
 from farm_management.constants import *
@@ -26,14 +26,7 @@ class FarmMasterView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # Prefetch only active addresses with status != DELETED
-        active_addresses = FarmAddress.active_objects.filter(~Q(status=FarmAddress.BaseModelStatus.DELETED))
-
-        farms = FarmMaster.active_objects.select_related(
-            'address'
-        ).prefetch_related(
-            Prefetch('address', queryset=active_addresses, to_attr='active_address')
-        )
+        farms = FarmMaster.active_objects.all()
 
         # Custom serialization to include related fields
         farms_data = []
@@ -55,13 +48,12 @@ class FarmMasterView(TemplateView):
                     "status": farm.status,
                     "created_at": farm.created_at.isoformat(),
                     "updated_at": farm.updated_at.isoformat(),
-                    # Include related address fields if they exist and are active
-                    "admin_unit_l1": address.admin_unit_l1 if address else None,
-                    "admin_unit_l2": address.admin_unit_l2 if address else None,
-                    "address_area": address.address_area if address else None,
-                    "municipality": address.municipality if address else None,
-                    "community": address.community if address else None,
-                    "locator_name": address.locator_name if address else None,
+                    "admin_unit_l1": farm.admin_unit_l1,
+                    "admin_unit_l2": farm.admin_unit_l2,
+                    "address_area": farm.address_area,
+                    "municipality": farm.municipality,
+                    "community": farm.community,
+                    "locator_name": farm.locator_name,
                 }
             }
             farms_data.append(farm_data)
@@ -75,16 +67,14 @@ class FarmMasterView(TemplateView):
         if pk:
             farm = get_object_or_404(FarmMaster, pk=pk)
             # Pre-fill the form with the farm data and related address data if available
-            initial_data = {}
-            if hasattr(farm, 'address') and farm.address.status == FarmAddress.BaseModelStatus.ACTIVE:
-                initial_data = {
-                    'admin_unit_l1': farm.address.admin_unit_l1,
-                    'admin_unit_l2': farm.address.admin_unit_l2,
-                    'address_area': farm.address.address_area,
-                    'municipality': farm.address.municipality,
-                    'community': farm.address.community,
-                    'locator_name': farm.address.locator_name,
-                }
+            initial_data = {
+                'admin_unit_l1': farm.admin_unit_l1,
+                'admin_unit_l2': farm.admin_unit_l2,
+                'address_area': farm.address_area,
+                'municipality': farm.municipality,
+                'community': farm.community,
+                'locator_name': farm.locator_name,
+            }
             form = FarmMasterForm(instance=farm, initial=initial_data)
         else:
             # Creating a new Farm
@@ -119,15 +109,15 @@ class FarmMasterView(TemplateView):
 
                 farm_instance.save()
 
-                # Save the FarmAddress
-                farm_address, _ = FarmAddress.objects.get_or_create(farm=farm_instance)
-                farm_address.admin_unit_l1 = form.cleaned_data.get('admin_unit_l1')
-                farm_address.admin_unit_l2 = form.cleaned_data.get('admin_unit_l2')
-                farm_address.address_area = form.cleaned_data.get('address_area')
-                farm_address.municipality = form.cleaned_data.get('municipality')
-                farm_address.community = form.cleaned_data.get('community')
-                farm_address.locator_name = form.cleaned_data.get('locator_name')
-                farm_address.save()
+                # # Save the FarmAddress
+                # farm_address, _ = FarmAddress.objects.get_or_create(farm=farm_instance)
+                # farm_address.admin_unit_l1 = form.cleaned_data.get('admin_unit_l1')
+                # farm_address.admin_unit_l2 = form.cleaned_data.get('admin_unit_l2')
+                # farm_address.address_area = form.cleaned_data.get('address_area')
+                # farm_address.municipality = form.cleaned_data.get('municipality')
+                # farm_address.community = form.cleaned_data.get('community')
+                # farm_address.locator_name = form.cleaned_data.get('locator_name')
+                # farm_address.save()
 
                 messages.success(request, "Farm saved successfully.")
                 return redirect(self.success_url)
@@ -137,10 +127,6 @@ class FarmMasterView(TemplateView):
                 context['form'] = form
                 context['is_edit'] = bool(pk)
                 return render(request, self.template_name, context)
-        except ObjectDoesNotExist as e:
-            # Handle cases where the Farm or FarmAddress does not exist
-            error_message = f"Error: {str(e)}"
-            return render(request, self.template_name, {'error': error_message})
         except ValidationError as e:
             # Handle validation errors
             error_message = f"Validation Error: {str(e)}"
