@@ -2,31 +2,28 @@ import json
 
 from django.contrib import messages
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
-from django.core.serializers import serialize
-from django.core.serializers.json import DjangoJSONEncoder
 from django.db import DatabaseError, IntegrityError
-from django.db.models import Prefetch, Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.generic import TemplateView
 
-from farm_management.models import FarmMaster
-from farm_management.forms.FarmMasterForm import FarmMasterForm
+from farm_management.models import Farm
+from farm_management.forms import FarmForm
 
 from farm_management.constants import *
 
 
 @method_decorator(never_cache, name='dispatch')
-class FarmMasterView(TemplateView):
+class FarmView(TemplateView):
     template_name = "farm_management/farm_master.html"
     success_url = reverse_lazy('farms')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        farms = FarmMaster.active_objects.all()
+        farms = Farm.active_objects.all()
 
         # Custom serialization to include related fields
         farms_data = []
@@ -65,7 +62,7 @@ class FarmMasterView(TemplateView):
         pk = self.kwargs.get('pk')
         # Determine if editing or creating a new Farm
         if pk:
-            farm = get_object_or_404(FarmMaster, pk=pk)
+            farm = get_object_or_404(Farm, pk=pk)
             # Pre-fill the form with the farm data and related address data if available
             initial_data = {
                 'admin_unit_l1': farm.admin_unit_l1,
@@ -75,10 +72,10 @@ class FarmMasterView(TemplateView):
                 'community': farm.community,
                 'locator_name': farm.locator_name,
             }
-            form = FarmMasterForm(instance=farm, initial=initial_data)
+            form = FarmForm(instance=farm, initial=initial_data)
         else:
             # Creating a new Farm
-            form = FarmMasterForm()
+            form = FarmForm()
 
         context = self.get_context_data(**kwargs)
         context.update({
@@ -93,12 +90,12 @@ class FarmMasterView(TemplateView):
         try:
             if pk:
                 # Update an existing Farm
-                farm = get_object_or_404(FarmMaster, pk=pk)
+                farm = get_object_or_404(Farm, pk=pk)
                 org_farm_name = farm.name
-                form = FarmMasterForm(request.POST, instance=farm)
+                form = FarmForm(request.POST, instance=farm)
             else:
                 # Create a new Farm
-                form = FarmMasterForm(request.POST)
+                form = FarmForm(request.POST)
 
             if form.is_valid():
                 # Save the Farm
@@ -146,7 +143,7 @@ class FarmMasterView(TemplateView):
         # Handle DELETE requests to delete a Farm
         pk = kwargs.get('pk')
         try:
-            farm = get_object_or_404(FarmMaster, pk=pk)
+            farm = get_object_or_404(Farm, pk=pk)
             farm.delete()
             return redirect(self.success_url)
 

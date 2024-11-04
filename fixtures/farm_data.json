@@ -1,0 +1,54 @@
+[
+    {
+        "model": "farm_management.farm",
+        "pk": 1,
+        "fields": {
+            "status": 1,
+            "deleted_at": null,
+            "created_at": "2024-11-04T12:45:19.254Z",
+            "updated_at": "2024-11-04T12:45:19.254Z",
+            "name": "Some Farm",
+            "description": "Description",
+            "administrator": "Admin",
+            "contact_person_firstname": "A",
+            "contact_person_lastname": "DM",
+            "telephone": "0000",
+            "vat_id": "1111",
+            "admin_unit_l1": "Greece",
+            "admin_unit_l2": "Country X",
+            "address_area": "District A",
+            "municipality": "Municipality B",
+            "community": "Community C",
+            "locator_name": "Some Farm LTD"
+        }
+    },
+    {
+        "model": "farm_management.farmparcel",
+        "pk": 1,
+        "fields": {
+            "status": 1,
+            "deleted_at": null,
+            "created_at": "2024-11-04T12:51:14.074Z",
+            "updated_at": "2024-11-04T12:51:14.074Z",
+            "farm": 1,
+            "identifier": "123456",
+            "description": "Parcel for Crop",
+            "category": "pasture",
+            "valid_from": null,
+            "valid_to": null,
+            "in_region": "Some region",
+            "has_toponym": "Some toponym",
+            "area": "100.00",
+            "is_nitro_area": false,
+            "is_natura2000_area": false,
+            "is_pdopg_area": false,
+            "is_irrigated": false,
+            "is_cultivated_in_levels": false,
+            "is_ground_slope": false,
+            "depiction": "",
+            "irrigation_flow": "100.00",
+            "geo_id": null,
+            "coordinates": "0,0"
+        }
+    }
+]

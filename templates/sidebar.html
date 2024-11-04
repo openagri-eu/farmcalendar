@@ -25,25 +25,18 @@
     <hr class="sidebar-divider">
     <!-- Heading -->
     <div class="sidebar-heading">
-        Farms
+        Farms and Parcels
     </div>
     <!-- Nav Item for main menu -->
     <li class="nav-item">
-        <a class="nav-link" href="/farms">
+        <a class="nav-link" href="{% url 'farms' %}">
             <i class="fas fa-fw fa-leaf"></i>
             <span>Farms</span>
         </a>
     </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Farm Parcels
-    </div>
     <!-- Nav Item for main menu -->
     <li class="nav-item">
-        <a class="nav-link" href="/farm-parcels">
+        <a class="nav-link" href="{% url 'farm_parcels' %}">
             <i class="fas fa-fw fa-list"></i>
             <span>Farm Parcels</span>
         </a>
@@ -65,14 +58,14 @@
 
     <ul class="navbar-nav ml-3">
         <li class="nav-item">
-            <a class="nav-link" href="/farm-crops">
+            <a class="nav-link" href="#">
                 <i class="fas fa-fw fa-carrot"></i>
                 <span>Crops</span>
             </a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="/farm-animals">
+            <a class="nav-link" href="#">
                 <i class="fas fa-fw fa-dog"></i>
                 <span>Animals</span>
             </a>

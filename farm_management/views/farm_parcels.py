@@ -9,14 +9,14 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.generic import TemplateView
 
-from farm_management.models import FarmParcel, FarmMaster, FarmLocation
-from farm_management.forms.FarmParcelsForm import FarmParcelsForm
+from farm_management.models import FarmParcel, Farm
+from farm_management.forms.farm_parcels import FarmParcelsForm
 
 
 @method_decorator(never_cache, name='dispatch')
 class FarmParcelView(TemplateView):
     template_name = "farm_parcels/farm_parcels.html"
-    success_url = reverse_lazy('farm-parcels')
+    success_url = reverse_lazy('farm_parcels')
 
     def decimal_to_float(self, data):
         """Convert all Decimal values to float in a nested dictionary."""

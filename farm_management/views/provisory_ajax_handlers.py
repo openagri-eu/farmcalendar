@@ -5,11 +5,11 @@ from django.views import View
 from django.views.decorators.cache import never_cache
 from django.utils.decorators import method_decorator
 
-from ..models.farm_parcels import FarmMaster, FarmParcel
+from ..models.farm_parcels import Farm, FarmParcel
 
 
 MODEL_MAP = {
-    "farms": FarmMaster,
+    "farms": Farm,
     "farm-parcel": FarmParcel
 }
 

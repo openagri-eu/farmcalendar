@@ -3,7 +3,7 @@ from calamus.schema import JsonLDSchema
 
 
 from farm_management.models import (
-    FarmMaster, FarmParcel
+    Farm, FarmParcel
 )
 
 from farm_activities.models import (
@@ -34,7 +34,7 @@ class NamedHistoricalBaseModelSchema(JsonLDSchema):
 class FarmSchema(NamedHistoricalBaseModelSchema):
     class Meta:
         rdf_type = ocsm_namespace.Farm
-        model = FarmMaster
+        model = Farm
 
 
 class FarmParcelSchema(NamedHistoricalBaseModelSchema):

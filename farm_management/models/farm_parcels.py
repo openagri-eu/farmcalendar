@@ -1,11 +1,11 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from .base import BaseModel, LocationBaseModel, ActivePageManager
+from .base import BaseModel, ActivePageManager
 from .validators import *
 
 
-class FarmMaster(BaseModel):
+class Farm(BaseModel):
     name = models.CharField(
         _('Farm Name'), max_length=255, unique=False,
         blank=False, null=False,
@@ -31,7 +31,6 @@ class FarmMaster(BaseModel):
     active_objects = ActivePageManager()
 
     class Meta:
-        db_table = "farm_master"
         verbose_name = "Farm"
         verbose_name_plural = "Farms"
 
@@ -44,7 +43,7 @@ class FarmParcel(BaseModel):
         ARABLE = 'arable', _('Arable')
         VINEYARD = 'vineyard', _('Vineyard')
 
-    farm = models.ForeignKey('FarmMaster', on_delete=models.CASCADE, blank=False, null=False,
+    farm = models.ForeignKey(Farm, on_delete=models.CASCADE, blank=False, null=False,
                              related_name="farm_parcels")
     '''
     What do you think about this?
@@ -78,27 +77,9 @@ class FarmParcel(BaseModel):
     active_objects = ActivePageManager()
 
     class Meta:
-        db_table = "farm_parcels"
         verbose_name = "Farm Parcel"
         verbose_name_plural = "Farm Parcels"
 
     def __str__(self):
         return f"{self.farm} ({self.category})"
 
-
-# Model for Location
-class FarmLocation(BaseModel):
-    farm_parcel = models.OneToOneField(FarmParcel, on_delete=models.CASCADE, related_name="location")
-    latitude = models.FloatField()
-    longitude = models.FloatField()
-
-    objects = models.Manager()
-    active_objects = ActivePageManager()
-
-    class Meta:
-        db_table = "farm_location"
-        verbose_name = "Farm Location"
-        verbose_name_plural = "Farm Locations"
-
-    def __str__(self):
-        return f"Farm Location for {self.farm_parcel.identifier}"

@@ -54,7 +54,7 @@
                             <div id="farmParcelFormCollapse" class="collapse show">
                                 <div class="card-body">
                                     <form class="needs-validation" id="farmParcelForm" name="farmParcelForm" novalidate method="POST"
-                                          action="{% if is_edit %}{% url 'farm-parcel_edit' pk=form.instance.pk %}{% else %}{% url 'farm-parcels' %}{% endif %}"
+                                          action="{% if is_edit %}{% url 'farm_parcel_edit' pk=form.instance.pk %}{% else %}{% url 'farm_parcels' %}{% endif %}"
                                           enctype="multipart/form-data">
                                         {% csrf_token %}
                                         <div class="row">

@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.urls import path
 from . import views
-from .views import FarmParcelView, FarmMasterView, AjaxHandlerView
+from .views import FarmParcelView, FarmView, AjaxHandlerView
 
 urlpatterns = [
     path('login/', views.login_view, name='login'),
@@ -24,11 +24,14 @@ urlpatterns = [
     path('test_perm/', views.need_permission_view, name='need_permission'),
 
     # Ajax routes for toggling status and deletion
+    # this has to be changed to use the actual API, otherwise we are creating two
+    # different APIs in the system, and instead we shoud use one if we want to retrieve JSON(or JSON-LD)
+    # representation of the models
     path('<str:prefix>/ajax/<str:action>/<int:pk>/', view=AjaxHandlerView.as_view(), name='action'),
 
-    path('farms/', FarmMasterView.as_view(), name="farms"),
-    path("farms/edit/<int:pk>/", view=FarmMasterView.as_view(), name="farm_edit"),
+    path('farms/', FarmView.as_view(), name='farms'),
+    path("farms/edit/<int:pk>/", view=FarmView.as_view(), name='farm_edit'),
 
-    path('farm-parcels/', FarmParcelView.as_view(), name="farm-parcels"),
-    path("farm-parcels/edit/<int:pk>/", view=FarmParcelView.as_view(), name="farm-parcel_edit"),
+    path('farm-parcels/', FarmParcelView.as_view(), name='farm_parcels'),
+    path('farm-parcels/edit/<int:pk>/', view=FarmParcelView.as_view(), name='farm_parcel_edit'),
 ]
