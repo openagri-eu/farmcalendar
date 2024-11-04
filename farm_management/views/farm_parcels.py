@@ -37,11 +37,14 @@ class FarmParcelView(TemplateView):
             'pk',
             *farm_parcel_fields,
             farm_name=F('farm__name'),  # Related field from FarmMaster
-        )
+                )
+        farm_parcels_with_coordinates = [
+            {**parcel, "coordinates": f"{parcel_obj.latitude}, {parcel_obj.longitude}"}
+            for parcel, parcel_obj in zip(farm_parcels, FarmParcel.objects.filter(pk__in=[p['pk'] for p in farm_parcels]))
+        ]
 
-        context["farm_parcels"] = json.dumps(list(farm_parcels), cls=DjangoJSONEncoder)
+        context["farm_parcels"] = json.dumps(list(farm_parcels_with_coordinates), cls=DjangoJSONEncoder)
 
-        print(context["farm_parcels"])
 
         return context
 

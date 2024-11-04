@@ -58,11 +58,11 @@ class FarmParcelsForm(forms.ModelForm):
         })
     )
 
-    category = forms.ChoiceField(
-        choices=FarmParcel.CultivationTypeChoices.choices,
-        required=True, label="Cultivation Type",
+    parcel_type = forms.CharField(
+        required=True, label="Parcel Type",
         widget=forms.Select(attrs={'class': 'form-control'})
     )
+
     valid_from = forms.DateTimeField(
         required=False, label="Valid From",
         widget=forms.DateTimeInput(attrs={'class': 'form-control',
@@ -117,19 +117,32 @@ class FarmParcelsForm(forms.ModelForm):
         required=False, label="Irrigation Flow (units)",
         widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Flow rate'})
     )
-    geo_id = forms.UUIDField(
+    geo_id = forms.CharField(
         required=False, label="Geographic Data ID",
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Geographic UUID'})
     )
-    coordinates = forms.CharField(
-        max_length=255, required=False, label="Coordinates",
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Latitude, Longitude'})
+
+    latitude = forms.DecimalField(
+        max_digits=15, decimal_places=2, required=False, label="Latitude",
+        widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Latitude'})
     )
 
+    longitude = forms.DecimalField(
+        max_digits=15, decimal_places=2, required=False, label="Longitude",
+        widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Longitude'})
+    )
+
+    geometry = forms.CharField(
+        required=False, label="Geometry (WKT)",
+        widget=forms.Textarea(attrs={
+            'class': 'form-control', 'placeholder': 'Geometry in WKT format',
+            'style': 'width: 100%; height: 100px; overflow-y: scroll;'
+        })
+    )
     class Meta:
         model = FarmParcel
         fields = [
-            'farm', 'identifier', 'description', 'category', 'valid_from', 'valid_to', 'in_region', 'has_toponym',
-            'area', 'is_nitro_area', 'is_natura2000_area', 'is_pdopg_area', 'is_irrigated',
-            'is_cultivated_in_levels', 'is_ground_slope', 'depiction', 'irrigation_flow', 'geo_id', 'coordinates'
+            'farm', 'identifier', 'description', 'parcel_type', 'valid_from', 'valid_to', 'in_region', 'has_toponym',
+            'area', 'is_nitro_area', 'is_natura2000_area', 'is_pdopg_area', 'is_irrigated', 'is_cultivated_in_levels',
+            'is_ground_slope', 'depiction', 'irrigation_flow', 'geo_id', 'latitude', 'longitude', 'geometry'
         ]

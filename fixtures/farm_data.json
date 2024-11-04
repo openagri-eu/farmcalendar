@@ -33,7 +33,7 @@
             "farm": 1,
             "identifier": "123456",
             "description": "Parcel for Crop",
-            "category": "pasture",
+            "parcel_type": "pasture",
             "valid_from": null,
             "valid_to": null,
             "in_region": "Some region",
@@ -47,8 +47,10 @@
             "is_ground_slope": false,
             "depiction": "",
             "irrigation_flow": "100.00",
+            "geometry": null,
             "geo_id": null,
-            "coordinates": "0,0"
+            "latitude": "10.10",
+            "longitude": "20.20"
         }
     }
 ]

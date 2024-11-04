@@ -35,9 +35,17 @@ class LocationBaseModel(models.Model):
     longitude = models.DecimalField(_('Longitude'), max_digits=15, decimal_places=2, blank=True, null=True)
 
     geometry = models.TextField(_('Geometry (WKT)'), blank=True, null=True)
+    geo_id = models.CharField(_('Geographic Data ID'), unique=False, blank=True, null=True)
+    # coordinates = models.CharField(attribute='_get_full_name', readonly=True)  # virtual field for rep coordinates
 
     class Meta:
         abstract = True
+
+    @property
+    def coordinates(self):
+        if self.latitude is not None and self.longitude is not None:
+            return f"{self.latitude}, {self.longitude}"
+        return "0.0,0.0"
 
 
 class ActivePageManager(models.Manager):
