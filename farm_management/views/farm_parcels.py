@@ -37,8 +37,6 @@ class FarmParcelView(TemplateView):
             'pk',
             *farm_parcel_fields,
             farm_name=F('farm__name'),  # Related field from FarmMaster
-            # geometry_type=F('geometry__geometry_type'),  # Related field from FarmGeometry
-            # as_wkt=F('geometry__as_wkt')
         )
 
         context["farm_parcels"] = json.dumps(list(farm_parcels), cls=DjangoJSONEncoder)

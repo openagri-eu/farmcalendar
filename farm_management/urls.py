@@ -21,7 +21,6 @@ from .views import FarmParcelView, FarmView, AjaxHandlerView
 urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('post_auth/', views.post_authentication, name='post_auth'),
-    path('test_perm/', views.need_permission_view, name='need_permission'),
 
     # Ajax routes for toggling status and deletion
     # this has to be changed to use the actual API, otherwise we are creating two
