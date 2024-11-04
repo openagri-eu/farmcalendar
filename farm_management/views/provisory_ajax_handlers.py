@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.views import View
 from django.views.decorators.cache import never_cache
 from django.utils.decorators import method_decorator
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from ..models.farm_parcels import Farm, FarmParcel
 
@@ -13,9 +14,8 @@ MODEL_MAP = {
     "farm-parcel": FarmParcel
 }
 
-
 @method_decorator(never_cache, name='dispatch')
-class AjaxHandlerView(View):
+class AjaxHandlerView(LoginRequiredMixin, View):
     def post(self, request, prefix=None, action=None, pk=None):
         # Handle missing prefix by providing a default response or error
         if prefix and prefix in MODEL_MAP:

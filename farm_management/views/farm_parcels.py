@@ -7,6 +7,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 
 from farm_management.models import FarmParcel, Farm
@@ -14,7 +15,7 @@ from farm_management.forms.farm_parcels import FarmParcelsForm
 
 
 @method_decorator(never_cache, name='dispatch')
-class FarmParcelView(TemplateView):
+class FarmParcelView(LoginRequiredMixin, TemplateView):
     template_name = "farm_parcels/farm_parcels.html"
     success_url = reverse_lazy('farm_parcels')
 
