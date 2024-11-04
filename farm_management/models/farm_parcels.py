@@ -52,14 +52,14 @@ class FarmParcel(BaseModel):
     produce a meaningful or intuitive related name. Thus, I changed it to more descriptive and specific name.
     '''
     identifier = models.CharField(max_length=100, unique=True, blank=False, null=False, default="Unnamed",
-                                  validators=[validate_name_field])
+                                  validators=[])
     description = models.TextField(blank=True, null=True)
     category = models.CharField(max_length=50, choices=CultivationTypeChoices.choices,
                                 default=CultivationTypeChoices.ARABLE)
-    valid_from = models.DateTimeField(blank=True, null=True, validators=[validate_datetime_format])
-    valid_to = models.DateTimeField(blank=True, null=True, validators=[validate_datetime_format])
-    in_region = models.CharField(max_length=255, blank=True, null=True, validators=[validate_name_field])
-    has_toponym = models.CharField(max_length=255, blank=True, null=True, validators=[validate_name_field])
+    valid_from = models.DateTimeField(blank=True, null=True, validators=[])
+    valid_to = models.DateTimeField(blank=True, null=True, validators=[])
+    in_region = models.CharField(max_length=255, blank=True, null=True, validators=[])
+    has_toponym = models.CharField(max_length=255, blank=True, null=True, validators=[])
     area = models.DecimalField(max_digits=15, decimal_places=2, default=0.0)
     is_nitro_area = models.BooleanField(default=False)
     is_natura2000_area = models.BooleanField(default=False)
