@@ -18,6 +18,24 @@
     <link href="{% static 'libs/alertifyjs/build/css/themes/default.min.css' %}" rel="stylesheet" type="text/css" />
 
     <link href="{% static 'libs/flatpickr/flatpickr.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="{% static 'vendor/ol/css/ol.css' %}">
+
+    <style>
+        /* Set the size of the map */
+        #map {
+            width: 100%;
+            height: 40vh;
+        }
+        #controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            padding: 10px;
+            z-index: 10;
+        }
+    </style>
 {% endblock extra_css %}
 
 {% block page_content %}
@@ -35,6 +53,7 @@
                                 </ol>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -53,10 +72,28 @@
                             <!-- Collapsible form body -->
                             <div id="farmParcelFormCollapse" class="collapse show">
                                 <div class="card-body">
+
+                                    <div class="row">
+                                        <div id="map" class="map"></div>
+                                        <div class="col-auto">
+                                            <span class="input-group">
+                                            <label class="input-group-text" for="geo_type">Geometry type:</label>
+                                            <select class="form-select" id="geo_type">
+                                                <option value="Polygon">Polygon</option>
+                                                <option value="Point">Point</option>
+                                                <option value="LineString">LineString</option>
+                                                <option value="Circle">Circle</option>
+                                            </select>
+                                            <input class="form-control" type="button" value="Remove All" id="geo_remove">
+                                            </span>
+                                        </div>
+                                    </div>
                                     <form class="needs-validation" id="farmParcelForm" name="farmParcelForm" novalidate method="POST"
                                           action="{% if is_edit %}{% url 'farm_parcel_edit' pk=form.instance.pk %}{% else %}{% url 'farm_parcels' %}{% endif %}"
                                           enctype="multipart/form-data">
                                         {% csrf_token %}
+
+
                                         <div class="row">
                                             <!-- Render the main form fields -->
                                             {% for field in form %}
@@ -113,6 +150,10 @@
 {% endblock %}
 
 {% block body_end_extra_scripts %}
+
+    <!-- Required Openlayers js -->
+    <script src="{% static 'vendor/ol/js/ol.js' %}"></script>
+
     <!-- Required datatable js -->
     <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
     <script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
@@ -255,3 +296,93 @@
         });
     </script>
 {% endblock body_end_extra_scripts %}
+
+{% block on_dom_load_js %}
+
+
+// Create a raster layer with OpenStreetMap tiles
+const raster = new ol.layer.Tile({
+    source: new ol.source.OSM(),
+});
+
+const wktFormat = new ol.format.WKT();
+
+const initial_wkt = $('#id_geometry').val().trim();
+//const initial_wkt = "GEOMETRYCOLLECTION(POLYGON((-1224516745703.9097 -14987166.321472412,-1224516864341.3445 -15862599.307536451,-1224514276562.2947 -15506490.974222265,-1224516745703.9097 -14987166.321472412)),POLYGON((-1224512867742.7546 -15291342.189511612,-1224513527663.4866 -16181613.022797074,-1224510643290.8494 -15892275.001979299,-1224512867742.7546 -15291342.189511612)),POLYGON((-1224519415565.0466 -14481954.337433683,-1224519526977.35 -16424781.101703715,-1224523330911.7097 -15580766.195914276,-1224519415565.0466 -14481954.337433683)))"
+let initial_features;
+if (initial_wkt) {
+    // If initial_wkt is not empty, parse it and initialize features
+    // Parse the initial WKT string to create OpenLayers features
+    initial_features = wktFormat.readFeatures(initial_wkt);
+} else {
+    // If initial_wkt is empty, create an empty source
+    initial_features = [];
+}
+
+
+// Create a vector source with the initial features
+const source = new ol.source.Vector({
+    wrapX: false,
+    features: initial_features // Pass the parsed features directly
+});
+
+
+
+// Create a vector layer to display the drawn features
+const vector = new ol.layer.Vector({
+    source: source,
+});
+
+
+// Create the map
+const map = new ol.Map({
+    layers: [raster, vector],
+    target: 'map',
+    view: new ol.View({
+        center: ol.proj.fromLonLat([-11000000, 4600000]), // Set initial center
+        zoom: 4, // Set initial zoom level
+    }),
+});
+
+
+const typeSelect = document.getElementById('geo_type');
+let draw; // global so we can remove it later
+
+// Function to add drawing interaction
+function addInteraction() {
+    const value = typeSelect.value;
+    if (value !== 'None') {
+        draw = new ol.interaction.Draw({
+            source: source,
+            type: value,
+        });
+        map.addInteraction(draw);
+    }
+}
+
+// Handle change event for shape selection
+typeSelect.onchange = function () {
+    map.removeInteraction(draw);
+    addInteraction();
+};
+
+
+$('#geo_remove').on('click', function() {
+    source.clear(); // Clear all features from the vector source
+});
+
+// Function to update WKT textarea
+function updateWKT() {
+    const features = source.getFeatures(); // Get current features
+    const wktStrings = wktFormat.writeFeatures(features);
+    $('#id_geometry').val(wktStrings);
+}
+
+source.on('change', function (evt) {
+    alert('change');
+    updateWKT(); // Pass the feature to the update function
+});
+
+// Initialize drawing interaction
+addInteraction();
+{% endblock on_dom_load_js %}

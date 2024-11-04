@@ -60,7 +60,7 @@ class FarmParcelsForm(forms.ModelForm):
 
     parcel_type = forms.CharField(
         required=True, label="Parcel Type",
-        widget=forms.Select(attrs={'class': 'form-control'})
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Vineyard'})
     )
 
     valid_from = forms.DateTimeField(
