@@ -71,5 +71,5 @@ class FarmParcel(BaseModel, LocationBaseModel):
         verbose_name_plural = "Farm Parcels"
 
     def __str__(self):
-        return f"{self.farm} - {self.identifier} - ({self.category})"
+        return f"{self.farm} - {self.identifier} - ({self.parcel_type})"
 
