@@ -33,7 +33,7 @@
             "farm": 1,
             "identifier": "123456",
             "description": "Parcel for Crop",
-            "parcel_type": "pasture",
+            "parcel_type": "Vineyard",
             "valid_from": null,
             "valid_to": null,
             "in_region": "Some region",
@@ -47,7 +47,7 @@
             "is_ground_slope": false,
             "depiction": "",
             "irrigation_flow": "100.00",
-            "geometry": null,
+            "geometry": "GEOMETRYCOLLECTION(POLYGON((-1224516683275.9106 -15064922.898076247,-1224516693059.8503 -16063434.394239211,-1224513806797.6624 -15955751.781907912,-1224514286210.7036 -15035554.912894985,-1224516683275.9106 -15064922.898076247)),POLYGON((-1224512525101.572 -15113869.540045021,-1224513092570.07 -16092802.379420476,-1224511683682.7646 -15994909.09548293,-1224512525101.572 -15113869.540045021)))",
             "geo_id": null,
             "latitude": "10.10",
             "longitude": "20.20"
