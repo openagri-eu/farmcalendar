@@ -11,10 +11,10 @@
     <hr class="sidebar-divider my-0">
     <!-- Heading -->
     <div class="sidebar-heading">
-        Calendar
+        Farm Activities
     </div>
     <!-- Nav Item for main menu -->
-    <li class="nav-item">
+    <li class="nav-item{% if active_page == 'calendar' %} active{% endif %}">
         <a class="nav-link" href="{% url 'calendar' %}">
             <i class="fas fa-fw fa-calendar"></i>
             <span>Calendar</span>
@@ -25,10 +25,10 @@
     <hr class="sidebar-divider">
     <!-- Heading -->
     <div class="sidebar-heading">
-        Farms and Parcels
+        Farm Locations
     </div>
     <!-- Nav Item for main menu -->
-    <li class="nav-item">
+    <li class="nav-item{% if active_page == 'farms' %} active{% endif %}">
         <a class="nav-link" href="{% url 'farms' %}">
             <i class="fas fa-fw fa-leaf"></i>
             <span>Farms</span>
@@ -36,8 +36,8 @@
     </li>
     <!-- Nav Item for main menu -->
     <li class="nav-item">
-        <a class="nav-link" href="{% url 'farm_parcels' %}">
-            <i class="fas fa-fw fa-list"></i>
+        <a class="nav-link{% if active_page == 'farm_parcels' %} active{% endif %}" href="{% url 'farm_parcels' %}">
+            <i class="fas fa-fw fa-map"></i>
             <span>Farm Parcels</span>
         </a>
     </li>
@@ -48,27 +48,31 @@
     <div class="sidebar-heading">
         Farm Assets
     </div>
-    <!-- Nav Item for main menu -->
-    <li class="nav-item">
-        <a class="nav-link" href="#">
-            <i class="fas fa-fw fa-list"></i>
-            <span>Farm Assets</span>
-        </a>
-    </li>
 
     <ul class="navbar-nav ml-3">
-        <li class="nav-item">
+        <li class="nav-item{% if active_page == 'crops' %} active{% endif %}">
             <a class="nav-link" href="#">
                 <i class="fas fa-fw fa-carrot"></i>
                 <span>Crops</span>
             </a>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item{% if active_page == 'animals' %} active{% endif %}">
+            <a class="nav-link" href="/">
+                <i class="fas fa-fw fa-horse-head"></i>
+                <span>Animals</span></a>
+        </li>
+
+        <li class="nav-item{% if active_page == 'equipment' %} active{% endif %}">
             <a class="nav-link" href="#">
-                <i class="fas fa-fw fa-dog"></i>
-                <span>Animals</span>
-            </a>
+                <i class="fas fa-fw fa-tractor"></i>
+                <span>Equipment</span></a>
+        </li>
+
+        <li class="nav-item{% if active_page == 'sensors' %} active{% endif %}">
+            <a class="nav-link" href="/">
+                <i class="fas fa-fw fa-satellite-dish"></i>
+                <span>Sensors</span></a>
         </li>
     </ul>
 
