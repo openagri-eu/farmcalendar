@@ -11,10 +11,6 @@ from django.shortcuts import render, redirect
 def index_view(request):
     return render(request, 'index.html')
 
-@login_required
-def need_permission_view(request):
-    return render(request, 'index.html')
-
 
 def post_authentication(request):
     auth_token = request.GET.get('auth_token', None)

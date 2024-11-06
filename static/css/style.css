@@ -6,11 +6,11 @@
 .text-primary {
     color: green !important;
 }
-.btn-primary {
-    color: #fff;
-    background-color: green;
-    border-color: green ;
-}
+/*.btn-primary {*/
+/*    color: #fff;*/
+/*    background-color: green;*/
+/*    border-color: green ;*/
+/*}*/
 .topbar .dropdown-list .dropdown-header {
     background-color: green;
     border: 1px solid green;

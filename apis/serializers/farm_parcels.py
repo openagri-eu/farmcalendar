@@ -20,6 +20,7 @@ class FarmSerializer(JSONLDSerializer):
 
     #     return json_ld_representation
 
+
 class FarmParcelSerializer(JSONLDSerializer):
     class Meta:
         model = FarmParcel
@@ -28,6 +29,7 @@ class FarmParcelSerializer(JSONLDSerializer):
             'id', 'name',
             'geo_id',
             'farm',
+            'cultivation_type',
             'status', 'created_at', 'updated_at', 'deleted_at',
         ]
 

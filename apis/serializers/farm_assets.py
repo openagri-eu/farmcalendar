@@ -10,6 +10,7 @@ class FarmCropSerializer(serializers.HyperlinkedModelSerializer):
             'id', 'name', 'description',
             'parcel', 'geo_id',
             'species', 'variety',
+            'growth_stage',
             'status', 'created_at', 'updated_at', 'deleted_at',
         ]
 

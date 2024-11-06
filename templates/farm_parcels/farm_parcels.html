@@ -1,0 +1,388 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Farm Parcel{% endblock title %}
+
+{% block extra_css %}
+    <!-- Page-specific stylesheets -->
+    <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+    <link href="{% static 'libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet">
+
+    <!-- Responsive datatable examples -->
+    <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <!-- alertifyjs Css -->
+    <link href="{% static 'libs/alertifyjs/build/css/alertify.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <!-- alertifyjs default themes  Css -->
+    <link href="{% static 'libs/alertifyjs/build/css/themes/default.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <link href="{% static 'libs/flatpickr/flatpickr.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="{% static 'vendor/ol/css/ol.css' %}">
+
+    <style>
+        /* Set the size of the map */
+        #map {
+            width: 100%;
+            height: 40vh;
+        }
+        #controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            padding: 10px;
+            z-index: 10;
+        }
+    </style>
+{% endblock extra_css %}
+
+{% block page_content %}
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <h4 class="mb-sm-0 font-size-18">{% if is_edit %}Edit Farm Parcel{% else %}Farm Parcels{% endif %}</h4>
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Farm Parcels</a></li>
+                                    <li class="breadcrumb-item active">{% if is_edit %}Edit{% else %}Add{% endif %} Farm Parcel</li>
+                                </ol>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h4 class="card-title mb-0">{% if is_edit %}Edit Farm Parcel{% else %}Add Farm Parcel{% endif %}</h4>
+                                <!-- Toggle button to show/hide the form -->
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#farmParcelFormCollapse"
+                                        aria-expanded="true" aria-controls="farmParcelFormCollapse">
+                                    <i class="fas fa-chevron-down"></i> <!-- Icon for collapsing -->
+                                </button>
+                            </div>
+
+                            <!-- Collapsible form body -->
+                            <div id="farmParcelFormCollapse" class="collapse show">
+                                <div class="card-body">
+
+                                    <div class="row">
+                                        <div id="map" class="map"></div>
+                                        <div class="col-auto">
+                                            <span class="input-group">
+                                            <label class="input-group-text" for="geo_type">Geometry type:</label>
+                                            <select class="form-select" id="geo_type">
+                                                <option value="Polygon">Polygon</option>
+                                                <option value="Point">Point</option>
+                                                <option value="LineString">LineString</option>
+                                                <option value="Circle">Circle</option>
+                                            </select>
+                                            <input class="form-control" type="button" value="Remove All" id="geo_remove">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <form class="needs-validation" id="farmParcelForm" name="farmParcelForm" novalidate method="POST"
+                                          action="{% if is_edit %}{% url 'farm_parcel_edit' pk=form.instance.pk %}{% else %}{% url 'farm_parcels' %}{% endif %}"
+                                          enctype="multipart/form-data">
+                                        {% csrf_token %}
+
+
+                                        <div class="row">
+                                            <!-- Render the main form fields -->
+                                            {% for field in form %}
+                                            <div class="col-sm-4 mb-3">
+                                                {{ field.label_tag }}
+                                                {{ field }}
+                                                {% if field.errors %}
+                                                    <div style="color: #e83e8c;">
+                                                        {{ field.errors }}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="d-flex flex-wrap gap-2">
+                                                {% if is_edit %}
+                                                    <!-- Show Update button for edit mode -->
+                                                    <button class="btn btn-primary w-md" type="submit" id="submit_btn">Update</button>
+                                                    <button type="button" class="btn btn-danger w-md" onclick="location.href='{% url 'farms' %}'">Cancel</button>
+                                                {% else %}
+                                                    <!-- Show Submit button for add mode -->
+                                                    <button class="btn btn-success w-md" type="submit" id="submit_btn">Submit</button>
+                                                    <button class="btn btn-secondary w-md" type="reset" id="reset">Reset</button>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if not is_edit %}
+                <!-- Farm DataTable - Only displayed in add mode -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Farm Parcels Available</h4>
+                            </div>
+                            <div class="card-body">
+                                <table id="datatable" class="table table-bordered dt-responsive nowrap w-100"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body_end_extra_scripts %}
+
+    <!-- Required Openlayers js -->
+    <script src="{% static 'vendor/ol/js/ol.js' %}"></script>
+
+    <!-- Required datatable js -->
+    <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+
+    <!-- Responsive datatables -->
+    <script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
+
+    <script src="{% static 'libs/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
+
+    <!-- Column visibility -->
+    <script src="{% static 'libs/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
+
+    <!-- alertifyjs js -->
+    <script src="{% static 'libs/alertifyjs/build/alertify.min.js' %}"></script>
+
+    <!-- moment JS for datetime -->
+    <script src="{% static 'libs/moment/js/moment.min.js' %}"></script>
+
+    <script src="{% static 'libs/flatpickr/flatpickr_v4.6.13.js' %}"></script>
+
+    <script>
+        const farm_parcels = JSON.parse('{{ farm_parcels|safe }}');
+
+            $('#datatable').DataTable({
+                data: farm_parcels,
+                rowId: 'pk',
+                columns: [
+                    { data: 'farm_name', title: 'Farm' },
+                    { data: 'identifier', title: 'Identifier' },
+                    { data: 'parcel_type', title: 'Parcel Type' },
+                    {
+                        data: null,
+                        title: 'Valid from - Valid till',
+                        render: function(data, type, row) {
+                            const valid_from = row.valid_from || '';
+                            const valid_to = row.valid_to || '';
+                            return `From: ${valid_from} <br>Until: ${valid_to}`.trim();
+                        }
+                    },
+                    { data: 'coordinates', title: 'Coordinates' },
+                    {
+                        data: null,
+                        title: 'Operations',
+                        render: function(data, type, row) {
+                            const buttonClass = row.status ? 'btn-success' : 'btn-danger';
+                            return `
+                                <button class="btn btn-primary btn-sm edit-farm-parcel p-2" data-id="${row.pk}"><i class="fas fa-pencil-alt d-block font-size-16"></i></button>
+                                <button class="btn btn-danger btn-sm delete-farm p-2" data-id="${row.pk}"><i class="fas fa-trash-alt d-block font-size-16"></i></button>
+                                <button class="btn btn-sm toggle-active p-2 ${buttonClass}" data-id="${row.pk}"><i class="fas fa-check d-block font-size-16"></i></button>
+                            `;
+                        }
+                    },
+                    {
+                        data: null,
+                        title: 'Timestamp',
+                        render: function(data, type, row) {
+                            let createdAt = moment(row.created_at).format('dddd, D MMMM YYYY HH:mm:ss.SSS');
+                            let updatedAt = moment(row.updated_at).format('dddd, D MMMM YYYY HH:mm:ss.SSS');
+                            return `Created: ${createdAt}<br>Updated: ${updatedAt}`;
+                        }
+                    }
+                ]
+            }).on('click', '.toggle-active', function() {
+                    const pk = $(this).data('id');
+                    const $this = $(this);
+                    const isActive = $this.hasClass('btn-success');
+
+                    // Toggle state visually
+                    $this.toggleClass('btn-success btn-danger');
+
+                    const newStatus = !isActive;
+
+                    $.ajax({
+                        url: `/farm-parcel/ajax/toggle-status/${pk}/`,
+                        method: 'POST',
+                        data: {'status': newStatus},
+                        success: function(response) {
+                            if (response.farm_status === 1) {
+                                $this.removeClass('btn-danger').addClass('btn-success');
+                            } else {
+                                $this.removeClass('btn-success').addClass('btn-danger');
+                            }
+                            alertify.success(response.message);
+                        },
+                        error: function(xhr, status, error) {
+                            let errorMessage = "Status update failed.";
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                errorMessage = xhr.responseJSON.message;
+                            }
+                            alertify.error(errorMessage);
+                        }
+                    });
+                }).on('click', '.delete-farm', function() {
+                    const pk = $(this).data('id');
+                    const $row = $(this).closest('tr');
+                    // Confirmation dialog
+                    if (confirm('Are you sure you want to delete this farm? This will remove all related records.')) {
+                        $.ajax({
+                            url: `/farm-parcel/ajax/delete/${pk}/`,
+                            method: 'POST',
+                            success: function(response) {
+                                alertify.success(response.message);
+                                $('#datatable').DataTable().row($row).remove().draw();
+                            },
+                            error: function(xhr, status, error) {
+                                let errorMessage = "Deletion failed.";
+                                if (xhr.responseJSON && xhr.responseJSON.message) {
+                                    errorMessage = xhr.responseJSON.message;
+                                }
+                                alertify.error(errorMessage);
+                            }
+                        });
+                    }
+                }).on('click', '.edit-farm-parcel', function() {
+                const pk = $(this).data('id');
+                window.location.href = '/farm-parcels/edit/' + pk;
+            });
+
+        $(function() {
+            // Initialize Flatpickr on #id_valid_from
+            $("#id_valid_from").flatpickr({
+                enableTime: true,
+                dateFormat: "Y-m-d H:i:S",
+                allowInput: false,
+                onChange: function(selectedDates, dateStr, instance) {
+                    const validToPicker = $("#id_valid_to").flatpickr();
+                    validToPicker.set("minDate", dateStr);
+                }
+            });
+
+            // Initialize Flatpickr on #id_valid_to
+            $("#id_valid_to").flatpickr({
+                enableTime: true,
+                dateFormat: "Y-m-d H:i:S",
+                allowInput: false,
+                minDate: $("#id_valid_from").val()
+            });
+        });
+    </script>
+{% endblock body_end_extra_scripts %}
+
+{% block on_dom_load_js %}
+
+
+// Create a raster layer with OpenStreetMap tiles
+const raster = new ol.layer.Tile({
+    source: new ol.source.OSM(),
+});
+
+const wktFormat = new ol.format.WKT();
+
+const initial_wkt = $('#id_geometry').val().trim();
+//const initial_wkt = "GEOMETRYCOLLECTION(POLYGON((-1224516745703.9097 -14987166.321472412,-1224516864341.3445 -15862599.307536451,-1224514276562.2947 -15506490.974222265,-1224516745703.9097 -14987166.321472412)),POLYGON((-1224512867742.7546 -15291342.189511612,-1224513527663.4866 -16181613.022797074,-1224510643290.8494 -15892275.001979299,-1224512867742.7546 -15291342.189511612)),POLYGON((-1224519415565.0466 -14481954.337433683,-1224519526977.35 -16424781.101703715,-1224523330911.7097 -15580766.195914276,-1224519415565.0466 -14481954.337433683)))"
+let initial_features;
+if (initial_wkt) {
+    // If initial_wkt is not empty, parse it and initialize features
+    // Parse the initial WKT string to create OpenLayers features
+    initial_features = wktFormat.readFeatures(initial_wkt);
+} else {
+    // If initial_wkt is empty, create an empty source
+    initial_features = [];
+}
+
+
+// Create a vector source with the initial features
+const source = new ol.source.Vector({
+    wrapX: false,
+    features: initial_features // Pass the parsed features directly
+});
+
+
+
+// Create a vector layer to display the drawn features
+const vector = new ol.layer.Vector({
+    source: source,
+});
+
+
+// Create the map
+const map = new ol.Map({
+    layers: [raster, vector],
+    target: 'map',
+    view: new ol.View({
+        center: ol.proj.fromLonLat([-11000000, 4600000]), // Set initial center
+        zoom: 4, // Set initial zoom level
+    }),
+});
+
+
+const typeSelect = document.getElementById('geo_type');
+let draw; // global so we can remove it later
+
+// Function to add drawing interaction
+function addInteraction() {
+    const value = typeSelect.value;
+    if (value !== 'None') {
+        draw = new ol.interaction.Draw({
+            source: source,
+            type: value,
+        });
+        map.addInteraction(draw);
+    }
+}
+
+// Handle change event for shape selection
+typeSelect.onchange = function () {
+    map.removeInteraction(draw);
+    addInteraction();
+};
+
+
+$('#geo_remove').on('click', function() {
+    source.clear(); // Clear all features from the vector source
+});
+
+// Function to update WKT textarea
+function updateWKT() {
+    const features = source.getFeatures(); // Get current features
+    const wktStrings = wktFormat.writeFeatures(features);
+    $('#id_geometry').val(wktStrings);
+}
+
+source.on('change', function (evt) {
+    alert('change');
+    updateWKT(); // Pass the feature to the update function
+});
+
+// Initialize drawing interaction
+addInteraction();
+{% endblock on_dom_load_js %}

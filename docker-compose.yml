@@ -1,31 +1,46 @@
 version: '3.9'
 
 services:
-  db:
+  oa_fc_postgres:
     image: postgres:16.3
+    container_name: oa_fc_postgres
     ports:
       - "5432:5432"
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-  web:
-    build: .
-    image: ghcr.io/openagri-eu/farmcalendar:latest
-    command: /var/www/entrypoint.sh
+    restart: no
+
+  oa_fc_pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: oa_fc_pgadmin
     ports:
-      - "${APP_PORT}:${APP_PORT}"
-    depends_on:
-      - db
+      - "5050:80"
     environment:
-      POSTGRES_HOST: db
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
-      LOGGING_LEVEL: ${LOGGING_LEVEL}
-      GATEKEEPER_LOGIN_URL: ${GATEKEEPER_LOGIN_URL}
-      JWT_SIGNING_KEY: ${JWT_SIGNING_KEY}
-      JWT_COOKIE_NAME: ${JWT_COOKIE_NAME}
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    depends_on:
+      - oa_fc_postgres
+    restart: no
+
+#  web:
+#    build: .
+#    image: ghcr.io/openagri-eu/farmcalendar:latest
+#    command: /var/www/entrypoint.sh
+#    ports:
+#      - "${APP_PORT}:${APP_PORT}"
+#    depends_on:
+#      - db
+#    environment:
+#      POSTGRES_HOST: db
+#      POSTGRES_DB: ${POSTGRES_DB}
+#      POSTGRES_USER: ${POSTGRES_USER}
+#      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+#      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+#      LOGGING_LEVEL: ${LOGGING_LEVEL}
+#      GATEKEEPER_LOGIN_URL: ${GATEKEEPER_LOGIN_URL}
+#      JWT_SIGNING_KEY: ${JWT_SIGNING_KEY}
+#      JWT_COOKIE_NAME: ${JWT_COOKIE_NAME}
     # volumes:
     #   - ./:/var/www

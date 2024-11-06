@@ -1,25 +1,62 @@
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-
 from simple_history.models import HistoricalRecords
 
 
-class NamedHistoricalBaseModel(models.Model):
-    id = models.AutoField(primary_key=True, db_index=True, editable=False, unique=True,
-                          blank=False, null=False, verbose_name='ID')
+class BaseModel(models.Model):
+    class BaseModelStatus(models.IntegerChoices):
+        INACTIVE = 0, 'Inactive'
+        ACTIVE = 1, 'Active'
+        DELETED = 2, 'Deleted'
+
+    id = models.AutoField(primary_key=True, db_column='id', db_index=True, editable=False, unique=True, blank=False,
+                          null=False, verbose_name='ID')
+
+    status = models.IntegerField(choices=BaseModelStatus.choices, default=BaseModelStatus.ACTIVE, verbose_name='Status')
+    deleted_at = models.DateTimeField(null=True, blank=True, verbose_name='Deleted At')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created At')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Updated At')
+
+    # Dynamically set the history table name based on the model name
+    history = HistoricalRecords(inherit=True)
+
+    class Meta:
+        abstract = True
+
+    def soft_delete(self):
+        self.status = self.BaseModelStatus.DELETED
+        self.deleted_at = timezone.now()
+        self.save(update_fields=['status', 'deleted_at'])
+
+
+class LocationBaseModel(models.Model):
+    latitude = models.DecimalField(_('Latitude'), max_digits=15, decimal_places=2, blank=True, null=True)
+    longitude = models.DecimalField(_('Longitude'), max_digits=15, decimal_places=2, blank=True, null=True)
+
+    geometry = models.TextField(_('Geometry (WKT)'), blank=True, null=True)
+    geo_id = models.CharField(_('Geographic Data ID'), unique=False, blank=True, null=True)
+    # coordinates = models.CharField(attribute='_get_full_name', readonly=True)  # virtual field for rep coordinates
+
+    class Meta:
+        abstract = True
+
+    @property
+    def coordinates(self):
+        if self.latitude is not None and self.longitude is not None:
+            return f"{self.latitude}, {self.longitude}"
+        return "0.0,0.0"
+
+
+class ActivePageManager(models.Manager):
+    def get_queryset(self):
+        # Exclude records with status set to DELETED (status=2)
+        return super().get_queryset().filter(status__lt=BaseModel.BaseModelStatus.DELETED)
+
+
+class NamedHistoricalBaseModel(BaseModel):
 
     name = models.CharField(max_length=100)
-
-    class StatusChoices(models.IntegerChoices):
-        ACTIVE = 0, _('Active')
-        DELETED = 1, _('Deleted')
-
-    status = models.IntegerField(choices=StatusChoices, default=StatusChoices.ACTIVE)
-    deleted_at = models.DateTimeField(null=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    history = HistoricalRecords(inherit=True)
 
     class Meta:
         abstract = True

@@ -53,11 +53,17 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'simple_history',
     'drf_spectacular',
+    'crispy_forms',
+    'crispy_bootstrap5',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
 GATEKEEPER_LOGIN_URL = os.environ.get('GATEKEEPER_LOGIN_URL', None)
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 if GATEKEEPER_LOGIN_URL == '':
     GATEKEEPER_LOGIN_URL = None
@@ -159,7 +165,7 @@ ROOT_URLCONF = 'farm_calendar.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [str(BASE_DIR / "templates")],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -259,4 +265,32 @@ DEFAULT_CALENDAR_ACTIVITY_TYPES = {
         "border_color": "#8B4513",
         "text_color": "#2F4F4F"
     },
+    'irrigation': {
+        'name': 'Irrigation',
+        'description': 'Irrigation operation',
+        'background_color': '#B3E5FC',
+        'border_color': '#0288D1',
+        'text_color': '#01579B'
+    },
+    'crop_protection':{
+        'name': 'Pesticides',
+        'description': 'Pesticide application',
+        'background_color': '#C5E1A5',
+        'border_color': '#8E7F2F',
+        'text_color': '#4E342E',
+    },
+    'crop_stress_indicator':{
+        'name': 'Crop Stress Indicator',
+        'description': 'Crop Stress Indicator Observation',
+        'background_color': '#FFCCCB',
+        'border_color': '#C62828',
+        'text_color': '#BF360C',
+    },
+    'crop_growth_stage':{
+        'name': 'Crop Growth Stage Observation',
+        'description': 'Crop Stress Indicator Observation',
+        "background_color": "#F5E8C7",
+        "border_color": "#8B4513",
+        "text_color": "#2F4F4F"
+    }
 }

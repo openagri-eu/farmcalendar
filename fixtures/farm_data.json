@@ -1,0 +1,56 @@
+[
+    {
+        "model": "farm_management.farm",
+        "pk": 1,
+        "fields": {
+            "status": 1,
+            "deleted_at": null,
+            "created_at": "2024-11-04T12:45:19.254Z",
+            "updated_at": "2024-11-04T12:45:19.254Z",
+            "name": "Some Farm",
+            "description": "Description",
+            "administrator": "Admin",
+            "contact_person_firstname": "A",
+            "contact_person_lastname": "DM",
+            "telephone": "0000",
+            "vat_id": "1111",
+            "admin_unit_l1": "Greece",
+            "admin_unit_l2": "Country X",
+            "address_area": "District A",
+            "municipality": "Municipality B",
+            "community": "Community C",
+            "locator_name": "Some Farm LTD"
+        }
+    },
+    {
+        "model": "farm_management.farmparcel",
+        "pk": 1,
+        "fields": {
+            "status": 1,
+            "deleted_at": null,
+            "created_at": "2024-11-04T12:51:14.074Z",
+            "updated_at": "2024-11-04T12:51:14.074Z",
+            "farm": 1,
+            "identifier": "123456",
+            "description": "Parcel for Crop",
+            "parcel_type": "Vineyard",
+            "valid_from": null,
+            "valid_to": null,
+            "in_region": "Some region",
+            "has_toponym": "Some toponym",
+            "area": "100.00",
+            "is_nitro_area": false,
+            "is_natura2000_area": false,
+            "is_pdopg_area": false,
+            "is_irrigated": false,
+            "is_cultivated_in_levels": false,
+            "is_ground_slope": false,
+            "depiction": "",
+            "irrigation_flow": "100.00",
+            "geometry": "GEOMETRYCOLLECTION(POLYGON((-1224516683275.9106 -15064922.898076247,-1224516693059.8503 -16063434.394239211,-1224513806797.6624 -15955751.781907912,-1224514286210.7036 -15035554.912894985,-1224516683275.9106 -15064922.898076247)),POLYGON((-1224512525101.572 -15113869.540045021,-1224513092570.07 -16092802.379420476,-1224511683682.7646 -15994909.09548293,-1224512525101.572 -15113869.540045021)))",
+            "geo_id": null,
+            "latitude": "10.10",
+            "longitude": "20.20"
+        }
+    }
+]

@@ -1,5 +1,4 @@
 from rest_framework import permissions, viewsets
-
 from farm_management.models import (
     Farm,
     FarmParcel,
@@ -9,7 +8,6 @@ from ..serializers import (
     FarmParcelSerializer,
 )
 
-# from apis.renderer import JSONLDRenderer
 
 class FarmViewSet(viewsets.ModelViewSet):
     """
@@ -18,7 +16,6 @@ class FarmViewSet(viewsets.ModelViewSet):
     queryset = Farm.objects.all().order_by('-created_at')
     serializer_class = FarmSerializer
     permission_classes = [permissions.IsAuthenticated]
-
 
 
 class FarmParcelViewSet(viewsets.ModelViewSet):
