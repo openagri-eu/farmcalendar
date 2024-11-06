@@ -24,23 +24,23 @@ services:
       - oa_fc_postgres
     restart: no
 
-#  web:
-#    build: .
-#    image: ghcr.io/openagri-eu/farmcalendar:latest
-#    command: /var/www/entrypoint.sh
-#    ports:
-#      - "${APP_PORT}:${APP_PORT}"
-#    depends_on:
-#      - db
-#    environment:
-#      POSTGRES_HOST: db
-#      POSTGRES_DB: ${POSTGRES_DB}
-#      POSTGRES_USER: ${POSTGRES_USER}
-#      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-#      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
-#      LOGGING_LEVEL: ${LOGGING_LEVEL}
-#      GATEKEEPER_LOGIN_URL: ${GATEKEEPER_LOGIN_URL}
-#      JWT_SIGNING_KEY: ${JWT_SIGNING_KEY}
-#      JWT_COOKIE_NAME: ${JWT_COOKIE_NAME}
+  web:
+    build: .
+    image: ghcr.io/openagri-eu/farmcalendar:latest
+    command: /var/www/entrypoint.sh
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    depends_on:
+      - oa_fc_postgres
+    environment:
+      POSTGRES_HOST: oa_fc_postgres
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+      LOGGING_LEVEL: ${LOGGING_LEVEL}
+      GATEKEEPER_LOGIN_URL: ${GATEKEEPER_LOGIN_URL}
+      JWT_SIGNING_KEY: ${JWT_SIGNING_KEY}
+      JWT_COOKIE_NAME: ${JWT_COOKIE_NAME}
     # volumes:
     #   - ./:/var/www
