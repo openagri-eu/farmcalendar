@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 
 from farm_calendar.utils.jwt_utils import get_user_id_from_token
 
+
 class CustomJWTAuthenticationBackend(BaseBackend):
     def authenticate(self, request, token, **kwargs):
         user_id = get_user_id_from_token(token)
@@ -20,12 +21,11 @@ class CustomJWTAuthenticationBackend(BaseBackend):
             return User.objects.get(**{settings.JWT_LOCAL_USER_ID_FIELD: user_id})
         except User.DoesNotExist:
             if settings.AUTO_CREATE_AUTH_USER:
-                password = User.objects.make_random_password()
                 new_user = User.objects.create_user(**{
                     settings.JWT_LOCAL_USER_ID_FIELD: user_id,
                     'email': f'{user_id}@farm.calendar',
-                    'password': password
                 })
+                new_user.set_unusable_password()
                 try:
                     new_user.save()
                 except Exception:
