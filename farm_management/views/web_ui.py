@@ -13,7 +13,7 @@ def index_view(request):
 
 
 def post_authentication(request):
-    auth_token = request.GET.get('auth_token', None)
+    auth_token = request.GET.get(settings.POST_AUTH_TOKEN_ATTRIBUTE, None)
     user = authenticate(request, token=auth_token)
     response = None
     if user is not None:
