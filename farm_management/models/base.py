@@ -31,10 +31,10 @@ class BaseModel(models.Model):
 
 
 class LocationBaseModel(models.Model):
-    latitude = models.DecimalField(_('Latitude'), max_digits=15, decimal_places=2, blank=True, null=True)
-    longitude = models.DecimalField(_('Longitude'), max_digits=15, decimal_places=2, blank=True, null=True)
+    latitude = models.DecimalField(_('Latitude'), max_digits=17, decimal_places=14, blank=True, null=True)
+    longitude = models.DecimalField(_('Longitude'), max_digits=17, decimal_places=14, blank=True, null=True)
 
-    geometry = models.TextField(_('Geometry (WKT)'), blank=True, null=True)
+    geometry = models.TextField(_('Geometry (WKT EPSG:4326)'), blank=True, null=True)
     geo_id = models.CharField(_('Geographic Data ID'), unique=False, blank=True, null=True)
     # coordinates = models.CharField(attribute='_get_full_name', readonly=True)  # virtual field for rep coordinates
 
