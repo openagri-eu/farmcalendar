@@ -122,15 +122,15 @@ class FarmParcelsForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Geographic UUID'})
     )
 
-    latitude = forms.DecimalField(
-        max_digits=15, decimal_places=2, required=False, label="Latitude",
-        widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Latitude'})
-    )
+    # latitude = forms.DecimalField(
+    #     max_digits=15, decimal_places=2, required=False, label="Latitude",
+    #     widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Latitude'})
+    # )
 
-    longitude = forms.DecimalField(
-        max_digits=15, decimal_places=2, required=False, label="Longitude",
-        widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Longitude'})
-    )
+    # longitude = forms.DecimalField(
+    #     max_digits=15, decimal_places=2, required=False, label="Longitude",
+    #     widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Longitude'})
+    # )
 
     geometry = forms.CharField(
         required=False, label="Geometry (WKT)",

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %}Farm Parcel{% endblock title %}
 
@@ -70,7 +71,7 @@
                             </div>
 
                             <!-- Collapsible form body -->
-                            <div id="farmParcelFormCollapse" class="collapse show">
+                            <div id="farmParcelFormCollapse" class="collapse{% if is_edit %} show{% endif %}">
                                 <div class="card-body">
 
                                     <div class="row">
@@ -96,17 +97,11 @@
 
                                         <div class="row">
                                             <!-- Render the main form fields -->
-                                            {% for field in form %}
-                                            <div class="col-sm-4 mb-3">
-                                                {{ field.label_tag }}
-                                                {{ field }}
-                                                {% if field.errors %}
-                                                    <div style="color: #e83e8c;">
-                                                        {{ field.errors }}
-                                                    </div>
-                                                {% endif %}
+
+                                            <div class="d-flex flex-wrap gap-2">
+                                                {{ form | crispy }}
+
                                             </div>
-                                            {% endfor %}
                                         </div>
 
                                         <div class="row">
@@ -114,7 +109,7 @@
                                                 {% if is_edit %}
                                                     <!-- Show Update button for edit mode -->
                                                     <button class="btn btn-primary w-md" type="submit" id="submit_btn">Update</button>
-                                                    <button type="button" class="btn btn-danger w-md" onclick="location.href='{% url 'farms' %}'">Cancel</button>
+                                                    <button type="button" class="btn btn-danger w-md" onclick="location.href='{% url 'farm_parcels' %}'">Cancel</button>
                                                 {% else %}
                                                     <!-- Show Submit button for add mode -->
                                                     <button class="btn btn-success w-md" type="submit" id="submit_btn">Submit</button>
@@ -364,7 +359,7 @@ function addInteraction() {
     // Center the map around the existing features, if any
     if (initial_features.length > 0) {
         const extent = source.getExtent();
-        map.getView().fit(extent, { padding: [50, 50, 50, 50], maxZoom: 14 });
+        map.getView().fit(extent, { padding: [50, 50, 50, 50], maxZoom: 16 });
     }
 }
 
