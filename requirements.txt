@@ -8,5 +8,5 @@ psycopg2==2.9.9
 drf-spectacular==0.27.2
 calamus==0.4.2
 python-decouple==3.8
-crispy-bootstrap5==2024.10
+crispy-bootstrap4==2024.10
 django-crispy-forms==2.3
