@@ -12,7 +12,6 @@ class FarmAsset(NamedHistoricalBaseModel):
         abstract = True
 
     description = models.TextField(blank=True, null=True)
-    geo_id = models.UUIDField(_('Geographic Data ID'), unique=False, blank=True, null=True)
     parcel = models.ForeignKey('FarmParcel', on_delete=models.SET_NULL,blank=True, null=True,
                                related_name="%(class)ss")
 

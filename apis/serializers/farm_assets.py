@@ -8,7 +8,7 @@ class FarmCropSerializer(serializers.HyperlinkedModelSerializer):
         model = FarmCrop
         fields = [
             'id', 'name', 'description',
-            'parcel', 'geo_id',
+            'parcel',
             'species', 'variety',
             'growth_stage',
             'status', 'created_at', 'updated_at', 'deleted_at',
@@ -20,7 +20,7 @@ class FarmAnimalSerializer(serializers.HyperlinkedModelSerializer):
         model = FarmAnimal
         fields = [
             'id', 'name', 'description',
-            'parcel', 'geo_id',
+            'parcel',
             'sex', 'castrated', 'species', 'breed', 'birth_date',
             'status', 'created_at', 'updated_at', 'deleted_at',
         ]
@@ -31,7 +31,7 @@ class AgriculturalMachineSerializer(serializers.HyperlinkedModelSerializer):
         model = AgriculturalMachine
         fields = [
             'id', 'name', 'description',
-            'parcel', 'geo_id',
+            'parcel',
             'purchase_date', 'manufacturer', 'model', 'seria_number',
             'status', 'created_at', 'updated_at', 'deleted_at',
         ]
