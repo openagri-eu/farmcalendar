@@ -304,16 +304,19 @@
 const raster = new ol.layer.Tile({
     source: new ol.source.OSM(),
 });
-
 const wktFormat = new ol.format.WKT();
 
 const initial_wkt = $('#id_geometry').val().trim();
-//const initial_wkt = "GEOMETRYCOLLECTION(POLYGON((-1224516745703.9097 -14987166.321472412,-1224516864341.3445 -15862599.307536451,-1224514276562.2947 -15506490.974222265,-1224516745703.9097 -14987166.321472412)),POLYGON((-1224512867742.7546 -15291342.189511612,-1224513527663.4866 -16181613.022797074,-1224510643290.8494 -15892275.001979299,-1224512867742.7546 -15291342.189511612)),POLYGON((-1224519415565.0466 -14481954.337433683,-1224519526977.35 -16424781.101703715,-1224523330911.7097 -15580766.195914276,-1224519415565.0466 -14481954.337433683)))"
 let initial_features;
 if (initial_wkt) {
     // If initial_wkt is not empty, parse it and initialize features
     // Parse the initial WKT string to create OpenLayers features
-    initial_features = wktFormat.readFeatures(initial_wkt);
+    initial_features = wktFormat.readFeatures(initial_wkt, {
+        dataProjection: 'EPSG:4326',      // Interpret input WKT in EPSG:4326
+        featureProjection: 'EPSG:3857'    // Keep it in EPSG:3857 for the map
+    });
+
+    console.log(initial_wkt);
 } else {
     // If initial_wkt is empty, create an empty source
     initial_features = [];
@@ -327,7 +330,6 @@ const source = new ol.source.Vector({
 });
 
 
-
 // Create a vector layer to display the drawn features
 const vector = new ol.layer.Vector({
     source: source,
@@ -339,8 +341,9 @@ const map = new ol.Map({
     layers: [raster, vector],
     target: 'map',
     view: new ol.View({
-        center: ol.proj.fromLonLat([-11000000, 4600000]), // Set initial center
-        zoom: 4, // Set initial zoom level
+        center: [22.48994006427307, 37.42592004044673], // Set initial center
+        projection: 'EPSG:3857', // Set the map projection to EPSG:4326
+        zoom: 12, // Set initial zoom level
     }),
 });
 
@@ -358,6 +361,11 @@ function addInteraction() {
         });
         map.addInteraction(draw);
     }
+    // Center the map around the existing features, if any
+    if (initial_features.length > 0) {
+        const extent = source.getExtent();
+        map.getView().fit(extent, { padding: [50, 50, 50, 50], maxZoom: 14 });
+    }
 }
 
 // Handle change event for shape selection
@@ -374,12 +382,16 @@ $('#geo_remove').on('click', function() {
 // Function to update WKT textarea
 function updateWKT() {
     const features = source.getFeatures(); // Get current features
-    const wktStrings = wktFormat.writeFeatures(features);
+    const wktStrings = wktFormat.writeFeatures(features, {
+        dataProjection: 'EPSG:4326', // Specify WKT output projection as EPSG:4326
+        featureProjection: 'EPSG:3857' // Make sure features are interpreted as EPSG:4326
+    });
+    console.log(wktStrings);
+
     $('#id_geometry').val(wktStrings);
 }
 
 source.on('change', function (evt) {
-    alert('change');
     updateWKT(); // Pass the feature to the update function
 });
 
