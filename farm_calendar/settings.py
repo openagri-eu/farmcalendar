@@ -50,6 +50,7 @@ LOCAL_APPS =[
 ]
 
 THIRD_PARTY_APPS = [
+    'django_filters',
     'rest_framework',
     'simple_history',
     'drf_spectacular',
@@ -118,6 +119,7 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
     ],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
 SPECTACULAR_SETTINGS = {

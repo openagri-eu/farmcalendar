@@ -16,6 +16,7 @@ class FarmViewSet(viewsets.ModelViewSet):
     queryset = Farm.objects.all().order_by('-created_at')
     serializer_class = FarmSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['name', 'status']
 
 
 class FarmParcelViewSet(viewsets.ModelViewSet):
@@ -25,6 +26,7 @@ class FarmParcelViewSet(viewsets.ModelViewSet):
     queryset = FarmParcel.objects.all().order_by('-created_at')
     serializer_class = FarmParcelSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['identifier', 'parcel_type', 'geo_id']
 
 
 

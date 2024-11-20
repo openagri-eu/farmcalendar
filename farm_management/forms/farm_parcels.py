@@ -117,9 +117,9 @@ class FarmParcelsForm(forms.ModelForm):
         required=False, label="Irrigation Flow (units)",
         widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Flow rate'})
     )
-    geo_id = forms.CharField(
+    geo_id = forms.UUIDField(
         required=False, label="Geographic Data ID",
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Geographic UUID'})
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Geographic UUID', 'readonly': 'readonly'})
     )
 
     # latitude = forms.DecimalField(
@@ -144,5 +144,5 @@ class FarmParcelsForm(forms.ModelForm):
         fields = [
             'farm', 'identifier', 'description', 'parcel_type', 'valid_from', 'valid_to', 'in_region', 'has_toponym',
             'area', 'is_nitro_area', 'is_natura2000_area', 'is_pdopg_area', 'is_irrigated', 'is_cultivated_in_levels',
-            'is_ground_slope', 'depiction', 'irrigation_flow', 'geo_id', 'latitude', 'longitude', 'geometry'
+            'is_ground_slope', 'depiction', 'irrigation_flow', 'latitude', 'longitude', 'geometry', 'geo_id',
         ]

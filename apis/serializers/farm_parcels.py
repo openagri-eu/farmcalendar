@@ -6,11 +6,11 @@ from .base import JSONLDSerializer
 class FarmSerializer(JSONLDSerializer):
     class Meta:
         model = Farm
-
-        fields = [
-            'id', 'name',
-            'status', 'created_at', 'updated_at', 'deleted_at',
-        ]
+        fields = '__all__'
+        # fields = [
+        #     'id', 'name',
+        #     'status', 'created_at', 'updated_at', 'deleted_at',
+        # ]
 
     # def to_representation(self, instance):
     #     class_key = self.Meta.model.__name__
@@ -25,13 +25,14 @@ class FarmParcelSerializer(JSONLDSerializer):
     class Meta:
         model = FarmParcel
 
-        fields = [
-            'id', 'name',
-            'geo_id',
-            'farm',
-            'cultivation_type',
-            'status', 'created_at', 'updated_at', 'deleted_at',
-        ]
+        fields = '__all__'
+        # fields = [
+        #     'id', 'name',
+        #     'geo_id',
+        #     'farm',
+        #     'cultivation_type',
+        #     'status', 'created_at', 'updated_at', 'deleted_at',
+        # ]
 
 
 

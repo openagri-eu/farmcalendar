@@ -80,8 +80,8 @@ class FertilizationOperationSchema(FarmCalendarActivitySchema):
 
 
 
-OCSM_SCHEMA['Farm'] = FarmSchema
-OCSM_SCHEMA['FarmParcel'] = FarmParcelSchema
-OCSM_SCHEMA['FertilizationOperation'] = FertilizationOperationSchema
+# OCSM_SCHEMA['Farm'] = FarmSchema
+# OCSM_SCHEMA['FarmParcel'] = FarmParcelSchema
+# OCSM_SCHEMA['FertilizationOperation'] = FertilizationOperationSchema
 
 
