@@ -30,6 +30,8 @@ class FarmCalendarActivityViewSet(viewsets.ModelViewSet):
     serializer_class = FarmCalendarActivitySerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    filterset_fields = ['title', 'activity_type', 'responsible_agent']
+
 
 class FarmCalendarActivityTypeViewSet(viewsets.ModelViewSet):
     """
@@ -38,6 +40,7 @@ class FarmCalendarActivityTypeViewSet(viewsets.ModelViewSet):
     queryset = FarmCalendarActivityType.objects.all().order_by('-name')
     serializer_class = FarmCalendarActivityTypeSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['name', ]
 
 
 class FertilizationOperationViewSet(viewsets.ModelViewSet):
@@ -47,6 +50,7 @@ class FertilizationOperationViewSet(viewsets.ModelViewSet):
     queryset = FertilizationOperation.objects.all().order_by('-start_datetime')
     serializer_class = FertilizationOperationSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['title', 'activity_type', 'responsible_agent']
 
 
 class IrrigationOperationViewSet(viewsets.ModelViewSet):
@@ -56,6 +60,7 @@ class IrrigationOperationViewSet(viewsets.ModelViewSet):
     queryset = IrrigationOperation.objects.all().order_by('-start_datetime')
     serializer_class = IrrigationOperationSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['title', 'activity_type', 'responsible_agent']
 
 
 class CropProtectionOperationViewSet(viewsets.ModelViewSet):
@@ -65,7 +70,7 @@ class CropProtectionOperationViewSet(viewsets.ModelViewSet):
     queryset = CropProtectionOperation.objects.all().order_by('-start_datetime')
     serializer_class = CropProtectionOperationSerializer
     permission_classes = [permissions.IsAuthenticated]
-
+    filterset_fields = ['title', 'activity_type', 'responsible_agent']
 
 
 class ObservationViewSet(viewsets.ModelViewSet):
@@ -75,7 +80,7 @@ class ObservationViewSet(viewsets.ModelViewSet):
     queryset = Observation.objects.all().order_by('-start_datetime')
     serializer_class = ObservationSerializer
     permission_classes = [permissions.IsAuthenticated]
-
+    filterset_fields = ['title','activity_type', 'responsible_agent']
 
 
 class CropStressIndicatorObservationViewSet(viewsets.ModelViewSet):
@@ -85,6 +90,7 @@ class CropStressIndicatorObservationViewSet(viewsets.ModelViewSet):
     queryset = CropStressIndicatorObservation.objects.all().order_by('-start_datetime')
     serializer_class = CropStressIndicatorObservationSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['title','activity_type', 'responsible_agent']
 
 
 class CropGrowthStageObservationViewSet(viewsets.ModelViewSet):
@@ -94,6 +100,7 @@ class CropGrowthStageObservationViewSet(viewsets.ModelViewSet):
     queryset = CropGrowthStageObservation.objects.all().order_by('-start_datetime')
     serializer_class = CropGrowthStageObservationSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['title','activity_type', 'responsible_agent']
 
 
 

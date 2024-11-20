@@ -63,7 +63,6 @@ class FarmCalendarActivity(models.Model):
     start_datetime = models.DateTimeField(default=datetime.datetime.now)
     end_datetime = models.DateTimeField(blank=True, null=True)
 
-    title = models.CharField(max_length=200)
     details = models.TextField(blank=True, null=True)
 
     responsible_agent = models.CharField(blank=True, null=True)

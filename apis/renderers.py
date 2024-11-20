@@ -9,6 +9,11 @@ class JSONLDRenderer(JSONRenderer):
     format = 'jsonld'
 
     def render(self, data, accepted_media_type=None, renderer_context=None):
+        request = renderer_context.get('request', None)
+        if request and request.method == 'OPTIONS':
+            # If it's an OPTIONS request, do not return JSON-LD
+            return super().render(data, accepted_media_type, renderer_context)
+
         ocsm_context = settings.OCSM_JSONLD_CONTEXT['@context'].copy()
         # Check if data is a list for @graph
         if isinstance(data, list):
