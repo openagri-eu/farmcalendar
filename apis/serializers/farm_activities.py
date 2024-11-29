@@ -1,12 +1,19 @@
+import uuid
+
 from rest_framework import serializers
+
+from farm_management.models import (
+    Fertilizer,
+    FarmParcel,
+    AgriculturalMachine
+)
 
 from farm_activities.models import (
     FarmCalendarActivityType,
     FarmCalendarActivity,
     FertilizationOperation,
     IrrigationOperation,
-    CropProtectionOperation,
-    Observation,
+    CropProtectionOperation,Observation,
     CropStressIndicatorObservation,
     CropGrowthStageObservation,
 )
@@ -15,44 +22,111 @@ from .base import JSONLDSerializer
 from ..schemas import QuantityValueModel
 
 
+class FarmCalendarActivitySerializer(serializers.ModelSerializer):
+    activityType = serializers.PrimaryKeyRelatedField(source='activity_type', queryset=FarmCalendarActivityType.objects.all())
+    hasStartDatetime = serializers.DateTimeField(source='start_datetime')
+    hasEndDatetime = serializers.DateTimeField(source='end_datetime', allow_null=True)
 
-class FarmCalendarActivitySerializer(serializers.HyperlinkedModelSerializer):
+    responsibleAgent = serializers.CharField(source='responsible_agent')
+
+    usesAgriculturalMachinery = serializers.PrimaryKeyRelatedField(source='agricultural_machinery', many=True, queryset=AgriculturalMachine.objects.all())
+
     class Meta:
         model = FarmCalendarActivity
 
         fields = [
-            'activity_type', 'title', 'details',
-            'start_datetime', 'end_datetime',
+            'id',
+            'activityType', 'title', 'details',
+            'hasStartDatetime', 'hasEndDatetime',
+            'responsibleAgent', 'usesAgriculturalMachinery'
         ]
         # 'status', 'created_at', 'updated_at', 'deleted_at',
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
 
-class FarmCalendarActivityTypeSerializer(serializers.HyperlinkedModelSerializer):
+        json_ld_representation = {
+            '@type': 'Operation',
+            '@id': representation.pop('id'),
+            **representation
+        }
+
+        return json_ld_representation
+
+
+class FarmCalendarActivityTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = FarmCalendarActivityType
 
         fields = [
+            'id',
             'name', 'description',
             'background_color', 'border_color', 'text_color',
         ]
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
 
-class FertilizationOperationSerializer(JSONLDSerializer):
+        json_ld_representation = {
+            '@type': 'FarmActivityType', #?
+            '@id': representation.pop('id'),
+            **representation
+        }
+
+        return json_ld_representation
+
+
+class AppliedAmmountFieldSerializer(serializers.Serializer):
+    unit = serializers.CharField(source='applied_amount_unit')
+    numericValue = serializers.DecimalField(source='applied_amount', max_digits=17, decimal_places=14)
+
+
+    def to_representation(self, instance):
+        uuid_orig_str = "".join([
+            getattr(instance, 'applied_amount_unit', ''),
+            str(getattr(instance, 'applied_amount', ''),)
+        ])
+        hash_uuid = str(uuid.uuid5(uuid.NAMESPACE_DNS, uuid_orig_str))
+        return {
+            '@id': hash_uuid,
+            '@type': 'QuantityValue',
+            'unit': instance.applied_amount_unit,
+            'numericValue': instance.applied_amount,
+        }
+
+class FertilizationOperationSerializer(FarmCalendarActivitySerializer):
+    hasAppliedAmount = AppliedAmmountFieldSerializer(source='*')
+    hasApplicationMethod = serializers.CharField(source='application_method', allow_null=True)
+
+    usesFertilizer = serializers.PrimaryKeyRelatedField(
+        queryset=Fertilizer.objects.all(),
+        allow_null=True
+    )
+    operatedOn = serializers.PrimaryKeyRelatedField(
+        queryset=FarmParcel.objects.all(),
+        source='operated_on'
+    )
+
     class Meta:
         model = FertilizationOperation
 
         fields = [
-            'activity_type', 'title', 'details',
             'id',
-            'start_datetime', 'end_datetime',
-            'applied_amount', 'applied_amount_unit',
-            'application_method',
-            'fertilizer', 'operated_on'
+            'activityType', 'title', 'details',
+            'hasStartDatetime', 'hasEndDatetime',
+            'responsibleAgent', 'usesAgriculturalMachinery',
+            'hasAppliedAmount', 'hasApplicationMethod',
+            'usesFertilizer', 'operatedOn'
         ]
 
+
     def to_representation(self, instance):
-        instance.has_applied_amount = QuantityValueModel(instance.applied_amount, instance.applied_amount_unit)
-        return super().to_representation(instance)
+        representation = super().to_representation(instance)
+        representation.update({'@type': 'FertilizationOperation'})
+        json_ld_representation = representation
+
+        return json_ld_representation
+
 
 
 class IrrigationOperationSerializer(serializers.HyperlinkedModelSerializer):

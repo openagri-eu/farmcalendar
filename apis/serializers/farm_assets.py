@@ -80,7 +80,6 @@ class AgriculturalMachineSerializer(serializers.HyperlinkedModelSerializer):
             'status', 'created_at', 'updated_at', 'deleted_at',
         ]
 
-
     def to_representation(self, instance):
         representation = super().to_representation(instance)
 

@@ -3737,6 +3737,18 @@ components:
       - purchase_date
       - seria_number
       - updated_at
+    AppliedAmmountField:
+      type: object
+      properties:
+        unit:
+          type: string
+        numericValue:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,3}(?:\.\d{0,14})?$
+      required:
+      - numericValue
+      - unit
     ContactPersonField:
       type: object
       properties:
@@ -4024,28 +4036,44 @@ components:
     FarmCalendarActivity:
       type: object
       properties:
-        activity_type:
-          type: string
-          format: uri
+        id:
+          type: integer
+          readOnly: true
+        activityType:
+          type: integer
         title:
           type: string
           maxLength: 200
         details:
           type: string
           nullable: true
-        start_datetime:
+        hasStartDatetime:
           type: string
           format: date-time
-        end_datetime:
+        hasEndDatetime:
           type: string
           format: date-time
           nullable: true
+        responsibleAgent:
+          type: string
+        usesAgriculturalMachinery:
+          type: array
+          items:
+            type: integer
       required:
-      - activity_type
+      - activityType
+      - hasEndDatetime
+      - hasStartDatetime
+      - id
+      - responsibleAgent
       - title
+      - usesAgriculturalMachinery
     FarmCalendarActivityType:
       type: object
       properties:
+        id:
+          type: integer
+          readOnly: true
         name:
           type: string
           maxLength: 100
@@ -4065,6 +4093,7 @@ components:
           pattern: ^#[0-9A-Fa-f]{6}$
           maxLength: 7
       required:
+      - id
       - name
     FarmCrop:
       type: object
@@ -4211,7 +4240,10 @@ components:
     FertilizationOperation:
       type: object
       properties:
-        activity_type:
+        id:
+          type: integer
+          readOnly: true
+        activityType:
           type: integer
         title:
           type: string
@@ -4219,39 +4251,41 @@ components:
         details:
           type: string
           nullable: true
-        id:
-          type: integer
-          readOnly: true
-        start_datetime:
+        hasStartDatetime:
           type: string
           format: date-time
-        end_datetime:
+        hasEndDatetime:
           type: string
           format: date-time
           nullable: true
-        applied_amount:
+        responsibleAgent:
           type: string
-          format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
-        applied_amount_unit:
-          type: string
-          maxLength: 255
-        application_method:
+        usesAgriculturalMachinery:
+          type: array
+          items:
+            type: integer
+        hasAppliedAmount:
+          $ref: '#/components/schemas/AppliedAmmountField'
+        hasApplicationMethod:
           type: string
           nullable: true
-          maxLength: 255
-        fertilizer:
+        usesFertilizer:
           type: integer
           nullable: true
-        operated_on:
+        operatedOn:
           type: integer
       required:
-      - activity_type
-      - applied_amount
-      - applied_amount_unit
+      - activityType
+      - hasApplicationMethod
+      - hasAppliedAmount
+      - hasEndDatetime
+      - hasStartDatetime
       - id
-      - operated_on
+      - operatedOn
+      - responsibleAgent
       - title
+      - usesAgriculturalMachinery
+      - usesFertilizer
     Fertilizer:
       type: object
       properties:
@@ -5051,25 +5085,36 @@ components:
     PatchedFarmCalendarActivity:
       type: object
       properties:
-        activity_type:
-          type: string
-          format: uri
+        id:
+          type: integer
+          readOnly: true
+        activityType:
+          type: integer
         title:
           type: string
           maxLength: 200
         details:
           type: string
           nullable: true
-        start_datetime:
+        hasStartDatetime:
           type: string
           format: date-time
-        end_datetime:
+        hasEndDatetime:
           type: string
           format: date-time
           nullable: true
+        responsibleAgent:
+          type: string
+        usesAgriculturalMachinery:
+          type: array
+          items:
+            type: integer
     PatchedFarmCalendarActivityType:
       type: object
       properties:
+        id:
+          type: integer
+          readOnly: true
         name:
           type: string
           maxLength: 100
@@ -5207,7 +5252,10 @@ components:
     PatchedFertilizationOperation:
       type: object
       properties:
-        activity_type:
+        id:
+          type: integer
+          readOnly: true
+        activityType:
           type: integer
         title:
           type: string
@@ -5215,31 +5263,28 @@ components:
         details:
           type: string
           nullable: true
-        id:
-          type: integer
-          readOnly: true
-        start_datetime:
+        hasStartDatetime:
           type: string
           format: date-time
-        end_datetime:
+        hasEndDatetime:
           type: string
           format: date-time
           nullable: true
-        applied_amount:
+        responsibleAgent:
           type: string
-          format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
-        applied_amount_unit:
-          type: string
-          maxLength: 255
-        application_method:
+        usesAgriculturalMachinery:
+          type: array
+          items:
+            type: integer
+        hasAppliedAmount:
+          $ref: '#/components/schemas/AppliedAmmountField'
+        hasApplicationMethod:
           type: string
           nullable: true
-          maxLength: 255
-        fertilizer:
+        usesFertilizer:
           type: integer
           nullable: true
-        operated_on:
+        operatedOn:
           type: integer
     PatchedFertilizer:
       type: object

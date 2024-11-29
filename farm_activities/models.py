@@ -88,7 +88,7 @@ class FertilizationOperation(FarmCalendarActivity):
 
     operated_on = models.ForeignKey('farm_management.FarmParcel', on_delete=models.CASCADE)
     fertilizer = models.ForeignKey('farm_management.Fertilizer', on_delete=models.SET_NULL, blank=True, null=True)
-    # TreatmentPlan
+
     def save(self, *args, **kwargs):
         self.activity_type, _ = FarmCalendarActivityType.objects.get_or_create(name=settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['fertilization']['name'])
         super().save(*args, **kwargs)

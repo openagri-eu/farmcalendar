@@ -44,8 +44,8 @@ class AddressField(serializers.Serializer):
         ])
         address_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, address_str))
         return {
-            '@id': address_id,   # Add the generated ID
-            '@type': 'Address',   # Set the type for JSON-LD
+            '@id': address_id,
+            '@type': 'Address',
             'adminUnitL1': getattr(instance, 'admin_unit_l1'),
             'adminUnitL2': getattr(instance, 'admin_unit_l2'),
             'addressArea': getattr(instance, 'address_area'),
