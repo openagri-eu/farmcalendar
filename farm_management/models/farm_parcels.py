@@ -61,7 +61,6 @@ class FarmParcel(BaseModel, LocationBaseModel):
     depiction = models.URLField(max_length=500, blank=True, null=True)
     # irrigation_system = models.ForeignKey(IrrigationSystem, on_delete=models.SET_NULL, null=True, blank=True, related_name="parcels")
     irrigation_flow = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True, validators=[])
-    # crop = models.ForeignKey(Crop, on_delete=models.SET_NULL, null=True, blank=True, related_name="parcels")
 
     objects = models.Manager()
     active_objects = ActivePageManager()
