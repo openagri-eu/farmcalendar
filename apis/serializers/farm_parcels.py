@@ -83,13 +83,6 @@ class FarmParcelSerializer(JSONLDSerializer):
         model = FarmParcel
 
         fields = '__all__'
-        # fields = [
-        #     'id', 'name',
-        #     'geo_id',
-        #     'farm',
-        #     'cultivation_type',
-        #     'status', 'created_at', 'updated_at', 'deleted_at',
-        # ]
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
