@@ -10,7 +10,6 @@ def snake_to_camel_lower(snake_str):
     components = snake_str.split('_')
     return components[0] + ''.join(x.capitalize() for x in components[1:])
 
-# ContactPersonField: This handles the serialization of the contact person's data.
 class ContactPersonField(serializers.Serializer):
     firstname = serializers.CharField(source='contact_person_firstname')
     lastname = serializers.CharField(source='contact_person_lastname')
@@ -25,17 +24,7 @@ class ContactPersonField(serializers.Serializer):
             '@type': 'Person'
         }
 
-    # def to_internal_value(self, data):
-    #     # Generate the @id for contact person when receiving input data
-    #     firstname = data.get('firstname', '')
-    #     lastname = data.get('lastname', '')
-    #     return {
-    #         'firstname': firstname,
-    #         'lastname': lastname,
-    #     }
 
-
-# AddressField: This handles the serialization of the address data.
 class AddressField(serializers.Serializer):
     adminUnitL1 = serializers.CharField(source='admin_unit_l1')
     adminUnitL2 = serializers.CharField(source='admin_unit_l2')
@@ -69,10 +58,10 @@ class FarmSerializer(serializers.ModelSerializer):
     contactPerson = ContactPersonField(source='*')
     address = AddressField(source='*')
 
-    status = serializers.ChoiceField(choices=Farm.BaseModelStatus.choices)
-    deleted_at = serializers.DateTimeField(required=False, allow_null=True)
-    created_at = serializers.DateTimeField(read_only=True)
-    updated_at = serializers.DateTimeField(read_only=True)
+    # status = serializers.ChoiceField(choices=Farm.BaseModelStatus.choices)
+    # deleted_at = serializers.DateTimeField(required=False, allow_null=True)
+    # created_at = serializers.DateTimeField(read_only=True)
+    # updated_at = serializers.DateTimeField(read_only=True)
     name = serializers.CharField()
     description = serializers.CharField()
     administrator = serializers.CharField()
@@ -93,60 +82,63 @@ class FarmSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
 
         json_ld_representation = representation
-        json_ld_representation['@id'] = str(instance.id)
+
+        json_ld_representation['@id'] = str(representation.pop('id'))
         json_ld_representation['@type'] = 'Farm'
 
         return json_ld_representation
 
-class FarmParcelSerializer(JSONLDSerializer):
-    farmcrops = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+class GeometrySerializerField(serializers.Serializer):
+    asWKT = serializers.CharField(source='geometry')
+
+    def to_representation(self, instance):
+
+        return {
+            '@id': instance.geo_id,
+            '@type': 'Geometry',
+            'asWKT': instance.geometry
+        }
+
+
+class FarmParcelSerializer(serializers.ModelSerializer):
+    validFrom = serializers.DateTimeField(source='valid_from')
+    validTo = serializers.DateTimeField(source='valid_to')
+    category = serializers.CharField(source='parcel_type')
+    hasAgriCrop = serializers.PrimaryKeyRelatedField(source='farmcrops', many=True, read_only=True)
+
+    hasIrrigationFlow = serializers.DecimalField(
+        max_digits=15, decimal_places=2, source='irrigation_flow', allow_null=True
+    )
+    category = serializers.CharField(source='parcel_type')
+    inRegion = serializers.CharField(source='in_region', allow_null=True)
+    hasToponym = serializers.CharField(source='has_toponym', allow_null=True)
+    isNitroArea = serializers.BooleanField(source='is_nitro_area')
+    isNatura2000Area = serializers.BooleanField(source='is_natura2000_area')
+    isPdopgArea = serializers.BooleanField(source='is_pdopg_area')
+    isIrrigated = serializers.BooleanField(source='is_irrigated')
+    isCultivatedInLevels = serializers.BooleanField(source='is_cultivated_in_levels')
+    isGroundSlope = serializers.BooleanField(source='is_ground_slope')
+    hasGeometry = GeometrySerializerField(source='*')
 
     class Meta:
         model = FarmParcel
 
-        fields = '__all__'
+        fields = [
+            'status', 'deleted_at', 'created_at', 'updated_at',
+            'id', 'identifier', 'description', 'validFrom', 'validTo', 'area',
+            'hasIrrigationFlow', 'category', 'inRegion', 'hasToponym',
+            'isNitroArea', 'isNatura2000Area', 'isPdopgArea', 'isIrrigated',
+            'isCultivatedInLevels', 'isGroundSlope', 'depiction',
+            'hasGeometry', 'hasAgriCrop'
+        ]
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
+
         json_ld_representation = {
-            '@type': 'Parcel'
+            '@type': 'Parcel',
+            '@id': representation.pop('id'),
+            **representation
         }
-
-        specific_attrs_mapping = {
-            'id': '@id',
-            'identifier': 'identifier',
-            'description': 'description',
-            'valid_from': 'validFrom',
-            'valid_to': 'validTo',
-            'area': 'area',
-            'irrigation_flow': 'hasIrrigationFlow',
-            'farmcrops': 'hasAgriCrop',
-            'parcel_type': 'category',
-        }
-        geo_id = representation.pop('geo_id', '')
-        if representation['geometry']:
-            geometry = {
-                '@id': geo_id,
-                'asWKT': representation.pop('geometry', ''),
-            }
-            geometry['@type'] = 'Geometry'
-            json_ld_representation['hasGeometry'] = geometry
-
-        location = {
-            '@id': geo_id,
-            '@type': 'Point',
-            'lat': representation.pop('latitude', ''),
-            'long': representation.pop('longitude', ''),
-        }
-        json_ld_representation['location'] = location
-
-
-        for attr, value in representation.items():
-            clean_attr = specific_attrs_mapping.get(attr, None)
-            if clean_attr is None:
-                clean_attr = attr
-                clean_attr = snake_to_camel_lower(attr)
-
-            json_ld_representation[clean_attr] = value
 
         return json_ld_representation

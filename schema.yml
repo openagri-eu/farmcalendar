@@ -3905,7 +3905,10 @@ components:
       type: object
       properties:
         status:
-          $ref: '#/components/schemas/StatusEnum'
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          minimum: -2147483648
+          maximum: 2147483647
         deleted_at:
           type: string
           format: date-time
@@ -3949,7 +3952,6 @@ components:
       - hasAgriParcel
       - id
       - name
-      - status
       - telephone
       - updated_at
       - vatID
@@ -4108,14 +4110,6 @@ components:
     FarmParcel:
       type: object
       properties:
-        id:
-          type: integer
-          readOnly: true
-        farmcrops:
-          type: array
-          items:
-            type: integer
-          readOnly: true
         status:
           allOf:
           - $ref: '#/components/schemas/StatusEnum'
@@ -4133,87 +4127,81 @@ components:
           type: string
           format: date-time
           readOnly: true
-        latitude:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,3}(?:\.\d{0,14})?$
-          nullable: true
-        longitude:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,3}(?:\.\d{0,14})?$
-          nullable: true
-        geometry:
-          type: string
-          nullable: true
-          title: Geometry (WKT EPSG:4326)
-        geo_id:
-          type: string
-          format: uuid
-          nullable: true
-          title: Geographic Data ID
+        id:
+          type: integer
+          readOnly: true
         identifier:
           type: string
           maxLength: 255
         description:
           type: string
           nullable: true
-        parcel_type:
-          type: string
-          title: Type of Parcel
-          maxLength: 50
-        valid_from:
+        validFrom:
           type: string
           format: date-time
-          nullable: true
-        valid_to:
+        validTo:
           type: string
           format: date-time
-          nullable: true
-        in_region:
-          type: string
-          nullable: true
-          maxLength: 255
-        has_toponym:
-          type: string
-          nullable: true
-          maxLength: 255
         area:
           type: string
           format: decimal
           pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
-        is_nitro_area:
+        hasIrrigationFlow:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+          nullable: true
+        category:
+          type: string
+        inRegion:
+          type: string
+          nullable: true
+        hasToponym:
+          type: string
+          nullable: true
+        isNitroArea:
           type: boolean
-        is_natura2000_area:
+        isNatura2000Area:
           type: boolean
-        is_pdopg_area:
+        isPdopgArea:
           type: boolean
-        is_irrigated:
+        isIrrigated:
           type: boolean
-        is_cultivated_in_levels:
+        isCultivatedInLevels:
           type: boolean
-        is_ground_slope:
+        isGroundSlope:
           type: boolean
         depiction:
           type: string
           format: uri
           nullable: true
           maxLength: 500
-        irrigation_flow:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
-          nullable: true
-        farm:
-          type: integer
+        hasGeometry:
+          $ref: '#/components/schemas/GeometrySerializerField'
+        hasAgriCrop:
+          type: array
+          items:
+            type: integer
+          readOnly: true
       required:
+      - category
       - created_at
-      - farm
-      - farmcrops
+      - hasAgriCrop
+      - hasGeometry
+      - hasIrrigationFlow
+      - hasToponym
       - id
       - identifier
-      - parcel_type
+      - inRegion
+      - isCultivatedInLevels
+      - isGroundSlope
+      - isIrrigated
+      - isNatura2000Area
+      - isNitroArea
+      - isPdopgArea
       - updated_at
+      - validFrom
+      - validTo
     FertilizationOperation:
       type: object
       properties:
@@ -4310,6 +4298,13 @@ components:
       - price_unit
       - targeted_towards
       - updated_at
+    GeometrySerializerField:
+      type: object
+      properties:
+        asWKT:
+          type: string
+      required:
+      - asWKT
     IrrigationOperation:
       type: object
       properties:
@@ -4946,7 +4941,10 @@ components:
       type: object
       properties:
         status:
-          $ref: '#/components/schemas/StatusEnum'
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          minimum: -2147483648
+          maximum: 2147483647
         deleted_at:
           type: string
           format: date-time
@@ -5118,14 +5116,6 @@ components:
     PatchedFarmParcel:
       type: object
       properties:
-        id:
-          type: integer
-          readOnly: true
-        farmcrops:
-          type: array
-          items:
-            type: integer
-          readOnly: true
         status:
           allOf:
           - $ref: '#/components/schemas/StatusEnum'
@@ -5143,79 +5133,62 @@ components:
           type: string
           format: date-time
           readOnly: true
-        latitude:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,3}(?:\.\d{0,14})?$
-          nullable: true
-        longitude:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,3}(?:\.\d{0,14})?$
-          nullable: true
-        geometry:
-          type: string
-          nullable: true
-          title: Geometry (WKT EPSG:4326)
-        geo_id:
-          type: string
-          format: uuid
-          nullable: true
-          title: Geographic Data ID
+        id:
+          type: integer
+          readOnly: true
         identifier:
           type: string
           maxLength: 255
         description:
           type: string
           nullable: true
-        parcel_type:
-          type: string
-          title: Type of Parcel
-          maxLength: 50
-        valid_from:
+        validFrom:
           type: string
           format: date-time
-          nullable: true
-        valid_to:
+        validTo:
           type: string
           format: date-time
-          nullable: true
-        in_region:
-          type: string
-          nullable: true
-          maxLength: 255
-        has_toponym:
-          type: string
-          nullable: true
-          maxLength: 255
         area:
           type: string
           format: decimal
           pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
-        is_nitro_area:
+        hasIrrigationFlow:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+          nullable: true
+        category:
+          type: string
+        inRegion:
+          type: string
+          nullable: true
+        hasToponym:
+          type: string
+          nullable: true
+        isNitroArea:
           type: boolean
-        is_natura2000_area:
+        isNatura2000Area:
           type: boolean
-        is_pdopg_area:
+        isPdopgArea:
           type: boolean
-        is_irrigated:
+        isIrrigated:
           type: boolean
-        is_cultivated_in_levels:
+        isCultivatedInLevels:
           type: boolean
-        is_ground_slope:
+        isGroundSlope:
           type: boolean
         depiction:
           type: string
           format: uri
           nullable: true
           maxLength: 500
-        irrigation_flow:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
-          nullable: true
-        farm:
-          type: integer
+        hasGeometry:
+          $ref: '#/components/schemas/GeometrySerializerField'
+        hasAgriCrop:
+          type: array
+          items:
+            type: integer
+          readOnly: true
     PatchedFertilizationOperation:
       type: object
       properties:
