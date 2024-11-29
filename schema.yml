@@ -4178,6 +4178,8 @@ components:
           maxLength: 500
         hasGeometry:
           $ref: '#/components/schemas/GeometrySerializerField'
+        location:
+          $ref: '#/components/schemas/LocationSerializerField'
         hasAgriCrop:
           type: array
           items:
@@ -4199,6 +4201,7 @@ components:
       - isNatura2000Area
       - isNitroArea
       - isPdopgArea
+      - location
       - updated_at
       - validFrom
       - validTo
@@ -4369,6 +4372,20 @@ components:
         * `centre_pivot` - Centre Pivot
         * `furrow` - Furrow
         * `terraced` - Terraced
+    LocationSerializerField:
+      type: object
+      properties:
+        lat:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,3}(?:\.\d{0,14})?$
+        long:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,3}(?:\.\d{0,14})?$
+      required:
+      - lat
+      - long
     Observation:
       type: object
       properties:
@@ -5184,6 +5201,8 @@ components:
           maxLength: 500
         hasGeometry:
           $ref: '#/components/schemas/GeometrySerializerField'
+        location:
+          $ref: '#/components/schemas/LocationSerializerField'
         hasAgriCrop:
           type: array
           items:
