@@ -71,7 +71,7 @@
                             </div>
 
                             <!-- Collapsible form body -->
-                            <div id="farmParcelFormCollapse" class="collapse{% if is_edit %} show{% endif %}">
+                            <div id="farmParcelFormCollapse" class="collapse{% if is_edit or form.errors  %} show{% endif %}">
                                 <div class="card-body">
 
                                     <div class="row">
