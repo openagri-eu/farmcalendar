@@ -3978,8 +3978,7 @@ components:
           type: string
           nullable: true
         parcel:
-          type: string
-          format: uri
+          type: integer
           nullable: true
         sex:
           allOf:
@@ -5013,8 +5012,7 @@ components:
           type: string
           nullable: true
         parcel:
-          type: string
-          format: uri
+          type: integer
           nullable: true
         sex:
           allOf:

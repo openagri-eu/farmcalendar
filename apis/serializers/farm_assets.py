@@ -48,7 +48,7 @@ class FarmCropSerializer(serializers.ModelSerializer):
         return json_ld_representation
 
 
-class FarmAnimalSerializer(serializers.HyperlinkedModelSerializer):
+class FarmAnimalSerializer(serializers.ModelSerializer):
     class Meta:
         model = FarmAnimal
         fields = [
@@ -57,6 +57,17 @@ class FarmAnimalSerializer(serializers.HyperlinkedModelSerializer):
             'sex', 'castrated', 'species', 'breed', 'birth_date',
             'status', 'created_at', 'updated_at', 'deleted_at',
         ]
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+
+        json_ld_representation = {
+            '@type': 'Animal',
+            '@id': representation.pop('id'),
+            **representation
+        }
+
+        return json_ld_representation
 
 
 class AgriculturalMachineSerializer(serializers.HyperlinkedModelSerializer):
@@ -70,3 +81,13 @@ class AgriculturalMachineSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+
+        json_ld_representation = {
+            '@type': 'AgriculturalMachine',
+            '@id': representation.pop('id'),
+            **representation
+        }
+
+        return json_ld_representation
