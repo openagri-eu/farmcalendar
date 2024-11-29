@@ -57,7 +57,7 @@
                             {% endif %}
 
                             <!-- Collapsible form body -->
-                            <div id="farmFormCollapse" class="collapse{% if is_edit %} show{% endif %}">
+                            <div id="farmFormCollapse" class="collapse{% if is_edit or form.errors %} show{% endif %}">
                                 <div class="card-body">
                                     <form class="needs-validation" id="farmForm" name="farmForm" novalidate method="POST"
                                           action="{% if is_edit %}{% url 'farm_edit' pk=form.instance.pk %}{% else %}{% url 'farms' %}{% endif %}"
