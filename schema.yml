@@ -10,13 +10,6 @@ paths:
       description: API endpoint that allows AgriculturalMachine to be viewed or edited.
       parameters:
       - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
-      - in: query
         name: name
         schema:
           type: string
@@ -50,9 +43,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/PaginatedAgriculturalMachineList'
             application/json:
               schema:
                 $ref: '#/components/schemas/PaginatedAgriculturalMachineList'
@@ -60,21 +50,10 @@ paths:
     post:
       operationId: api_v1_AgriculturalMachines_create
       description: API endpoint that allows AgriculturalMachine to be viewed or edited.
-      parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       tags:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/AgriculturalMachine'
           application/json:
             schema:
               $ref: '#/components/schemas/AgriculturalMachine'
@@ -91,9 +70,6 @@ paths:
       responses:
         '201':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/AgriculturalMachine'
             application/json:
               schema:
                 $ref: '#/components/schemas/AgriculturalMachine'
@@ -103,13 +79,6 @@ paths:
       operationId: api_v1_AgriculturalMachines_retrieve
       description: API endpoint that allows AgriculturalMachine to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -124,9 +93,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/AgriculturalMachine'
             application/json:
               schema:
                 $ref: '#/components/schemas/AgriculturalMachine'
@@ -135,13 +101,6 @@ paths:
       operationId: api_v1_AgriculturalMachines_update
       description: API endpoint that allows AgriculturalMachine to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -152,9 +111,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/AgriculturalMachine'
           application/json:
             schema:
               $ref: '#/components/schemas/AgriculturalMachine'
@@ -171,9 +127,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/AgriculturalMachine'
             application/json:
               schema:
                 $ref: '#/components/schemas/AgriculturalMachine'
@@ -182,13 +135,6 @@ paths:
       operationId: api_v1_AgriculturalMachines_partial_update
       description: API endpoint that allows AgriculturalMachine to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -199,9 +145,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/PatchedAgriculturalMachine'
           application/json:
             schema:
               $ref: '#/components/schemas/PatchedAgriculturalMachine'
@@ -217,9 +160,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/AgriculturalMachine'
             application/json:
               schema:
                 $ref: '#/components/schemas/AgriculturalMachine'
@@ -228,13 +168,6 @@ paths:
       operationId: api_v1_AgriculturalMachines_destroy
       description: API endpoint that allows AgriculturalMachine to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -259,13 +192,6 @@ paths:
         name: activity_type
         schema:
           type: integer
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - name: page
         required: false
         in: query
@@ -288,9 +214,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/PaginatedCropGrowthStageObservationList'
             application/json:
               schema:
                 $ref: '#/components/schemas/PaginatedCropGrowthStageObservationList'
@@ -299,21 +222,10 @@ paths:
       operationId: api_v1_CropGrowthStageObservations_create
       description: API endpoint that allows CropGrowthStageObservation to be viewed
         or edited.
-      parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       tags:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/CropGrowthStageObservation'
           application/json:
             schema:
               $ref: '#/components/schemas/CropGrowthStageObservation'
@@ -330,9 +242,6 @@ paths:
       responses:
         '201':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/CropGrowthStageObservation'
             application/json:
               schema:
                 $ref: '#/components/schemas/CropGrowthStageObservation'
@@ -343,13 +252,6 @@ paths:
       description: API endpoint that allows CropGrowthStageObservation to be viewed
         or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -364,9 +266,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/CropGrowthStageObservation'
             application/json:
               schema:
                 $ref: '#/components/schemas/CropGrowthStageObservation'
@@ -376,13 +275,6 @@ paths:
       description: API endpoint that allows CropGrowthStageObservation to be viewed
         or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -393,9 +285,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/CropGrowthStageObservation'
           application/json:
             schema:
               $ref: '#/components/schemas/CropGrowthStageObservation'
@@ -412,9 +301,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/CropGrowthStageObservation'
             application/json:
               schema:
                 $ref: '#/components/schemas/CropGrowthStageObservation'
@@ -424,13 +310,6 @@ paths:
       description: API endpoint that allows CropGrowthStageObservation to be viewed
         or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -441,9 +320,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/PatchedCropGrowthStageObservation'
           application/json:
             schema:
               $ref: '#/components/schemas/PatchedCropGrowthStageObservation'
@@ -459,9 +335,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/CropGrowthStageObservation'
             application/json:
               schema:
                 $ref: '#/components/schemas/CropGrowthStageObservation'
@@ -471,13 +344,6 @@ paths:
       description: API endpoint that allows CropGrowthStageObservation to be viewed
         or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -502,13 +368,6 @@ paths:
         name: activity_type
         schema:
           type: integer
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - name: page
         required: false
         in: query
@@ -531,9 +390,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/PaginatedCropProtectionOperationList'
             application/json:
               schema:
                 $ref: '#/components/schemas/PaginatedCropProtectionOperationList'
@@ -542,21 +398,10 @@ paths:
       operationId: api_v1_CropProtectionOperations_create
       description: API endpoint that allows CropProtectionOperation to be viewed or
         edited.
-      parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       tags:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/CropProtectionOperation'
           application/json:
             schema:
               $ref: '#/components/schemas/CropProtectionOperation'
@@ -573,9 +418,6 @@ paths:
       responses:
         '201':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/CropProtectionOperation'
             application/json:
               schema:
                 $ref: '#/components/schemas/CropProtectionOperation'
@@ -586,13 +428,6 @@ paths:
       description: API endpoint that allows CropProtectionOperation to be viewed or
         edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -607,9 +442,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/CropProtectionOperation'
             application/json:
               schema:
                 $ref: '#/components/schemas/CropProtectionOperation'
@@ -619,13 +451,6 @@ paths:
       description: API endpoint that allows CropProtectionOperation to be viewed or
         edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -636,9 +461,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/CropProtectionOperation'
           application/json:
             schema:
               $ref: '#/components/schemas/CropProtectionOperation'
@@ -655,9 +477,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/CropProtectionOperation'
             application/json:
               schema:
                 $ref: '#/components/schemas/CropProtectionOperation'
@@ -667,13 +486,6 @@ paths:
       description: API endpoint that allows CropProtectionOperation to be viewed or
         edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -684,9 +496,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/PatchedCropProtectionOperation'
           application/json:
             schema:
               $ref: '#/components/schemas/PatchedCropProtectionOperation'
@@ -702,9 +511,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/CropProtectionOperation'
             application/json:
               schema:
                 $ref: '#/components/schemas/CropProtectionOperation'
@@ -714,13 +520,6 @@ paths:
       description: API endpoint that allows CropProtectionOperation to be viewed or
         edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -744,13 +543,6 @@ paths:
         name: activity_type
         schema:
           type: integer
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - name: page
         required: false
         in: query
@@ -773,9 +565,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/PaginatedCropStressIndicatorObservationList'
             application/json:
               schema:
                 $ref: '#/components/schemas/PaginatedCropStressIndicatorObservationList'
@@ -783,21 +572,10 @@ paths:
     post:
       operationId: api_v1_CropStressIndicatorObservations_create
       description: API endpoint that allows CropStressIndicator to be viewed or edited.
-      parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       tags:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/CropStressIndicatorObservation'
           application/json:
             schema:
               $ref: '#/components/schemas/CropStressIndicatorObservation'
@@ -814,9 +592,6 @@ paths:
       responses:
         '201':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/CropStressIndicatorObservation'
             application/json:
               schema:
                 $ref: '#/components/schemas/CropStressIndicatorObservation'
@@ -826,13 +601,6 @@ paths:
       operationId: api_v1_CropStressIndicatorObservations_retrieve
       description: API endpoint that allows CropStressIndicator to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -848,9 +616,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/CropStressIndicatorObservation'
             application/json:
               schema:
                 $ref: '#/components/schemas/CropStressIndicatorObservation'
@@ -859,13 +624,6 @@ paths:
       operationId: api_v1_CropStressIndicatorObservations_update
       description: API endpoint that allows CropStressIndicator to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -877,9 +635,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/CropStressIndicatorObservation'
           application/json:
             schema:
               $ref: '#/components/schemas/CropStressIndicatorObservation'
@@ -896,9 +651,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/CropStressIndicatorObservation'
             application/json:
               schema:
                 $ref: '#/components/schemas/CropStressIndicatorObservation'
@@ -907,13 +659,6 @@ paths:
       operationId: api_v1_CropStressIndicatorObservations_partial_update
       description: API endpoint that allows CropStressIndicator to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -925,9 +670,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/PatchedCropStressIndicatorObservation'
           application/json:
             schema:
               $ref: '#/components/schemas/PatchedCropStressIndicatorObservation'
@@ -943,9 +685,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/CropStressIndicatorObservation'
             application/json:
               schema:
                 $ref: '#/components/schemas/CropStressIndicatorObservation'
@@ -954,13 +693,6 @@ paths:
       operationId: api_v1_CropStressIndicatorObservations_destroy
       description: API endpoint that allows CropStressIndicator to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -981,13 +713,6 @@ paths:
       operationId: api_v1_Farm_list
       description: API endpoint that allows Farm to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: query
         name: name
         schema:
@@ -1018,9 +743,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/PaginatedFarmList'
             application/json:
               schema:
                 $ref: '#/components/schemas/PaginatedFarmList'
@@ -1028,21 +750,10 @@ paths:
     post:
       operationId: api_v1_Farm_create
       description: API endpoint that allows Farm to be viewed or edited.
-      parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       tags:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Farm'
           application/json:
             schema:
               $ref: '#/components/schemas/Farm'
@@ -1052,15 +763,13 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/Farm'
+        required: true
       security:
       - cookieAuth: []
       - basicAuth: []
       responses:
         '201':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Farm'
             application/json:
               schema:
                 $ref: '#/components/schemas/Farm'
@@ -1070,13 +779,6 @@ paths:
       operationId: api_v1_Farm_retrieve
       description: API endpoint that allows Farm to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -1091,9 +793,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Farm'
             application/json:
               schema:
                 $ref: '#/components/schemas/Farm'
@@ -1102,13 +801,6 @@ paths:
       operationId: api_v1_Farm_update
       description: API endpoint that allows Farm to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -1119,9 +811,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Farm'
           application/json:
             schema:
               $ref: '#/components/schemas/Farm'
@@ -1131,15 +820,13 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/Farm'
+        required: true
       security:
       - cookieAuth: []
       - basicAuth: []
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Farm'
             application/json:
               schema:
                 $ref: '#/components/schemas/Farm'
@@ -1148,13 +835,6 @@ paths:
       operationId: api_v1_Farm_partial_update
       description: API endpoint that allows Farm to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -1165,9 +845,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/PatchedFarm'
           application/json:
             schema:
               $ref: '#/components/schemas/PatchedFarm'
@@ -1183,9 +860,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Farm'
             application/json:
               schema:
                 $ref: '#/components/schemas/Farm'
@@ -1194,13 +868,6 @@ paths:
       operationId: api_v1_Farm_destroy
       description: API endpoint that allows Farm to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -1220,13 +887,6 @@ paths:
       operationId: api_v1_FarmAnimals_list
       description: API endpoint that allows FarmAnimal to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: query
         name: name
         schema:
@@ -1261,9 +921,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/PaginatedFarmAnimalList'
             application/json:
               schema:
                 $ref: '#/components/schemas/PaginatedFarmAnimalList'
@@ -1271,21 +928,10 @@ paths:
     post:
       operationId: api_v1_FarmAnimals_create
       description: API endpoint that allows FarmAnimal to be viewed or edited.
-      parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       tags:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/FarmAnimal'
           application/json:
             schema:
               $ref: '#/components/schemas/FarmAnimal'
@@ -1302,9 +948,6 @@ paths:
       responses:
         '201':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/FarmAnimal'
             application/json:
               schema:
                 $ref: '#/components/schemas/FarmAnimal'
@@ -1314,13 +957,6 @@ paths:
       operationId: api_v1_FarmAnimals_retrieve
       description: API endpoint that allows FarmAnimal to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -1335,9 +971,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/FarmAnimal'
             application/json:
               schema:
                 $ref: '#/components/schemas/FarmAnimal'
@@ -1346,13 +979,6 @@ paths:
       operationId: api_v1_FarmAnimals_update
       description: API endpoint that allows FarmAnimal to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -1363,9 +989,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/FarmAnimal'
           application/json:
             schema:
               $ref: '#/components/schemas/FarmAnimal'
@@ -1382,9 +1005,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/FarmAnimal'
             application/json:
               schema:
                 $ref: '#/components/schemas/FarmAnimal'
@@ -1393,13 +1013,6 @@ paths:
       operationId: api_v1_FarmAnimals_partial_update
       description: API endpoint that allows FarmAnimal to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -1410,9 +1023,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/PatchedFarmAnimal'
           application/json:
             schema:
               $ref: '#/components/schemas/PatchedFarmAnimal'
@@ -1428,9 +1038,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/FarmAnimal'
             application/json:
               schema:
                 $ref: '#/components/schemas/FarmAnimal'
@@ -1439,13 +1046,6 @@ paths:
       operationId: api_v1_FarmAnimals_destroy
       description: API endpoint that allows FarmAnimal to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -1469,13 +1069,6 @@ paths:
         name: activity_type
         schema:
           type: integer
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - name: page
         required: false
         in: query
@@ -1498,9 +1091,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/PaginatedFarmCalendarActivityList'
             application/json:
               schema:
                 $ref: '#/components/schemas/PaginatedFarmCalendarActivityList'
@@ -1508,21 +1098,10 @@ paths:
     post:
       operationId: api_v1_FarmCalendarActivities_create
       description: API endpoint that allows FarmCalendarActivity to be viewed or edited.
-      parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       tags:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/FarmCalendarActivity'
           application/json:
             schema:
               $ref: '#/components/schemas/FarmCalendarActivity'
@@ -1539,9 +1118,6 @@ paths:
       responses:
         '201':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/FarmCalendarActivity'
             application/json:
               schema:
                 $ref: '#/components/schemas/FarmCalendarActivity'
@@ -1551,13 +1127,6 @@ paths:
       operationId: api_v1_FarmCalendarActivities_retrieve
       description: API endpoint that allows FarmCalendarActivity to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -1572,9 +1141,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/FarmCalendarActivity'
             application/json:
               schema:
                 $ref: '#/components/schemas/FarmCalendarActivity'
@@ -1583,13 +1149,6 @@ paths:
       operationId: api_v1_FarmCalendarActivities_update
       description: API endpoint that allows FarmCalendarActivity to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -1600,9 +1159,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/FarmCalendarActivity'
           application/json:
             schema:
               $ref: '#/components/schemas/FarmCalendarActivity'
@@ -1619,9 +1175,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/FarmCalendarActivity'
             application/json:
               schema:
                 $ref: '#/components/schemas/FarmCalendarActivity'
@@ -1630,13 +1183,6 @@ paths:
       operationId: api_v1_FarmCalendarActivities_partial_update
       description: API endpoint that allows FarmCalendarActivity to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -1647,9 +1193,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/PatchedFarmCalendarActivity'
           application/json:
             schema:
               $ref: '#/components/schemas/PatchedFarmCalendarActivity'
@@ -1665,9 +1208,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/FarmCalendarActivity'
             application/json:
               schema:
                 $ref: '#/components/schemas/FarmCalendarActivity'
@@ -1676,13 +1216,6 @@ paths:
       operationId: api_v1_FarmCalendarActivities_destroy
       description: API endpoint that allows FarmCalendarActivity to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -1704,13 +1237,6 @@ paths:
         or edited.
       parameters:
       - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
-      - in: query
         name: name
         schema:
           type: string
@@ -1728,9 +1254,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/PaginatedFarmCalendarActivityTypeList'
             application/json:
               schema:
                 $ref: '#/components/schemas/PaginatedFarmCalendarActivityTypeList'
@@ -1739,21 +1262,10 @@ paths:
       operationId: api_v1_FarmCalendarActivityTypes_create
       description: API endpoint that allows FarmCalendarActivityType to be viewed
         or edited.
-      parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       tags:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/FarmCalendarActivityType'
           application/json:
             schema:
               $ref: '#/components/schemas/FarmCalendarActivityType'
@@ -1770,9 +1282,6 @@ paths:
       responses:
         '201':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/FarmCalendarActivityType'
             application/json:
               schema:
                 $ref: '#/components/schemas/FarmCalendarActivityType'
@@ -1783,13 +1292,6 @@ paths:
       description: API endpoint that allows FarmCalendarActivityType to be viewed
         or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -1805,9 +1307,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/FarmCalendarActivityType'
             application/json:
               schema:
                 $ref: '#/components/schemas/FarmCalendarActivityType'
@@ -1817,13 +1316,6 @@ paths:
       description: API endpoint that allows FarmCalendarActivityType to be viewed
         or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -1835,9 +1327,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/FarmCalendarActivityType'
           application/json:
             schema:
               $ref: '#/components/schemas/FarmCalendarActivityType'
@@ -1854,9 +1343,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/FarmCalendarActivityType'
             application/json:
               schema:
                 $ref: '#/components/schemas/FarmCalendarActivityType'
@@ -1866,13 +1352,6 @@ paths:
       description: API endpoint that allows FarmCalendarActivityType to be viewed
         or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -1884,9 +1363,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/PatchedFarmCalendarActivityType'
           application/json:
             schema:
               $ref: '#/components/schemas/PatchedFarmCalendarActivityType'
@@ -1902,9 +1378,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/FarmCalendarActivityType'
             application/json:
               schema:
                 $ref: '#/components/schemas/FarmCalendarActivityType'
@@ -1914,13 +1387,6 @@ paths:
       description: API endpoint that allows FarmCalendarActivityType to be viewed
         or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -1941,13 +1407,6 @@ paths:
       operationId: api_v1_FarmCrops_list
       description: API endpoint that allows FarmCrop to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: query
         name: growth_stage
         schema:
@@ -1994,9 +1453,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/PaginatedFarmCropList'
             application/json:
               schema:
                 $ref: '#/components/schemas/PaginatedFarmCropList'
@@ -2004,21 +1460,10 @@ paths:
     post:
       operationId: api_v1_FarmCrops_create
       description: API endpoint that allows FarmCrop to be viewed or edited.
-      parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       tags:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/FarmCrop'
           application/json:
             schema:
               $ref: '#/components/schemas/FarmCrop'
@@ -2035,9 +1480,6 @@ paths:
       responses:
         '201':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/FarmCrop'
             application/json:
               schema:
                 $ref: '#/components/schemas/FarmCrop'
@@ -2047,13 +1489,6 @@ paths:
       operationId: api_v1_FarmCrops_retrieve
       description: API endpoint that allows FarmCrop to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -2068,9 +1503,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/FarmCrop'
             application/json:
               schema:
                 $ref: '#/components/schemas/FarmCrop'
@@ -2079,13 +1511,6 @@ paths:
       operationId: api_v1_FarmCrops_update
       description: API endpoint that allows FarmCrop to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -2096,9 +1521,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/FarmCrop'
           application/json:
             schema:
               $ref: '#/components/schemas/FarmCrop'
@@ -2115,9 +1537,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/FarmCrop'
             application/json:
               schema:
                 $ref: '#/components/schemas/FarmCrop'
@@ -2126,13 +1545,6 @@ paths:
       operationId: api_v1_FarmCrops_partial_update
       description: API endpoint that allows FarmCrop to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -2143,9 +1555,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/PatchedFarmCrop'
           application/json:
             schema:
               $ref: '#/components/schemas/PatchedFarmCrop'
@@ -2161,9 +1570,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/FarmCrop'
             application/json:
               schema:
                 $ref: '#/components/schemas/FarmCrop'
@@ -2172,13 +1578,6 @@ paths:
       operationId: api_v1_FarmCrops_destroy
       description: API endpoint that allows FarmCrop to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -2202,13 +1601,6 @@ paths:
         name: farm
         schema:
           type: integer
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: query
         name: geo_id
         schema:
@@ -2248,9 +1640,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/PaginatedFarmParcelList'
             application/json:
               schema:
                 $ref: '#/components/schemas/PaginatedFarmParcelList'
@@ -2258,21 +1647,10 @@ paths:
     post:
       operationId: api_v1_FarmParcels_create
       description: API endpoint that allows FarmParcel to be viewed or edited.
-      parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       tags:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/FarmParcel'
           application/json:
             schema:
               $ref: '#/components/schemas/FarmParcel'
@@ -2289,9 +1667,6 @@ paths:
       responses:
         '201':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/FarmParcel'
             application/json:
               schema:
                 $ref: '#/components/schemas/FarmParcel'
@@ -2301,13 +1676,6 @@ paths:
       operationId: api_v1_FarmParcels_retrieve
       description: API endpoint that allows FarmParcel to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -2322,9 +1690,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/FarmParcel'
             application/json:
               schema:
                 $ref: '#/components/schemas/FarmParcel'
@@ -2333,13 +1698,6 @@ paths:
       operationId: api_v1_FarmParcels_update
       description: API endpoint that allows FarmParcel to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -2350,9 +1708,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/FarmParcel'
           application/json:
             schema:
               $ref: '#/components/schemas/FarmParcel'
@@ -2369,9 +1724,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/FarmParcel'
             application/json:
               schema:
                 $ref: '#/components/schemas/FarmParcel'
@@ -2380,13 +1732,6 @@ paths:
       operationId: api_v1_FarmParcels_partial_update
       description: API endpoint that allows FarmParcel to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -2397,9 +1742,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/PatchedFarmParcel'
           application/json:
             schema:
               $ref: '#/components/schemas/PatchedFarmParcel'
@@ -2415,9 +1757,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/FarmParcel'
             application/json:
               schema:
                 $ref: '#/components/schemas/FarmParcel'
@@ -2426,13 +1765,6 @@ paths:
       operationId: api_v1_FarmParcels_destroy
       description: API endpoint that allows FarmParcel to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -2457,13 +1789,6 @@ paths:
         name: activity_type
         schema:
           type: integer
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - name: page
         required: false
         in: query
@@ -2486,9 +1811,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/PaginatedFertilizationOperationList'
             application/json:
               schema:
                 $ref: '#/components/schemas/PaginatedFertilizationOperationList'
@@ -2497,21 +1819,10 @@ paths:
       operationId: api_v1_FertilizationOperations_create
       description: API endpoint that allows FertilizationOperation to be viewed or
         edited.
-      parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       tags:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/FertilizationOperation'
           application/json:
             schema:
               $ref: '#/components/schemas/FertilizationOperation'
@@ -2528,9 +1839,6 @@ paths:
       responses:
         '201':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/FertilizationOperation'
             application/json:
               schema:
                 $ref: '#/components/schemas/FertilizationOperation'
@@ -2541,13 +1849,6 @@ paths:
       description: API endpoint that allows FertilizationOperation to be viewed or
         edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -2562,9 +1863,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/FertilizationOperation'
             application/json:
               schema:
                 $ref: '#/components/schemas/FertilizationOperation'
@@ -2574,13 +1872,6 @@ paths:
       description: API endpoint that allows FertilizationOperation to be viewed or
         edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -2591,9 +1882,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/FertilizationOperation'
           application/json:
             schema:
               $ref: '#/components/schemas/FertilizationOperation'
@@ -2610,9 +1898,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/FertilizationOperation'
             application/json:
               schema:
                 $ref: '#/components/schemas/FertilizationOperation'
@@ -2622,13 +1907,6 @@ paths:
       description: API endpoint that allows FertilizationOperation to be viewed or
         edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -2639,9 +1917,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/PatchedFertilizationOperation'
           application/json:
             schema:
               $ref: '#/components/schemas/PatchedFertilizationOperation'
@@ -2657,9 +1932,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/FertilizationOperation'
             application/json:
               schema:
                 $ref: '#/components/schemas/FertilizationOperation'
@@ -2669,13 +1941,6 @@ paths:
       description: API endpoint that allows FertilizationOperation to be viewed or
         edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -2695,13 +1960,6 @@ paths:
       operationId: api_v1_Fertilizers_list
       description: API endpoint that allows Fertilizer to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: query
         name: name
         schema:
@@ -2732,9 +1990,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/PaginatedFertilizerList'
             application/json:
               schema:
                 $ref: '#/components/schemas/PaginatedFertilizerList'
@@ -2742,21 +1997,10 @@ paths:
     post:
       operationId: api_v1_Fertilizers_create
       description: API endpoint that allows Fertilizer to be viewed or edited.
-      parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       tags:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Fertilizer'
           application/json:
             schema:
               $ref: '#/components/schemas/Fertilizer'
@@ -2773,9 +2017,6 @@ paths:
       responses:
         '201':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Fertilizer'
             application/json:
               schema:
                 $ref: '#/components/schemas/Fertilizer'
@@ -2785,13 +2026,6 @@ paths:
       operationId: api_v1_Fertilizers_retrieve
       description: API endpoint that allows Fertilizer to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -2806,9 +2040,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Fertilizer'
             application/json:
               schema:
                 $ref: '#/components/schemas/Fertilizer'
@@ -2817,13 +2048,6 @@ paths:
       operationId: api_v1_Fertilizers_update
       description: API endpoint that allows Fertilizer to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -2834,9 +2058,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Fertilizer'
           application/json:
             schema:
               $ref: '#/components/schemas/Fertilizer'
@@ -2853,9 +2074,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Fertilizer'
             application/json:
               schema:
                 $ref: '#/components/schemas/Fertilizer'
@@ -2864,13 +2082,6 @@ paths:
       operationId: api_v1_Fertilizers_partial_update
       description: API endpoint that allows Fertilizer to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -2881,9 +2092,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/PatchedFertilizer'
           application/json:
             schema:
               $ref: '#/components/schemas/PatchedFertilizer'
@@ -2899,9 +2107,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Fertilizer'
             application/json:
               schema:
                 $ref: '#/components/schemas/Fertilizer'
@@ -2910,13 +2115,6 @@ paths:
       operationId: api_v1_Fertilizers_destroy
       description: API endpoint that allows Fertilizer to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -2940,13 +2138,6 @@ paths:
         name: activity_type
         schema:
           type: integer
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - name: page
         required: false
         in: query
@@ -2969,9 +2160,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/PaginatedIrrigationOperationList'
             application/json:
               schema:
                 $ref: '#/components/schemas/PaginatedIrrigationOperationList'
@@ -2979,21 +2167,10 @@ paths:
     post:
       operationId: api_v1_IrrigationOperations_create
       description: API endpoint that allows IrrigationOperation to be viewed or edited.
-      parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       tags:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/IrrigationOperation'
           application/json:
             schema:
               $ref: '#/components/schemas/IrrigationOperation'
@@ -3010,9 +2187,6 @@ paths:
       responses:
         '201':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/IrrigationOperation'
             application/json:
               schema:
                 $ref: '#/components/schemas/IrrigationOperation'
@@ -3022,13 +2196,6 @@ paths:
       operationId: api_v1_IrrigationOperations_retrieve
       description: API endpoint that allows IrrigationOperation to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -3043,9 +2210,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/IrrigationOperation'
             application/json:
               schema:
                 $ref: '#/components/schemas/IrrigationOperation'
@@ -3054,13 +2218,6 @@ paths:
       operationId: api_v1_IrrigationOperations_update
       description: API endpoint that allows IrrigationOperation to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -3071,9 +2228,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/IrrigationOperation'
           application/json:
             schema:
               $ref: '#/components/schemas/IrrigationOperation'
@@ -3090,9 +2244,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/IrrigationOperation'
             application/json:
               schema:
                 $ref: '#/components/schemas/IrrigationOperation'
@@ -3101,13 +2252,6 @@ paths:
       operationId: api_v1_IrrigationOperations_partial_update
       description: API endpoint that allows IrrigationOperation to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -3118,9 +2262,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/PatchedIrrigationOperation'
           application/json:
             schema:
               $ref: '#/components/schemas/PatchedIrrigationOperation'
@@ -3136,9 +2277,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/IrrigationOperation'
             application/json:
               schema:
                 $ref: '#/components/schemas/IrrigationOperation'
@@ -3147,13 +2285,6 @@ paths:
       operationId: api_v1_IrrigationOperations_destroy
       description: API endpoint that allows IrrigationOperation to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -3177,13 +2308,6 @@ paths:
         name: activity_type
         schema:
           type: integer
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - name: page
         required: false
         in: query
@@ -3206,9 +2330,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/PaginatedObservationList'
             application/json:
               schema:
                 $ref: '#/components/schemas/PaginatedObservationList'
@@ -3216,21 +2337,10 @@ paths:
     post:
       operationId: api_v1_Observations_create
       description: API endpoint that allows Observation to be viewed or edited.
-      parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       tags:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Observation'
           application/json:
             schema:
               $ref: '#/components/schemas/Observation'
@@ -3247,9 +2357,6 @@ paths:
       responses:
         '201':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Observation'
             application/json:
               schema:
                 $ref: '#/components/schemas/Observation'
@@ -3259,13 +2366,6 @@ paths:
       operationId: api_v1_Observations_retrieve
       description: API endpoint that allows Observation to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -3280,9 +2380,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Observation'
             application/json:
               schema:
                 $ref: '#/components/schemas/Observation'
@@ -3291,13 +2388,6 @@ paths:
       operationId: api_v1_Observations_update
       description: API endpoint that allows Observation to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -3308,9 +2398,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Observation'
           application/json:
             schema:
               $ref: '#/components/schemas/Observation'
@@ -3327,9 +2414,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Observation'
             application/json:
               schema:
                 $ref: '#/components/schemas/Observation'
@@ -3338,13 +2422,6 @@ paths:
       operationId: api_v1_Observations_partial_update
       description: API endpoint that allows Observation to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -3355,9 +2432,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/PatchedObservation'
           application/json:
             schema:
               $ref: '#/components/schemas/PatchedObservation'
@@ -3373,9 +2447,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Observation'
             application/json:
               schema:
                 $ref: '#/components/schemas/Observation'
@@ -3384,13 +2455,6 @@ paths:
       operationId: api_v1_Observations_destroy
       description: API endpoint that allows Observation to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -3410,13 +2474,6 @@ paths:
       operationId: api_v1_Pesticides_list
       description: API endpoint that allows Pesticide to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: query
         name: name
         schema:
@@ -3447,9 +2504,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/PaginatedPesticideList'
             application/json:
               schema:
                 $ref: '#/components/schemas/PaginatedPesticideList'
@@ -3457,21 +2511,10 @@ paths:
     post:
       operationId: api_v1_Pesticides_create
       description: API endpoint that allows Pesticide to be viewed or edited.
-      parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       tags:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Pesticide'
           application/json:
             schema:
               $ref: '#/components/schemas/Pesticide'
@@ -3488,9 +2531,6 @@ paths:
       responses:
         '201':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Pesticide'
             application/json:
               schema:
                 $ref: '#/components/schemas/Pesticide'
@@ -3500,13 +2540,6 @@ paths:
       operationId: api_v1_Pesticides_retrieve
       description: API endpoint that allows Pesticide to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -3521,9 +2554,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Pesticide'
             application/json:
               schema:
                 $ref: '#/components/schemas/Pesticide'
@@ -3532,13 +2562,6 @@ paths:
       operationId: api_v1_Pesticides_update
       description: API endpoint that allows Pesticide to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -3549,9 +2572,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Pesticide'
           application/json:
             schema:
               $ref: '#/components/schemas/Pesticide'
@@ -3568,9 +2588,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Pesticide'
             application/json:
               schema:
                 $ref: '#/components/schemas/Pesticide'
@@ -3579,13 +2596,6 @@ paths:
       operationId: api_v1_Pesticides_partial_update
       description: API endpoint that allows Pesticide to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -3596,9 +2606,6 @@ paths:
       - api
       requestBody:
         content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/PatchedPesticide'
           application/json:
             schema:
               $ref: '#/components/schemas/PatchedPesticide'
@@ -3614,9 +2621,6 @@ paths:
       responses:
         '200':
           content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Pesticide'
             application/json:
               schema:
                 $ref: '#/components/schemas/Pesticide'
@@ -3625,13 +2629,6 @@ paths:
       operationId: api_v1_Pesticides_destroy
       description: API endpoint that allows Pesticide to be viewed or edited.
       parameters:
-      - in: query
-        name: format
-        schema:
-          type: string
-          enum:
-          - json
-          - jsonld
       - in: path
         name: id
         schema:
@@ -3794,6 +2791,28 @@ paths:
           description: ''
 components:
   schemas:
+    AddressField:
+      type: object
+      properties:
+        adminUnitL1:
+          type: string
+        adminUnitL2:
+          type: string
+        addressArea:
+          type: string
+        municipality:
+          type: string
+        community:
+          type: string
+        locatorName:
+          type: string
+      required:
+      - addressArea
+      - adminUnitL1
+      - adminUnitL2
+      - community
+      - locatorName
+      - municipality
     AgriculturalMachine:
       type: object
       properties:
@@ -3848,6 +2867,16 @@ components:
       - purchase_date
       - seria_number
       - updated_at
+    ContactPersonField:
+      type: object
+      properties:
+        firstname:
+          type: string
+        lastname:
+          type: string
+      required:
+      - firstname
+      - lastname
     CropGrowthStageObservation:
       type: object
       properties:
@@ -4005,19 +3034,8 @@ components:
     Farm:
       type: object
       properties:
-        id:
-          type: integer
-          readOnly: true
-        farm_parcels:
-          type: array
-          items:
-            type: integer
-          readOnly: true
         status:
-          allOf:
-          - $ref: '#/components/schemas/StatusEnum'
-          minimum: -2147483648
-          maximum: 2147483647
+          $ref: '#/components/schemas/StatusEnum'
         deleted_at:
           type: string
           format: date-time
@@ -4030,69 +3048,41 @@ components:
           type: string
           format: date-time
           readOnly: true
+        id:
+          type: integer
+          readOnly: true
         name:
           type: string
-          title: Farm Name
-          maxLength: 255
         description:
           type: string
-          nullable: true
-          title: Farm Description
         administrator:
           type: string
-          nullable: true
-          title: Farm Administrator
-          maxLength: 255
-        contact_person_firstname:
-          type: string
-          nullable: true
-          title: Contact Person First Name
-          maxLength: 255
-        contact_person_lastname:
-          type: string
-          nullable: true
-          title: Contact Person Last Name
-          maxLength: 255
         telephone:
           type: string
-          nullable: true
-          title: Contact Telephone
-          maxLength: 20
-        vat_id:
+        vatID:
           type: string
-          nullable: true
-          maxLength: 50
-        admin_unit_l1:
-          type: string
-          nullable: true
-          title: Admin Unit Line 1
-          maxLength: 255
-        admin_unit_l2:
-          type: string
-          nullable: true
-          title: Admin Unit Line 2
-          maxLength: 255
-        address_area:
-          type: string
-          nullable: true
-          maxLength: 255
-        municipality:
-          type: string
-          nullable: true
-          maxLength: 255
-        community:
-          type: string
-          nullable: true
-          maxLength: 255
-        locator_name:
-          type: string
-          nullable: true
-          maxLength: 255
+        farm_parcels:
+          type: array
+          items:
+            type: integer
+          readOnly: true
+        contactPerson:
+          $ref: '#/components/schemas/ContactPersonField'
+        address:
+          $ref: '#/components/schemas/AddressField'
       required:
+      - address
+      - administrator
+      - contactPerson
       - created_at
+      - description
       - farm_parcels
       - id
+      - name
+      - status
+      - telephone
       - updated_at
+      - vatID
     FarmAnimal:
       type: object
       properties:
@@ -5085,19 +4075,8 @@ components:
     PatchedFarm:
       type: object
       properties:
-        id:
-          type: integer
-          readOnly: true
-        farm_parcels:
-          type: array
-          items:
-            type: integer
-          readOnly: true
         status:
-          allOf:
-          - $ref: '#/components/schemas/StatusEnum'
-          minimum: -2147483648
-          maximum: 2147483647
+          $ref: '#/components/schemas/StatusEnum'
         deleted_at:
           type: string
           format: date-time
@@ -5110,64 +4089,28 @@ components:
           type: string
           format: date-time
           readOnly: true
+        id:
+          type: integer
+          readOnly: true
         name:
           type: string
-          title: Farm Name
-          maxLength: 255
         description:
           type: string
-          nullable: true
-          title: Farm Description
         administrator:
           type: string
-          nullable: true
-          title: Farm Administrator
-          maxLength: 255
-        contact_person_firstname:
-          type: string
-          nullable: true
-          title: Contact Person First Name
-          maxLength: 255
-        contact_person_lastname:
-          type: string
-          nullable: true
-          title: Contact Person Last Name
-          maxLength: 255
         telephone:
           type: string
-          nullable: true
-          title: Contact Telephone
-          maxLength: 20
-        vat_id:
+        vatID:
           type: string
-          nullable: true
-          maxLength: 50
-        admin_unit_l1:
-          type: string
-          nullable: true
-          title: Admin Unit Line 1
-          maxLength: 255
-        admin_unit_l2:
-          type: string
-          nullable: true
-          title: Admin Unit Line 2
-          maxLength: 255
-        address_area:
-          type: string
-          nullable: true
-          maxLength: 255
-        municipality:
-          type: string
-          nullable: true
-          maxLength: 255
-        community:
-          type: string
-          nullable: true
-          maxLength: 255
-        locator_name:
-          type: string
-          nullable: true
-          maxLength: 255
+        farm_parcels:
+          type: array
+          items:
+            type: integer
+          readOnly: true
+        contactPerson:
+          $ref: '#/components/schemas/ContactPersonField'
+        address:
+          $ref: '#/components/schemas/AddressField'
     PatchedFarmAnimal:
       type: object
       properties:
