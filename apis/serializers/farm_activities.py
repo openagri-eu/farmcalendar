@@ -128,32 +128,63 @@ class FertilizationOperationSerializer(FarmCalendarActivitySerializer):
         return json_ld_representation
 
 
-
-class IrrigationOperationSerializer(serializers.HyperlinkedModelSerializer):
+class IrrigationOperationSerializer(FarmCalendarActivitySerializer):
     class Meta:
         model = IrrigationOperation
         fields = '__all__'
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation.update({'@type': 'IrrigationOperation'})
+        json_ld_representation = representation
 
-class CropProtectionOperationSerializer(serializers.HyperlinkedModelSerializer):
+        return json_ld_representation
+
+class CropProtectionOperationSerializer(FarmCalendarActivitySerializer):
     class Meta:
         model = CropProtectionOperation
         fields = '__all__'
 
-class ObservationSerializer(serializers.HyperlinkedModelSerializer):
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation.update({'@type': 'CropProtectionOperation'})
+        json_ld_representation = representation
+
+        return json_ld_representation
+
+class ObservationSerializer(FarmCalendarActivitySerializer):
     class Meta:
         model = Observation
         fields = '__all__'
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation.update({'@type': 'CropObservation'})
+        json_ld_representation = representation
 
-class CropStressIndicatorObservationSerializer(serializers.HyperlinkedModelSerializer):
+        return json_ld_representation
+
+class CropStressIndicatorObservationSerializer(FarmCalendarActivitySerializer):
     class Meta:
         model = CropStressIndicatorObservation
         fields = '__all__'
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation.update({'@type': 'CropStressIndicatorObservation'})
+        json_ld_representation = representation
 
-class CropGrowthStageObservationSerializer(serializers.HyperlinkedModelSerializer):
+        return json_ld_representation
+
+class CropGrowthStageObservationSerializer(FarmCalendarActivitySerializer):
     class Meta:
         model = CropGrowthStageObservation
         fields = '__all__'
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation.update({'@type': 'CropGrowthStageObservation'})
+        json_ld_representation = representation
+
+        return json_ld_representation
 

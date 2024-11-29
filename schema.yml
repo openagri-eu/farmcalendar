@@ -3762,10 +3762,24 @@ components:
     CropGrowthStageObservation:
       type: object
       properties:
-        url:
-          type: string
-          format: uri
+        id:
+          type: integer
           readOnly: true
+        activityType:
+          type: integer
+        hasStartDatetime:
+          type: string
+          format: date-time
+        hasEndDatetime:
+          type: string
+          format: date-time
+          nullable: true
+        responsibleAgent:
+          type: string
+        usesAgriculturalMachinery:
+          type: array
+          items:
+            type: integer
         title:
           type: string
           maxLength: 200
@@ -3792,31 +3806,47 @@ components:
           type: string
           maxLength: 255
         activity_type:
-          type: string
-          format: uri
+          type: integer
         crop:
-          type: string
-          format: uri
+          type: integer
         agricultural_machinery:
           type: array
           items:
-            type: string
-            format: uri
+            type: integer
       required:
+      - activityType
       - activity_type
       - crop
+      - hasEndDatetime
+      - hasStartDatetime
+      - id
       - observed_property
+      - responsibleAgent
       - title
-      - url
+      - usesAgriculturalMachinery
       - value
       - value_unit
     CropProtectionOperation:
       type: object
       properties:
-        url:
-          type: string
-          format: uri
+        id:
+          type: integer
           readOnly: true
+        activityType:
+          type: integer
+        hasStartDatetime:
+          type: string
+          format: date-time
+        hasEndDatetime:
+          type: string
+          format: date-time
+          nullable: true
+        responsibleAgent:
+          type: string
+        usesAgriculturalMachinery:
+          type: array
+          items:
+            type: integer
         title:
           type: string
           maxLength: 200
@@ -3841,27 +3871,28 @@ components:
           type: string
           maxLength: 255
         activity_type:
-          type: string
-          format: uri
+          type: integer
         operated_on:
-          type: string
-          format: uri
+          type: integer
         pesticide:
-          type: string
-          format: uri
+          type: integer
           nullable: true
         agricultural_machinery:
           type: array
           items:
-            type: string
-            format: uri
+            type: integer
       required:
+      - activityType
       - activity_type
       - applied_amount
       - applied_amount_unit
+      - hasEndDatetime
+      - hasStartDatetime
+      - id
       - operated_on
+      - responsibleAgent
       - title
-      - url
+      - usesAgriculturalMachinery
     CropSpeciesSerializerField:
       type: object
       properties:
@@ -3875,10 +3906,24 @@ components:
     CropStressIndicatorObservation:
       type: object
       properties:
-        url:
-          type: string
-          format: uri
+        id:
+          type: integer
           readOnly: true
+        activityType:
+          type: integer
+        hasStartDatetime:
+          type: string
+          format: date-time
+        hasEndDatetime:
+          type: string
+          format: date-time
+          nullable: true
+        responsibleAgent:
+          type: string
+        usesAgriculturalMachinery:
+          type: array
+          items:
+            type: integer
         title:
           type: string
           maxLength: 200
@@ -3905,22 +3950,24 @@ components:
           type: string
           maxLength: 255
         activity_type:
-          type: string
-          format: uri
+          type: integer
         crop:
-          type: string
-          format: uri
+          type: integer
         agricultural_machinery:
           type: array
           items:
-            type: string
-            format: uri
+            type: integer
       required:
+      - activityType
       - activity_type
       - crop
+      - hasEndDatetime
+      - hasStartDatetime
+      - id
       - observed_property
+      - responsibleAgent
       - title
-      - url
+      - usesAgriculturalMachinery
       - value
       - value_unit
     Farm:
@@ -4348,10 +4395,24 @@ components:
     IrrigationOperation:
       type: object
       properties:
-        url:
-          type: string
-          format: uri
+        id:
+          type: integer
           readOnly: true
+        activityType:
+          type: integer
+        hasStartDatetime:
+          type: string
+          format: date-time
+        hasEndDatetime:
+          type: string
+          format: date-time
+          nullable: true
+        responsibleAgent:
+          type: string
+        usesAgriculturalMachinery:
+          type: array
+          items:
+            type: integer
         title:
           type: string
           maxLength: 200
@@ -4378,23 +4439,25 @@ components:
         irrigation_system:
           $ref: '#/components/schemas/IrrigationSystemEnum'
         activity_type:
-          type: string
-          format: uri
+          type: integer
         operated_on:
-          type: string
-          format: uri
+          type: integer
         agricultural_machinery:
           type: array
           items:
-            type: string
-            format: uri
+            type: integer
       required:
+      - activityType
       - activity_type
       - applied_amount
       - applied_amount_unit
+      - hasEndDatetime
+      - hasStartDatetime
+      - id
       - operated_on
+      - responsibleAgent
       - title
-      - url
+      - usesAgriculturalMachinery
     IrrigationSystemEnum:
       enum:
       - sprinkler
@@ -4426,10 +4489,24 @@ components:
     Observation:
       type: object
       properties:
-        url:
-          type: string
-          format: uri
+        id:
+          type: integer
           readOnly: true
+        activityType:
+          type: integer
+        hasStartDatetime:
+          type: string
+          format: date-time
+        hasEndDatetime:
+          type: string
+          format: date-time
+          nullable: true
+        responsibleAgent:
+          type: string
+        usesAgriculturalMachinery:
+          type: array
+          items:
+            type: integer
         title:
           type: string
           maxLength: 200
@@ -4456,18 +4533,21 @@ components:
           type: string
           maxLength: 255
         activity_type:
-          type: string
-          format: uri
+          type: integer
         agricultural_machinery:
           type: array
           items:
-            type: string
-            format: uri
+            type: integer
       required:
+      - activityType
       - activity_type
+      - hasEndDatetime
+      - hasStartDatetime
+      - id
       - observed_property
+      - responsibleAgent
       - title
-      - url
+      - usesAgriculturalMachinery
       - value
       - value_unit
     PaginatedAgriculturalMachineList:
@@ -4863,10 +4943,24 @@ components:
     PatchedCropGrowthStageObservation:
       type: object
       properties:
-        url:
-          type: string
-          format: uri
+        id:
+          type: integer
           readOnly: true
+        activityType:
+          type: integer
+        hasStartDatetime:
+          type: string
+          format: date-time
+        hasEndDatetime:
+          type: string
+          format: date-time
+          nullable: true
+        responsibleAgent:
+          type: string
+        usesAgriculturalMachinery:
+          type: array
+          items:
+            type: integer
         title:
           type: string
           maxLength: 200
@@ -4893,23 +4987,34 @@ components:
           type: string
           maxLength: 255
         activity_type:
-          type: string
-          format: uri
+          type: integer
         crop:
-          type: string
-          format: uri
+          type: integer
         agricultural_machinery:
           type: array
           items:
-            type: string
-            format: uri
+            type: integer
     PatchedCropProtectionOperation:
       type: object
       properties:
-        url:
-          type: string
-          format: uri
+        id:
+          type: integer
           readOnly: true
+        activityType:
+          type: integer
+        hasStartDatetime:
+          type: string
+          format: date-time
+        hasEndDatetime:
+          type: string
+          format: date-time
+          nullable: true
+        responsibleAgent:
+          type: string
+        usesAgriculturalMachinery:
+          type: array
+          items:
+            type: integer
         title:
           type: string
           maxLength: 200
@@ -4934,27 +5039,37 @@ components:
           type: string
           maxLength: 255
         activity_type:
-          type: string
-          format: uri
+          type: integer
         operated_on:
-          type: string
-          format: uri
+          type: integer
         pesticide:
-          type: string
-          format: uri
+          type: integer
           nullable: true
         agricultural_machinery:
           type: array
           items:
-            type: string
-            format: uri
+            type: integer
     PatchedCropStressIndicatorObservation:
       type: object
       properties:
-        url:
-          type: string
-          format: uri
+        id:
+          type: integer
           readOnly: true
+        activityType:
+          type: integer
+        hasStartDatetime:
+          type: string
+          format: date-time
+        hasEndDatetime:
+          type: string
+          format: date-time
+          nullable: true
+        responsibleAgent:
+          type: string
+        usesAgriculturalMachinery:
+          type: array
+          items:
+            type: integer
         title:
           type: string
           maxLength: 200
@@ -4981,16 +5096,13 @@ components:
           type: string
           maxLength: 255
         activity_type:
-          type: string
-          format: uri
+          type: integer
         crop:
-          type: string
-          format: uri
+          type: integer
         agricultural_machinery:
           type: array
           items:
-            type: string
-            format: uri
+            type: integer
     PatchedFarm:
       type: object
       properties:
@@ -5332,10 +5444,24 @@ components:
     PatchedIrrigationOperation:
       type: object
       properties:
-        url:
-          type: string
-          format: uri
+        id:
+          type: integer
           readOnly: true
+        activityType:
+          type: integer
+        hasStartDatetime:
+          type: string
+          format: date-time
+        hasEndDatetime:
+          type: string
+          format: date-time
+          nullable: true
+        responsibleAgent:
+          type: string
+        usesAgriculturalMachinery:
+          type: array
+          items:
+            type: integer
         title:
           type: string
           maxLength: 200
@@ -5362,23 +5488,34 @@ components:
         irrigation_system:
           $ref: '#/components/schemas/IrrigationSystemEnum'
         activity_type:
-          type: string
-          format: uri
+          type: integer
         operated_on:
-          type: string
-          format: uri
+          type: integer
         agricultural_machinery:
           type: array
           items:
-            type: string
-            format: uri
+            type: integer
     PatchedObservation:
       type: object
       properties:
-        url:
-          type: string
-          format: uri
+        id:
+          type: integer
           readOnly: true
+        activityType:
+          type: integer
+        hasStartDatetime:
+          type: string
+          format: date-time
+        hasEndDatetime:
+          type: string
+          format: date-time
+          nullable: true
+        responsibleAgent:
+          type: string
+        usesAgriculturalMachinery:
+          type: array
+          items:
+            type: integer
         title:
           type: string
           maxLength: 200
@@ -5405,13 +5542,11 @@ components:
           type: string
           maxLength: 255
         activity_type:
-          type: string
-          format: uri
+          type: integer
         agricultural_machinery:
           type: array
           items:
-            type: string
-            format: uri
+            type: integer
     PatchedPesticide:
       type: object
       properties:
