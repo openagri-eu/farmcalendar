@@ -4,6 +4,7 @@ from rest_framework import serializers
 
 from farm_management.models import (
     Fertilizer,
+    Pesticide,
     FarmParcel,
     AgriculturalMachine
 )
@@ -94,19 +95,20 @@ class AppliedAmmountFieldSerializer(serializers.Serializer):
             'numericValue': instance.applied_amount,
         }
 
-class FertilizationOperationSerializer(FarmCalendarActivitySerializer):
+class GenericOperationSerializer(FarmCalendarActivitySerializer):
     hasAppliedAmount = AppliedAmmountFieldSerializer(source='*')
-    hasApplicationMethod = serializers.CharField(source='application_method', allow_null=True)
 
-    usesFertilizer = serializers.PrimaryKeyRelatedField(
-        queryset=Fertilizer.objects.all(),
-        allow_null=True
-    )
     operatedOn = serializers.PrimaryKeyRelatedField(
         queryset=FarmParcel.objects.all(),
         source='operated_on'
     )
 
+class FertilizationOperationSerializer(GenericOperationSerializer):
+    usesFertilizer = serializers.PrimaryKeyRelatedField(
+        queryset=Fertilizer.objects.all(),
+        allow_null=True
+    )
+    hasApplicationMethod = serializers.CharField(source='application_method', allow_null=True)
     class Meta:
         model = FertilizationOperation
 
@@ -119,7 +121,6 @@ class FertilizationOperationSerializer(FarmCalendarActivitySerializer):
             'usesFertilizer', 'operatedOn'
         ]
 
-
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation.update({'@type': 'FertilizationOperation'})
@@ -128,10 +129,24 @@ class FertilizationOperationSerializer(FarmCalendarActivitySerializer):
         return json_ld_representation
 
 
-class IrrigationOperationSerializer(FarmCalendarActivitySerializer):
+class IrrigationOperationSerializer(GenericOperationSerializer):
+    usesIrrigationSystem = serializers.ChoiceField(
+        choices=IrrigationOperation.IrrigationSystemChoices.choices,
+        source='irrigation_system'
+    )
+
     class Meta:
         model = IrrigationOperation
-        fields = '__all__'
+
+        fields = [
+            'id',
+            'activityType', 'title', 'details',
+            'hasStartDatetime', 'hasEndDatetime',
+            'responsibleAgent', 'usesAgriculturalMachinery',
+            'hasAppliedAmount',
+            'usesIrrigationSystem', 'operatedOn'
+        ]
+
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
@@ -140,10 +155,22 @@ class IrrigationOperationSerializer(FarmCalendarActivitySerializer):
 
         return json_ld_representation
 
-class CropProtectionOperationSerializer(FarmCalendarActivitySerializer):
+class CropProtectionOperationSerializer(GenericOperationSerializer):
+    usesPesticide = serializers.PrimaryKeyRelatedField(
+        queryset=Pesticide.objects.all(),
+        allow_null=True
+    )
     class Meta:
         model = CropProtectionOperation
-        fields = '__all__'
+        fields = [
+            'id',
+            'activityType', 'title', 'details',
+            'hasStartDatetime', 'hasEndDatetime',
+            'responsibleAgent', 'usesAgriculturalMachinery',
+            'hasAppliedAmount',
+            'usesPesticide', 'operatedOn'
+        ]
+
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)

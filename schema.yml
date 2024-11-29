@@ -3834,6 +3834,12 @@ components:
           readOnly: true
         activityType:
           type: integer
+        title:
+          type: string
+          maxLength: 200
+        details:
+          type: string
+          nullable: true
         hasStartDatetime:
           type: string
           format: date-time
@@ -3847,52 +3853,24 @@ components:
           type: array
           items:
             type: integer
-        title:
-          type: string
-          maxLength: 200
-        start_datetime:
-          type: string
-          format: date-time
-        end_datetime:
-          type: string
-          format: date-time
-          nullable: true
-        details:
-          type: string
-          nullable: true
-        responsible_agent:
-          type: string
-          nullable: true
-        applied_amount:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
-        applied_amount_unit:
-          type: string
-          maxLength: 255
-        activity_type:
-          type: integer
-        operated_on:
-          type: integer
-        pesticide:
+        hasAppliedAmount:
+          $ref: '#/components/schemas/AppliedAmmountField'
+        usesPesticide:
           type: integer
           nullable: true
-        agricultural_machinery:
-          type: array
-          items:
-            type: integer
+        operatedOn:
+          type: integer
       required:
       - activityType
-      - activity_type
-      - applied_amount
-      - applied_amount_unit
+      - hasAppliedAmount
       - hasEndDatetime
       - hasStartDatetime
       - id
-      - operated_on
+      - operatedOn
       - responsibleAgent
       - title
       - usesAgriculturalMachinery
+      - usesPesticide
     CropSpeciesSerializerField:
       type: object
       properties:
@@ -4400,6 +4378,12 @@ components:
           readOnly: true
         activityType:
           type: integer
+        title:
+          type: string
+          maxLength: 200
+        details:
+          type: string
+          nullable: true
         hasStartDatetime:
           type: string
           format: date-time
@@ -4413,65 +4397,23 @@ components:
           type: array
           items:
             type: integer
-        title:
-          type: string
-          maxLength: 200
-        start_datetime:
-          type: string
-          format: date-time
-        end_datetime:
-          type: string
-          format: date-time
-          nullable: true
-        details:
-          type: string
-          nullable: true
-        responsible_agent:
-          type: string
-          nullable: true
-        applied_amount:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
-        applied_amount_unit:
-          type: string
-          maxLength: 255
-        irrigation_system:
-          $ref: '#/components/schemas/IrrigationSystemEnum'
-        activity_type:
+        hasAppliedAmount:
+          $ref: '#/components/schemas/AppliedAmmountField'
+        usesIrrigationSystem:
+          $ref: '#/components/schemas/UsesIrrigationSystemEnum'
+        operatedOn:
           type: integer
-        operated_on:
-          type: integer
-        agricultural_machinery:
-          type: array
-          items:
-            type: integer
       required:
       - activityType
-      - activity_type
-      - applied_amount
-      - applied_amount_unit
+      - hasAppliedAmount
       - hasEndDatetime
       - hasStartDatetime
       - id
-      - operated_on
+      - operatedOn
       - responsibleAgent
       - title
       - usesAgriculturalMachinery
-    IrrigationSystemEnum:
-      enum:
-      - sprinkler
-      - drip
-      - centre_pivot
-      - furrow
-      - terraced
-      type: string
-      description: |-
-        * `sprinkler` - Sprinkler
-        * `drip` - Drip
-        * `centre_pivot` - Centre Pivot
-        * `furrow` - Furrow
-        * `terraced` - Terraced
+      - usesIrrigationSystem
     LocationSerializerField:
       type: object
       properties:
@@ -5002,6 +4944,12 @@ components:
           readOnly: true
         activityType:
           type: integer
+        title:
+          type: string
+          maxLength: 200
+        details:
+          type: string
+          nullable: true
         hasStartDatetime:
           type: string
           format: date-time
@@ -5015,40 +4963,13 @@ components:
           type: array
           items:
             type: integer
-        title:
-          type: string
-          maxLength: 200
-        start_datetime:
-          type: string
-          format: date-time
-        end_datetime:
-          type: string
-          format: date-time
-          nullable: true
-        details:
-          type: string
-          nullable: true
-        responsible_agent:
-          type: string
-          nullable: true
-        applied_amount:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
-        applied_amount_unit:
-          type: string
-          maxLength: 255
-        activity_type:
-          type: integer
-        operated_on:
-          type: integer
-        pesticide:
+        hasAppliedAmount:
+          $ref: '#/components/schemas/AppliedAmmountField'
+        usesPesticide:
           type: integer
           nullable: true
-        agricultural_machinery:
-          type: array
-          items:
-            type: integer
+        operatedOn:
+          type: integer
     PatchedCropStressIndicatorObservation:
       type: object
       properties:
@@ -5449,6 +5370,12 @@ components:
           readOnly: true
         activityType:
           type: integer
+        title:
+          type: string
+          maxLength: 200
+        details:
+          type: string
+          nullable: true
         hasStartDatetime:
           type: string
           format: date-time
@@ -5462,39 +5389,12 @@ components:
           type: array
           items:
             type: integer
-        title:
-          type: string
-          maxLength: 200
-        start_datetime:
-          type: string
-          format: date-time
-        end_datetime:
-          type: string
-          format: date-time
-          nullable: true
-        details:
-          type: string
-          nullable: true
-        responsible_agent:
-          type: string
-          nullable: true
-        applied_amount:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
-        applied_amount_unit:
-          type: string
-          maxLength: 255
-        irrigation_system:
-          $ref: '#/components/schemas/IrrigationSystemEnum'
-        activity_type:
+        hasAppliedAmount:
+          $ref: '#/components/schemas/AppliedAmmountField'
+        usesIrrigationSystem:
+          $ref: '#/components/schemas/UsesIrrigationSystemEnum'
+        operatedOn:
           type: integer
-        operated_on:
-          type: integer
-        agricultural_machinery:
-          type: array
-          items:
-            type: integer
     PatchedObservation:
       type: object
       properties:
@@ -5670,6 +5570,20 @@ components:
         * `0` - Inactive
         * `1` - Active
         * `2` - Deleted
+    UsesIrrigationSystemEnum:
+      enum:
+      - sprinkler
+      - drip
+      - centre_pivot
+      - furrow
+      - terraced
+      type: string
+      description: |-
+        * `sprinkler` - Sprinkler
+        * `drip` - Drip
+        * `centre_pivot` - Centre Pivot
+        * `furrow` - Furrow
+        * `terraced` - Terraced
   securitySchemes:
     basicAuth:
       type: http
