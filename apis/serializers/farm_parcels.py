@@ -58,10 +58,6 @@ class FarmSerializer(serializers.ModelSerializer):
     contactPerson = ContactPersonField(source='*')
     address = AddressField(source='*')
 
-    # status = serializers.ChoiceField(choices=Farm.BaseModelStatus.choices)
-    # deleted_at = serializers.DateTimeField(required=False, allow_null=True)
-    # created_at = serializers.DateTimeField(read_only=True)
-    # updated_at = serializers.DateTimeField(read_only=True)
     name = serializers.CharField()
     description = serializers.CharField()
     administrator = serializers.CharField()
@@ -132,13 +128,7 @@ class FarmParcelSerializer(serializers.ModelSerializer):
     isGroundSlope = serializers.BooleanField(source='is_ground_slope')
     hasGeometry = GeometrySerializerField(source='*')
     location = LocationSerializerField(source='*')
-        # location = {
-        #     '@id': geo_id,
-        #     '@type': 'Point',
-        #     'lat': representation.pop('latitude', ''),
-        #     'long': representation.pop('longitude', ''),
-        # }
-        # json_ld_representation['location'] = location
+
     class Meta:
         model = FarmParcel
 

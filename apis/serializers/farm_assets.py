@@ -1,18 +1,51 @@
+import uuid
+
 from rest_framework import serializers
 
 from farm_management.models import FarmCrop, FarmAnimal, AgriculturalMachine
 
+class CropSpeciesSerializerField(serializers.Serializer):
+    name = serializers.CharField(source='species')
+    variety = serializers.CharField()
 
-class FarmCropSerializer(serializers.HyperlinkedModelSerializer):
+    def to_representation(self, instance):
+        uuid_orig_str = "".join([
+            getattr(instance, 'species', ''),
+            getattr(instance, 'variety', ''),
+        ])
+        hash_uuid = str(uuid.uuid5(uuid.NAMESPACE_DNS, uuid_orig_str))
+        return {
+            '@id': hash_uuid,
+            '@type': 'CropType',
+            'name': instance.species,
+            'variety': instance.variety,
+        }
+
+
+class FarmCropSerializer(serializers.ModelSerializer):
+
+    cropSpecies = CropSpeciesSerializerField(source='*')
+
     class Meta:
         model = FarmCrop
         fields = [
+            'status', 'deleted_at', 'created_at', 'updated_at',
             'id', 'name', 'description',
-            'parcel',
-            'species', 'variety',
+            'parcel', 'cropSpecies',
             'growth_stage',
             'status', 'created_at', 'updated_at', 'deleted_at',
         ]
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+
+        json_ld_representation = {
+            '@type': 'Crop',
+            '@id': representation.pop('id'),
+            **representation
+        }
+
+        return json_ld_representation
 
 
 class FarmAnimalSerializer(serializers.HyperlinkedModelSerializer):

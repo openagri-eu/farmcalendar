@@ -3850,6 +3850,16 @@ components:
       - operated_on
       - title
       - url
+    CropSpeciesSerializerField:
+      type: object
+      properties:
+        name:
+          type: string
+        variety:
+          type: string
+      required:
+      - name
+      - variety
     CropStressIndicatorObservation:
       type: object
       properties:
@@ -4060,6 +4070,23 @@ components:
     FarmCrop:
       type: object
       properties:
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
         id:
           type: integer
           readOnly: true
@@ -4070,42 +4097,19 @@ components:
           type: string
           nullable: true
         parcel:
-          type: string
-          format: uri
+          type: integer
           nullable: true
-        species:
-          type: string
-          maxLength: 255
-        variety:
-          type: string
-          nullable: true
-          maxLength: 255
+        cropSpecies:
+          $ref: '#/components/schemas/CropSpeciesSerializerField'
         growth_stage:
           type: string
           nullable: true
           maxLength: 255
-        status:
-          allOf:
-          - $ref: '#/components/schemas/StatusEnum'
-          minimum: -2147483648
-          maximum: 2147483647
-        created_at:
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          type: string
-          format: date-time
-          readOnly: true
-        deleted_at:
-          type: string
-          format: date-time
-          nullable: true
       required:
       - created_at
+      - cropSpecies
       - id
       - name
-      - species
       - updated_at
     FarmParcel:
       type: object
@@ -5089,6 +5093,23 @@ components:
     PatchedFarmCrop:
       type: object
       properties:
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
         id:
           type: integer
           readOnly: true
@@ -5099,37 +5120,14 @@ components:
           type: string
           nullable: true
         parcel:
-          type: string
-          format: uri
+          type: integer
           nullable: true
-        species:
-          type: string
-          maxLength: 255
-        variety:
-          type: string
-          nullable: true
-          maxLength: 255
+        cropSpecies:
+          $ref: '#/components/schemas/CropSpeciesSerializerField'
         growth_stage:
           type: string
           nullable: true
           maxLength: 255
-        status:
-          allOf:
-          - $ref: '#/components/schemas/StatusEnum'
-          minimum: -2147483648
-          maximum: 2147483647
-        created_at:
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          type: string
-          format: date-time
-          readOnly: true
-        deleted_at:
-          type: string
-          format: date-time
-          nullable: true
     PatchedFarmParcel:
       type: object
       properties:
