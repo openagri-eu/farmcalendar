@@ -17,33 +17,23 @@ class JSONLDRenderer(JSONRenderer):
         ocsm_context = settings.OCSM_JSONLD_CONTEXT['@context'].copy()
 
         # should handle paginated responses differently?
-        # if isinstance(data, dict) and 'results' in data:
-        #     ocsm_context.append({
-        #         "Pagination": "http://schema.org/DataFeed",
-        #         "count": "http://schema.org/numberOfItems",
-        #         "next": {
-        #             "@id": "http://schema.org/nextItem",
-        #             "@type": "@id"
-        #         },
-        #         "previous": {
-        #             "@id": "http://schema.org/previousItem",
-        #             "@type": "@id"
-        #         },
-        #     })
-        #     context = {
-        #         "@context": ocsm_context,
-        #         "@graph": [
-        #             {
-        #                 "@type": "Pagination",
-        #                 "count": data.get("count"),
-        #                 "next": data.get("next"),
-        #                 "previous": data.get("previous")
-        #             }
-        #         ] + data["results"]
-        #     }
+        # Check if we are dealing with a paginated response
+        if isinstance(data, dict) and 'results' in data:
+            # Handle pagination and results separately
+            context = {
+                "count": data.get("count"),
+                "next": data.get("next"),
+                "previous": data.get("previous"),
+                "results": [
+                    {
+                        "@context": ocsm_context,
+                        "@graph": data["results"]
+                    }
+                ]
+            }
 
         # Check if data is a list for @graph
-        if isinstance(data, list):
+        elif isinstance(data, list):
             context = {
                 "@context": ocsm_context,
                 "@graph": data  # Use the serialized items directly

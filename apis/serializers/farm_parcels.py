@@ -78,14 +78,14 @@ class FarmSerializer(serializers.ModelSerializer):
     administrator = serializers.CharField()
     telephone = serializers.CharField()
     vatID = serializers.CharField(source='vat_id')
-    farm_parcels = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    hasAgriParcel = serializers.PrimaryKeyRelatedField(source='farm_parcels', many=True, read_only=True)
 
     class Meta:
         model = Farm
         fields = [
             'status', 'deleted_at', 'created_at', 'updated_at',
             'id', 'name', 'description', 'administrator',
-            'telephone', 'vatID', 'farm_parcels',
+            'telephone', 'vatID', 'hasAgriParcel',
             'contactPerson', 'address'
         ]
 
@@ -93,87 +93,10 @@ class FarmSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
 
         json_ld_representation = representation
-        json_ld_representation['@id'] = str(instance.id)  # Set @id using the model's id
+        json_ld_representation['@id'] = str(instance.id)
+        json_ld_representation['@type'] = 'Farm'
 
         return json_ld_representation
-
-    # def update(self, instance, validated_data):
-    #     if address_data:
-    #         # Update the address fields
-    #         instance.admin_unit_l1 = address_data.get('admin_unit_l1', instance.admin_unit_l1)
-    #         instance.admin_unit_l2 = address_data.get('admin_unit_l2', instance.admin_unit_l2)
-    #         instance.address_area = address_data.get('address_area', instance.address_area)
-    #         instance.municipality = address_data.get('municipality', instance.municipality)
-    #         instance.community = address_data.get('community', instance.community)
-    #         instance.locator_name = address_data.get('locator_name', instance.locator_name)
-
-    #     # Handle the update for other fields as usual
-    #     return super().update(instance, validated_data)
-
-# class FarmSerializer(JSONLDSerializer):
-#     farm_parcels = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-
-#     class Meta:
-#         model = Farm
-#         fields = '__all__'
-#         # fields = [
-#         #     'id', 'name',
-#         #     'status', 'created_at', 'updated_at', 'deleted_at',
-#         # ]
-
-#     def to_representation(self, instance):
-#         representation = super().to_representation(instance)
-#         json_ld_representation = {
-#             '@type': 'Farm'
-#         }
-
-#         specific_attrs_mapping = {
-#             'id': '@id',
-#             'vat_id': 'vatID',
-#             'telephone': 'telephone',
-#             'area': 'area',
-#             'farm_parcels': 'hasAgriParcel',
-#             'description': 'description',
-#             'name': 'name',
-#         }
-#         if representation['contact_person_firstname']:
-#             contact_person = {
-#                 'firstname': representation.pop('contact_person_firstname', ''),
-#                 'lastname': representation.pop('contact_person_lastname', ''),
-#                 '@type': "Person"
-#             }
-#             contact_person['@id'] = str(uuid.uuid5(uuid.NAMESPACE_DNS, contact_person['firstname'] + contact_person['lastname']))
-#             json_ld_representation['contactPerson'] = contact_person
-
-#         if representation['admin_unit_l1'] and representation['admin_unit_l2']:
-#             address = {
-#                 'admin_unit_l1': representation.pop('admin_unit_l1', ''),
-#                 'admin_unit_l2': representation.pop('admin_unit_l2', ''),
-#                 'address_area': representation.pop('address_area', ''),
-#                 'municipality': representation.pop('municipality', ''),
-#                 'address_area': representation.pop('address_area', ''),
-#                 'community': representation.pop('community', ''),
-#                 'locator_name': representation.pop('locator_name', ''),
-#             }
-#             pre_hash_str = "".join(address.values())
-#             if pre_hash_str != "":
-#                 address['@id'] = str(uuid.uuid5(
-#                     uuid.NAMESPACE_DNS,
-#                     pre_hash_str
-#                 ))
-#                 address['@type'] = 'Address'
-#                 json_ld_representation['address'] = address
-
-
-#         for attr, value in representation.items():
-#             clean_attr = specific_attrs_mapping.get(attr, None)
-#             if clean_attr is None:
-#                 clean_attr = f'has{"".join(word.title() for word in attr.split("_"))}'
-
-#             json_ld_representation[clean_attr] = value
-
-#         return json_ld_representation
-
 
 class FarmParcelSerializer(JSONLDSerializer):
     farmcrops = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
