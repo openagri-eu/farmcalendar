@@ -99,6 +99,18 @@ class GeometrySerializerField(serializers.Serializer):
             'asWKT': instance.geometry
         }
 
+class LocationSerializerField(serializers.Serializer):
+    lat = serializers.DecimalField(source='latitude', max_digits=17, decimal_places=14)
+    long = serializers.DecimalField(source='longitude', max_digits=17, decimal_places=14)
+
+    def to_representation(self, instance):
+        return {
+            '@id': instance.geo_id,
+            '@type': 'Point',
+            'lat': instance.latitude,
+            'long': instance.longitude,
+        }
+
 
 class FarmParcelSerializer(serializers.ModelSerializer):
     validFrom = serializers.DateTimeField(source='valid_from')
@@ -119,7 +131,14 @@ class FarmParcelSerializer(serializers.ModelSerializer):
     isCultivatedInLevels = serializers.BooleanField(source='is_cultivated_in_levels')
     isGroundSlope = serializers.BooleanField(source='is_ground_slope')
     hasGeometry = GeometrySerializerField(source='*')
-
+    location = LocationSerializerField(source='*')
+        # location = {
+        #     '@id': geo_id,
+        #     '@type': 'Point',
+        #     'lat': representation.pop('latitude', ''),
+        #     'long': representation.pop('longitude', ''),
+        # }
+        # json_ld_representation['location'] = location
     class Meta:
         model = FarmParcel
 
@@ -129,7 +148,7 @@ class FarmParcelSerializer(serializers.ModelSerializer):
             'hasIrrigationFlow', 'category', 'inRegion', 'hasToponym',
             'isNitroArea', 'isNatura2000Area', 'isPdopgArea', 'isIrrigated',
             'isCultivatedInLevels', 'isGroundSlope', 'depiction',
-            'hasGeometry', 'hasAgriCrop'
+            'hasGeometry', 'location', 'hasAgriCrop'
         ]
 
     def to_representation(self, instance):
