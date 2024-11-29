@@ -67,7 +67,7 @@ class FarmCalendarActivity(models.Model):
 
     responsible_agent = models.CharField(blank=True, null=True)
     # need to change this into a operation model instead...
-    agricultural_machinery = models.ManyToManyField('farm_management.AgriculturalMachine', related_name='used_in_operations', blank=True, null=True)
+    agricultural_machinery = models.ManyToManyField('farm_management.AgriculturalMachine', related_name='used_in_operations', blank=True)
     # weather_observation = models.ManyToManyField('farm_management.AgriculturalMachine', related_name='used_in_operations', blank=True, null=True)?
 
     def __str__(self):
