@@ -20,12 +20,6 @@ paths:
         name: name
         schema:
           type: string
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
       - in: query
         name: parcel
         schema:
@@ -53,10 +47,14 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/PaginatedAgriculturalMachineList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/AgriculturalMachine'
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedAgriculturalMachineList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/AgriculturalMachine'
           description: ''
     post:
       operationId: api_v1_AgriculturalMachines_create
@@ -263,12 +261,6 @@ paths:
           enum:
           - json
           - jsonld
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
       - in: query
         name: responsible_agent
         schema:
@@ -287,10 +279,14 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/PaginatedCropGrowthStageObservationList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/CropGrowthStageObservation'
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedCropGrowthStageObservationList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/CropGrowthStageObservation'
           description: ''
     post:
       operationId: api_v1_CropGrowthStageObservations_create
@@ -502,12 +498,6 @@ paths:
           enum:
           - json
           - jsonld
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
       - in: query
         name: responsible_agent
         schema:
@@ -526,10 +516,14 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/PaginatedCropProtectionOperationList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/CropProtectionOperation'
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedCropProtectionOperationList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/CropProtectionOperation'
           description: ''
     post:
       operationId: api_v1_CropProtectionOperations_create
@@ -740,12 +734,6 @@ paths:
           enum:
           - json
           - jsonld
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
       - in: query
         name: responsible_agent
         schema:
@@ -764,10 +752,14 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/PaginatedCropStressIndicatorObservationList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/CropStressIndicatorObservation'
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedCropStressIndicatorObservationList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/CropStressIndicatorObservation'
           description: ''
     post:
       operationId: api_v1_CropStressIndicatorObservations_create
@@ -972,12 +964,6 @@ paths:
         name: name
         schema:
           type: string
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
       - in: query
         name: status
         schema:
@@ -1000,10 +986,14 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/PaginatedFarmList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Farm'
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedFarmList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Farm'
           description: ''
     post:
       operationId: api_v1_Farm_create
@@ -1208,12 +1198,6 @@ paths:
         name: name
         schema:
           type: string
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
       - in: query
         name: parcel
         schema:
@@ -1241,10 +1225,14 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/PaginatedFarmAnimalList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/FarmAnimal'
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedFarmAnimalList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/FarmAnimal'
           description: ''
     post:
       operationId: api_v1_FarmAnimals_create
@@ -1450,12 +1438,6 @@ paths:
           enum:
           - json
           - jsonld
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
       - in: query
         name: responsible_agent
         schema:
@@ -1474,10 +1456,14 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/PaginatedFarmCalendarActivityList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/FarmCalendarActivity'
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedFarmCalendarActivityList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/FarmCalendarActivity'
           description: ''
     post:
       operationId: api_v1_FarmCalendarActivities_create
@@ -1683,12 +1669,6 @@ paths:
         name: name
         schema:
           type: string
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
       tags:
       - api
       security:
@@ -1699,10 +1679,14 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/PaginatedFarmCalendarActivityTypeList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/FarmCalendarActivityType'
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedFarmCalendarActivityTypeList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/FarmCalendarActivityType'
           description: ''
     post:
       operationId: api_v1_FarmCalendarActivityTypes_create
@@ -1916,12 +1900,6 @@ paths:
         name: name
         schema:
           type: string
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
       - in: query
         name: parcel
         schema:
@@ -1957,10 +1935,14 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/PaginatedFarmCropList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/FarmCrop'
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedFarmCropList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/FarmCrop'
           description: ''
     post:
       operationId: api_v1_FarmCrops_create
@@ -2175,12 +2157,6 @@ paths:
         name: identifier
         schema:
           type: string
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
       - in: query
         name: parcel_type
         schema:
@@ -2207,10 +2183,14 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/PaginatedFarmParcelList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/FarmParcel'
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedFarmParcelList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/FarmParcel'
           description: ''
     post:
       operationId: api_v1_FarmParcels_create
@@ -2417,12 +2397,6 @@ paths:
           enum:
           - json
           - jsonld
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
       - in: query
         name: responsible_agent
         schema:
@@ -2441,10 +2415,14 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/PaginatedFertilizationOperationList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/FertilizationOperation'
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedFertilizationOperationList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/FertilizationOperation'
           description: ''
     post:
       operationId: api_v1_FertilizationOperations_create
@@ -2654,12 +2632,6 @@ paths:
         name: name
         schema:
           type: string
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
       - in: query
         name: status
         schema:
@@ -2682,10 +2654,14 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/PaginatedFertilizerList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Fertilizer'
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedFertilizerList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Fertilizer'
           description: ''
     post:
       operationId: api_v1_Fertilizers_create
@@ -2891,12 +2867,6 @@ paths:
           enum:
           - json
           - jsonld
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
       - in: query
         name: responsible_agent
         schema:
@@ -2915,10 +2885,14 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/PaginatedIrrigationOperationList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/IrrigationOperation'
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedIrrigationOperationList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/IrrigationOperation'
           description: ''
     post:
       operationId: api_v1_IrrigationOperations_create
@@ -3124,12 +3098,6 @@ paths:
           enum:
           - json
           - jsonld
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
       - in: query
         name: responsible_agent
         schema:
@@ -3148,10 +3116,14 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/PaginatedObservationList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Observation'
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedObservationList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Observation'
           description: ''
     post:
       operationId: api_v1_Observations_create
@@ -3356,12 +3328,6 @@ paths:
         name: name
         schema:
           type: string
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
       - in: query
         name: status
         schema:
@@ -3384,10 +3350,14 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/PaginatedPesticideList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pesticide'
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedPesticideList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pesticide'
           description: ''
     post:
       operationId: api_v1_Pesticides_create
@@ -4597,351 +4567,6 @@ components:
       - usesAgriculturalMachinery
       - value
       - value_unit
-    PaginatedAgriculturalMachineList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgriculturalMachine'
-    PaginatedCropGrowthStageObservationList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/CropGrowthStageObservation'
-    PaginatedCropProtectionOperationList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/CropProtectionOperation'
-    PaginatedCropStressIndicatorObservationList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/CropStressIndicatorObservation'
-    PaginatedFarmAnimalList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/FarmAnimal'
-    PaginatedFarmCalendarActivityList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/FarmCalendarActivity'
-    PaginatedFarmCalendarActivityTypeList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/FarmCalendarActivityType'
-    PaginatedFarmCropList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/FarmCrop'
-    PaginatedFarmList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Farm'
-    PaginatedFarmParcelList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/FarmParcel'
-    PaginatedFertilizationOperationList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/FertilizationOperation'
-    PaginatedFertilizerList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Fertilizer'
-    PaginatedIrrigationOperationList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/IrrigationOperation'
-    PaginatedObservationList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Observation'
-    PaginatedPesticideList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Pesticide'
     PatchedAgriculturalMachine:
       type: object
       properties:
