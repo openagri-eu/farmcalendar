@@ -34,7 +34,7 @@ class FarmView(LoginRequiredMixin, TemplateView):
 
             farm_data = {
                 "model": "farm_management.farmmaster",
-                "pk": farm.pk,
+                "pk": str(farm.pk),
                 "fields": {
                     "name": farm.name,
                     "description": farm.description,

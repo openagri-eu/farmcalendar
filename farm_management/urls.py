@@ -29,8 +29,8 @@ urlpatterns = [
     path('<str:prefix>/ajax/<str:action>/<int:pk>/', view=AjaxHandlerView.as_view(), name='action'),
 
     path('farms/', FarmView.as_view(), name='farms'),
-    path("farms/edit/<int:pk>/", view=FarmView.as_view(), name='farm_edit'),
+    path("farms/edit/<uuid:pk>/", view=FarmView.as_view(), name='farm_edit'),
 
     path('farm-parcels/', FarmParcelView.as_view(), name='farm_parcels'),
-    path('farm-parcels/edit/<int:pk>/', view=FarmParcelView.as_view(), name='farm_parcel_edit'),
+    path('farm-parcels/edit/<uuid:pk>/', view=FarmParcelView.as_view(), name='farm_parcel_edit'),
 ]

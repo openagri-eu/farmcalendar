@@ -12,8 +12,8 @@ class BaseModel(models.Model):
         ACTIVE = 1, 'Active'
         DELETED = 2, 'Deleted'
 
-    id = models.AutoField(primary_key=True, db_column='id', db_index=True, editable=False, unique=True, blank=False,
-                          null=False, verbose_name='ID')
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, db_index=True, editable=False, unique=True,
+                          blank=False, null=False, verbose_name='ID')
 
     status = models.IntegerField(choices=BaseModelStatus.choices, default=BaseModelStatus.ACTIVE, verbose_name='Status')
     deleted_at = models.DateTimeField(null=True, blank=True, verbose_name='Deleted At')

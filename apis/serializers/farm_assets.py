@@ -2,7 +2,27 @@ import uuid
 
 from rest_framework import serializers
 
-from farm_management.models import FarmCrop, FarmAnimal, AgriculturalMachine
+from ..schemas import generate_urn
+from .base import URNRelatedField
+
+from farm_management.models import FarmCrop, FarmAnimal, AgriculturalMachine, FarmParcel
+
+
+class BaseFarmAssetSerializer(serializers.ModelSerializer):
+    parcel = URNRelatedField(
+        class_names=['FarmParcel'],
+        queryset=FarmParcel.objects.all(),
+    )
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+
+        json_ld_representation = {
+            '@id': generate_urn(instance.__class__.__name__, obj_id=representation.pop('id')),
+            **representation
+        }
+
+        return json_ld_representation
 
 class CropSpeciesSerializerField(serializers.Serializer):
     name = serializers.CharField(source='species')
@@ -15,14 +35,15 @@ class CropSpeciesSerializerField(serializers.Serializer):
         ])
         hash_uuid = str(uuid.uuid5(uuid.NAMESPACE_DNS, uuid_orig_str))
         return {
-            '@id': hash_uuid,
+            '@id': generate_urn('CropType', obj_id=hash_uuid),
             '@type': 'CropType',
             'name': instance.species,
             'variety': instance.variety,
         }
 
 
-class FarmCropSerializer(serializers.ModelSerializer):
+
+class FarmCropSerializer(BaseFarmAssetSerializer):
 
     cropSpecies = CropSpeciesSerializerField(source='*')
 
@@ -41,14 +62,13 @@ class FarmCropSerializer(serializers.ModelSerializer):
 
         json_ld_representation = {
             '@type': 'Crop',
-            '@id': representation.pop('id'),
             **representation
         }
 
         return json_ld_representation
 
 
-class FarmAnimalSerializer(serializers.ModelSerializer):
+class FarmAnimalSerializer(BaseFarmAssetSerializer):
     class Meta:
         model = FarmAnimal
         fields = [
@@ -63,14 +83,13 @@ class FarmAnimalSerializer(serializers.ModelSerializer):
 
         json_ld_representation = {
             '@type': 'Animal',
-            '@id': representation.pop('id'),
             **representation
         }
 
         return json_ld_representation
 
 
-class AgriculturalMachineSerializer(serializers.HyperlinkedModelSerializer):
+class AgriculturalMachineSerializer(BaseFarmAssetSerializer):
     class Meta:
         model = AgriculturalMachine
         fields = [
@@ -85,7 +104,6 @@ class AgriculturalMachineSerializer(serializers.HyperlinkedModelSerializer):
 
         json_ld_representation = {
             '@type': 'AgriculturalMachine',
-            '@id': representation.pop('id'),
             **representation
         }
 

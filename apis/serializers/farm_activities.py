@@ -19,36 +19,34 @@ from farm_activities.models import (
     CropGrowthStageObservation,
 )
 
-from .base import JSONLDSerializer
-from ..schemas import QuantityValueModel
+from .base import URNRelatedField
+from ..schemas import generate_urn
 
 
 class FarmCalendarActivitySerializer(serializers.ModelSerializer):
-    activityType = serializers.PrimaryKeyRelatedField(source='activity_type', queryset=FarmCalendarActivityType.objects.all())
+    activityType = URNRelatedField(class_names=['FarmCalendarActivityType'], source='activity_type', queryset=FarmCalendarActivityType.objects.all())
     hasStartDatetime = serializers.DateTimeField(source='start_datetime')
     hasEndDatetime = serializers.DateTimeField(source='end_datetime', allow_null=True)
 
     responsibleAgent = serializers.CharField(source='responsible_agent')
 
-    usesAgriculturalMachinery = serializers.PrimaryKeyRelatedField(source='agricultural_machinery', many=True, queryset=AgriculturalMachine.objects.all())
+    usesAgriculturalMachinery = URNRelatedField(class_names=['AgriculturalMachinery'], source='agricultural_machinery', many=True, queryset=AgriculturalMachine.objects.all())
 
     class Meta:
         model = FarmCalendarActivity
-
         fields = [
             'id',
             'activityType', 'title', 'details',
             'hasStartDatetime', 'hasEndDatetime',
             'responsibleAgent', 'usesAgriculturalMachinery'
         ]
-        # 'status', 'created_at', 'updated_at', 'deleted_at',
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
 
         json_ld_representation = {
             '@type': 'Operation',
-            '@id': representation.pop('id'),
+            '@id': generate_urn('FarmCalendarActivity', obj_id=representation.pop('id')),
             **representation
         }
 
@@ -69,8 +67,8 @@ class FarmCalendarActivityTypeSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
 
         json_ld_representation = {
-            '@type': 'FarmActivityType', #?
-            '@id': representation.pop('id'),
+            '@type': 'FarmActivityType',
+            '@id': generate_urn('FarmActivityType', obj_id=representation.pop('id')),
             **representation
         }
 
@@ -89,7 +87,7 @@ class AppliedAmmountFieldSerializer(serializers.Serializer):
         ])
         hash_uuid = str(uuid.uuid5(uuid.NAMESPACE_DNS, uuid_orig_str))
         return {
-            '@id': hash_uuid,
+            '@id': generate_urn('QuantityValue',obj_id=hash_uuid),
             '@type': 'QuantityValue',
             'unit': instance.applied_amount_unit,
             'numericValue': instance.applied_amount,
@@ -98,13 +96,15 @@ class AppliedAmmountFieldSerializer(serializers.Serializer):
 class GenericOperationSerializer(FarmCalendarActivitySerializer):
     hasAppliedAmount = AppliedAmmountFieldSerializer(source='*')
 
-    operatedOn = serializers.PrimaryKeyRelatedField(
+    operatedOn = URNRelatedField(
+        class_names=['FarmParcel'],
         queryset=FarmParcel.objects.all(),
         source='operated_on'
     )
 
 class FertilizationOperationSerializer(GenericOperationSerializer):
-    usesFertilizer = serializers.PrimaryKeyRelatedField(
+    usesFertilizer = URNRelatedField(
+        class_names=['Fertilizer'],
         queryset=Fertilizer.objects.all(),
         allow_null=True
     )
@@ -156,7 +156,8 @@ class IrrigationOperationSerializer(GenericOperationSerializer):
         return json_ld_representation
 
 class CropProtectionOperationSerializer(GenericOperationSerializer):
-    usesPesticide = serializers.PrimaryKeyRelatedField(
+    usesPesticide = URNRelatedField(
+        class_names=['Pesticide'],
         queryset=Pesticide.objects.all(),
         allow_null=True
     )

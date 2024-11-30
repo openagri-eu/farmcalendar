@@ -1,3 +1,4 @@
+import uuid
 import datetime
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
@@ -20,7 +21,7 @@ class FarmCalendarActivityType(models.Model):
     during development. However, the user may add their own generic activity type that is not
     covered by the defaults.
     """
-    id = models.AutoField(primary_key=True, db_index=True, editable=False, unique=True,
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, db_index=True, editable=False, unique=True,
                           blank=False, null=False, verbose_name='ID')
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField(blank=True, null=True)
@@ -55,7 +56,7 @@ class FarmCalendarActivity(models.Model):
         verbose_name = "Farm Activity"
         verbose_name_plural = "Farm Activities"
 
-    id = models.AutoField(primary_key=True, db_index=True, editable=False, unique=True,
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, db_index=True, editable=False, unique=True,
                           blank=False, null=False, verbose_name='ID')
 
     activity_type = models.ForeignKey(FarmCalendarActivityType, on_delete=models.CASCADE)

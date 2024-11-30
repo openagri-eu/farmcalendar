@@ -3,7 +3,9 @@ import uuid
 from rest_framework import serializers
 
 from farm_management.models import Farm, FarmParcel
-from .base import JSONLDSerializer
+from .base import JSONLDSerializer, URNRelatedField
+
+from ..schemas import URN_BASE_NAMESPACE, generate_urn
 
 
 def snake_to_camel_lower(snake_str):
@@ -16,11 +18,13 @@ class ContactPersonField(serializers.Serializer):
 
     def to_representation(self, instance):
         # Construct the @id for the contact person
+        if instance.contact_person_firstname is None or instance.contact_person_lastname is None:
+            return {}
         contact_person_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, instance.contact_person_firstname + instance.contact_person_lastname))
         return {
             'firstname': instance.contact_person_firstname,
             'lastname': instance.contact_person_lastname,
-            '@id': contact_person_id,
+            '@id': generate_urn('ContactPerson', obj_id=contact_person_id),
             '@type': 'Person'
         }
 
@@ -33,18 +37,24 @@ class AddressField(serializers.Serializer):
     community = serializers.CharField()
     locatorName = serializers.CharField(source='locator_name')
 
+    def _get_none_attr_as_empty_str(self, instance, attr):
+        val = getattr(instance, attr)
+        if val is None:
+            return ''
+        return val
+
     def to_representation(self, instance):
         address_str = "".join([
-            getattr(instance, 'admin_unit_l1', ''),
-            getattr(instance, 'admin_unit_l2', ''),
-            getattr(instance, 'address_area', ''),
-            getattr(instance, 'municipality', ''),
-            getattr(instance, 'community', ''),
-            getattr(instance, 'locator_name', '')
+            self._get_none_attr_as_empty_str(instance, 'admin_unit_l1'),
+            self._get_none_attr_as_empty_str(instance, 'admin_unit_l2'),
+            self._get_none_attr_as_empty_str(instance, 'address_area'),
+            self._get_none_attr_as_empty_str(instance, 'municipality'),
+            self._get_none_attr_as_empty_str(instance, 'community'),
+            self._get_none_attr_as_empty_str(instance, 'locator_name'),
         ])
         address_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, address_str))
         return {
-            '@id': address_id,
+            '@id': generate_urn('Address', obj_id=address_id),
             '@type': 'Address',
             'adminUnitL1': getattr(instance, 'admin_unit_l1'),
             'adminUnitL2': getattr(instance, 'admin_unit_l2'),
@@ -63,7 +73,8 @@ class FarmSerializer(serializers.ModelSerializer):
     administrator = serializers.CharField()
     telephone = serializers.CharField()
     vatID = serializers.CharField(source='vat_id')
-    hasAgriParcel = serializers.PrimaryKeyRelatedField(source='farm_parcels', many=True, read_only=True)
+    hasAgriParcel = URNRelatedField(source='farm_parcels', class_names=["FarmParcel"], many=True, read_only=True)
+
 
     class Meta:
         model = Farm
@@ -79,7 +90,7 @@ class FarmSerializer(serializers.ModelSerializer):
 
         json_ld_representation = representation
 
-        json_ld_representation['@id'] = str(representation.pop('id'))
+        json_ld_representation['@id'] = generate_urn('Farm', obj_id=str(representation.pop('id')))
         json_ld_representation['@type'] = 'Farm'
 
         return json_ld_representation
@@ -90,7 +101,7 @@ class GeometrySerializerField(serializers.Serializer):
     def to_representation(self, instance):
 
         return {
-            '@id': instance.geo_id,
+            '@id': generate_urn('Geometry', obj_id=instance.geo_id),
             '@type': 'Geometry',
             'asWKT': instance.geometry
         }
@@ -112,7 +123,7 @@ class FarmParcelSerializer(serializers.ModelSerializer):
     validFrom = serializers.DateTimeField(source='valid_from')
     validTo = serializers.DateTimeField(source='valid_to')
     category = serializers.CharField(source='parcel_type')
-    hasAgriCrop = serializers.PrimaryKeyRelatedField(source='farmcrops', many=True, read_only=True)
+    hasAgriCrop = URNRelatedField(class_names=['FarmCrop'], source='farmcrops', many=True, read_only=True)
 
     hasIrrigationFlow = serializers.DecimalField(
         max_digits=15, decimal_places=2, source='irrigation_flow', allow_null=True
@@ -129,6 +140,8 @@ class FarmParcelSerializer(serializers.ModelSerializer):
     hasGeometry = GeometrySerializerField(source='*')
     location = LocationSerializerField(source='*')
 
+    farm = URNRelatedField(class_names=['Farm'], queryset=Farm.objects.all())
+
     class Meta:
         model = FarmParcel
 
@@ -138,7 +151,7 @@ class FarmParcelSerializer(serializers.ModelSerializer):
             'hasIrrigationFlow', 'category', 'inRegion', 'hasToponym',
             'isNitroArea', 'isNatura2000Area', 'isPdopgArea', 'isIrrigated',
             'isCultivatedInLevels', 'isGroundSlope', 'depiction',
-            'hasGeometry', 'location', 'hasAgriCrop'
+            'hasGeometry', 'location', 'hasAgriCrop', 'farm'
         ]
 
     def to_representation(self, instance):
@@ -146,7 +159,7 @@ class FarmParcelSerializer(serializers.ModelSerializer):
 
         json_ld_representation = {
             '@type': 'Parcel',
-            '@id': representation.pop('id'),
+            '@id': generate_urn('FarmParcel', obj_id=str(representation.pop('id'))),
             **representation
         }
 
