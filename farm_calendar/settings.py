@@ -110,8 +110,8 @@ REST_FRAMEWORK = {
     'DEFAULT_VERSION': SHORT_API_VERSION,
     'ALLOWED_VERSIONS': ['v1',],
     'VERSION_PARAM': 'version',
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,
+    'DEFAULT_PAGINATION_CLASS': None,
+    # 'PAGE_SIZE': 99999999,
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 
     'DEFAULT_RENDERER_CLASSES': [
