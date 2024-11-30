@@ -272,14 +272,16 @@ DEFAULT_CALENDAR_ACTIVITY_TYPES = {
         'description': 'Fertilization operation',
         "background_color": "#F5E8C7",
         "border_color": "#8B4513",
-        "text_color": "#2F4F4F"
+        "text_color": "#2F4F4F",
+        "id": "00000000-0000-0000-0000-000000000001",
     },
     'irrigation': {
         'name': 'Irrigation',
         'description': 'Irrigation operation',
         'background_color': '#B3E5FC',
         'border_color': '#0288D1',
-        'text_color': '#01579B'
+        'text_color': '#01579B',
+        "id": "00000000-0000-0000-0000-000000000002",
     },
     'crop_protection':{
         'name': 'Pesticides',
@@ -287,6 +289,7 @@ DEFAULT_CALENDAR_ACTIVITY_TYPES = {
         'background_color': '#C5E1A5',
         'border_color': '#8E7F2F',
         'text_color': '#4E342E',
+        "id": "00000000-0000-0000-0000-000000000003",
     },
     'crop_stress_indicator':{
         'name': 'Crop Stress Indicator',
@@ -294,12 +297,14 @@ DEFAULT_CALENDAR_ACTIVITY_TYPES = {
         'background_color': '#FFCCCB',
         'border_color': '#C62828',
         'text_color': '#BF360C',
+        "id": "00000000-0000-0000-0000-000000000004",
     },
     'crop_growth_stage':{
         'name': 'Crop Growth Stage Observation',
         'description': 'Crop Stress Indicator Observation',
         "background_color": "#F5E8C7",
         "border_color": "#8B4513",
-        "text_color": "#2F4F4F"
+        "text_color": "#2F4F4F",
+        "id": "00000000-0000-0000-0000-000000000005",
     }
 }
