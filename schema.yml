@@ -29,7 +29,8 @@ paths:
       - in: query
         name: parcel
         schema:
-          type: integer
+          type: string
+          format: uuid
       - in: query
         name: status
         schema:
@@ -110,8 +111,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Farm Equipment.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Farm Equipment.
         required: true
       tags:
       - api
@@ -142,8 +144,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Farm Equipment.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Farm Equipment.
         required: true
       tags:
       - api
@@ -186,8 +189,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Farm Equipment.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Farm Equipment.
         required: true
       tags:
       - api
@@ -229,8 +233,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Farm Equipment.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Farm Equipment.
         required: true
       tags:
       - api
@@ -249,7 +254,8 @@ paths:
       - in: query
         name: activity_type
         schema:
-          type: integer
+          type: string
+          format: uuid
       - in: query
         name: format
         schema:
@@ -341,8 +347,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Crop Growth Stage Observation.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Crop Growth Stage Observation.
         required: true
       tags:
       - api
@@ -374,8 +381,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Crop Growth Stage Observation.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Crop Growth Stage Observation.
         required: true
       tags:
       - api
@@ -419,8 +427,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Crop Growth Stage Observation.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Crop Growth Stage Observation.
         required: true
       tags:
       - api
@@ -463,8 +472,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Crop Growth Stage Observation.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Crop Growth Stage Observation.
         required: true
       tags:
       - api
@@ -483,7 +493,8 @@ paths:
       - in: query
         name: activity_type
         schema:
-          type: integer
+          type: string
+          format: uuid
       - in: query
         name: format
         schema:
@@ -575,8 +586,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Crop Protection Operation.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Crop Protection Operation.
         required: true
       tags:
       - api
@@ -608,8 +620,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Crop Protection Operation.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Crop Protection Operation.
         required: true
       tags:
       - api
@@ -653,8 +666,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Crop Protection Operation.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Crop Protection Operation.
         required: true
       tags:
       - api
@@ -697,8 +711,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Crop Protection Operation.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Crop Protection Operation.
         required: true
       tags:
       - api
@@ -716,7 +731,8 @@ paths:
       - in: query
         name: activity_type
         schema:
-          type: integer
+          type: string
+          format: uuid
       - in: query
         name: format
         schema:
@@ -806,9 +822,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Crop Stress Indicator
-          Observation.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Crop Stress Indicator Observation.
         required: true
       tags:
       - api
@@ -839,9 +855,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Crop Stress Indicator
-          Observation.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Crop Stress Indicator Observation.
         required: true
       tags:
       - api
@@ -884,9 +900,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Crop Stress Indicator
-          Observation.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Crop Stress Indicator Observation.
         required: true
       tags:
       - api
@@ -928,9 +944,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Crop Stress Indicator
-          Observation.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Crop Stress Indicator Observation.
         required: true
       tags:
       - api
@@ -1042,8 +1058,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Farm.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Farm.
         required: true
       tags:
       - api
@@ -1074,8 +1091,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Farm.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Farm.
         required: true
       tags:
       - api
@@ -1118,8 +1136,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Farm.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Farm.
         required: true
       tags:
       - api
@@ -1161,8 +1180,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Farm.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Farm.
         required: true
       tags:
       - api
@@ -1197,7 +1217,8 @@ paths:
       - in: query
         name: parcel
         schema:
-          type: integer
+          type: string
+          format: uuid
       - in: query
         name: status
         schema:
@@ -1278,8 +1299,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Farm Animal.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Farm Animal.
         required: true
       tags:
       - api
@@ -1310,8 +1332,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Farm Animal.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Farm Animal.
         required: true
       tags:
       - api
@@ -1354,8 +1377,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Farm Animal.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Farm Animal.
         required: true
       tags:
       - api
@@ -1397,8 +1421,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Farm Animal.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Farm Animal.
         required: true
       tags:
       - api
@@ -1416,7 +1441,8 @@ paths:
       - in: query
         name: activity_type
         schema:
-          type: integer
+          type: string
+          format: uuid
       - in: query
         name: format
         schema:
@@ -1506,8 +1532,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Farm Activity.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Farm Activity.
         required: true
       tags:
       - api
@@ -1538,8 +1565,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Farm Activity.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Farm Activity.
         required: true
       tags:
       - api
@@ -1582,8 +1610,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Farm Activity.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Farm Activity.
         required: true
       tags:
       - api
@@ -1625,8 +1654,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Farm Activity.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Farm Activity.
         required: true
       tags:
       - api
@@ -1729,9 +1759,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this farm calendar activity
-          type.
+          type: string
+          format: uuid
+        description: A UUID string identifying this farm calendar activity type.
         required: true
       tags:
       - api
@@ -1763,9 +1793,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this farm calendar activity
-          type.
+          type: string
+          format: uuid
+        description: A UUID string identifying this farm calendar activity type.
         required: true
       tags:
       - api
@@ -1809,9 +1839,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this farm calendar activity
-          type.
+          type: string
+          format: uuid
+        description: A UUID string identifying this farm calendar activity type.
         required: true
       tags:
       - api
@@ -1854,9 +1884,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this farm calendar activity
-          type.
+          type: string
+          format: uuid
+        description: A UUID string identifying this farm calendar activity type.
         required: true
       tags:
       - api
@@ -1895,7 +1925,8 @@ paths:
       - in: query
         name: parcel
         schema:
-          type: integer
+          type: string
+          format: uuid
       - in: query
         name: species
         schema:
@@ -1984,8 +2015,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Farm Plant.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Farm Plant.
         required: true
       tags:
       - api
@@ -2016,8 +2048,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Farm Plant.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Farm Plant.
         required: true
       tags:
       - api
@@ -2060,8 +2093,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Farm Plant.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Farm Plant.
         required: true
       tags:
       - api
@@ -2103,8 +2137,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Farm Plant.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Farm Plant.
         required: true
       tags:
       - api
@@ -2122,7 +2157,8 @@ paths:
       - in: query
         name: farm
         schema:
-          type: integer
+          type: string
+          format: uuid
       - in: query
         name: format
         schema:
@@ -2229,8 +2265,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Farm Parcel.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Farm Parcel.
         required: true
       tags:
       - api
@@ -2261,8 +2298,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Farm Parcel.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Farm Parcel.
         required: true
       tags:
       - api
@@ -2305,8 +2343,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Farm Parcel.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Farm Parcel.
         required: true
       tags:
       - api
@@ -2348,8 +2387,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Farm Parcel.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Farm Parcel.
         required: true
       tags:
       - api
@@ -2368,7 +2408,8 @@ paths:
       - in: query
         name: activity_type
         schema:
-          type: integer
+          type: string
+          format: uuid
       - in: query
         name: format
         schema:
@@ -2460,8 +2501,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Fertilization Operation.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Fertilization Operation.
         required: true
       tags:
       - api
@@ -2493,8 +2535,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Fertilization Operation.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Fertilization Operation.
         required: true
       tags:
       - api
@@ -2538,8 +2581,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Fertilization Operation.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Fertilization Operation.
         required: true
       tags:
       - api
@@ -2582,8 +2626,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Fertilization Operation.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Fertilization Operation.
         required: true
       tags:
       - api
@@ -2695,8 +2740,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Fertilizer.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Fertilizer.
         required: true
       tags:
       - api
@@ -2727,8 +2773,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Fertilizer.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Fertilizer.
         required: true
       tags:
       - api
@@ -2771,8 +2818,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Fertilizer.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Fertilizer.
         required: true
       tags:
       - api
@@ -2814,8 +2862,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Fertilizer.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Fertilizer.
         required: true
       tags:
       - api
@@ -2833,7 +2882,8 @@ paths:
       - in: query
         name: activity_type
         schema:
-          type: integer
+          type: string
+          format: uuid
       - in: query
         name: format
         schema:
@@ -2923,8 +2973,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Irrigation Operation.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Irrigation Operation.
         required: true
       tags:
       - api
@@ -2955,8 +3006,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Irrigation Operation.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Irrigation Operation.
         required: true
       tags:
       - api
@@ -2999,8 +3051,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Irrigation Operation.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Irrigation Operation.
         required: true
       tags:
       - api
@@ -3042,8 +3095,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Irrigation Operation.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Irrigation Operation.
         required: true
       tags:
       - api
@@ -3061,7 +3115,8 @@ paths:
       - in: query
         name: activity_type
         schema:
-          type: integer
+          type: string
+          format: uuid
       - in: query
         name: format
         schema:
@@ -3151,8 +3206,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Observation.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Observation.
         required: true
       tags:
       - api
@@ -3183,8 +3239,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Observation.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Observation.
         required: true
       tags:
       - api
@@ -3227,8 +3284,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Observation.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Observation.
         required: true
       tags:
       - api
@@ -3270,8 +3328,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Observation.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Observation.
         required: true
       tags:
       - api
@@ -3383,8 +3442,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Pesticide.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Pesticide.
         required: true
       tags:
       - api
@@ -3415,8 +3475,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Pesticide.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Pesticide.
         required: true
       tags:
       - api
@@ -3459,8 +3520,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Pesticide.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Pesticide.
         required: true
       tags:
       - api
@@ -3502,8 +3564,9 @@ paths:
       - in: path
         name: id
         schema:
-          type: integer
-        description: A unique integer value identifying this Pesticide.
+          type: string
+          format: uuid
+        description: A UUID string identifying this Pesticide.
         required: true
       tags:
       - api
@@ -3687,7 +3750,8 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         name:
           type: string
@@ -3697,8 +3761,7 @@ components:
           nullable: true
         parcel:
           type: string
-          format: uri
-          nullable: true
+          format: uuid
         purchase_date:
           type: string
           format: date
@@ -3734,6 +3797,7 @@ components:
       - manufacturer
       - model
       - name
+      - parcel
       - purchase_date
       - seria_number
       - updated_at
@@ -3763,10 +3827,12 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         activityType:
-          type: integer
+          type: string
+          format: uuid
         hasStartDatetime:
           type: string
           format: date-time
@@ -3779,7 +3845,8 @@ components:
         usesAgriculturalMachinery:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
         title:
           type: string
           maxLength: 200
@@ -3806,13 +3873,16 @@ components:
           type: string
           maxLength: 255
         activity_type:
-          type: integer
+          type: string
+          format: uuid
         crop:
-          type: integer
+          type: string
+          format: uuid
         agricultural_machinery:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
       required:
       - activityType
       - activity_type
@@ -3830,10 +3900,12 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         activityType:
-          type: integer
+          type: string
+          format: uuid
         title:
           type: string
           maxLength: 200
@@ -3852,14 +3924,17 @@ components:
         usesAgriculturalMachinery:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
         hasAppliedAmount:
           $ref: '#/components/schemas/AppliedAmmountField'
         usesPesticide:
-          type: integer
+          type: string
+          format: uuid
           nullable: true
         operatedOn:
-          type: integer
+          type: string
+          format: uuid
       required:
       - activityType
       - hasAppliedAmount
@@ -3885,10 +3960,12 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         activityType:
-          type: integer
+          type: string
+          format: uuid
         hasStartDatetime:
           type: string
           format: date-time
@@ -3901,7 +3978,8 @@ components:
         usesAgriculturalMachinery:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
         title:
           type: string
           maxLength: 200
@@ -3928,13 +4006,16 @@ components:
           type: string
           maxLength: 255
         activity_type:
-          type: integer
+          type: string
+          format: uuid
         crop:
-          type: integer
+          type: string
+          format: uuid
         agricultural_machinery:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
       required:
       - activityType
       - activity_type
@@ -3969,7 +4050,8 @@ components:
           format: date-time
           readOnly: true
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         name:
           type: string
@@ -3984,7 +4066,8 @@ components:
         hasAgriParcel:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
           readOnly: true
         contactPerson:
           $ref: '#/components/schemas/ContactPersonField'
@@ -4006,7 +4089,8 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         name:
           type: string
@@ -4015,8 +4099,8 @@ components:
           type: string
           nullable: true
         parcel:
-          type: integer
-          nullable: true
+          type: string
+          format: uuid
         sex:
           allOf:
           - $ref: '#/components/schemas/SexEnum'
@@ -4056,16 +4140,19 @@ components:
       - created_at
       - id
       - name
+      - parcel
       - species
       - updated_at
     FarmCalendarActivity:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         activityType:
-          type: integer
+          type: string
+          format: uuid
         title:
           type: string
           maxLength: 200
@@ -4084,7 +4171,8 @@ components:
         usesAgriculturalMachinery:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
       required:
       - activityType
       - hasEndDatetime
@@ -4097,7 +4185,8 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         name:
           type: string
@@ -4141,7 +4230,8 @@ components:
           format: date-time
           readOnly: true
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         name:
           type: string
@@ -4150,8 +4240,8 @@ components:
           type: string
           nullable: true
         parcel:
-          type: integer
-          nullable: true
+          type: string
+          format: uuid
         cropSpecies:
           $ref: '#/components/schemas/CropSpeciesSerializerField'
         growth_stage:
@@ -4163,6 +4253,7 @@ components:
       - cropSpecies
       - id
       - name
+      - parcel
       - updated_at
     FarmParcel:
       type: object
@@ -4185,7 +4276,8 @@ components:
           format: date-time
           readOnly: true
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         identifier:
           type: string
@@ -4240,11 +4332,16 @@ components:
         hasAgriCrop:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
           readOnly: true
+        farm:
+          type: string
+          format: uuid
       required:
       - category
       - created_at
+      - farm
       - hasAgriCrop
       - hasGeometry
       - hasIrrigationFlow
@@ -4266,10 +4363,12 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         activityType:
-          type: integer
+          type: string
+          format: uuid
         title:
           type: string
           maxLength: 200
@@ -4288,17 +4387,20 @@ components:
         usesAgriculturalMachinery:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
         hasAppliedAmount:
           $ref: '#/components/schemas/AppliedAmmountField'
         hasApplicationMethod:
           type: string
           nullable: true
         usesFertilizer:
-          type: integer
+          type: string
+          format: uuid
           nullable: true
         operatedOn:
-          type: integer
+          type: string
+          format: uuid
       required:
       - activityType
       - hasApplicationMethod
@@ -4314,29 +4416,23 @@ components:
     Fertilizer:
       type: object
       properties:
-        name:
+        hasCommercialName:
           type: string
-          maxLength: 100
         description:
           type: string
           nullable: true
-        cost:
+        hasCost:
           type: string
           format: decimal
           pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
-        price_unit:
+        isPricePer:
           type: string
-          maxLength: 255
-        active_substance:
+        hasActiveSubstance:
           type: string
-          maxLength: 255
-        targeted_towards:
+        isTargetedTowards:
           type: string
-          maxLength: 255
-        nutrient_concentration:
+        hasNutrientConcentration:
           type: string
-          format: decimal
-          pattern: ^-?\d{0,3}(?:\.\d{0,2})?$
         status:
           allOf:
           - $ref: '#/components/schemas/StatusEnum'
@@ -4355,13 +4451,13 @@ components:
           format: date-time
           nullable: true
       required:
-      - active_substance
-      - cost
       - created_at
-      - name
-      - nutrient_concentration
-      - price_unit
-      - targeted_towards
+      - hasActiveSubstance
+      - hasCommercialName
+      - hasCost
+      - hasNutrientConcentration
+      - isPricePer
+      - isTargetedTowards
       - updated_at
     GeometrySerializerField:
       type: object
@@ -4374,10 +4470,12 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         activityType:
-          type: integer
+          type: string
+          format: uuid
         title:
           type: string
           maxLength: 200
@@ -4396,13 +4494,15 @@ components:
         usesAgriculturalMachinery:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
         hasAppliedAmount:
           $ref: '#/components/schemas/AppliedAmmountField'
         usesIrrigationSystem:
           $ref: '#/components/schemas/UsesIrrigationSystemEnum'
         operatedOn:
-          type: integer
+          type: string
+          format: uuid
       required:
       - activityType
       - hasAppliedAmount
@@ -4432,10 +4532,12 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         activityType:
-          type: integer
+          type: string
+          format: uuid
         hasStartDatetime:
           type: string
           format: date-time
@@ -4448,7 +4550,8 @@ components:
         usesAgriculturalMachinery:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
         title:
           type: string
           maxLength: 200
@@ -4475,11 +4578,13 @@ components:
           type: string
           maxLength: 255
         activity_type:
-          type: integer
+          type: string
+          format: uuid
         agricultural_machinery:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
       required:
       - activityType
       - activity_type
@@ -4841,7 +4946,8 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         name:
           type: string
@@ -4851,8 +4957,7 @@ components:
           nullable: true
         parcel:
           type: string
-          format: uri
-          nullable: true
+          format: uuid
         purchase_date:
           type: string
           format: date
@@ -4886,10 +4991,12 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         activityType:
-          type: integer
+          type: string
+          format: uuid
         hasStartDatetime:
           type: string
           format: date-time
@@ -4902,7 +5009,8 @@ components:
         usesAgriculturalMachinery:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
         title:
           type: string
           maxLength: 200
@@ -4929,21 +5037,26 @@ components:
           type: string
           maxLength: 255
         activity_type:
-          type: integer
+          type: string
+          format: uuid
         crop:
-          type: integer
+          type: string
+          format: uuid
         agricultural_machinery:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
     PatchedCropProtectionOperation:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         activityType:
-          type: integer
+          type: string
+          format: uuid
         title:
           type: string
           maxLength: 200
@@ -4962,22 +5075,27 @@ components:
         usesAgriculturalMachinery:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
         hasAppliedAmount:
           $ref: '#/components/schemas/AppliedAmmountField'
         usesPesticide:
-          type: integer
+          type: string
+          format: uuid
           nullable: true
         operatedOn:
-          type: integer
+          type: string
+          format: uuid
     PatchedCropStressIndicatorObservation:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         activityType:
-          type: integer
+          type: string
+          format: uuid
         hasStartDatetime:
           type: string
           format: date-time
@@ -4990,7 +5108,8 @@ components:
         usesAgriculturalMachinery:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
         title:
           type: string
           maxLength: 200
@@ -5017,13 +5136,16 @@ components:
           type: string
           maxLength: 255
         activity_type:
-          type: integer
+          type: string
+          format: uuid
         crop:
-          type: integer
+          type: string
+          format: uuid
         agricultural_machinery:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
     PatchedFarm:
       type: object
       properties:
@@ -5045,7 +5167,8 @@ components:
           format: date-time
           readOnly: true
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         name:
           type: string
@@ -5060,7 +5183,8 @@ components:
         hasAgriParcel:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
           readOnly: true
         contactPerson:
           $ref: '#/components/schemas/ContactPersonField'
@@ -5070,7 +5194,8 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         name:
           type: string
@@ -5079,8 +5204,8 @@ components:
           type: string
           nullable: true
         parcel:
-          type: integer
-          nullable: true
+          type: string
+          format: uuid
         sex:
           allOf:
           - $ref: '#/components/schemas/SexEnum'
@@ -5119,10 +5244,12 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         activityType:
-          type: integer
+          type: string
+          format: uuid
         title:
           type: string
           maxLength: 200
@@ -5141,12 +5268,14 @@ components:
         usesAgriculturalMachinery:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
     PatchedFarmCalendarActivityType:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         name:
           type: string
@@ -5187,7 +5316,8 @@ components:
           format: date-time
           readOnly: true
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         name:
           type: string
@@ -5196,8 +5326,8 @@ components:
           type: string
           nullable: true
         parcel:
-          type: integer
-          nullable: true
+          type: string
+          format: uuid
         cropSpecies:
           $ref: '#/components/schemas/CropSpeciesSerializerField'
         growth_stage:
@@ -5225,7 +5355,8 @@ components:
           format: date-time
           readOnly: true
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         identifier:
           type: string
@@ -5280,16 +5411,22 @@ components:
         hasAgriCrop:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
           readOnly: true
+        farm:
+          type: string
+          format: uuid
     PatchedFertilizationOperation:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         activityType:
-          type: integer
+          type: string
+          format: uuid
         title:
           type: string
           maxLength: 200
@@ -5308,43 +5445,40 @@ components:
         usesAgriculturalMachinery:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
         hasAppliedAmount:
           $ref: '#/components/schemas/AppliedAmmountField'
         hasApplicationMethod:
           type: string
           nullable: true
         usesFertilizer:
-          type: integer
+          type: string
+          format: uuid
           nullable: true
         operatedOn:
-          type: integer
+          type: string
+          format: uuid
     PatchedFertilizer:
       type: object
       properties:
-        name:
+        hasCommercialName:
           type: string
-          maxLength: 100
         description:
           type: string
           nullable: true
-        cost:
+        hasCost:
           type: string
           format: decimal
           pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
-        price_unit:
+        isPricePer:
           type: string
-          maxLength: 255
-        active_substance:
+        hasActiveSubstance:
           type: string
-          maxLength: 255
-        targeted_towards:
+        isTargetedTowards:
           type: string
-          maxLength: 255
-        nutrient_concentration:
+        hasNutrientConcentration:
           type: string
-          format: decimal
-          pattern: ^-?\d{0,3}(?:\.\d{0,2})?$
         status:
           allOf:
           - $ref: '#/components/schemas/StatusEnum'
@@ -5366,10 +5500,12 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         activityType:
-          type: integer
+          type: string
+          format: uuid
         title:
           type: string
           maxLength: 200
@@ -5388,21 +5524,25 @@ components:
         usesAgriculturalMachinery:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
         hasAppliedAmount:
           $ref: '#/components/schemas/AppliedAmmountField'
         usesIrrigationSystem:
           $ref: '#/components/schemas/UsesIrrigationSystemEnum'
         operatedOn:
-          type: integer
+          type: string
+          format: uuid
     PatchedObservation:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           readOnly: true
         activityType:
-          type: integer
+          type: string
+          format: uuid
         hasStartDatetime:
           type: string
           format: date-time
@@ -5415,7 +5555,8 @@ components:
         usesAgriculturalMachinery:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
         title:
           type: string
           maxLength: 200
@@ -5442,27 +5583,38 @@ components:
           type: string
           maxLength: 255
         activity_type:
-          type: integer
+          type: string
+          format: uuid
         agricultural_machinery:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
     PatchedPesticide:
       type: object
       properties:
-        url:
+        hasCommercialName:
           type: string
-          format: uri
-          readOnly: true
+        description:
+          type: string
+          nullable: true
+        hasCost:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        isPricePer:
+          type: string
+        hasActiveSubstance:
+          type: string
+        isTargetedTowards:
+          type: string
+        hasPreharvestInterval:
+          type: integer
         status:
           allOf:
           - $ref: '#/components/schemas/StatusEnum'
           minimum: -2147483648
           maximum: 2147483647
-        deleted_at:
-          type: string
-          format: date-time
-          nullable: true
         created_at:
           type: string
           format: date-time
@@ -5471,45 +5623,35 @@ components:
           type: string
           format: date-time
           readOnly: true
-        name:
+        deleted_at:
           type: string
-          maxLength: 100
-        description:
-          type: string
+          format: date-time
           nullable: true
-        cost:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
-        price_unit:
-          type: string
-          maxLength: 255
-        active_substance:
-          type: string
-          maxLength: 255
-        targeted_towards:
-          type: string
-          maxLength: 255
-        preharvest_interval:
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
     Pesticide:
       type: object
       properties:
-        url:
+        hasCommercialName:
           type: string
-          format: uri
-          readOnly: true
+        description:
+          type: string
+          nullable: true
+        hasCost:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        isPricePer:
+          type: string
+        hasActiveSubstance:
+          type: string
+        isTargetedTowards:
+          type: string
+        hasPreharvestInterval:
+          type: integer
         status:
           allOf:
           - $ref: '#/components/schemas/StatusEnum'
           minimum: -2147483648
           maximum: 2147483647
-        deleted_at:
-          type: string
-          format: date-time
-          nullable: true
         created_at:
           type: string
           format: date-time
@@ -5518,38 +5660,19 @@ components:
           type: string
           format: date-time
           readOnly: true
-        name:
+        deleted_at:
           type: string
-          maxLength: 100
-        description:
-          type: string
+          format: date-time
           nullable: true
-        cost:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
-        price_unit:
-          type: string
-          maxLength: 255
-        active_substance:
-          type: string
-          maxLength: 255
-        targeted_towards:
-          type: string
-          maxLength: 255
-        preharvest_interval:
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
       required:
-      - active_substance
-      - cost
       - created_at
-      - name
-      - price_unit
-      - targeted_towards
+      - hasActiveSubstance
+      - hasCommercialName
+      - hasCost
+      - hasPreharvestInterval
+      - isPricePer
+      - isTargetedTowards
       - updated_at
-      - url
     SexEnum:
       enum:
       - 0
