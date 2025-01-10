@@ -125,7 +125,12 @@ REST_FRAMEWORK = {
     #     'rest_framework.parsers.FormParser',
     #     'rest_framework.parsers.MultiPartParser',
     # ],
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'farm_calendar.utils.auth_backends.CustomJWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+
 }
 
 SPECTACULAR_SETTINGS = {
@@ -168,6 +173,7 @@ MIDDLEWARE = [
     'simple_history.middleware.HistoryRequestMiddleware',
     'farm_calendar.utils.auth_middlewares.JWTAuthenticationMiddleware',
 ]
+
 
 ROOT_URLCONF = 'farm_calendar.urls'
 
