@@ -16,10 +16,11 @@ class FarmAsset(NamedHistoricalBaseModel):
                                related_name="%(class)ss")
 
 
+
 class FarmCrop(FarmAsset):
     class Meta:
-        verbose_name = "Farm Plant"
-        verbose_name_plural = "Farm Plants"
+        verbose_name = "Farm Crop"
+        verbose_name_plural = "Farm Crops"
 
     species = models.CharField(max_length=255)
     variety = models.CharField(max_length=255, blank=True, null=True)
@@ -55,8 +56,8 @@ class FarmAnimal(FarmAsset):
 
 class AgriculturalMachine(FarmAsset):
     class Meta:
-        verbose_name = "Farm Equipment"
-        verbose_name_plural = "Farm Equipments"
+        verbose_name = "Farm Machine"
+        verbose_name_plural = "Farm Machines"
 
     purchase_date = models.DateField()
     manufacturer = models.CharField(max_length=255)

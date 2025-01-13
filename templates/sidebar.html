@@ -50,22 +50,22 @@
     </div>
 
         <li class="nav-item{% if active_page == 'crops' %} active{% endif %}">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{% url 'farm_crops' %}">
                 <i class="fas fa-fw fa-carrot"></i>
                 <span>Crops</span>
             </a>
         </li>
 
         <li class="nav-item{% if active_page == 'animals' %} active{% endif %}">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{% url 'farm_animals' %}">
                 <i class="fas fa-fw fa-horse-head"></i>
                 <span>Animals</span></a>
         </li>
 
-        <li class="nav-item{% if active_page == 'equipment' %} active{% endif %}">
-            <a class="nav-link" href="#">
+        <li class="nav-item{% if active_page == 'Machines' %} active{% endif %}">
+            <a class="nav-link" href="{% url 'agri_machines' %}">
                 <i class="fas fa-fw fa-tractor"></i>
-                <span>Equipment</span></a>
+                <span>Machines</span></a>
         </li>
 
 
