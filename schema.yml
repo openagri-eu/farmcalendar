@@ -41,7 +41,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -83,7 +82,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '201':
           content:
@@ -111,13 +109,12 @@ paths:
         schema:
           type: string
           format: uuid
-        description: A UUID string identifying this Farm Equipment.
+        description: A UUID string identifying this Farm Machine.
         required: true
       tags:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -144,7 +141,7 @@ paths:
         schema:
           type: string
           format: uuid
-        description: A UUID string identifying this Farm Equipment.
+        description: A UUID string identifying this Farm Machine.
         required: true
       tags:
       - api
@@ -162,7 +159,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -189,7 +185,7 @@ paths:
         schema:
           type: string
           format: uuid
-        description: A UUID string identifying this Farm Equipment.
+        description: A UUID string identifying this Farm Machine.
         required: true
       tags:
       - api
@@ -206,7 +202,6 @@ paths:
               $ref: '#/components/schemas/PatchedAgriculturalMachine'
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -233,13 +228,12 @@ paths:
         schema:
           type: string
           format: uuid
-        description: A UUID string identifying this Farm Equipment.
+        description: A UUID string identifying this Farm Machine.
         required: true
       tags:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '204':
           description: No response body
@@ -273,7 +267,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -316,7 +309,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '201':
           content:
@@ -351,7 +343,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -397,7 +388,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -442,7 +432,6 @@ paths:
               $ref: '#/components/schemas/PatchedCropGrowthStageObservation'
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -476,7 +465,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '204':
           description: No response body
@@ -510,7 +498,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -553,7 +540,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '201':
           content:
@@ -588,7 +574,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -634,7 +619,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -679,7 +663,6 @@ paths:
               $ref: '#/components/schemas/PatchedCropProtectionOperation'
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -713,7 +696,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '204':
           description: No response body
@@ -746,7 +728,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -788,7 +769,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '201':
           content:
@@ -822,7 +802,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -867,7 +846,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -911,7 +889,6 @@ paths:
               $ref: '#/components/schemas/PatchedCropStressIndicatorObservation'
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -944,7 +921,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '204':
           description: No response body
@@ -980,7 +956,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -1022,7 +997,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '201':
           content:
@@ -1056,7 +1030,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -1101,7 +1074,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -1145,7 +1117,6 @@ paths:
               $ref: '#/components/schemas/PatchedFarm'
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -1178,7 +1149,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '204':
           description: No response body
@@ -1219,7 +1189,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -1261,7 +1230,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '201':
           content:
@@ -1295,7 +1263,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -1340,7 +1307,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -1384,7 +1350,6 @@ paths:
               $ref: '#/components/schemas/PatchedFarmAnimal'
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -1417,7 +1382,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '204':
           description: No response body
@@ -1450,7 +1414,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -1492,7 +1455,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '201':
           content:
@@ -1526,7 +1488,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -1571,7 +1532,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -1615,7 +1575,6 @@ paths:
               $ref: '#/components/schemas/PatchedFarmCalendarActivity'
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -1648,7 +1607,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '204':
           description: No response body
@@ -1673,7 +1631,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -1716,7 +1673,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '201':
           content:
@@ -1751,7 +1707,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -1797,7 +1752,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -1842,7 +1796,6 @@ paths:
               $ref: '#/components/schemas/PatchedFarmCalendarActivityType'
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -1876,7 +1829,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '204':
           description: No response body
@@ -1929,7 +1881,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -1971,7 +1922,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '201':
           content:
@@ -1999,13 +1949,12 @@ paths:
         schema:
           type: string
           format: uuid
-        description: A UUID string identifying this Farm Plant.
+        description: A UUID string identifying this Farm Crop.
         required: true
       tags:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -2032,7 +1981,7 @@ paths:
         schema:
           type: string
           format: uuid
-        description: A UUID string identifying this Farm Plant.
+        description: A UUID string identifying this Farm Crop.
         required: true
       tags:
       - api
@@ -2050,7 +1999,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -2077,7 +2025,7 @@ paths:
         schema:
           type: string
           format: uuid
-        description: A UUID string identifying this Farm Plant.
+        description: A UUID string identifying this Farm Crop.
         required: true
       tags:
       - api
@@ -2094,7 +2042,6 @@ paths:
               $ref: '#/components/schemas/PatchedFarmCrop'
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -2121,13 +2068,12 @@ paths:
         schema:
           type: string
           format: uuid
-        description: A UUID string identifying this Farm Plant.
+        description: A UUID string identifying this Farm Crop.
         required: true
       tags:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '204':
           description: No response body
@@ -2177,7 +2123,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -2219,7 +2164,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '201':
           content:
@@ -2253,7 +2197,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -2298,7 +2241,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -2342,7 +2284,6 @@ paths:
               $ref: '#/components/schemas/PatchedFarmParcel'
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -2375,7 +2316,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '204':
           description: No response body
@@ -2409,7 +2349,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -2452,7 +2391,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '201':
           content:
@@ -2487,7 +2425,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -2533,7 +2470,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -2578,7 +2514,6 @@ paths:
               $ref: '#/components/schemas/PatchedFertilizationOperation'
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -2612,7 +2547,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '204':
           description: No response body
@@ -2648,7 +2582,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -2690,7 +2623,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '201':
           content:
@@ -2724,7 +2656,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -2769,7 +2700,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -2813,7 +2743,6 @@ paths:
               $ref: '#/components/schemas/PatchedFertilizer'
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -2846,7 +2775,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '204':
           description: No response body
@@ -2879,7 +2807,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -2921,7 +2848,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '201':
           content:
@@ -2955,7 +2881,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -3000,7 +2925,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -3044,7 +2968,6 @@ paths:
               $ref: '#/components/schemas/PatchedIrrigationOperation'
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -3077,7 +3000,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '204':
           description: No response body
@@ -3110,7 +3032,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -3152,7 +3073,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '201':
           content:
@@ -3186,7 +3106,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -3231,7 +3150,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -3275,7 +3193,6 @@ paths:
               $ref: '#/components/schemas/PatchedObservation'
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -3308,7 +3225,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '204':
           description: No response body
@@ -3344,7 +3260,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -3386,7 +3301,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '201':
           content:
@@ -3420,7 +3334,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -3465,7 +3378,6 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -3509,7 +3421,6 @@ paths:
               $ref: '#/components/schemas/PatchedPesticide'
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '200':
           content:
@@ -3542,7 +3453,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       responses:
         '204':
           description: No response body
@@ -3670,7 +3580,6 @@ paths:
       - api
       security:
       - cookieAuth: []
-      - basicAuth: []
       - {}
       responses:
         '200':
@@ -5333,9 +5242,6 @@ components:
         * `furrow` - Furrow
         * `terraced` - Terraced
   securitySchemes:
-    basicAuth:
-      type: http
-      scheme: basic
     cookieAuth:
       type: apiKey
       in: cookie

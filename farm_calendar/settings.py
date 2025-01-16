@@ -15,6 +15,7 @@ from decouple import config, Csv
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_ROOT = str(BASE_DIR / "static")
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -31,6 +32,8 @@ EXTRA_ALLOWED_HOSTS = os.environ.get('EXTRA_ALLOWED_HOSTS', None)
 if EXTRA_ALLOWED_HOSTS is not None:
     EXTRA_ALLOWED_HOSTS = EXTRA_ALLOWED_HOSTS.split(',')
     ALLOWED_HOSTS.extend(EXTRA_ALLOWED_HOSTS)
+
+APP_PORT = config('APP_PORT', default='8002')
 
 # Application definition
 DEFAULT_APPS = [
@@ -62,12 +65,22 @@ INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
 GATEKEEPER_LOGIN_URL = os.environ.get('GATEKEEPER_LOGIN_URL', None)
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
-
-CRISPY_TEMPLATE_PACK = "bootstrap4"
-
 if GATEKEEPER_LOGIN_URL == '':
     GATEKEEPER_LOGIN_URL = None
+
+INTERNAL_SERVICE_NAME = config('INTERNAL_SERVICE_NAME', default='farmcalendar')
+INTERNAL_SERVICE_URL = config('INTERNAL_SERVICE_URL', default=f'http://{INTERNAL_SERVICE_NAME}:{APP_PORT}/')
+GATEKEEPER_API_LOGIN_URL = None
+GATEKEEPER_ENDPOINT_REG_URL = None
+FARMCALENDAR_GATEKEEPER_USER = None
+FARMCALENDAR_GATEKEEPER_PASSWORD = None
+if GATEKEEPER_LOGIN_URL is not None:
+    GATEKEEPER_API_LOGIN_URL = config('GATEKEEPER_API_LOGIN_URL')
+    GATEKEEPER_ENDPOINT_REG_URL = config('GATEKEEPER_ENDPOINT_REG_URL')
+
+    FARMCALENDAR_GATEKEEPER_USER = config('FARMCALENDAR_GATEKEEPER_USER')
+    FARMCALENDAR_GATEKEEPER_PASSWORD = config('FARMCALENDAR_GATEKEEPER_PASSWORD')
+
 
 AUTHENTICATION_BACKENDS = (
     'farm_calendar.utils.auth_backends.CustomJWTAuthenticationBackend',
@@ -75,6 +88,9 @@ AUTHENTICATION_BACKENDS = (
 if GATEKEEPER_LOGIN_URL is None:
     AUTHENTICATION_BACKENDS = AUTHENTICATION_BACKENDS + ('django.contrib.auth.backends.ModelBackend',)
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # AUTH_USER_MODEL = "harvesthand.DefaultAuthUserExtend"
 
@@ -104,6 +120,7 @@ POST_AUTH_TOKEN_ATTRIBUTE = os.environ.get('POST_AUTH_TOKEN_ATTRIBUTE', 'access_
 DEFAULT_API_VERSION = config('DEFAULT_API_VERSION', default='1.0.0')
 SHORT_API_VERSION = f'v{DEFAULT_API_VERSION.split(".")[0]}'
 
+API_SCHEMA_FILE_PATH = BASE_DIR / 'schema.yml'
 
 REST_FRAMEWORK = {
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
