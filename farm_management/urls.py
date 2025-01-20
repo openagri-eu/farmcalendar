@@ -28,6 +28,10 @@ from .views import (
     FarmAnimalUpdateView,
     AgriculturalMachineListView,
     AgriculturalMachineUpdateView,
+    FertilizerListView,
+    FertilizerUpdateView,
+    PesticideListView,
+    PesticideUpdateView,
 )
 
 
@@ -54,4 +58,10 @@ urlpatterns = [
     path("farm-animals/<uuid:pk>/", FarmAnimalUpdateView.as_view(), name="farm_animal_edit"),
     path("agri-machines/", AgriculturalMachineListView.as_view(), name="agri_machines"),
     path("agri-machines/<uuid:pk>/", AgriculturalMachineUpdateView.as_view(), name="agri_machine_edit"),
+
+    path("fertilizers/", FertilizerListView.as_view(), name="fertilizers"),
+    path("fertilizers/<uuid:pk>/", FertilizerUpdateView.as_view(), name="fertilizer_edit"),
+
+    path("pesticides/", PesticideListView.as_view(), name="pesticides"),
+    path("pesticides/<uuid:pk>/", PesticideUpdateView.as_view(), name="pesticide_edit"),
 ]

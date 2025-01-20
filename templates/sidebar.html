@@ -70,12 +70,21 @@
 
 
         <li class="nav-item{% if active_page == 'materials' %} active{% endif %}">
-            <a class="nav-link" href="#">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMaterials"
+                aria-expanded="true" aria-controls="collapseMaterials">
                 <i class="fas fa-fw fa-prescription-bottle"></i>
-                <span>Materials</span></a>
-        </li>
+                <span>Materials</span>
+            </a>
+            <div id="collapseMaterials" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{% url 'fertilizers' %}">Fertilizers</a>
+                    <a class="collapse-item" href="{% url 'pesticides' %}">Pesticides</a>
+                </div>
+            </div>
+            </li>
 
-        <li class="nav-item{% if active_page == 'sensors' %} active{% endif %}">
+
+        <li class="nav-item{% if active_page == 'Sensors' %} active{% endif %}">
             <a class="nav-link" href="/">
                 <i class="fas fa-fw fa-satellite-dish"></i>
                 <span>Sensors</span></a>
