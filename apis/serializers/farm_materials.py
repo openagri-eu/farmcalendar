@@ -39,6 +39,7 @@ class FertilizerSerializer(BaseTreatmentMaterialsSerializer):
     class Meta:
         model = Fertilizer
         fields = [
+            'id',
             'hasCommercialName', 'description',
             'hasCost', 'isPricePer', 'hasActiveSubstance', 'isTargetedTowards',
             'hasNutrientConcentration',
@@ -58,6 +59,7 @@ class PesticideSerializer(BaseTreatmentMaterialsSerializer):
     class Meta:
         model = Pesticide
         fields = [
+            'id',
             'hasCommercialName', 'description',
             'hasCost', 'isPricePer', 'hasActiveSubstance', 'isTargetedTowards',
             'hasPreharvestInterval',
