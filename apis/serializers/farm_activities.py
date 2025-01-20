@@ -180,10 +180,22 @@ class CropProtectionOperationSerializer(GenericOperationSerializer):
 
         return json_ld_representation
 
+
 class ObservationSerializer(FarmCalendarActivitySerializer):
+    isMeasuredIn = serializers.CharField(source='value_unit')
+    hasValue = serializers.CharField(source='value')
+    relatesToProperty = serializers.CharField(source='observed_property')
+
     class Meta:
         model = Observation
-        fields = '__all__'
+        fields = [
+            'id',
+            'activityType', 'title', 'details',
+            'hasStartDatetime', 'hasEndDatetime',
+            'responsibleAgent', 'usesAgriculturalMachinery',
+            'hasValue', 'isMeasuredIn', 'relatesToProperty'
+        ]
+
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
@@ -192,10 +204,16 @@ class ObservationSerializer(FarmCalendarActivitySerializer):
 
         return json_ld_representation
 
-class CropStressIndicatorObservationSerializer(FarmCalendarActivitySerializer):
+class CropStressIndicatorObservationSerializer(ObservationSerializer):
     class Meta:
         model = CropStressIndicatorObservation
-        fields = '__all__'
+        fields = [
+            'id',
+            'activityType', 'title', 'details',
+            'hasStartDatetime', 'hasEndDatetime',
+            'responsibleAgent', 'usesAgriculturalMachinery',
+            'hasValue', 'isMeasuredIn', 'relatesToProperty'
+        ]
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
@@ -204,10 +222,16 @@ class CropStressIndicatorObservationSerializer(FarmCalendarActivitySerializer):
 
         return json_ld_representation
 
-class CropGrowthStageObservationSerializer(FarmCalendarActivitySerializer):
+class CropGrowthStageObservationSerializer(ObservationSerializer):
     class Meta:
         model = CropGrowthStageObservation
-        fields = '__all__'
+        fields = [
+            'id',
+            'activityType', 'title', 'details',
+            'hasStartDatetime', 'hasEndDatetime',
+            'responsibleAgent', 'usesAgriculturalMachinery',
+            'hasValue', 'isMeasuredIn', 'relatesToProperty'
+        ]
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)

@@ -3712,6 +3712,12 @@ components:
         activityType:
           type: string
           format: uuid
+        title:
+          type: string
+          maxLength: 200
+        details:
+          type: string
+          nullable: true
         hasStartDatetime:
           type: string
           format: date-time
@@ -3726,55 +3732,23 @@ components:
           items:
             type: string
             format: uuid
-        title:
+        hasValue:
           type: string
-          maxLength: 200
-        start_datetime:
+        isMeasuredIn:
           type: string
-          format: date-time
-        end_datetime:
+        relatesToProperty:
           type: string
-          format: date-time
-          nullable: true
-        details:
-          type: string
-          nullable: true
-        responsible_agent:
-          type: string
-          nullable: true
-        value:
-          type: string
-          maxLength: 255
-        value_unit:
-          type: string
-          maxLength: 255
-        observed_property:
-          type: string
-          maxLength: 255
-        activity_type:
-          type: string
-          format: uuid
-        crop:
-          type: string
-          format: uuid
-        agricultural_machinery:
-          type: array
-          items:
-            type: string
-            format: uuid
       required:
       - activityType
-      - activity_type
-      - crop
       - hasEndDatetime
       - hasStartDatetime
+      - hasValue
       - id
-      - observed_property
+      - isMeasuredIn
+      - relatesToProperty
       - responsibleAgent
       - title
       - usesAgriculturalMachinery
-      - value
-      - value_unit
     CropProtectionOperation:
       type: object
       properties:
@@ -3845,6 +3819,12 @@ components:
         activityType:
           type: string
           format: uuid
+        title:
+          type: string
+          maxLength: 200
+        details:
+          type: string
+          nullable: true
         hasStartDatetime:
           type: string
           format: date-time
@@ -3859,55 +3839,23 @@ components:
           items:
             type: string
             format: uuid
-        title:
+        hasValue:
           type: string
-          maxLength: 200
-        start_datetime:
+        isMeasuredIn:
           type: string
-          format: date-time
-        end_datetime:
+        relatesToProperty:
           type: string
-          format: date-time
-          nullable: true
-        details:
-          type: string
-          nullable: true
-        responsible_agent:
-          type: string
-          nullable: true
-        value:
-          type: string
-          maxLength: 255
-        value_unit:
-          type: string
-          maxLength: 255
-        observed_property:
-          type: string
-          maxLength: 255
-        activity_type:
-          type: string
-          format: uuid
-        crop:
-          type: string
-          format: uuid
-        agricultural_machinery:
-          type: array
-          items:
-            type: string
-            format: uuid
       required:
       - activityType
-      - activity_type
-      - crop
       - hasEndDatetime
       - hasStartDatetime
+      - hasValue
       - id
-      - observed_property
+      - isMeasuredIn
+      - relatesToProperty
       - responsibleAgent
       - title
       - usesAgriculturalMachinery
-      - value
-      - value_unit
     Farm:
       type: object
       properties:
@@ -4417,6 +4365,12 @@ components:
         activityType:
           type: string
           format: uuid
+        title:
+          type: string
+          maxLength: 200
+        details:
+          type: string
+          nullable: true
         hasStartDatetime:
           type: string
           format: date-time
@@ -4431,51 +4385,23 @@ components:
           items:
             type: string
             format: uuid
-        title:
+        hasValue:
           type: string
-          maxLength: 200
-        start_datetime:
+        isMeasuredIn:
           type: string
-          format: date-time
-        end_datetime:
+        relatesToProperty:
           type: string
-          format: date-time
-          nullable: true
-        details:
-          type: string
-          nullable: true
-        responsible_agent:
-          type: string
-          nullable: true
-        value:
-          type: string
-          maxLength: 255
-        value_unit:
-          type: string
-          maxLength: 255
-        observed_property:
-          type: string
-          maxLength: 255
-        activity_type:
-          type: string
-          format: uuid
-        agricultural_machinery:
-          type: array
-          items:
-            type: string
-            format: uuid
       required:
       - activityType
-      - activity_type
       - hasEndDatetime
       - hasStartDatetime
+      - hasValue
       - id
-      - observed_property
+      - isMeasuredIn
+      - relatesToProperty
       - responsibleAgent
       - title
       - usesAgriculturalMachinery
-      - value
-      - value_unit
     PatchedAgriculturalMachine:
       type: object
       properties:
@@ -4531,6 +4457,12 @@ components:
         activityType:
           type: string
           format: uuid
+        title:
+          type: string
+          maxLength: 200
+        details:
+          type: string
+          nullable: true
         hasStartDatetime:
           type: string
           format: date-time
@@ -4545,42 +4477,12 @@ components:
           items:
             type: string
             format: uuid
-        title:
+        hasValue:
           type: string
-          maxLength: 200
-        start_datetime:
+        isMeasuredIn:
           type: string
-          format: date-time
-        end_datetime:
+        relatesToProperty:
           type: string
-          format: date-time
-          nullable: true
-        details:
-          type: string
-          nullable: true
-        responsible_agent:
-          type: string
-          nullable: true
-        value:
-          type: string
-          maxLength: 255
-        value_unit:
-          type: string
-          maxLength: 255
-        observed_property:
-          type: string
-          maxLength: 255
-        activity_type:
-          type: string
-          format: uuid
-        crop:
-          type: string
-          format: uuid
-        agricultural_machinery:
-          type: array
-          items:
-            type: string
-            format: uuid
     PatchedCropProtectionOperation:
       type: object
       properties:
@@ -4630,6 +4532,12 @@ components:
         activityType:
           type: string
           format: uuid
+        title:
+          type: string
+          maxLength: 200
+        details:
+          type: string
+          nullable: true
         hasStartDatetime:
           type: string
           format: date-time
@@ -4644,42 +4552,12 @@ components:
           items:
             type: string
             format: uuid
-        title:
+        hasValue:
           type: string
-          maxLength: 200
-        start_datetime:
+        isMeasuredIn:
           type: string
-          format: date-time
-        end_datetime:
+        relatesToProperty:
           type: string
-          format: date-time
-          nullable: true
-        details:
-          type: string
-          nullable: true
-        responsible_agent:
-          type: string
-          nullable: true
-        value:
-          type: string
-          maxLength: 255
-        value_unit:
-          type: string
-          maxLength: 255
-        observed_property:
-          type: string
-          maxLength: 255
-        activity_type:
-          type: string
-          format: uuid
-        crop:
-          type: string
-          format: uuid
-        agricultural_machinery:
-          type: array
-          items:
-            type: string
-            format: uuid
     PatchedFarm:
       type: object
       properties:
@@ -5077,6 +4955,12 @@ components:
         activityType:
           type: string
           format: uuid
+        title:
+          type: string
+          maxLength: 200
+        details:
+          type: string
+          nullable: true
         hasStartDatetime:
           type: string
           format: date-time
@@ -5091,39 +4975,12 @@ components:
           items:
             type: string
             format: uuid
-        title:
+        hasValue:
           type: string
-          maxLength: 200
-        start_datetime:
+        isMeasuredIn:
           type: string
-          format: date-time
-        end_datetime:
+        relatesToProperty:
           type: string
-          format: date-time
-          nullable: true
-        details:
-          type: string
-          nullable: true
-        responsible_agent:
-          type: string
-          nullable: true
-        value:
-          type: string
-          maxLength: 255
-        value_unit:
-          type: string
-          maxLength: 255
-        observed_property:
-          type: string
-          maxLength: 255
-        activity_type:
-          type: string
-          format: uuid
-        agricultural_machinery:
-          type: array
-          items:
-            type: string
-            format: uuid
     PatchedPesticide:
       type: object
       properties:
