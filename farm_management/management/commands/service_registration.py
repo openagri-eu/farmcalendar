@@ -86,6 +86,8 @@ class Command(BaseCommand):
         endpoint_data = []
 
         for path, methods in schema.get('paths', {}).items():
+            if path.startswith('/'):
+                path = path[1:]
             all_methods = [k.upper() for k in methods.keys()]
             all_methods.extend(['HEAD', 'OPTIONS'])
             combined_params = set()
