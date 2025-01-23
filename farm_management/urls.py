@@ -43,7 +43,7 @@ urlpatterns = [
     # different APIs in the system, and instead we shoud use one if we want to retrieve JSON(or JSON-LD)
     # representation of the models
     path(
-        "<str:prefix>/ajax/<str:action>/<int:pk>/",
+        "<str:prefix>/ajax/<str:action>/<uuid:pk>/",
         view=AjaxHandlerView.as_view(),
         name="action",
     ),

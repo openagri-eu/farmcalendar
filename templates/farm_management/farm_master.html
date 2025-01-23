@@ -254,7 +254,7 @@
                 }
             }).on('click', '.edit-farm', function() {
             const pk = $(this).data('id');
-            window.location.href = '/farms/edit/' + pk;
+            window.location.href = '{% url 'farms' %}' + pk;
         });
     </script>
 {% endblock body_end_extra_scripts %}

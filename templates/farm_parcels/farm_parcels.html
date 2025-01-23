@@ -266,7 +266,7 @@
                     }
                 }).on('click', '.edit-farm-parcel', function() {
                 const pk = $(this).data('id');
-                window.location.href = '/farm-parcels/edit/' + pk;
+                window.location.href = '{% url 'farm_parcels' %}' + pk;
             });
 
         $(function() {
