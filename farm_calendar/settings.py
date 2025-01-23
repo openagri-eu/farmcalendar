@@ -33,6 +33,20 @@ if EXTRA_ALLOWED_HOSTS is not None:
     EXTRA_ALLOWED_HOSTS = EXTRA_ALLOWED_HOSTS.split(',')
     ALLOWED_HOSTS.extend(EXTRA_ALLOWED_HOSTS)
 
+def default_crsf_from_allowed_host_format(host_list):
+    crsf_host_format = []
+    for host in host_list:
+        if host.startswith('['):
+            continue
+        crsf_host = host
+        if crsf_host.startswith('.'):
+            crsf_host = f'*{crsf_host}'
+        crsf_host_format.append(f'http://{crsf_host}')
+        crsf_host_format.append(f'https://{crsf_host}')
+    return ','.join(crsf_host_format)
+
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', cast=Csv(), default=default_crsf_from_allowed_host_format(ALLOWED_HOSTS))
+
 APP_PORT = config('APP_PORT', default='8002')
 
 # Application definition
