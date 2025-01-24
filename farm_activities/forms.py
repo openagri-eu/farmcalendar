@@ -4,6 +4,7 @@ from django.forms import modelform_factory
 from .models import (
     FarmCalendarActivityType,
     FarmCalendarActivity,
+    Observation,
     FertilizationOperation,
     IrrigationOperation,
     CropProtectionOperation,
@@ -54,7 +55,13 @@ def get_generic_farm_calendar_activity_form(activity_type):
         settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['crop_stress_indicator']['name']: CropStressIndicatorObservation,
         settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['crop_growth_stage']['name']: CropGrowthStageObservation,
     }
-    ActivityModel = activity_type_model_map.get(activity_type, FarmCalendarActivity)
+    ActivityModel = activity_type_model_map.get(activity_type)
+    if ActivityModel is None:
+        # if 'observation' in activity_type.lower():
+        #     ActivityModel = Observation
+        ActivityModel = FarmCalendarActivity
+
+
     GenericActivityForm = modelform_factory(
         ActivityModel,
         fields="__all__",

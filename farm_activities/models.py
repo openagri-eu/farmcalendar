@@ -72,7 +72,7 @@ class FarmCalendarActivity(models.Model):
     # weather_observation = models.ManyToManyField('farm_management.AgriculturalMachine', related_name='used_in_operations', blank=True, null=True)?
 
     def __str__(self):
-        return f"{self.title} ({self.start_time.strftime('%Y-%m-%d %H:%M')})"
+        return f"{self.title} ({self.start_datetime.strftime('%Y-%m-%d %H:%M')})"
 
 
 class FertilizationOperation(FarmCalendarActivity):
