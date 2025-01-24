@@ -18,6 +18,7 @@ Including another URLconf
 from django.urls import path
 from .views import (
     login_view,
+    logout_view,
     post_authentication,
     FarmParcelView,
     FarmView,
@@ -38,6 +39,7 @@ from .views import (
 urlpatterns = [
     path("login/", login_view, name="login"),
     path("post_auth/", post_authentication, name="post_auth"),
+    path("logout/", logout_view, name="logout"),
     # Ajax routes for toggling status and deletion
     # this has to be changed to use the actual API, otherwise we are creating two
     # different APIs in the system, and instead we shoud use one if we want to retrieve JSON(or JSON-LD)
