@@ -13,6 +13,9 @@ class BaseFarmAssetSerializer(serializers.ModelSerializer):
         class_names=['FarmParcel'],
         queryset=FarmParcel.objects.all(),
     )
+    dateCreated = serializers.DateTimeField(source='created_at')
+    dateModified = serializers.DateTimeField(source='updated_at')
+    invalidatedAtTime = serializers.DateTimeField(source='deleted_at')
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
@@ -50,11 +53,10 @@ class FarmCropSerializer(BaseFarmAssetSerializer):
     class Meta:
         model = FarmCrop
         fields = [
-            'status', 'deleted_at', 'created_at', 'updated_at',
+            'status', 'invalidatedAtTime', 'dateCreated', 'dateModified',
             'id', 'name', 'description',
             'parcel', 'cropSpecies',
             'growth_stage',
-            'status', 'created_at', 'updated_at', 'deleted_at',
         ]
 
     def to_representation(self, instance):
@@ -69,13 +71,16 @@ class FarmCropSerializer(BaseFarmAssetSerializer):
 
 
 class FarmAnimalSerializer(BaseFarmAssetSerializer):
+    birthdate = serializers.DateTimeField(source='birth_date')
+    AnimalGroup = serializers.CharField(source='animal_group')
+
     class Meta:
         model = FarmAnimal
         fields = [
             'id', 'national_id', 'name', 'description',
             'parcel',
-            'sex', 'castrated', 'species', 'breed', 'birth_date', 'animal_group',
-            'status', 'created_at', 'updated_at', 'deleted_at',
+            'sex', 'castrated', 'species', 'breed', 'birthdate', 'AnimalGroup',
+            'status', 'invalidatedAtTime', 'dateCreated', 'dateModified',
         ]
 
     def to_representation(self, instance):
@@ -96,7 +101,7 @@ class AgriculturalMachineSerializer(BaseFarmAssetSerializer):
             'id', 'name', 'description',
             'parcel',
             'purchase_date', 'manufacturer', 'model', 'seria_number',
-            'status', 'created_at', 'updated_at', 'deleted_at',
+            'status', 'invalidatedAtTime', 'dateCreated', 'dateModified',
         ]
 
     def to_representation(self, instance):

@@ -3662,28 +3662,26 @@ components:
           - $ref: '#/components/schemas/StatusEnum'
           minimum: -2147483648
           maximum: 2147483647
-        created_at:
+        invalidatedAtTime:
           type: string
           format: date-time
-          readOnly: true
-        updated_at:
+        dateCreated:
           type: string
           format: date-time
-          readOnly: true
-        deleted_at:
+        dateModified:
           type: string
           format: date-time
-          nullable: true
       required:
-      - created_at
+      - dateCreated
+      - dateModified
       - id
+      - invalidatedAtTime
       - manufacturer
       - model
       - name
       - parcel
       - purchase_date
       - seria_number
-      - updated_at
     AppliedAmmountField:
       type: object
       properties:
@@ -3950,37 +3948,34 @@ components:
           type: string
           nullable: true
           maxLength: 255
-        birth_date:
+        birthdate:
           type: string
           format: date-time
-        animal_group:
+        AnimalGroup:
           type: string
-          nullable: true
-          maxLength: 255
         status:
           allOf:
           - $ref: '#/components/schemas/StatusEnum'
           minimum: -2147483648
           maximum: 2147483647
-        created_at:
+        invalidatedAtTime:
           type: string
           format: date-time
-          readOnly: true
-        updated_at:
+        dateCreated:
           type: string
           format: date-time
-          readOnly: true
-        deleted_at:
+        dateModified:
           type: string
           format: date-time
-          nullable: true
       required:
-      - birth_date
-      - created_at
+      - AnimalGroup
+      - birthdate
+      - dateCreated
+      - dateModified
       - id
+      - invalidatedAtTime
       - parcel
       - species
-      - updated_at
     FarmCalendarActivity:
       type: object
       properties:
@@ -4055,18 +4050,15 @@ components:
           - $ref: '#/components/schemas/StatusEnum'
           minimum: -2147483648
           maximum: 2147483647
-        deleted_at:
+        invalidatedAtTime:
           type: string
           format: date-time
-          nullable: true
-        created_at:
+        dateCreated:
           type: string
           format: date-time
-          readOnly: true
-        updated_at:
+        dateModified:
           type: string
           format: date-time
-          readOnly: true
         id:
           type: string
           format: uuid
@@ -4087,12 +4079,13 @@ components:
           nullable: true
           maxLength: 255
       required:
-      - created_at
       - cropSpecies
+      - dateCreated
+      - dateModified
       - id
+      - invalidatedAtTime
       - name
       - parcel
-      - updated_at
     FarmParcel:
       type: object
       properties:
@@ -4451,18 +4444,15 @@ components:
           - $ref: '#/components/schemas/StatusEnum'
           minimum: -2147483648
           maximum: 2147483647
-        created_at:
+        invalidatedAtTime:
           type: string
           format: date-time
-          readOnly: true
-        updated_at:
+        dateCreated:
           type: string
           format: date-time
-          readOnly: true
-        deleted_at:
+        dateModified:
           type: string
           format: date-time
-          nullable: true
     PatchedCropGrowthStageObservation:
       type: object
       properties:
@@ -4652,30 +4642,25 @@ components:
           type: string
           nullable: true
           maxLength: 255
-        birth_date:
+        birthdate:
           type: string
           format: date-time
-        animal_group:
+        AnimalGroup:
           type: string
-          nullable: true
-          maxLength: 255
         status:
           allOf:
           - $ref: '#/components/schemas/StatusEnum'
           minimum: -2147483648
           maximum: 2147483647
-        created_at:
+        invalidatedAtTime:
           type: string
           format: date-time
-          readOnly: true
-        updated_at:
+        dateCreated:
           type: string
           format: date-time
-          readOnly: true
-        deleted_at:
+        dateModified:
           type: string
           format: date-time
-          nullable: true
     PatchedFarmCalendarActivity:
       type: object
       properties:
@@ -4739,18 +4724,15 @@ components:
           - $ref: '#/components/schemas/StatusEnum'
           minimum: -2147483648
           maximum: 2147483647
-        deleted_at:
+        invalidatedAtTime:
           type: string
           format: date-time
-          nullable: true
-        created_at:
+        dateCreated:
           type: string
           format: date-time
-          readOnly: true
-        updated_at:
+        dateModified:
           type: string
           format: date-time
-          readOnly: true
         id:
           type: string
           format: uuid
