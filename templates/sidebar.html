@@ -82,13 +82,14 @@
                 </div>
             </div>
             </li>
-
-
-        <li class="nav-item{% if active_page == 'Sensors' %} active{% endif %}">
-            <a class="nav-link" href="/">
-                <i class="fas fa-fw fa-satellite-dish"></i>
-                <span>Sensors</span></a>
-        </li>
+        {% comment %}
+            <li class="nav-item{% if active_page == 'Sensors' %} active{% endif %}">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-fw fa-satellite-dish"></i>
+                    <span>Sensors</span>
+                </a>
+            </li>
+        {% endcomment %}
 
     <!-- Divider -->
     <hr class="sidebar-divider">

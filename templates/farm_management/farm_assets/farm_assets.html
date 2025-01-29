@@ -17,6 +17,9 @@
 
     <!-- alertifyjs default themes  Css -->
     <link href="{% static 'libs/alertifyjs/build/css/themes/default.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+
 {% endblock extra_css %}
 
 {% block page_content_title %}{{ model_name }}{% endblock %}
@@ -90,4 +93,36 @@
 
     <!-- alertifyjs js -->
     <script src="{% static 'libs/alertifyjs/build/alertify.min.js' %}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 {% endblock body_end_extra_scripts %}
+
+
+{% block on_dom_load_js %}
+    $('#id_animal_group').select2({
+        placeholder: 'Select an animal group',
+        allowClear: true,
+        ajax: {
+            url: "{% url 'animal-group-autocomplete' %}",
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    term: params.term,
+                };
+            },
+            processResults: function (data) {
+                return {
+                    results: $.map(data, function (item) {
+                        return {
+                            text: item,
+                            id: item,
+                        };
+                    }),
+                };
+            },
+            cache: true,
+        },
+        minimumInputLength: 1,
+    });
+{% endblock on_dom_load_js %}

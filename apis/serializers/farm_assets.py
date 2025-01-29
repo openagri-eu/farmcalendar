@@ -72,9 +72,9 @@ class FarmAnimalSerializer(BaseFarmAssetSerializer):
     class Meta:
         model = FarmAnimal
         fields = [
-            'id', 'name', 'description',
+            'id', 'national_id', 'name', 'description',
             'parcel',
-            'sex', 'castrated', 'species', 'breed', 'birth_date',
+            'sex', 'castrated', 'species', 'breed', 'birth_date', 'animal_group',
             'status', 'created_at', 'updated_at', 'deleted_at',
         ]
 

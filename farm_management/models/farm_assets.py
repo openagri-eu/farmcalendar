@@ -41,8 +41,8 @@ class FarmAnimal(FarmAsset):
         FEMALE = 1, _('Female')
         MALE = 2, _('Male')
 
-    name = models.CharField(max_length=100, blank=True, null=True)
-    national_id = models.CharField(blank=True, null=True)
+    name = models.CharField(_('Name'), max_length=100, blank=True, null=True)
+    national_id = models.CharField(_('National ID'), blank=True, null=True)
     species = models.CharField(max_length=255)
     breed = models.CharField(max_length=255, blank=True, null=True)
     birth_date = models.DateTimeField()

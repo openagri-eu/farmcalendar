@@ -33,6 +33,7 @@ from .views import (
     FertilizerUpdateView,
     PesticideListView,
     PesticideUpdateView,
+    AnimalGroupAutocomplete,
 )
 
 
@@ -49,6 +50,7 @@ urlpatterns = [
         view=AjaxHandlerView.as_view(),
         name="action",
     ),
+    path('farm-animals/animal-group-autocomplete/', AnimalGroupAutocomplete.as_view(), name='animal-group-autocomplete'),
     path("farms/", FarmView.as_view(), name="farms"),
     path("farms/<uuid:pk>/", view=FarmView.as_view(), name="farm_edit"),
     path("farm-parcels/", FarmParcelView.as_view(), name="farm_parcels"),

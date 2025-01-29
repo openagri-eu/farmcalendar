@@ -3,8 +3,10 @@ import json
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import JsonResponse
 from django.contrib import messages
 from django.views.generic.list import ListView
+from django.views.generic.base import View
 from django.views.generic.edit import FormMixin, UpdateView
 from django.conf import settings
 
@@ -126,7 +128,7 @@ class FarmAnimalListView(BaseFarmAssetListManagementView):
     success_url = reverse_lazy('farm_animals')
     asset_base_url = reverse_lazy('farm_animals')
     form_class = get_generic_farm_asset_form(FarmAnimal)
-    datatable_fields = ['name', 'species', 'parcel', ]
+    datatable_fields = ['national_id', 'species', 'breed', 'animal_group', 'parcel']
 
 
 class AgriculturalMachineUpdateView(BaseFarmAssetUpdateView):
@@ -143,3 +145,12 @@ class AgriculturalMachineListView(BaseFarmAssetListManagementView):
     asset_base_url = reverse_lazy('agri_machines')
     form_class = get_generic_farm_asset_form(AgriculturalMachine)
     datatable_fields = ['name', 'model', 'parcel', ]
+
+
+class AnimalGroupAutocomplete(View):
+    def get(self, request, *args, **kwargs):
+        if 'term' in request.GET:
+            qs = FarmAnimal.objects.filter(animal_group__icontains=request.GET.get('term'))
+            animal_groups = list(set(qs.values_list('animal_group', flat=True)))
+            return JsonResponse(animal_groups, safe=False)
+        return JsonResponse([], safe=False)

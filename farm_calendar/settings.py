@@ -73,6 +73,8 @@ THIRD_PARTY_APPS = [
     'drf_spectacular',
     'crispy_forms',
     'crispy_bootstrap4',
+    'dal',
+    'dal_select2',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_PARTY_APPS
