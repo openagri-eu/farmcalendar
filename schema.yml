@@ -1158,6 +1158,10 @@ paths:
       description: API endpoint that allows FarmAnimal to be viewed or edited.
       parameters:
       - in: query
+        name: animal_group
+        schema:
+          type: string
+      - in: query
         name: format
         schema:
           type: string
@@ -3919,8 +3923,12 @@ components:
           type: string
           format: uuid
           readOnly: true
+        national_id:
+          type: string
+          nullable: true
         name:
           type: string
+          nullable: true
           maxLength: 100
         description:
           type: string
@@ -3945,6 +3953,10 @@ components:
         birth_date:
           type: string
           format: date-time
+        animal_group:
+          type: string
+          nullable: true
+          maxLength: 255
         status:
           allOf:
           - $ref: '#/components/schemas/StatusEnum'
@@ -3966,7 +3978,6 @@ components:
       - birth_date
       - created_at
       - id
-      - name
       - parcel
       - species
       - updated_at
@@ -4243,6 +4254,10 @@ components:
     Fertilizer:
       type: object
       properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
         hasCommercialName:
           type: string
         description:
@@ -4283,6 +4298,7 @@ components:
       - hasCommercialName
       - hasCost
       - hasNutrientConcentration
+      - id
       - isPricePer
       - isTargetedTowards
       - updated_at
@@ -4609,8 +4625,12 @@ components:
           type: string
           format: uuid
           readOnly: true
+        national_id:
+          type: string
+          nullable: true
         name:
           type: string
+          nullable: true
           maxLength: 100
         description:
           type: string
@@ -4635,6 +4655,10 @@ components:
         birth_date:
           type: string
           format: date-time
+        animal_group:
+          type: string
+          nullable: true
+          maxLength: 255
         status:
           allOf:
           - $ref: '#/components/schemas/StatusEnum'
@@ -4874,6 +4898,10 @@ components:
     PatchedFertilizer:
       type: object
       properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
         hasCommercialName:
           type: string
         description:
@@ -4984,6 +5012,10 @@ components:
     PatchedPesticide:
       type: object
       properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
         hasCommercialName:
           type: string
         description:
@@ -5021,6 +5053,10 @@ components:
     Pesticide:
       type: object
       properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
         hasCommercialName:
           type: string
         description:
@@ -5061,6 +5097,7 @@ components:
       - hasCommercialName
       - hasCost
       - hasPreharvestInterval
+      - id
       - isPricePer
       - isTargetedTowards
       - updated_at
