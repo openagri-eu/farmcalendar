@@ -9,7 +9,8 @@ from farm_management.models import FarmCrop, FarmAnimal, AgriculturalMachine, Fa
 
 
 class BaseFarmAssetSerializer(serializers.ModelSerializer):
-    parcel = URNRelatedField(
+    Parcel = URNRelatedField(
+        source='parcel',
         class_names=['FarmParcel'],
         queryset=FarmParcel.objects.all(),
     )
@@ -32,16 +33,17 @@ class CropSpeciesSerializerField(serializers.Serializer):
     variety = serializers.CharField()
 
     def to_representation(self, instance):
+        variety = (getattr(instance, 'variety', '') or '')
         uuid_orig_str = "".join([
             getattr(instance, 'species', ''),
-            getattr(instance, 'variety', ''),
+            variety,
         ])
         hash_uuid = str(uuid.uuid5(uuid.NAMESPACE_DNS, uuid_orig_str))
         return {
             '@id': generate_urn('CropType', obj_id=hash_uuid),
             '@type': 'CropType',
-            'name': instance.species,
-            'variety': instance.variety,
+            'name': getattr(instance, 'species', ''),
+            'variety': getattr(instance, 'species', ''),
         }
 
 
@@ -55,7 +57,7 @@ class FarmCropSerializer(BaseFarmAssetSerializer):
         fields = [
             'status', 'invalidatedAtTime', 'dateCreated', 'dateModified',
             'id', 'name', 'description',
-            'parcel', 'cropSpecies',
+            'Parcel', 'cropSpecies',
             'growth_stage',
         ]
 
@@ -78,7 +80,7 @@ class FarmAnimalSerializer(BaseFarmAssetSerializer):
         model = FarmAnimal
         fields = [
             'id', 'national_id', 'name', 'description',
-            'parcel',
+            'Parcel',
             'sex', 'castrated', 'species', 'breed', 'birthdate', 'AnimalGroup',
             'status', 'invalidatedAtTime', 'dateCreated', 'dateModified',
         ]
@@ -99,7 +101,7 @@ class AgriculturalMachineSerializer(BaseFarmAssetSerializer):
         model = AgriculturalMachine
         fields = [
             'id', 'name', 'description',
-            'parcel',
+            'Parcel',
             'purchase_date', 'manufacturer', 'model', 'seria_number',
             'status', 'invalidatedAtTime', 'dateCreated', 'dateModified',
         ]
