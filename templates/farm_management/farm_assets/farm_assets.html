@@ -99,9 +99,23 @@
 
 
 {% block on_dom_load_js %}
+
+    var initialAnimalGroupValue = "{{ form.instance.animal_group }}";
     $('#id_animal_group').select2({
         placeholder: 'Select an animal group',
         allowClear: true,
+        tags: true,  // Enables user input for new values
+        createTag: function (params) {
+            var term = $.trim(params.term);
+            if (term === '') {
+                return null;
+            }
+            return {
+                id: term,
+                text: term,
+                newTag: true  // Mark as new for styling if needed
+            };
+        },
         ajax: {
             url: "{% url 'animal-group-autocomplete' %}",
             dataType: 'json',
@@ -125,4 +139,18 @@
         },
         minimumInputLength: 1,
     });
+
+    // Load initial selection
+    if (initialAnimalGroupValue) {
+        $.ajax({
+            url: "{% url 'animal-group-autocomplete' %}",
+            data: { term: initialAnimalGroupValue },
+            dataType: 'json',
+        }).done(function (data) {
+            if (data.length > 0) {
+                var newOption = new Option(data[0], data[0], true, true);
+                $('#id_animal_group').append(newOption).trigger('change');
+            }
+        });
+    }
 {% endblock on_dom_load_js %}
