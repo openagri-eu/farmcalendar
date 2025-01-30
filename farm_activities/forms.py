@@ -68,8 +68,11 @@ def get_generic_farm_calendar_activity_form(activity_type):
         exclude=['id'],
         widgets={
             'start_datetime': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
-            'activity_type': forms.HiddenInput(),
             'end_datetime': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'activity_type': forms.HiddenInput(),
+            # 'end_datetime': forms.DateTimeInput(format='%Y-%m-%dT%H:%M:%S%z'),
+            # 'end_datetime': forms.DateTimeInput(format='%Y-%m-%dT%H:%M:%S'),
+            # 'end_datetime': forms.DateTimeInput(format='Y-m-d\\TH:i:sO' ),
         },
     )
     return GenericActivityForm

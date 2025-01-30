@@ -40,6 +40,7 @@ var calendarEl = document.getElementById('calendar');
 var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
     events: '{% url 'calendar_activity_list' %}',  // Fetch operations (events in FullCalendar) from the Django view
+    timeZone: 'local',
     headerToolbar: {
         left: 'prev,next today',
         center: 'title',

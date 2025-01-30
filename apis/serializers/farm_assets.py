@@ -9,14 +9,14 @@ from farm_management.models import FarmCrop, FarmAnimal, AgriculturalMachine, Fa
 
 
 class BaseFarmAssetSerializer(serializers.ModelSerializer):
-    Parcel = URNRelatedField(
+    hasAgriParcel = URNRelatedField(
         source='parcel',
         class_names=['FarmParcel'],
         queryset=FarmParcel.objects.all(),
     )
-    dateCreated = serializers.DateTimeField(source='created_at')
-    dateModified = serializers.DateTimeField(source='updated_at')
-    invalidatedAtTime = serializers.DateTimeField(source='deleted_at')
+    dateCreated = serializers.DateTimeField(source='created_at', read_only=True)
+    dateModified = serializers.DateTimeField(source='updated_at', read_only=True)
+    invalidatedAtTime = serializers.DateTimeField(source='deleted_at', read_only=True)
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
@@ -49,7 +49,6 @@ class CropSpeciesSerializerField(serializers.Serializer):
 
 
 class FarmCropSerializer(BaseFarmAssetSerializer):
-
     cropSpecies = CropSpeciesSerializerField(source='*')
 
     class Meta:
@@ -57,7 +56,7 @@ class FarmCropSerializer(BaseFarmAssetSerializer):
         fields = [
             'status', 'invalidatedAtTime', 'dateCreated', 'dateModified',
             'id', 'name', 'description',
-            'Parcel', 'cropSpecies',
+            'hasAgriParcel', 'cropSpecies',
             'growth_stage',
         ]
 
@@ -72,16 +71,30 @@ class FarmCropSerializer(BaseFarmAssetSerializer):
         return json_ld_representation
 
 
+class FarmAnimalGroupSerializerField(serializers.Serializer):
+    hasName = serializers.CharField(source='animal_group', required=False)
+
+    def to_representation(self, instance):
+        uuid_orig_str = getattr(instance, 'animal_group', '')
+        if uuid_orig_str is None or uuid_orig_str is '':
+            return {}
+        hash_uuid = str(uuid.uuid5(uuid.NAMESPACE_DNS, uuid_orig_str))
+        return {
+            '@id': generate_urn('AnimalGroup', obj_id=hash_uuid),
+            '@type': 'AnimalGroup',
+            'hasName': uuid_orig_str
+        }
+
 class FarmAnimalSerializer(BaseFarmAssetSerializer):
     birthdate = serializers.DateTimeField(source='birth_date')
-    AnimalGroup = serializers.CharField(source='animal_group')
+    isMemberOfAnimalGroup = FarmAnimalGroupSerializerField(source='*', required=False, allow_null=False)
 
     class Meta:
         model = FarmAnimal
         fields = [
             'id', 'national_id', 'name', 'description',
-            'Parcel',
-            'sex', 'castrated', 'species', 'breed', 'birthdate', 'AnimalGroup',
+            'hasAgriParcel',
+            'sex', 'castrated', 'species', 'breed', 'birthdate', 'isMemberOfAnimalGroup',
             'status', 'invalidatedAtTime', 'dateCreated', 'dateModified',
         ]
 
@@ -101,7 +114,7 @@ class AgriculturalMachineSerializer(BaseFarmAssetSerializer):
         model = AgriculturalMachine
         fields = [
             'id', 'name', 'description',
-            'Parcel',
+            'hasAgriParcel',
             'purchase_date', 'manufacturer', 'model', 'seria_number',
             'status', 'invalidatedAtTime', 'dateCreated', 'dateModified',
         ]
