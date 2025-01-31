@@ -1,8 +1,25 @@
 import re
 from datetime import datetime
 
+
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
+from django.utils.translation import gettext_lazy as _
+
+
+
+def validate_comma_separated_float_list(value):
+    """
+    Validates that the input is a comma-separated list of floats.
+    """
+    try:
+        # Split the input by commas and convert each part to a float
+        values = [float(val.strip()) for val in value.split(',')]
+    except ValueError:
+        raise ValidationError(
+            _('Enter only comma-separated float values (e.g., "10.5,15.2,25.0").'),
+            code='invalid',
+        )
 
 
 def validate_name_field(value):

@@ -5,7 +5,7 @@ from rest_framework import serializers
 from ..schemas import generate_urn
 from .base import URNRelatedField
 
-from farm_management.models import FarmCrop, FarmAnimal, AgriculturalMachine, FarmParcel
+from farm_management.models import FarmCrop, FarmAnimal, AgriculturalMachine, FarmParcel, CompostPile
 
 
 class BaseFarmAssetSerializer(serializers.ModelSerializer):
@@ -124,6 +124,25 @@ class AgriculturalMachineSerializer(BaseFarmAssetSerializer):
 
         json_ld_representation = {
             '@type': 'AgriculturalMachine',
+            **representation
+        }
+
+        return json_ld_representation
+
+class CompostPileSerializer(BaseFarmAssetSerializer):
+    class Meta:
+        model = CompostPile
+        fields = [
+            'id', 'name', 'description',
+            'hasAgriParcel',
+            'status', 'invalidatedAtTime', 'dateCreated', 'dateModified',
+        ]
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+
+        json_ld_representation = {
+            '@type': 'CompostPile',
             **representation
         }
 

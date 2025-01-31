@@ -11,7 +11,7 @@ from django.views.generic.edit import FormMixin, UpdateView
 from django.conf import settings
 
 
-from farm_management.models import FarmAsset, FarmCrop, FarmAnimal, AgriculturalMachine
+from farm_management.models import FarmAsset, FarmCrop, FarmAnimal, AgriculturalMachine, CompostPile
 from farm_management.constants import ERROR_PROCESSING
 from farm_management.forms import get_generic_farm_asset_form
 
@@ -130,6 +130,13 @@ class FarmAnimalListView(BaseFarmAssetListManagementView):
     form_class = get_generic_farm_asset_form(FarmAnimal)
     datatable_fields = ['national_id', 'species', 'breed', 'animal_group', 'parcel']
 
+class AnimalGroupAutocomplete(View):
+    def get(self, request, *args, **kwargs):
+        if 'term' in request.GET:
+            qs = FarmAnimal.objects.filter(animal_group__icontains=request.GET.get('term'))
+            animal_groups = list(set(qs.values_list('animal_group', flat=True)))
+            return JsonResponse(animal_groups, safe=False)
+        return JsonResponse([], safe=False)
 
 class AgriculturalMachineUpdateView(BaseFarmAssetUpdateView):
     model = AgriculturalMachine
@@ -147,10 +154,17 @@ class AgriculturalMachineListView(BaseFarmAssetListManagementView):
     datatable_fields = ['name', 'model', 'parcel', ]
 
 
-class AnimalGroupAutocomplete(View):
-    def get(self, request, *args, **kwargs):
-        if 'term' in request.GET:
-            qs = FarmAnimal.objects.filter(animal_group__icontains=request.GET.get('term'))
-            animal_groups = list(set(qs.values_list('animal_group', flat=True)))
-            return JsonResponse(animal_groups, safe=False)
-        return JsonResponse([], safe=False)
+class CompostPileUpdateView(BaseFarmAssetUpdateView):
+    model = CompostPile
+    form_class = get_generic_farm_asset_form(CompostPile)
+    template_name = 'farm_management/farm_assets/farm_assets.html'
+    success_url = reverse_lazy('compost_piles')
+
+
+class CompostPileListView(BaseFarmAssetListManagementView):
+    model = CompostPile
+    template_name = "farm_management/farm_assets/farm_assets.html"
+    success_url = reverse_lazy('compost_piles')
+    asset_base_url = reverse_lazy('compost_piles')
+    form_class = get_generic_farm_asset_form(CompostPile)
+    datatable_fields = ['name', 'volume', 'parcel']

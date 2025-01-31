@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from .base import NamedHistoricalBaseModel, BaseModel
+from .validators import validate_comma_separated_float_list
 
 
 class FarmAsset(NamedHistoricalBaseModel):
@@ -84,3 +85,63 @@ class FarmSensor(FarmAsset):
     def __str__(self):
         return f'{self.name} - {self.sensor_type}'
 
+
+class CompostPile(FarmAsset):
+    class Meta:
+        verbose_name = "Compost Pile"
+        verbose_name_plural = "Compost Piles"
+
+    class CompostingStageChoices(models.TextChoices):
+        PREPARATION = 'preparation', _('Preparation')
+        ACTIVE = 'active', _('Active Composting')
+        CURING = 'curing', _('Curing')
+        READY = 'ready', _('Ready')
+        USED = 'used', _('Used')
+
+
+    volume = models.FloatField(help_text="Volume in cubic meters")
+
+    composting_stage = models.CharField(
+        _('Composting Stage'),
+        max_length=50,
+        choices=CompostingStageChoices.choices,
+        default=CompostingStageChoices.PREPARATION,
+    )
+    last_turned_date = models.DateField(
+        _('Last Turned Date'),
+        null=True,
+        blank=True,
+        help_text=_("Date the compost pile was last turned or aerated."),
+    )
+    completion_date = models.DateField(
+        _('Completion Date'),
+        null=True,
+        blank=True,
+        help_text=_("Date the composting process was completed."),
+    )
+    temperature = models.FloatField(
+        _('Temperature'),
+        null=True,
+        blank=True,
+        help_text=_("Latest temperature reading in Celsius."),
+    )
+    moisture = models.FloatField(
+        _('Moisture'),
+        null=True,
+        blank=True,
+        help_text=_("Latest moisture level reading in percentage."),
+    )
+    ph = models.FloatField(
+        _('pH'),
+        null=True,
+        blank=True,
+        help_text=_("Latest pH reading."),
+    )
+    npk = models.CharField(
+        _('NPK'),
+        max_length=50,
+        null=True,
+        blank=True,
+        validators=[validate_comma_separated_float_list],
+        help_text=_("Enter NPK values as comma-separated floats (e.g., '10.5,15.2,25.0')."),
+    )
