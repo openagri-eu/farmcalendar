@@ -11,7 +11,7 @@ from farm_management.models import FarmCrop, FarmAnimal, AgriculturalMachine, Fa
 class BaseFarmAssetSerializer(serializers.ModelSerializer):
     hasAgriParcel = URNRelatedField(
         source='parcel',
-        class_names=['FarmParcel'],
+        class_names=['Parcel'],
         queryset=FarmParcel.objects.all(),
     )
     dateCreated = serializers.DateTimeField(source='created_at', read_only=True)

@@ -30,7 +30,7 @@ class FarmCalendarActivitySerializer(serializers.ModelSerializer):
 
     responsibleAgent = serializers.CharField(source='responsible_agent')
 
-    usesAgriculturalMachinery = URNRelatedField(class_names=['AgriculturalMachinery'], source='agricultural_machinery', many=True, queryset=AgriculturalMachine.objects.all())
+    usesAgriculturalMachinery = URNRelatedField(class_names=['AgriculturalMachine'], source='agricultural_machinery', many=True, queryset=AgriculturalMachine.objects.all())
 
     class Meta:
         model = FarmCalendarActivity
@@ -97,7 +97,7 @@ class GenericOperationSerializer(FarmCalendarActivitySerializer):
     hasAppliedAmount = AppliedAmmountFieldSerializer(source='*')
 
     operatedOn = URNRelatedField(
-        class_names=['FarmParcel'],
+        class_names=['Parcel'],
         queryset=FarmParcel.objects.all(),
         source='operated_on'
     )

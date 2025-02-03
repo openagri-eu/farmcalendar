@@ -73,7 +73,7 @@ class FarmSerializer(serializers.ModelSerializer):
     administrator = serializers.CharField()
     telephone = serializers.CharField()
     vatID = serializers.CharField(source='vat_id')
-    hasAgriParcel = URNRelatedField(source='farm_parcels', class_names=["FarmParcel"], many=True, read_only=True)
+    hasAgriParcel = URNRelatedField(source='farm_parcels', class_names=["Parcel"], many=True, read_only=True)
 
 
     class Meta:
@@ -123,7 +123,7 @@ class FarmParcelSerializer(serializers.ModelSerializer):
     validFrom = serializers.DateTimeField(source='valid_from')
     validTo = serializers.DateTimeField(source='valid_to')
     category = serializers.CharField(source='parcel_type')
-    hasAgriCrop = URNRelatedField(class_names=['FarmCrop'], source='farmcrops', many=True, read_only=True)
+    hasAgriCrop = URNRelatedField(class_names=['Crop'], source='farmcrops', many=True, read_only=True)
 
     hasIrrigationFlow = serializers.DecimalField(
         max_digits=15, decimal_places=2, source='irrigation_flow', allow_null=True
@@ -151,7 +151,9 @@ class FarmParcelSerializer(serializers.ModelSerializer):
             'hasIrrigationFlow', 'category', 'inRegion', 'hasToponym',
             'isNitroArea', 'isNatura2000Area', 'isPdopgArea', 'isIrrigated',
             'isCultivatedInLevels', 'isGroundSlope', 'depiction',
-            'hasGeometry', 'location', 'hasAgriCrop', 'farm'
+            'hasGeometry', 'location',
+            'hasAgriCrop',
+            'farm'
         ]
 
     def to_representation(self, instance):

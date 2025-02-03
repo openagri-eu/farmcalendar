@@ -18,6 +18,7 @@ class URNRelatedField(PrimaryKeyRelatedField):
         :param class_name: The class name added to the prefix for the URN, e.g., 'urn:myapp:farm'.
         :param kwargs: Additional arguments for PrimaryKeyRelatedField.
         """
+        self.class_name = class_names[0]
         self.urn_prefix = generate_urn_prefix(class_names)
         super().__init__(**kwargs)
 
@@ -30,18 +31,31 @@ class URNRelatedField(PrimaryKeyRelatedField):
             uuid_value = value.pk
         else:
             uuid_value = value.id
-        return f"{self.urn_prefix}:{uuid_value}"
+
+        json_ld_dict = {
+            "@type": self.class_name,
+            "@id": f"{self.urn_prefix}:{uuid_value}",
+        }
+        return json_ld_dict
 
     def to_internal_value(self, data):
         """
         Converts a URN string into a model instance.
         """
-        # Validate URN format
-        if not isinstance(data, str) or not data.startswith(f"{self.urn_prefix}:"):
-            raise serializers.ValidationError(f"Invalid URN format. Expected prefix '{self.urn_prefix}:'.")
+        if isinstance(data, str):
+            urn_data = data
+        else:
+            if not isinstance(data, dict) or not data.get('@type', '').lower() == self.class_name.lower() or data.get('@id', '').startswith(f"{self.urn_prefix}:"):
+                raise serializers.ValidationError((
+                    f"Invalid URN ref dict format. Expected a dictionary with "
+                    f"@type' as '{self.class_name}' and '@id' with prefix '{self.urn_prefix}:'."
+                    f" Received'{data}' instead."
+                ))
+            urn_data = data["@id"]
+
 
         # Extract the ID from the URN
-        raw_id = data.split(':')[-1]
+        raw_id = urn_data.split(':')[-1]
 
         # Ensure the ID is valid (UUID or integer depending on the target field)
         try:
@@ -51,6 +65,26 @@ class URNRelatedField(PrimaryKeyRelatedField):
 
         # Fetch the related instance
         return super().to_internal_value(raw_id)
+
+    def get_choices(self, cutoff=None):
+        """
+        Overrides `get_choices` to return valid choices for the DRF browsable API.
+        """
+        # import ipdb; ipdb.set_trace()
+        queryset = self.get_queryset()
+        if queryset is None:
+            # Ensure that field.choices returns something sensible
+            # even when accessed with a read-only field.
+            return {}
+
+        if cutoff is not None:
+            queryset = queryset[:cutoff]
+
+        choices = {
+            self.to_representation(item)['@id']: self.display_value(item) for item in queryset
+        }
+
+        return choices
 
 
 class JSONLDSerializer(serializers.ModelSerializer):

@@ -3642,7 +3642,7 @@ components:
         description:
           type: string
           nullable: true
-        parcel:
+        hasAgriParcel:
           type: string
           format: uuid
         purchase_date:
@@ -3665,21 +3665,24 @@ components:
         invalidatedAtTime:
           type: string
           format: date-time
+          readOnly: true
         dateCreated:
           type: string
           format: date-time
+          readOnly: true
         dateModified:
           type: string
           format: date-time
+          readOnly: true
       required:
       - dateCreated
       - dateModified
+      - hasAgriParcel
       - id
       - invalidatedAtTime
       - manufacturer
       - model
       - name
-      - parcel
       - purchase_date
       - seria_number
     AppliedAmmountField:
@@ -3931,7 +3934,7 @@ components:
         description:
           type: string
           nullable: true
-        parcel:
+        hasAgriParcel:
           type: string
           format: uuid
         sex:
@@ -3951,8 +3954,8 @@ components:
         birthdate:
           type: string
           format: date-time
-        AnimalGroup:
-          type: string
+        isMemberOfAnimalGroup:
+          $ref: '#/components/schemas/FarmAnimalGroupSerializerField'
         status:
           allOf:
           - $ref: '#/components/schemas/StatusEnum'
@@ -3961,21 +3964,28 @@ components:
         invalidatedAtTime:
           type: string
           format: date-time
+          readOnly: true
         dateCreated:
           type: string
           format: date-time
+          readOnly: true
         dateModified:
           type: string
           format: date-time
+          readOnly: true
       required:
-      - AnimalGroup
       - birthdate
       - dateCreated
       - dateModified
+      - hasAgriParcel
       - id
       - invalidatedAtTime
-      - parcel
       - species
+    FarmAnimalGroupSerializerField:
+      type: object
+      properties:
+        hasName:
+          type: string
     FarmCalendarActivity:
       type: object
       properties:
@@ -4053,12 +4063,15 @@ components:
         invalidatedAtTime:
           type: string
           format: date-time
+          readOnly: true
         dateCreated:
           type: string
           format: date-time
+          readOnly: true
         dateModified:
           type: string
           format: date-time
+          readOnly: true
         id:
           type: string
           format: uuid
@@ -4069,7 +4082,7 @@ components:
         description:
           type: string
           nullable: true
-        parcel:
+        hasAgriParcel:
           type: string
           format: uuid
         cropSpecies:
@@ -4082,10 +4095,10 @@ components:
       - cropSpecies
       - dateCreated
       - dateModified
+      - hasAgriParcel
       - id
       - invalidatedAtTime
       - name
-      - parcel
     FarmParcel:
       type: object
       properties:
@@ -4424,7 +4437,7 @@ components:
         description:
           type: string
           nullable: true
-        parcel:
+        hasAgriParcel:
           type: string
           format: uuid
         purchase_date:
@@ -4447,12 +4460,15 @@ components:
         invalidatedAtTime:
           type: string
           format: date-time
+          readOnly: true
         dateCreated:
           type: string
           format: date-time
+          readOnly: true
         dateModified:
           type: string
           format: date-time
+          readOnly: true
     PatchedCropGrowthStageObservation:
       type: object
       properties:
@@ -4625,7 +4641,7 @@ components:
         description:
           type: string
           nullable: true
-        parcel:
+        hasAgriParcel:
           type: string
           format: uuid
         sex:
@@ -4645,8 +4661,8 @@ components:
         birthdate:
           type: string
           format: date-time
-        AnimalGroup:
-          type: string
+        isMemberOfAnimalGroup:
+          $ref: '#/components/schemas/FarmAnimalGroupSerializerField'
         status:
           allOf:
           - $ref: '#/components/schemas/StatusEnum'
@@ -4655,12 +4671,15 @@ components:
         invalidatedAtTime:
           type: string
           format: date-time
+          readOnly: true
         dateCreated:
           type: string
           format: date-time
+          readOnly: true
         dateModified:
           type: string
           format: date-time
+          readOnly: true
     PatchedFarmCalendarActivity:
       type: object
       properties:
@@ -4727,12 +4746,15 @@ components:
         invalidatedAtTime:
           type: string
           format: date-time
+          readOnly: true
         dateCreated:
           type: string
           format: date-time
+          readOnly: true
         dateModified:
           type: string
           format: date-time
+          readOnly: true
         id:
           type: string
           format: uuid
@@ -4743,7 +4765,7 @@ components:
         description:
           type: string
           nullable: true
-        parcel:
+        hasAgriParcel:
           type: string
           format: uuid
         cropSpecies:
