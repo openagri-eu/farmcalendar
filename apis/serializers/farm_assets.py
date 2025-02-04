@@ -86,13 +86,14 @@ class FarmAnimalGroupSerializerField(serializers.Serializer):
         }
 
 class FarmAnimalSerializer(BaseFarmAssetSerializer):
+    nationalID = serializers.CharField(source='national_id', required=False)
     birthdate = serializers.DateTimeField(source='birth_date')
     isMemberOfAnimalGroup = FarmAnimalGroupSerializerField(source='*', required=False, allow_null=False)
 
     class Meta:
         model = FarmAnimal
         fields = [
-            'id', 'national_id', 'name', 'description',
+            'id', 'nationalID', 'name', 'description',
             'hasAgriParcel',
             'sex', 'castrated', 'species', 'breed', 'birthdate', 'isMemberOfAnimalGroup',
             'status', 'invalidatedAtTime', 'dateCreated', 'dateModified',

@@ -3924,9 +3924,8 @@ components:
           type: string
           format: uuid
           readOnly: true
-        national_id:
+        nationalID:
           type: string
-          nullable: true
         name:
           type: string
           nullable: true
@@ -4631,9 +4630,8 @@ components:
           type: string
           format: uuid
           readOnly: true
-        national_id:
+        nationalID:
           type: string
-          nullable: true
         name:
           type: string
           nullable: true
