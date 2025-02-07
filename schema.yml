@@ -3941,7 +3941,7 @@ components:
           - $ref: '#/components/schemas/SexEnum'
           minimum: -2147483648
           maximum: 2147483647
-        castrated:
+        isCastrated:
           type: boolean
         species:
           type: string
@@ -4647,7 +4647,7 @@ components:
           - $ref: '#/components/schemas/SexEnum'
           minimum: -2147483648
           maximum: 2147483647
-        castrated:
+        isCastrated:
           type: boolean
         species:
           type: string
