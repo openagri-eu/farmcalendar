@@ -182,7 +182,7 @@ class CropProtectionOperationSerializer(GenericOperationSerializer):
 
 
 class ObservationSerializer(FarmCalendarActivitySerializer):
-    isMeasuredIn = serializers.CharField(source='value_unit')
+    isMeasuredIn = serializers.CharField(source='value_unit', allow_null=True)
     hasValue = serializers.CharField(source='value')
     relatesToProperty = serializers.CharField(source='observed_property')
 

@@ -148,7 +148,7 @@ class Observation(FarmCalendarActivity):
         verbose_name_plural = "Observations"
 
     value = models.CharField(max_length=255)
-    value_unit = models.CharField(max_length=255)
+    value_unit = models.CharField(max_length=255, blank=True, null=True)
     observed_property = models.CharField(max_length=255)
 
 
