@@ -349,5 +349,21 @@ DEFAULT_CALENDAR_ACTIVITY_TYPES = {
         "border_color": "#8B4513",
         "text_color": "#2F4F4F",
         "id": "00000000-0000-0000-0000-000000000005",
+    },
+    'compost_operation':{
+        'name': 'Compost Operation',
+        'description': 'Compost Operation',
+        'background_color': '#A3C585',
+        'border_color': '#6B4226',
+        'text_color': '#3E4A34',
+        'id': '00000000-0000-0000-0000-000000000006',
+    },
+    'add_raw_material_operation':{
+        'name': 'Add Raw Material Operation',
+        'description': 'Add Raw Material Operation',
+        'background_color': '#D9E58A',
+        'border_color': '#8A5A2B',
+        'text_color': '#4A5320',
+        'id': '00000000-0000-0000-0000-000000000007',
     }
 }

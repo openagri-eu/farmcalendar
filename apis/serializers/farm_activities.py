@@ -1,10 +1,12 @@
 import uuid
 
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import serializers
 
 from farm_management.models import (
     Fertilizer,
     Pesticide,
+    CompostMaterial,
     FarmParcel,
     AgriculturalMachine
 )
@@ -17,6 +19,9 @@ from farm_activities.models import (
     CropProtectionOperation,Observation,
     CropStressIndicatorObservation,
     CropGrowthStageObservation,
+    CompostOperation,
+    AddRawMaterialOperation,
+    AddRawMaterialCompostQuantity,
 )
 
 from .base import URNRelatedField
@@ -82,7 +87,7 @@ class AppliedAmmountFieldSerializer(serializers.Serializer):
 
     def to_representation(self, instance):
         uuid_orig_str = "".join([
-            getattr(instance, 'applied_amount_unit', ''),
+            str(getattr(instance, 'applied_amount_unit', '')),
             str(getattr(instance, 'applied_amount', ''),)
         ])
         hash_uuid = str(uuid.uuid5(uuid.NAMESPACE_DNS, uuid_orig_str))
@@ -240,3 +245,109 @@ class CropGrowthStageObservationSerializer(ObservationSerializer):
 
         return json_ld_representation
 
+
+
+class AddRawMaterialCompostQuantitySerializer(serializers.ModelSerializer):
+    quantityValue = AppliedAmmountFieldSerializer(source='*')
+    typeName = serializers.CharField(source='material.name')
+
+    class Meta:
+        model = AddRawMaterialCompostQuantity
+        fields = [
+            'id',
+            'typeName',
+            'quantityValue',
+        ]
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        json_ld_representation = {
+            '@type': 'CompostMaterial',
+            '@id': generate_urn('CompostMaterial', obj_id=representation.pop('id')),
+            **representation
+        }
+        return json_ld_representation
+
+
+class AddRawMaterialOperationSerializer(GenericOperationSerializer):
+    hasCompostMaterial = AddRawMaterialCompostQuantitySerializer(source='addrawmaterialcompostquantity_set', many=True)
+
+    class Meta:
+        model = AddRawMaterialOperation
+
+        fields = [
+            'id',
+            'activityType', 'title', 'details',
+            'hasStartDatetime', 'hasEndDatetime',
+            'responsibleAgent', 'usesAgriculturalMachinery',
+            'hasCompostMaterial'
+        ]
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation.update({'@type': 'AddRawMaterialOperation'})
+        json_ld_representation = representation
+
+        return json_ld_representation
+
+
+    def create(self, validated_data):
+        compost_data = validated_data.pop('addrawmaterialcompostquantity_set', [])
+        operation = super().create(validated_data)
+
+        for compost in compost_data:
+            material = CompostMaterial.objects.get_or_create(name=compost.pop('material')['name'])[0]
+            AddRawMaterialCompostQuantity.objects.create(operation=operation, material=material, **compost)
+
+
+        return operation
+
+    def update(self, instance, validated_data):
+        compost_data = validated_data.pop('addrawmaterialcompostquantity_set', [])
+        instance = super().update(instance, validated_data)
+
+        instance.addrawmaterialcompostquantity_set.all().delete()
+        for compost in compost_data:
+            material = CompostMaterial.objects.get_or_create(name=compost.pop('material')['name'])[0]
+
+            AddRawMaterialCompostQuantity.objects.create(operation=instance, material=material, **compost)
+
+        return instance
+
+
+class CompostOperationSerializer(FarmCalendarActivitySerializer):
+    hasNestedOperation = URNRelatedField(class_names=None, source='nested_activities', many=True, queryset=FarmCalendarActivity.objects.all())
+
+
+    isOperatedOn = serializers.CharField(source='compost_pile_id')
+    class Meta:
+        model = CompostOperation
+
+        fields = [
+            'id',
+            'activityType', 'title', 'details',
+            'hasStartDatetime', 'hasEndDatetime',
+            'responsibleAgent', 'usesAgriculturalMachinery',
+            'isOperatedOn',
+            'hasNestedOperation'
+        ]
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation.update({'@type': 'CompostOperation'})
+        json_ld_representation = representation
+        for i_activity, nested_activity in enumerate(instance.nested_activities.all()):
+            class_name = None
+            for field in ['addrawmaterialoperation', 'irrigationoperation']:
+                try:
+
+                    class_name = getattr(nested_activity, field).__class__.__name__
+                except ObjectDoesNotExist as e:
+                    continue
+            fixed_id = json_ld_representation['hasNestedOperation'][i_activity]['@id'].format(class_name=class_name)
+            fixed_type = json_ld_representation['hasNestedOperation'][i_activity]['@type'].format(class_name=class_name)
+            json_ld_representation['hasNestedOperation'][i_activity]['@id'] = fixed_id
+            json_ld_representation['hasNestedOperation'][i_activity]['@type'] = fixed_type
+
+
+        return json_ld_representation

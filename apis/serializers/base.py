@@ -18,6 +18,8 @@ class URNRelatedField(PrimaryKeyRelatedField):
         :param class_name: The class name added to the prefix for the URN, e.g., 'urn:myapp:farm'.
         :param kwargs: Additional arguments for PrimaryKeyRelatedField.
         """
+        if class_names is None:
+            class_names = ['{class_name}']
         self.class_name = class_names[0]
         self.urn_prefix = generate_urn_prefix(class_names)
         super().__init__(**kwargs)
@@ -45,12 +47,13 @@ class URNRelatedField(PrimaryKeyRelatedField):
         if isinstance(data, str):
             urn_data = data
         else:
-            if not isinstance(data, dict) or not data.get('@type', '').lower() == self.class_name.lower() or data.get('@id', '').startswith(f"{self.urn_prefix}:"):
-                raise serializers.ValidationError((
-                    f"Invalid URN ref dict format. Expected a dictionary with "
-                    f"@type' as '{self.class_name}' and '@id' with prefix '{self.urn_prefix}:'."
-                    f" Received'{data}' instead."
-                ))
+            if not self.class_name == '{class_name}':
+                if not isinstance(data, dict) or not data.get('@type', '').lower() == self.class_name.lower() or not data.get('@id', '').startswith(f"{self.urn_prefix}:"):
+                    raise serializers.ValidationError((
+                        f"Invalid URN ref dict format. Expected a dictionary with "
+                        f"@type' as '{self.class_name}' and '@id' with prefix '{self.urn_prefix}:'."
+                        f" Received'{data}' instead."
+                    ))
             urn_data = data["@id"]
 
 
@@ -70,7 +73,6 @@ class URNRelatedField(PrimaryKeyRelatedField):
         """
         Overrides `get_choices` to return valid choices for the DRF browsable API.
         """
-        # import ipdb; ipdb.set_trace()
         queryset = self.get_queryset()
         if queryset is None:
             # Ensure that field.choices returns something sensible
@@ -85,6 +87,7 @@ class URNRelatedField(PrimaryKeyRelatedField):
         }
 
         return choices
+
 
 
 class JSONLDSerializer(serializers.ModelSerializer):

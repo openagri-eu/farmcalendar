@@ -71,6 +71,13 @@ class FarmCalendarActivity(models.Model):
     agricultural_machinery = models.ManyToManyField('farm_management.AgriculturalMachine', related_name='used_in_operations', blank=True)
     # weather_observation = models.ManyToManyField('farm_management.AgriculturalMachine', related_name='used_in_operations', blank=True, null=True)?
 
+    nested_activities = models.ManyToManyField(
+        "self",
+        symmetrical=False,
+        related_name="parent_activities",
+        blank=True
+    )
+
     def __str__(self):
         return f"{self.title} ({self.start_datetime.strftime('%Y-%m-%d %H:%M')})"
 
@@ -116,6 +123,8 @@ class IrrigationOperation(FarmCalendarActivity):
 
     irrigation_system = models.CharField(max_length=50, choices=IrrigationSystemChoices.choices,
                                         default=IrrigationSystemChoices.SPRINKLER)
+
+    # part_of_compost_operation = models.ForeignKey('farm_activities.CompostOperation', related_name="nested_%(class)ss", blank=True, null=True, on_delete=models.SET_NULL)
 
     def save(self, *args, **kwargs):
         self.activity_type, _ = FarmCalendarActivityType.objects.get_or_create(name=settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['irrigation']['name'])
@@ -179,3 +188,44 @@ class CropGrowthStageObservation(Observation):
         self.crop.growth_stage = self.value
         self.crop.save()
         super().save(*args, **kwargs)
+
+
+class CompostOperation(FarmCalendarActivity):
+    class Meta:
+        verbose_name = "Compost Operation"
+        verbose_name_plural = "Compost Operations"
+
+    compost_pile_id = models.CharField('Operated On Compost Pile', max_length=355)
+
+    def save(self, *args, **kwargs):
+        self.activity_type, _ = FarmCalendarActivityType.objects.get_or_create(name=settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['compost_operation']['name'])
+        super().save(*args, **kwargs)
+
+
+class AddRawMaterialOperation(FarmCalendarActivity):
+    class Meta:
+        verbose_name = "Add Raw Material Operation"
+        verbose_name_plural = "Add Raw Material Operations"
+
+
+    compost_materials = models.ManyToManyField('farm_management.CompostMaterial', through='farm_activities.AddRawMaterialCompostQuantity')
+    # part_of_compost_operation = models.ForeignKey('farm_activities.CompostOperation', related_name="nested_%(class)ss", blank=True, null=True, on_delete=models.SET_NULL)
+
+    def save(self, *args, **kwargs):
+        self.activity_type, _ = FarmCalendarActivityType.objects.get_or_create(name=settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['add_raw_material_operation']['name'])
+        super().save(*args, **kwargs)
+
+
+class AddRawMaterialCompostQuantity(models.Model):
+    class Meta:
+        verbose_name = "Raw Material Quantity for Operation"
+        verbose_name_plural = "Raw Material Quantities for Operation"
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, db_index=True, editable=False, unique=True,
+                          blank=False, null=False, verbose_name='ID')
+
+    operation = models.ForeignKey(AddRawMaterialOperation, on_delete=models.CASCADE)
+    material = models.ForeignKey('farm_management.CompostMaterial', on_delete=models.CASCADE)
+
+    applied_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    applied_amount_unit = models.CharField(max_length=255)

@@ -5,6 +5,8 @@ from .models import (
     FarmCalendarActivityType,
     FarmCalendarActivity,
     Observation,
+    CompostOperation,
+    AddRawMaterialOperation,
     FertilizationOperation,
     IrrigationOperation,
     CropProtectionOperation,
@@ -54,18 +56,21 @@ def get_generic_farm_calendar_activity_form(activity_type):
         settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['crop_protection']['name']: CropProtectionOperation,
         settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['crop_stress_indicator']['name']: CropStressIndicatorObservation,
         settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['crop_growth_stage']['name']: CropGrowthStageObservation,
+        settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['compost_operation']['name']: CompostOperation,
+        settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['add_raw_material_operation']['name']: AddRawMaterialOperation,
     }
     ActivityModel = activity_type_model_map.get(activity_type)
     if ActivityModel is None:
-        # if 'observation' in activity_type.lower():
-        #     ActivityModel = Observation
         ActivityModel = FarmCalendarActivity
 
+    exclude_fields = ['id']
+    if activity_type != 'compost_operation':
+        exclude_fields.append('nested_activities')
 
     GenericActivityForm = modelform_factory(
         ActivityModel,
         fields="__all__",
-        exclude=['id'],
+        exclude=exclude_fields,
         widgets={
             'start_datetime': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
             'end_datetime': forms.DateTimeInput(attrs={'type': 'datetime-local'}),

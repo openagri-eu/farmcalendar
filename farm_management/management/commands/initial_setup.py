@@ -20,14 +20,18 @@ class Command(BaseCommand):
 
     # Check if there is any existing data for AdminMenuMaster or FarmCalendarActivityType
     def check_for_initial_data(self):
-        return not FarmCalendarActivityType.objects.exists()
+        if not FarmCalendarActivityType.objects.exists():
+            return True
+
+        for def_operation_type in settings.DEFAULT_CALENDAR_ACTIVITY_TYPES.values():
+            if len(FarmCalendarActivityType.objects.filter(id=def_operation_type['id'])) == 0:
+                return True
 
     def setup_initial_data(self):
         # Populate FarmCalendarActivityType
         self.stdout.write(self.style.SUCCESS('Setting up FarmCalendarActivityType data...'))
         for def_operation_type in settings.DEFAULT_CALENDAR_ACTIVITY_TYPES.values():
-            operation = FarmCalendarActivityType(**def_operation_type)
-            operation.save()
+            FarmCalendarActivityType.objects.get_or_create(**def_operation_type)
 
     # Check for pending migrations
     def check_pending_migrations(self):

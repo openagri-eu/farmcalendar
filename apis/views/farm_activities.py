@@ -9,6 +9,8 @@ from farm_activities.models import (
     Observation,
     CropStressIndicatorObservation,
     CropGrowthStageObservation,
+    CompostOperation,
+    AddRawMaterialOperation,
 )
 from ..serializers import (
     FarmCalendarActivitySerializer,
@@ -19,6 +21,8 @@ from ..serializers import (
     ObservationSerializer,
     CropStressIndicatorObservationSerializer,
     CropGrowthStageObservationSerializer,
+    CompostOperationSerializer,
+    AddRawMaterialOperationSerializer,
 )
 
 
@@ -103,4 +107,23 @@ class CropGrowthStageObservationViewSet(viewsets.ModelViewSet):
     filterset_fields = ['title','activity_type', 'responsible_agent']
 
 
+
+class CompostOperationViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows CompostOperation to be viewed or edited.
+    """
+    queryset = CompostOperation.objects.all().prefetch_related('nested_activities').order_by('-start_datetime')
+    serializer_class = CompostOperationSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['title','activity_type', 'compost_pile_id']
+
+
+class AddRawMaterialOperationViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows AddRawMaterialOperation to be viewed or edited.
+    """
+    queryset = AddRawMaterialOperation.objects.all().order_by('-start_datetime')
+    serializer_class = AddRawMaterialOperationSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['title', 'activity_type']
 

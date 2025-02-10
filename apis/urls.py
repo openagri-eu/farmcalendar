@@ -22,6 +22,8 @@ from .views import (
     ObservationViewSet,
     CropStressIndicatorObservationViewSet,
     CropGrowthStageObservationViewSet,
+    CompostOperationViewSet,
+    AddRawMaterialOperationViewSet,
 )
 
 router = routers.DefaultRouter()
@@ -41,6 +43,8 @@ router.register(r'Pesticides', PesticideViewSet)
 router.register(r'Observations', ObservationViewSet)
 router.register(r'CropStressIndicatorObservations', CropStressIndicatorObservationViewSet)
 router.register(r'CropGrowthStageObservations', CropGrowthStageObservationViewSet)
+router.register(r'CompostOperations', CompostOperationViewSet)
+router.register(r'AddRawMaterialOperations', AddRawMaterialOperationViewSet)
 
 
 
