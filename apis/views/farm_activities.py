@@ -66,6 +66,12 @@ class IrrigationOperationViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
     filterset_fields = ['title', 'activity_type', 'responsible_agent']
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.kwargs.get('compost_operation_pk'):
+            queryset = queryset.filter(parent_activities=self.kwargs['compost_operation_pk'])
+        return queryset
+
 
 class CropProtectionOperationViewSet(viewsets.ModelViewSet):
     """
@@ -127,3 +133,8 @@ class AddRawMaterialOperationViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
     filterset_fields = ['title', 'activity_type']
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.kwargs.get('compost_operation_pk'):
+            queryset = queryset.filter(parent_activities=self.kwargs['compost_operation_pk'])
+        return queryset

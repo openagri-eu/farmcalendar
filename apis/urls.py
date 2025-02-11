@@ -2,7 +2,7 @@ from django.urls import path, include
 from django.shortcuts import redirect
 from django.conf import settings
 
-from rest_framework import routers
+from rest_framework_nested import routers
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
 
@@ -43,9 +43,13 @@ router.register(r'Pesticides', PesticideViewSet)
 router.register(r'Observations', ObservationViewSet)
 router.register(r'CropStressIndicatorObservations', CropStressIndicatorObservationViewSet)
 router.register(r'CropGrowthStageObservations', CropGrowthStageObservationViewSet)
-router.register(r'CompostOperations', CompostOperationViewSet)
 router.register(r'AddRawMaterialOperations', AddRawMaterialOperationViewSet)
+router.register(r'CompostOperations', CompostOperationViewSet)
 
+
+compost_operations_router = routers.NestedSimpleRouter(router, r'CompostOperations', lookup='compost_operation')
+compost_operations_router.register(r'AddRawMaterialOperations', AddRawMaterialOperationViewSet,basename=f'compost-operation-addrawmaterialoperation')
+compost_operations_router.register(r'IrrigationOperations', IrrigationOperationViewSet,basename=f'compost-operation-irrigationoperation')
 
 
 
@@ -53,6 +57,7 @@ urlpatterns = [
     path('api/', lambda request: redirect('api-root', settings.SHORT_API_VERSION)),
     path('api/<str:version>/', include([
         path('', include(router.urls)),  # Register versioned API routes
+        path('', include(compost_operations_router.urls)),  # Register versioned API routes
         path('schema/', SpectacularAPIView.as_view(), name='schema'),  # Schema generation
         path('schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),  # Swagger UI
         path('schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),  # ReDoc

@@ -160,6 +160,14 @@ class IrrigationOperationSerializer(GenericOperationSerializer):
 
         return json_ld_representation
 
+
+    def create(self, validated_data):
+        if self.context['view'].kwargs.get('compost_operation_pk'):
+            validated_data['parent_activities'] = [self.context['view'].kwargs.get('compost_operation_pk')]
+
+        return super().create(validated_data)
+
+
 class CropProtectionOperationSerializer(GenericOperationSerializer):
     usesPesticide = URNRelatedField(
         class_names=['Pesticide'],
@@ -291,14 +299,17 @@ class AddRawMaterialOperationSerializer(GenericOperationSerializer):
         return json_ld_representation
 
 
+
     def create(self, validated_data):
+        if self.context['view'].kwargs.get('compost_operation_pk'):
+            validated_data['parent_activities'] = [self.context['view'].kwargs.get('compost_operation_pk')]
+
         compost_data = validated_data.pop('addrawmaterialcompostquantity_set', [])
         operation = super().create(validated_data)
 
         for compost in compost_data:
             material = CompostMaterial.objects.get_or_create(name=compost.pop('material')['name'])[0]
             AddRawMaterialCompostQuantity.objects.create(operation=operation, material=material, **compost)
-
 
         return operation
 

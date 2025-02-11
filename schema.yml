@@ -4,6 +4,233 @@ info:
   version: 1.0.0
   description: API for farm assets and other farm related things.
 paths:
+  /api/v1/AddRawMaterialOperations/:
+    get:
+      operationId: api_v1_AddRawMaterialOperations_list
+      description: API endpoint that allows AddRawMaterialOperation to be viewed or
+        edited.
+      parameters:
+      - in: query
+        name: activity_type
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: query
+        name: title
+        schema:
+          type: string
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AddRawMaterialOperation'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AddRawMaterialOperation'
+          description: ''
+    post:
+      operationId: api_v1_AddRawMaterialOperations_create
+      description: API endpoint that allows AddRawMaterialOperation to be viewed or
+        edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddRawMaterialOperation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AddRawMaterialOperation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AddRawMaterialOperation'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AddRawMaterialOperation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddRawMaterialOperation'
+          description: ''
+  /api/v1/AddRawMaterialOperations/{id}/:
+    get:
+      operationId: api_v1_AddRawMaterialOperations_retrieve
+      description: API endpoint that allows AddRawMaterialOperation to be viewed or
+        edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Add Raw Material Operation.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AddRawMaterialOperation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddRawMaterialOperation'
+          description: ''
+    put:
+      operationId: api_v1_AddRawMaterialOperations_update
+      description: API endpoint that allows AddRawMaterialOperation to be viewed or
+        edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Add Raw Material Operation.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddRawMaterialOperation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AddRawMaterialOperation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AddRawMaterialOperation'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AddRawMaterialOperation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddRawMaterialOperation'
+          description: ''
+    patch:
+      operationId: api_v1_AddRawMaterialOperations_partial_update
+      description: API endpoint that allows AddRawMaterialOperation to be viewed or
+        edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Add Raw Material Operation.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAddRawMaterialOperation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedAddRawMaterialOperation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedAddRawMaterialOperation'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AddRawMaterialOperation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddRawMaterialOperation'
+          description: ''
+    delete:
+      operationId: api_v1_AddRawMaterialOperations_destroy
+      description: API endpoint that allows AddRawMaterialOperation to be viewed or
+        edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Add Raw Material Operation.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
   /api/v1/AgriculturalMachines/:
     get:
       operationId: api_v1_AgriculturalMachines_list
@@ -229,6 +456,743 @@ paths:
           type: string
           format: uuid
         description: A UUID string identifying this Farm Machine.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/CompostOperations/:
+    get:
+      operationId: api_v1_CompostOperations_list
+      description: API endpoint that allows CompostOperation to be viewed or edited.
+      parameters:
+      - in: query
+        name: activity_type
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: compost_pile_id
+        schema:
+          type: string
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: query
+        name: title
+        schema:
+          type: string
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CompostOperation'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CompostOperation'
+          description: ''
+    post:
+      operationId: api_v1_CompostOperations_create
+      description: API endpoint that allows CompostOperation to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompostOperation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CompostOperation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CompostOperation'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/CompostOperation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompostOperation'
+          description: ''
+  /api/v1/CompostOperations/{compost_operation_pk}/AddRawMaterialOperations/:
+    get:
+      operationId: api_v1_CompostOperations_AddRawMaterialOperations_list
+      description: API endpoint that allows AddRawMaterialOperation to be viewed or
+        edited.
+      parameters:
+      - in: query
+        name: activity_type
+        schema:
+          type: string
+          format: uuid
+      - in: path
+        name: compost_operation_pk
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: query
+        name: title
+        schema:
+          type: string
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AddRawMaterialOperation'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AddRawMaterialOperation'
+          description: ''
+    post:
+      operationId: api_v1_CompostOperations_AddRawMaterialOperations_create
+      description: API endpoint that allows AddRawMaterialOperation to be viewed or
+        edited.
+      parameters:
+      - in: path
+        name: compost_operation_pk
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddRawMaterialOperation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AddRawMaterialOperation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AddRawMaterialOperation'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AddRawMaterialOperation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddRawMaterialOperation'
+          description: ''
+  /api/v1/CompostOperations/{compost_operation_pk}/AddRawMaterialOperations/{id}/:
+    get:
+      operationId: api_v1_CompostOperations_AddRawMaterialOperations_retrieve
+      description: API endpoint that allows AddRawMaterialOperation to be viewed or
+        edited.
+      parameters:
+      - in: path
+        name: compost_operation_pk
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Add Raw Material Operation.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AddRawMaterialOperation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddRawMaterialOperation'
+          description: ''
+    put:
+      operationId: api_v1_CompostOperations_AddRawMaterialOperations_update
+      description: API endpoint that allows AddRawMaterialOperation to be viewed or
+        edited.
+      parameters:
+      - in: path
+        name: compost_operation_pk
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Add Raw Material Operation.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddRawMaterialOperation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AddRawMaterialOperation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AddRawMaterialOperation'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AddRawMaterialOperation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddRawMaterialOperation'
+          description: ''
+    patch:
+      operationId: api_v1_CompostOperations_AddRawMaterialOperations_partial_update
+      description: API endpoint that allows AddRawMaterialOperation to be viewed or
+        edited.
+      parameters:
+      - in: path
+        name: compost_operation_pk
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Add Raw Material Operation.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAddRawMaterialOperation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedAddRawMaterialOperation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedAddRawMaterialOperation'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AddRawMaterialOperation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddRawMaterialOperation'
+          description: ''
+    delete:
+      operationId: api_v1_CompostOperations_AddRawMaterialOperations_destroy
+      description: API endpoint that allows AddRawMaterialOperation to be viewed or
+        edited.
+      parameters:
+      - in: path
+        name: compost_operation_pk
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Add Raw Material Operation.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/CompostOperations/{compost_operation_pk}/IrrigationOperations/:
+    get:
+      operationId: api_v1_CompostOperations_IrrigationOperations_list
+      description: API endpoint that allows IrrigationOperation to be viewed or edited.
+      parameters:
+      - in: query
+        name: activity_type
+        schema:
+          type: string
+          format: uuid
+      - in: path
+        name: compost_operation_pk
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: query
+        name: responsible_agent
+        schema:
+          type: string
+      - in: query
+        name: title
+        schema:
+          type: string
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IrrigationOperation'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IrrigationOperation'
+          description: ''
+    post:
+      operationId: api_v1_CompostOperations_IrrigationOperations_create
+      description: API endpoint that allows IrrigationOperation to be viewed or edited.
+      parameters:
+      - in: path
+        name: compost_operation_pk
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IrrigationOperation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/IrrigationOperation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/IrrigationOperation'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/IrrigationOperation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IrrigationOperation'
+          description: ''
+  /api/v1/CompostOperations/{compost_operation_pk}/IrrigationOperations/{id}/:
+    get:
+      operationId: api_v1_CompostOperations_IrrigationOperations_retrieve
+      description: API endpoint that allows IrrigationOperation to be viewed or edited.
+      parameters:
+      - in: path
+        name: compost_operation_pk
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Irrigation Operation.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/IrrigationOperation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IrrigationOperation'
+          description: ''
+    put:
+      operationId: api_v1_CompostOperations_IrrigationOperations_update
+      description: API endpoint that allows IrrigationOperation to be viewed or edited.
+      parameters:
+      - in: path
+        name: compost_operation_pk
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Irrigation Operation.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IrrigationOperation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/IrrigationOperation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/IrrigationOperation'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/IrrigationOperation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IrrigationOperation'
+          description: ''
+    patch:
+      operationId: api_v1_CompostOperations_IrrigationOperations_partial_update
+      description: API endpoint that allows IrrigationOperation to be viewed or edited.
+      parameters:
+      - in: path
+        name: compost_operation_pk
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Irrigation Operation.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedIrrigationOperation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedIrrigationOperation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedIrrigationOperation'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/IrrigationOperation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IrrigationOperation'
+          description: ''
+    delete:
+      operationId: api_v1_CompostOperations_IrrigationOperations_destroy
+      description: API endpoint that allows IrrigationOperation to be viewed or edited.
+      parameters:
+      - in: path
+        name: compost_operation_pk
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Irrigation Operation.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/CompostOperations/{id}/:
+    get:
+      operationId: api_v1_CompostOperations_retrieve
+      description: API endpoint that allows CompostOperation to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Compost Operation.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/CompostOperation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompostOperation'
+          description: ''
+    put:
+      operationId: api_v1_CompostOperations_update
+      description: API endpoint that allows CompostOperation to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Compost Operation.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompostOperation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CompostOperation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CompostOperation'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/CompostOperation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompostOperation'
+          description: ''
+    patch:
+      operationId: api_v1_CompostOperations_partial_update
+      description: API endpoint that allows CompostOperation to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Compost Operation.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCompostOperation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCompostOperation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCompostOperation'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/CompostOperation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompostOperation'
+          description: ''
+    delete:
+      operationId: api_v1_CompostOperations_destroy
+      description: API endpoint that allows CompostOperation to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Compost Operation.
         required: true
       tags:
       - api
@@ -3607,6 +4571,64 @@ paths:
           description: ''
 components:
   schemas:
+    AddRawMaterialCompostQuantity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        typeName:
+          type: string
+        quantityValue:
+          $ref: '#/components/schemas/AppliedAmmountField'
+      required:
+      - id
+      - quantityValue
+      - typeName
+    AddRawMaterialOperation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        activityType:
+          type: string
+          format: uuid
+        title:
+          type: string
+          maxLength: 200
+        details:
+          type: string
+          nullable: true
+        hasStartDatetime:
+          type: string
+          format: date-time
+        hasEndDatetime:
+          type: string
+          format: date-time
+          nullable: true
+        responsibleAgent:
+          type: string
+        usesAgriculturalMachinery:
+          type: array
+          items:
+            type: string
+            format: uuid
+        hasCompostMaterial:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddRawMaterialCompostQuantity'
+      required:
+      - activityType
+      - hasCompostMaterial
+      - hasEndDatetime
+      - hasStartDatetime
+      - id
+      - responsibleAgent
+      - title
+      - usesAgriculturalMachinery
     AddressField:
       type: object
       properties:
@@ -3697,6 +4719,53 @@ components:
       required:
       - numericValue
       - unit
+    CompostOperation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        activityType:
+          type: string
+          format: uuid
+        title:
+          type: string
+          maxLength: 200
+        details:
+          type: string
+          nullable: true
+        hasStartDatetime:
+          type: string
+          format: date-time
+        hasEndDatetime:
+          type: string
+          format: date-time
+          nullable: true
+        responsibleAgent:
+          type: string
+        usesAgriculturalMachinery:
+          type: array
+          items:
+            type: string
+            format: uuid
+        isOperatedOn:
+          type: string
+        hasNestedOperation:
+          type: array
+          items:
+            type: string
+            format: uuid
+      required:
+      - activityType
+      - hasEndDatetime
+      - hasNestedOperation
+      - hasStartDatetime
+      - id
+      - isOperatedOn
+      - responsibleAgent
+      - title
+      - usesAgriculturalMachinery
     ContactPersonField:
       type: object
       properties:
@@ -3741,6 +4810,7 @@ components:
           type: string
         isMeasuredIn:
           type: string
+          nullable: true
         relatesToProperty:
           type: string
       required:
@@ -3848,6 +4918,7 @@ components:
           type: string
         isMeasuredIn:
           type: string
+          nullable: true
         relatesToProperty:
           type: string
       required:
@@ -4410,6 +5481,7 @@ components:
           type: string
         isMeasuredIn:
           type: string
+          nullable: true
         relatesToProperty:
           type: string
       required:
@@ -4423,6 +5495,40 @@ components:
       - responsibleAgent
       - title
       - usesAgriculturalMachinery
+    PatchedAddRawMaterialOperation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        activityType:
+          type: string
+          format: uuid
+        title:
+          type: string
+          maxLength: 200
+        details:
+          type: string
+          nullable: true
+        hasStartDatetime:
+          type: string
+          format: date-time
+        hasEndDatetime:
+          type: string
+          format: date-time
+          nullable: true
+        responsibleAgent:
+          type: string
+        usesAgriculturalMachinery:
+          type: array
+          items:
+            type: string
+            format: uuid
+        hasCompostMaterial:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddRawMaterialCompostQuantity'
     PatchedAgriculturalMachine:
       type: object
       properties:
@@ -4468,6 +5574,43 @@ components:
           type: string
           format: date-time
           readOnly: true
+    PatchedCompostOperation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        activityType:
+          type: string
+          format: uuid
+        title:
+          type: string
+          maxLength: 200
+        details:
+          type: string
+          nullable: true
+        hasStartDatetime:
+          type: string
+          format: date-time
+        hasEndDatetime:
+          type: string
+          format: date-time
+          nullable: true
+        responsibleAgent:
+          type: string
+        usesAgriculturalMachinery:
+          type: array
+          items:
+            type: string
+            format: uuid
+        isOperatedOn:
+          type: string
+        hasNestedOperation:
+          type: array
+          items:
+            type: string
+            format: uuid
     PatchedCropGrowthStageObservation:
       type: object
       properties:
@@ -4502,6 +5645,7 @@ components:
           type: string
         isMeasuredIn:
           type: string
+          nullable: true
         relatesToProperty:
           type: string
     PatchedCropProtectionOperation:
@@ -4577,6 +5721,7 @@ components:
           type: string
         isMeasuredIn:
           type: string
+          nullable: true
         relatesToProperty:
           type: string
     PatchedFarm:
@@ -5009,6 +6154,7 @@ components:
           type: string
         isMeasuredIn:
           type: string
+          nullable: true
         relatesToProperty:
           type: string
     PatchedPesticide:

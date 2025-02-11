@@ -94,7 +94,7 @@ class FarmCalendarActivityEdit(LoginRequiredMixin, View):
     def get_specific_activity_object_and_form(self, pk):
         base_object = get_object_or_404(FarmCalendarActivity, pk=pk)
         GenericActivityForm = get_generic_farm_calendar_activity_form(activity_type=base_object.activity_type.name)
-        main_object = get_object_or_404(GenericActivityForm.Meta.model.objects.prefetch_related('activity_type'), pk=pk)
+        main_object = get_object_or_404(GenericActivityForm.Meta.model.objects.prefetch_related('activity_type', 'nested_activities'), pk=pk)
         return main_object, GenericActivityForm
 
     def get_asset_delete_api_url(self, model_name, pk):
