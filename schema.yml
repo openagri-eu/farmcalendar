@@ -4715,7 +4715,7 @@ components:
         numericValue:
           type: string
           format: decimal
-          pattern: ^-?\d{0,3}(?:\.\d{0,14})?$
+          pattern: ^-?\d{0,15}(?:\.\d{0,2})?$
       required:
       - numericValue
       - unit

@@ -1,0 +1,51 @@
+<div id="{{ widget.name }}-container">
+    <!-- Dynamic fields will be added here -->
+</div>
+<button type="button" id="add-material" class="btn btn-primary mt-2">Add Material</button>
+<input type="hidden" name="{{ widget.name }}" id="id_{{ widget.name }}" value="{{ widget.value }}">
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    let compostData = $("#id_{{ widget.name }}").val();
+    if (compostData) {
+        try {
+            let materials = JSON.parse(compostData);
+            materials.forEach(material => addMaterialRow(material.material_name, material.quantity, material.unit));
+        } catch (e) {
+            console.error("Invalid JSON data in compost_materials_json");
+        }
+    }
+
+    $("#add-material").click(function() {
+        addMaterialRow("", "", "");
+    });
+
+    $(document).on("click", ".remove-material", function() {
+        $(this).closest(".material-group").remove();
+    });
+
+    $("form").submit(function() {
+        let materials = [];
+        $(".material-group").each(function() {
+            materials.push({
+                material_name: $(this).find(".material-name").val(),
+                quantity: $(this).find(".material-quantity").val(),
+                unit: $(this).find(".material-unit").val(),
+            });
+        });
+        $("#id_{{ widget.name }}").val(JSON.stringify(materials));
+    });
+
+    function addMaterialRow(name, quantity, unit) {
+        let newField = `
+            <div class="input-group mb-2 material-group">
+                <input type="text" class="form-control material-name" placeholder="Material Name" value="${name}">
+                <input type="number" class="form-control material-quantity" placeholder="Quantity" value="${quantity}">
+                <input type="text" class="form-control material-unit" placeholder="Unit" value="${unit}">
+                <button type="button" class="btn btn-danger remove-material">X</button>
+            </div>`;
+        $("#{{ widget.name }}-container").append(newField);
+    }
+});
+</script>

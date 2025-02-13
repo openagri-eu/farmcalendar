@@ -82,7 +82,7 @@ class FarmCalendarActivityTypeSerializer(serializers.ModelSerializer):
 
 class AppliedAmmountFieldSerializer(serializers.Serializer):
     unit = serializers.CharField(source='applied_amount_unit')
-    numericValue = serializers.DecimalField(source='applied_amount', max_digits=17, decimal_places=14)
+    numericValue = serializers.DecimalField(source='applied_amount', max_digits=17, decimal_places=2)
 
 
     def to_representation(self, instance):
