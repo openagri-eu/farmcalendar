@@ -48,8 +48,9 @@ router.register(r'CompostOperations', CompostOperationViewSet)
 
 
 compost_operations_router = routers.NestedSimpleRouter(router, r'CompostOperations', lookup='compost_operation')
-compost_operations_router.register(r'AddRawMaterialOperations', AddRawMaterialOperationViewSet,basename=f'compost-operation-addrawmaterialoperation')
-compost_operations_router.register(r'IrrigationOperations', IrrigationOperationViewSet,basename=f'compost-operation-irrigationoperation')
+compost_operations_router.register(r'AddRawMaterialOperations', AddRawMaterialOperationViewSet, basename=f'compost-operation-addrawmaterialoperation')
+compost_operations_router.register(r'IrrigationOperations', IrrigationOperationViewSet, basename=f'compost-operation-irrigationoperation')
+compost_operations_router.register(r'Observations', ObservationViewSet, basename=f'compost-operation-observation')
 
 
 

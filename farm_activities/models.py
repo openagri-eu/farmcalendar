@@ -71,10 +71,11 @@ class FarmCalendarActivity(models.Model):
     agricultural_machinery = models.ManyToManyField('farm_management.AgriculturalMachine', related_name='used_in_operations', blank=True)
     # weather_observation = models.ManyToManyField('farm_management.AgriculturalMachine', related_name='used_in_operations', blank=True, null=True)?
 
-    nested_activities = models.ManyToManyField(
+    parent_activity = models.ForeignKey(
         "self",
-        symmetrical=False,
-        related_name="parent_activities",
+        on_delete=models.SET_NULL,
+        related_name="nested_activities",  # This will act as the reverse relation
+        null=True,
         blank=True
     )
 
@@ -119,7 +120,7 @@ class IrrigationOperation(FarmCalendarActivity):
     applied_amount = models.DecimalField(max_digits=10, decimal_places=2)
     applied_amount_unit = models.CharField(max_length=255)
 
-    operated_on = models.ForeignKey('farm_management.FarmParcel', on_delete=models.CASCADE)
+    operated_on = models.ForeignKey('farm_management.FarmParcel', on_delete=models.CASCADE, blank=True, null=True)
 
     irrigation_system = models.CharField(max_length=50, choices=IrrigationSystemChoices.choices,
                                         default=IrrigationSystemChoices.SPRINKLER)

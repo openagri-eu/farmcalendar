@@ -1,5 +1,6 @@
 import uuid
 
+from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import serializers
 
@@ -51,7 +52,7 @@ class FarmCalendarActivitySerializer(serializers.ModelSerializer):
 
         json_ld_representation = {
             '@type': 'Operation',
-            '@id': generate_urn('FarmCalendarActivity', obj_id=representation.pop('id')),
+            '@id': generate_urn(instance.__class__.__name__, obj_id=representation.pop('id')),
             **representation
         }
 
@@ -139,6 +140,12 @@ class IrrigationOperationSerializer(GenericOperationSerializer):
         choices=IrrigationOperation.IrrigationSystemChoices.choices,
         source='irrigation_system'
     )
+    operatedOn = URNRelatedField(
+        class_names=['Parcel'],
+        queryset=FarmParcel.objects.all(),
+        source='operated_on',
+        allow_null=True
+    )
 
     class Meta:
         model = IrrigationOperation
@@ -163,7 +170,7 @@ class IrrigationOperationSerializer(GenericOperationSerializer):
 
     def create(self, validated_data):
         if self.context['view'].kwargs.get('compost_operation_pk'):
-            validated_data['parent_activities'] = [self.context['view'].kwargs.get('compost_operation_pk')]
+            validated_data['parent_activity'] = self.context['view'].kwargs.get('compost_operation_pk')
 
         return super().create(validated_data)
 
@@ -206,16 +213,35 @@ class ObservationSerializer(FarmCalendarActivitySerializer):
             'activityType', 'title', 'details',
             'hasStartDatetime', 'hasEndDatetime',
             'responsibleAgent', 'usesAgriculturalMachinery',
-            'hasValue', 'isMeasuredIn', 'relatesToProperty'
+            'hasValue', 'isMeasuredIn', 'relatesToProperty',
         ]
 
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation.update({'@type': 'CropObservation'})
+        representation.update({'@type': 'Observation'})
         json_ld_representation = representation
 
         return json_ld_representation
+
+
+    def create(self, validated_data):
+        if self.context['view'].kwargs.get('compost_operation_pk'):
+            validated_data['parent_activity'] = CompostOperation.objects.get(pk=self.context['view'].kwargs.get('compost_operation_pk'))
+
+        return super().create(validated_data)
+
+    def update(self, instance, validated_data):
+        compost_data = validated_data.pop('addrawmaterialcompostquantity_set', [])
+        instance = super().update(instance, validated_data)
+
+        instance.addrawmaterialcompostquantity_set.all().delete()
+        for compost in compost_data:
+            material = CompostMaterial.objects.get_or_create(name=compost.pop('material')['name'])[0]
+
+            AddRawMaterialCompostQuantity.objects.create(operation=instance, material=material, **compost)
+
+        return instance
 
 class CropStressIndicatorObservationSerializer(ObservationSerializer):
     class Meta:
@@ -302,7 +328,7 @@ class AddRawMaterialOperationSerializer(GenericOperationSerializer):
 
     def create(self, validated_data):
         if self.context['view'].kwargs.get('compost_operation_pk'):
-            validated_data['parent_activities'] = [self.context['view'].kwargs.get('compost_operation_pk')]
+            validated_data['parent_activity'] = self.context['view'].kwargs.get('compost_operation_pk')
 
         compost_data = validated_data.pop('addrawmaterialcompostquantity_set', [])
         operation = super().create(validated_data)
@@ -327,8 +353,20 @@ class AddRawMaterialOperationSerializer(GenericOperationSerializer):
 
 
 class CompostOperationSerializer(FarmCalendarActivitySerializer):
-    hasNestedOperation = URNRelatedField(class_names=None, source='nested_activities', many=True, queryset=FarmCalendarActivity.objects.all())
+    AllOWED_NESTED_OPERATIONS = [
+        settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['irrigation']['name'],
+        settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['add_raw_material_operation']['name']
+    ]
 
+    hasNestedOperation = URNRelatedField(
+        class_names=None, source='nested_activities', many=True,
+        read_only=True
+    )
+
+    hasMeasurement = URNRelatedField(
+        class_names=None, source='nested_activities', many=True,
+        read_only=True
+    )
 
     isOperatedOn = serializers.CharField(source='compost_pile_id')
     class Meta:
@@ -340,25 +378,52 @@ class CompostOperationSerializer(FarmCalendarActivitySerializer):
             'hasStartDatetime', 'hasEndDatetime',
             'responsibleAgent', 'usesAgriculturalMachinery',
             'isOperatedOn',
-            'hasNestedOperation'
+            'hasNestedOperation', 'hasMeasurement'
         ]
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation.update({'@type': 'CompostOperation'})
         json_ld_representation = representation
-        for i_activity, nested_activity in enumerate(instance.nested_activities.all()):
-            class_name = None
+        clean_nested_activities = []
+        clean_nested_obs = []
+            # instance.nested_activities.filter(activity_type__name__in=self.AllOWED_NESTED_OPERATIONS)
+        # nested_operations_ids = instance.nested_activities.filter(activity_type__name__in=self.AllOWED_NESTED_OPERATIONS).values('pk')
+        json_and_instances_list = zip(
+            json_ld_representation['hasNestedOperation'],
+            instance.nested_activities.all()
+        )
+        for json_activity, nested_activity in json_and_instances_list:
+            class_name = 'Observation'
             for field in ['addrawmaterialoperation', 'irrigationoperation']:
                 try:
-
                     class_name = getattr(nested_activity, field).__class__.__name__
+                    break
                 except ObjectDoesNotExist as e:
                     continue
-            fixed_id = json_ld_representation['hasNestedOperation'][i_activity]['@id'].format(class_name=class_name)
-            fixed_type = json_ld_representation['hasNestedOperation'][i_activity]['@type'].format(class_name=class_name)
-            json_ld_representation['hasNestedOperation'][i_activity]['@id'] = fixed_id
-            json_ld_representation['hasNestedOperation'][i_activity]['@type'] = fixed_type
 
+            fixed_id = json_activity['@id'].format(class_name=class_name)
+            fixed_type = json_activity['@type'].format(class_name=class_name)
+            json_activity['@id'] = fixed_id
+            json_activity['@type'] = fixed_type
+            if class_name == 'Observation':
+                clean_nested_obs.append(json_activity)
+            else:
+                clean_nested_activities.append(json_activity)
 
+        json_ld_representation['hasNestedOperation'] = clean_nested_activities
+        json_ld_representation['hasMeasurement'] = clean_nested_obs
         return json_ld_representation
+
+    # def to_internal_value(self, data):
+    #     import ipdb; ipdb.set_trace()
+    #     validated_data = super().to_internal_value(data)
+
+    #     # Extract activities from both fields
+    #     nested_operations = validated_data.get("hasNestedOperation", [])
+    #     nested_observations = validated_data.get("hasMeasurement", [])
+
+    #     # Merge them to prevent overwriting
+    #     validated_data["nested_activities"] = list(set(nested_operations + nested_observations))
+
+    #     return validated_data

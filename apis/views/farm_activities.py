@@ -69,7 +69,7 @@ class IrrigationOperationViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
         if self.kwargs.get('compost_operation_pk'):
-            queryset = queryset.filter(parent_activities=self.kwargs['compost_operation_pk'])
+            queryset = queryset.filter(parent_activity=self.kwargs['compost_operation_pk'])
         return queryset
 
 
@@ -92,6 +92,11 @@ class ObservationViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
     filterset_fields = ['title','activity_type', 'responsible_agent']
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.kwargs.get('compost_operation_pk'):
+            queryset = queryset.filter(parent_activity=self.kwargs['compost_operation_pk'])
+        return queryset
 
 class CropStressIndicatorObservationViewSet(viewsets.ModelViewSet):
     """
@@ -136,5 +141,5 @@ class AddRawMaterialOperationViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
         if self.kwargs.get('compost_operation_pk'):
-            queryset = queryset.filter(parent_activities=self.kwargs['compost_operation_pk'])
+            queryset = queryset.filter(parent_activity=self.kwargs['compost_operation_pk'])
         return queryset

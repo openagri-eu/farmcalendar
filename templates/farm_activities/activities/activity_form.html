@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% load crispy_forms_tags %}
+
+{% block extra_css %}
+
+    <link rel="stylesheet" href="{% static 'vendor/select2/css/select2.min.css' %}">
+
+{% endblock extra_css %}
+
 
 {% block page_content_title %}{% if is_edit %}Edit {{ form.instance.activity_type }}{% else %}Register New {{ form.activity_type.initial }}{% endif %}{% endblock %}
 
@@ -57,9 +63,57 @@
     });
 
 {% endif %}
+
+// Select2 for the parent_activity field
+
+{% if form.parent_activity %}
+    $('#id_parent_activity').select2({
+        placeholder: 'Select a Compost Operation',
+        allowClear: true,
+        ajax: {
+            url: "{% url 'activities-autocomplete' %}",  // Use the reverse URL lookup for your autocomplete view
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    term: params.term,  // Pass the term entered by the user
+                };
+            },
+            processResults: function (data) {
+                return {
+                    results: $.map(data, function (item) {
+                        return {
+                            text: item.activity,  // Display the activity string (the result from str())
+                            id: item.pk,  // The pk is required for the selection
+                        };
+                    }),
+                };
+            },
+            cache: true,
+        },
+        minimumInputLength: 1,  // Trigger the search after the first character
+    });
+
+    // Load initial selection for parent_activity field (if there is an initial value)
+    var initialParentActivityValue = "{{ form.instance.parent_activity.id }}";  // Use the current value of parent_activity
+    if (initialParentActivityValue) {
+        $.ajax({
+            url: "{% url 'activities-autocomplete' %}",
+            data: { term: initialParentActivityValue },
+            dataType: 'json',
+        }).done(function (data) {
+            if (data.length > 0) {
+                var newOption = new Option(data[0].activity, data[0].pk, true, true);
+                $('#id_parent_activity').append(newOption).trigger('change');
+            }
+        });
+    }
+{% endif %}
+
 {% endblock on_dom_load_js %}
 
 {% block body_end_extra_scripts %}
     <!-- alertifyjs js -->
     <script src="{% static 'libs/alertifyjs/build/alertify.min.js' %}"></script>
+    <script src="{% static 'vendor/select2/js/select2.min.js' %}"></script>
 {% endblock body_end_extra_scripts %}

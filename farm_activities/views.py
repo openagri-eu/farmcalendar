@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
@@ -13,7 +14,6 @@ from .models import (
 from .forms import (
     FarmCalendarActivityTypeSelectionForm,
     FarmCalendarActivityTypeForm,
-    FarmCalendarActivityForm,
     get_generic_farm_calendar_activity_form,
 )
 
@@ -58,7 +58,7 @@ class FarmCalendarActivityCreateByTypeView(LoginRequiredMixin, View):
         if GenericActivityForm is None:
             redirect('pre_register_calendar_activity')
         activity_type_instance = FarmCalendarActivityType.objects.get(name=activity_type)
-        form = GenericActivityForm(initial={'activity_type': activity_type_instance})
+        form = GenericActivityForm(initial={'activity_type': activity_type_instance, 'title': activity_type_instance.name})
         return render(request, self.template_name, {'form': form})
 
     def post(self, request, activity_type):
@@ -128,3 +128,27 @@ class FarmCalendarActivityEdit(LoginRequiredMixin, View):
             'delete_url': delete_url
         }
         return render(request, self.template_name, context=context)
+
+
+class FarmCalendarActivityAutocomplete(View):
+    def get(self, request, *args, **kwargs):
+        search_term = request.GET.get('term', '')
+
+        if search_term:
+            # Filter queryset by title or start_datetime
+            qs_values = FarmCalendarActivity.objects.filter(
+                Q(title__icontains=search_term) | Q(start_datetime__icontains=search_term)
+            ).values('pk', 'title', 'start_datetime')
+
+            # Create list of the string representations using __str__()
+            objs = [
+                {
+                    'pk': activity['pk'],
+                    'activity': str(FarmCalendarActivity(**activity))
+                }
+                for activity in qs_values
+            ]
+
+            return JsonResponse(objs, safe=False)
+
+        return JsonResponse([], safe=False)

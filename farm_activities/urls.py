@@ -8,7 +8,8 @@ from .views import (
     FarmCalendarActivityListView,
     FarmCalendarActivityEdit,
     FarmCalendarActivityTypeCreateView,
-    PreRegisterCalendarActivityView
+    PreRegisterCalendarActivityView,
+    FarmCalendarActivityAutocomplete,
 )
 
 
@@ -20,4 +21,5 @@ urlpatterns = [
     path('activities/', FarmCalendarActivityListView.as_view(), name='calendar_activity_list'),
     path('activities/<uuid:pk>/', FarmCalendarActivityEdit.as_view(), name='calendar_activity_edit'),
     path('activity-type/create/', FarmCalendarActivityTypeCreateView.as_view(), name='create_activity_type'),
+    path('activities-autocomplete/', FarmCalendarActivityAutocomplete.as_view(), name='activities-autocomplete'),
 ]
