@@ -366,5 +366,13 @@ DEFAULT_CALENDAR_ACTIVITY_TYPES = {
         'border_color': '#8A5A2B',
         'text_color': '#4A5320',
         'id': '00000000-0000-0000-0000-000000000007',
+    },
+    'compost_turning_operation': {
+        'name': 'Compost Turning Operation',
+        'description': 'Compost Turning Operation',
+        'background_color': '#BFD982',
+        'border_color': '#72512D',
+        'text_color': '#3C4F2E',
+        'id': '00000000-0000-0000-0000-000000000008',
     }
 }

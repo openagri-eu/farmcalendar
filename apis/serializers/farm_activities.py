@@ -25,7 +25,7 @@ from farm_activities.models import (
     AddRawMaterialCompostQuantity,
 )
 
-from .base import URNRelatedField
+from .base import URNRelatedField, URNCharField
 from ..schemas import generate_urn
 
 
@@ -351,6 +351,17 @@ class AddRawMaterialOperationSerializer(GenericOperationSerializer):
 
         return instance
 
+class CompostPileFieldSerializer(serializers.Serializer):
+    # pile_id = serializers.CharField(source='compost_pile_id')
+
+    def to_representation(self, instance):
+        return {
+            '@id': generate_urn('CompostPile',obj_id=instance),
+            '@type': 'CompostPile',
+        }
+    def to_internal_value(self, data):
+        return data['']
+
 
 class CompostOperationSerializer(FarmCalendarActivitySerializer):
     AllOWED_NESTED_OPERATIONS = [
@@ -368,7 +379,11 @@ class CompostOperationSerializer(FarmCalendarActivitySerializer):
         read_only=True
     )
 
-    isOperatedOn = serializers.CharField(source='compost_pile_id')
+    # isOperatedOn = serializers.CharField(source='compost_pile_id')
+    # isOperatedOn = CompostPileFieldSerializer(source='compost_pile_id')
+    isOperatedOn = URNCharField(
+        class_names=['CompostPile'], source='compost_pile_id', read_only=False
+    )
     class Meta:
         model = CompostOperation
 
@@ -387,8 +402,6 @@ class CompostOperationSerializer(FarmCalendarActivitySerializer):
         json_ld_representation = representation
         clean_nested_activities = []
         clean_nested_obs = []
-            # instance.nested_activities.filter(activity_type__name__in=self.AllOWED_NESTED_OPERATIONS)
-        # nested_operations_ids = instance.nested_activities.filter(activity_type__name__in=self.AllOWED_NESTED_OPERATIONS).values('pk')
         json_and_instances_list = zip(
             json_ld_representation['hasNestedOperation'],
             instance.nested_activities.all()
@@ -414,16 +427,3 @@ class CompostOperationSerializer(FarmCalendarActivitySerializer):
         json_ld_representation['hasNestedOperation'] = clean_nested_activities
         json_ld_representation['hasMeasurement'] = clean_nested_obs
         return json_ld_representation
-
-    # def to_internal_value(self, data):
-    #     import ipdb; ipdb.set_trace()
-    #     validated_data = super().to_internal_value(data)
-
-    #     # Extract activities from both fields
-    #     nested_operations = validated_data.get("hasNestedOperation", [])
-    #     nested_observations = validated_data.get("hasMeasurement", [])
-
-    #     # Merge them to prevent overwriting
-    #     validated_data["nested_activities"] = list(set(nested_operations + nested_observations))
-
-    #     return validated_data

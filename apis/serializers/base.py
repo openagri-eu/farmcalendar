@@ -3,10 +3,62 @@ from uuid import UUID
 from django.db.models.fields.related import ForeignKey, OneToOneField, ManyToManyField
 
 from rest_framework.relations import PrimaryKeyRelatedField, PKOnlyObject
+from rest_framework.relations import PrimaryKeyRelatedField, PKOnlyObject
 from rest_framework import serializers
 
 from ..schemas import OCSM_SCHEMA, generate_urn_prefix
 
+
+class URNCharField(serializers.CharField):
+    def __init__(self, class_names, **kwargs):
+        """
+        :param class_name: The class name added to the prefix for the URN, e.g., 'urn:myapp:farm'.
+        :param kwargs: Additional arguments for PrimaryKeyRelatedField.
+        """
+        if class_names is None:
+            class_names = ['{class_name}']
+        self.class_name = class_names[0]
+        self.urn_prefix = generate_urn_prefix(class_names)
+        super().__init__(**kwargs)
+
+    def to_representation(self, value):
+        """
+        Converts the related object to a URN string.
+        """
+
+        uuid_value = value
+
+        json_ld_dict = {
+            "@type": self.class_name,
+            "@id": f"{self.urn_prefix}:{uuid_value}",
+        }
+        return json_ld_dict
+
+    def to_internal_value(self, data):
+        """
+        Converts a URN string into a model instance.
+        """
+        if not self.class_name == '{class_name}':
+            if not isinstance(data, dict) or not data.get('@type', '').lower() == self.class_name.lower() or not data.get('@id', '').startswith(f"{self.urn_prefix}:"):
+                raise serializers.ValidationError((
+                    f"Invalid URN ref dict format. Expected a dictionary with "
+                    f"@type' as '{self.class_name}' and '@id' with prefix '{self.urn_prefix}:'."
+                    f" Received'{data}' instead."
+                ))
+            urn_data = data["@id"]
+
+
+        # Extract the ID from the URN
+        raw_id = urn_data.split(':')[-1]
+
+        # Ensure the ID is valid (UUID or integer depending on the target field)
+        # try:
+        #     raw_id = UUID(raw_id)
+        # except (ValueError, TypeError):
+        #     raise serializers.ValidationError("Invalid ID in URN.")
+
+        # Fetch the related instance
+        return super().to_internal_value(raw_id)
 
 
 class URNRelatedField(PrimaryKeyRelatedField):

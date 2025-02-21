@@ -203,6 +203,17 @@ class CompostOperation(FarmCalendarActivity):
         super().save(*args, **kwargs)
 
 
+class CompostTurningOperation(FarmCalendarActivity):
+    class Meta:
+        verbose_name = "Compost Turning Operation"
+        verbose_name_plural = "Compost Turning Operations"
+
+
+    def save(self, *args, **kwargs):
+        self.activity_type, _ = FarmCalendarActivityType.objects.get_or_create(name=settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['compost_turning_operation']['name'])
+        super().save(*args, **kwargs)
+
+
 class AddRawMaterialOperation(FarmCalendarActivity):
     class Meta:
         verbose_name = "Add Raw Material Operation"
@@ -210,7 +221,6 @@ class AddRawMaterialOperation(FarmCalendarActivity):
 
 
     compost_materials = models.ManyToManyField('farm_management.CompostMaterial', through='farm_activities.AddRawMaterialCompostQuantity')
-    # part_of_compost_operation = models.ForeignKey('farm_activities.CompostOperation', related_name="nested_%(class)ss", blank=True, null=True, on_delete=models.SET_NULL)
 
     def save(self, *args, **kwargs):
         self.activity_type, _ = FarmCalendarActivityType.objects.get_or_create(name=settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['add_raw_material_operation']['name'])
