@@ -11,6 +11,7 @@ from farm_activities.models import (
     CropGrowthStageObservation,
     CompostOperation,
     AddRawMaterialOperation,
+    CompostTurningOperation,
 )
 from ..serializers import (
     FarmCalendarActivitySerializer,
@@ -23,6 +24,7 @@ from ..serializers import (
     CropGrowthStageObservationSerializer,
     CompostOperationSerializer,
     AddRawMaterialOperationSerializer,
+    CompostTurningOperationSerializer,
 )
 
 
@@ -118,7 +120,6 @@ class CropGrowthStageObservationViewSet(viewsets.ModelViewSet):
     filterset_fields = ['title','activity_type', 'responsible_agent']
 
 
-
 class CompostOperationViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows CompostOperation to be viewed or edited.
@@ -135,6 +136,21 @@ class AddRawMaterialOperationViewSet(viewsets.ModelViewSet):
     """
     queryset = AddRawMaterialOperation.objects.all().order_by('-start_datetime')
     serializer_class = AddRawMaterialOperationSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['title', 'activity_type']
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.kwargs.get('compost_operation_pk'):
+            queryset = queryset.filter(parent_activity=self.kwargs['compost_operation_pk'])
+        return queryset
+
+class CompostTurningOperationViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows CompostTurningOperation to be viewed or edited.
+    """
+    queryset = CompostTurningOperation.objects.all().order_by('-start_datetime')
+    serializer_class = CompostTurningOperationSerializer
     permission_classes = [permissions.IsAuthenticated]
     filterset_fields = ['title', 'activity_type']
 

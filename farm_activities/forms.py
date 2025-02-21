@@ -23,7 +23,7 @@ from .models import (
     CropProtectionOperation,
     CropStressIndicatorObservation,
     CropGrowthStageObservation,
-    CropGrowthStageObservation,
+    CompostTurningOperation,
 )
 from farm_management.models import CompostMaterial
 
@@ -209,10 +209,12 @@ def get_generic_farm_calendar_activity_form(activity_type):
         settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['crop_growth_stage']['name']: CropGrowthStageObservation,
         settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['compost_operation']['name']: CompostOperation,
         settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['add_raw_material_operation']['name']: AddRawMaterialOperation,
+        settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['compost_turning_operation']['name']: CompostTurningOperation,
     }
     nested_compost_activities = [
         settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['irrigation']['name'],
-        settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['add_raw_material_operation']['name']
+        settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['compost_turning_operation']['name'],
+        settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['add_raw_material_operation']['name'],
     ]
     ActivityModel = activity_type_model_map.get(activity_type)
     is_observation = 'observation' in activity_type.lower()

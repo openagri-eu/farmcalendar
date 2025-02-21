@@ -23,6 +23,7 @@ from farm_activities.models import (
     CompostOperation,
     AddRawMaterialOperation,
     AddRawMaterialCompostQuantity,
+    CompostTurningOperation,
 )
 
 from .base import URNRelatedField, URNCharField
@@ -351,6 +352,33 @@ class AddRawMaterialOperationSerializer(GenericOperationSerializer):
 
         return instance
 
+
+class CompostTurningOperationSerializer(GenericOperationSerializer):
+
+    class Meta:
+        model = CompostTurningOperation
+
+        fields = [
+            'id',
+            'activityType', 'title', 'details',
+            'hasStartDatetime', 'hasEndDatetime',
+            'responsibleAgent', 'usesAgriculturalMachinery',
+        ]
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation.update({'@type': 'CompostTurningOperation'})
+        json_ld_representation = representation
+
+        return json_ld_representation
+
+    def create(self, validated_data):
+        if self.context['view'].kwargs.get('compost_operation_pk'):
+            validated_data['parent_activity'] = self.context['view'].kwargs.get('compost_operation_pk')
+
+        return super().create(validated_data)
+
+
 class CompostPileFieldSerializer(serializers.Serializer):
     # pile_id = serializers.CharField(source='compost_pile_id')
 
@@ -408,7 +436,7 @@ class CompostOperationSerializer(FarmCalendarActivitySerializer):
         )
         for json_activity, nested_activity in json_and_instances_list:
             class_name = 'Observation'
-            for field in ['addrawmaterialoperation', 'irrigationoperation']:
+            for field in ['addrawmaterialoperation', 'irrigationoperation', 'compostturningoperation']:
                 try:
                     class_name = getattr(nested_activity, field).__class__.__name__
                     break

@@ -24,6 +24,7 @@ from .views import (
     CropGrowthStageObservationViewSet,
     CompostOperationViewSet,
     AddRawMaterialOperationViewSet,
+    CompostTurningOperationViewSet,
 )
 
 router = routers.DefaultRouter()
@@ -45,12 +46,15 @@ router.register(r'CropStressIndicatorObservations', CropStressIndicatorObservati
 router.register(r'CropGrowthStageObservations', CropGrowthStageObservationViewSet)
 router.register(r'AddRawMaterialOperations', AddRawMaterialOperationViewSet)
 router.register(r'CompostOperations', CompostOperationViewSet)
+router.register(r'CompostTurningOperations', CompostTurningOperationViewSet)
 
 
 compost_operations_router = routers.NestedSimpleRouter(router, r'CompostOperations', lookup='compost_operation')
 compost_operations_router.register(r'AddRawMaterialOperations', AddRawMaterialOperationViewSet, basename=f'compost-operation-addrawmaterialoperation')
 compost_operations_router.register(r'IrrigationOperations', IrrigationOperationViewSet, basename=f'compost-operation-irrigationoperation')
 compost_operations_router.register(r'Observations', ObservationViewSet, basename=f'compost-operation-observation')
+compost_operations_router.register(r'CompostTurningOperations', CompostTurningOperationViewSet, basename=f'compost-turning-operation-observation')
+
 
 
 
