@@ -120,6 +120,8 @@ class CompostMaterialsWidget(forms.widgets.Widget):
         elif isinstance(value, str):
             try:
                 value = json.loads(value)
+                if value is None:
+                    value = []
             except json.JSONDecodeError:
                 value = []
 
