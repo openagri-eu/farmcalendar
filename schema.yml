@@ -5350,6 +5350,7 @@ components:
           nullable: true
         responsibleAgent:
           type: string
+          nullable: true
         usesAgriculturalMachinery:
           type: array
           items:
@@ -5366,7 +5367,6 @@ components:
       - hasStartDatetime
       - id
       - responsibleAgent
-      - title
       - usesAgriculturalMachinery
     AddressField:
       type: object
@@ -5483,6 +5483,7 @@ components:
           nullable: true
         responsibleAgent:
           type: string
+          nullable: true
         usesAgriculturalMachinery:
           type: array
           items:
@@ -5511,7 +5512,6 @@ components:
       - id
       - isOperatedOn
       - responsibleAgent
-      - title
       - usesAgriculturalMachinery
     CompostTurningOperation:
       type: object
@@ -5538,6 +5538,7 @@ components:
           nullable: true
         responsibleAgent:
           type: string
+          nullable: true
         usesAgriculturalMachinery:
           type: array
           items:
@@ -5549,7 +5550,6 @@ components:
       - hasStartDatetime
       - id
       - responsibleAgent
-      - title
       - usesAgriculturalMachinery
     ContactPersonField:
       type: object
@@ -5577,38 +5577,19 @@ components:
         details:
           type: string
           nullable: true
-        hasStartDatetime:
+        phenomenonTime:
           type: string
           format: date-time
-        hasEndDatetime:
-          type: string
-          format: date-time
-          nullable: true
-        responsibleAgent:
-          type: string
-        usesAgriculturalMachinery:
-          type: array
-          items:
-            type: string
-            format: uuid
-        hasValue:
-          type: string
-        isMeasuredIn:
-          type: string
-          nullable: true
-        relatesToProperty:
+        hasResult:
+          $ref: '#/components/schemas/GenericQuantityValueField'
+        observedProperty:
           type: string
       required:
       - activityType
-      - hasEndDatetime
-      - hasStartDatetime
-      - hasValue
+      - hasResult
       - id
-      - isMeasuredIn
-      - relatesToProperty
-      - responsibleAgent
-      - title
-      - usesAgriculturalMachinery
+      - observedProperty
+      - phenomenonTime
     CropProtectionOperation:
       type: object
       properties:
@@ -5634,6 +5615,7 @@ components:
           nullable: true
         responsibleAgent:
           type: string
+          nullable: true
         usesAgriculturalMachinery:
           type: array
           items:
@@ -5656,7 +5638,6 @@ components:
       - id
       - operatedOn
       - responsibleAgent
-      - title
       - usesAgriculturalMachinery
       - usesPesticide
     CropSpeciesSerializerField:
@@ -5685,38 +5666,19 @@ components:
         details:
           type: string
           nullable: true
-        hasStartDatetime:
+        phenomenonTime:
           type: string
           format: date-time
-        hasEndDatetime:
-          type: string
-          format: date-time
-          nullable: true
-        responsibleAgent:
-          type: string
-        usesAgriculturalMachinery:
-          type: array
-          items:
-            type: string
-            format: uuid
-        hasValue:
-          type: string
-        isMeasuredIn:
-          type: string
-          nullable: true
-        relatesToProperty:
+        hasResult:
+          $ref: '#/components/schemas/GenericQuantityValueField'
+        observedProperty:
           type: string
       required:
       - activityType
-      - hasEndDatetime
-      - hasStartDatetime
-      - hasValue
+      - hasResult
       - id
-      - isMeasuredIn
-      - relatesToProperty
-      - responsibleAgent
-      - title
-      - usesAgriculturalMachinery
+      - observedProperty
+      - phenomenonTime
     Farm:
       type: object
       properties:
@@ -5866,6 +5828,7 @@ components:
           nullable: true
         responsibleAgent:
           type: string
+          nullable: true
         usesAgriculturalMachinery:
           type: array
           items:
@@ -5877,7 +5840,6 @@ components:
       - hasStartDatetime
       - id
       - responsibleAgent
-      - title
       - usesAgriculturalMachinery
     FarmCalendarActivityType:
       type: object
@@ -6083,6 +6045,7 @@ components:
           nullable: true
         responsibleAgent:
           type: string
+          nullable: true
         usesAgriculturalMachinery:
           type: array
           items:
@@ -6109,7 +6072,6 @@ components:
       - id
       - operatedOn
       - responsibleAgent
-      - title
       - usesAgriculturalMachinery
       - usesFertilizer
     Fertilizer:
@@ -6163,6 +6125,18 @@ components:
       - isPricePer
       - isTargetedTowards
       - updated_at
+    GenericQuantityValueField:
+      type: object
+      properties:
+        unit:
+          type: string
+        numericValue:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,15}(?:\.\d{0,2})?$
+      required:
+      - numericValue
+      - unit
     GeometrySerializerField:
       type: object
       properties:
@@ -6195,6 +6169,7 @@ components:
           nullable: true
         responsibleAgent:
           type: string
+          nullable: true
         usesAgriculturalMachinery:
           type: array
           items:
@@ -6216,7 +6191,6 @@ components:
       - id
       - operatedOn
       - responsibleAgent
-      - title
       - usesAgriculturalMachinery
       - usesIrrigationSystem
     LocationSerializerField:
@@ -6249,38 +6223,19 @@ components:
         details:
           type: string
           nullable: true
-        hasStartDatetime:
+        phenomenonTime:
           type: string
           format: date-time
-        hasEndDatetime:
-          type: string
-          format: date-time
-          nullable: true
-        responsibleAgent:
-          type: string
-        usesAgriculturalMachinery:
-          type: array
-          items:
-            type: string
-            format: uuid
-        hasValue:
-          type: string
-        isMeasuredIn:
-          type: string
-          nullable: true
-        relatesToProperty:
+        hasResult:
+          $ref: '#/components/schemas/GenericQuantityValueField'
+        observedProperty:
           type: string
       required:
       - activityType
-      - hasEndDatetime
-      - hasStartDatetime
-      - hasValue
+      - hasResult
       - id
-      - isMeasuredIn
-      - relatesToProperty
-      - responsibleAgent
-      - title
-      - usesAgriculturalMachinery
+      - observedProperty
+      - phenomenonTime
     PatchedAddRawMaterialOperation:
       type: object
       properties:
@@ -6306,6 +6261,7 @@ components:
           nullable: true
         responsibleAgent:
           type: string
+          nullable: true
         usesAgriculturalMachinery:
           type: array
           items:
@@ -6385,6 +6341,7 @@ components:
           nullable: true
         responsibleAgent:
           type: string
+          nullable: true
         usesAgriculturalMachinery:
           type: array
           items:
@@ -6429,6 +6386,7 @@ components:
           nullable: true
         responsibleAgent:
           type: string
+          nullable: true
         usesAgriculturalMachinery:
           type: array
           items:
@@ -6450,26 +6408,12 @@ components:
         details:
           type: string
           nullable: true
-        hasStartDatetime:
+        phenomenonTime:
           type: string
           format: date-time
-        hasEndDatetime:
-          type: string
-          format: date-time
-          nullable: true
-        responsibleAgent:
-          type: string
-        usesAgriculturalMachinery:
-          type: array
-          items:
-            type: string
-            format: uuid
-        hasValue:
-          type: string
-        isMeasuredIn:
-          type: string
-          nullable: true
-        relatesToProperty:
+        hasResult:
+          $ref: '#/components/schemas/GenericQuantityValueField'
+        observedProperty:
           type: string
     PatchedCropProtectionOperation:
       type: object
@@ -6496,6 +6440,7 @@ components:
           nullable: true
         responsibleAgent:
           type: string
+          nullable: true
         usesAgriculturalMachinery:
           type: array
           items:
@@ -6526,26 +6471,12 @@ components:
         details:
           type: string
           nullable: true
-        hasStartDatetime:
+        phenomenonTime:
           type: string
           format: date-time
-        hasEndDatetime:
-          type: string
-          format: date-time
-          nullable: true
-        responsibleAgent:
-          type: string
-        usesAgriculturalMachinery:
-          type: array
-          items:
-            type: string
-            format: uuid
-        hasValue:
-          type: string
-        isMeasuredIn:
-          type: string
-          nullable: true
-        relatesToProperty:
+        hasResult:
+          $ref: '#/components/schemas/GenericQuantityValueField'
+        observedProperty:
           type: string
     PatchedFarm:
       type: object
@@ -6671,6 +6602,7 @@ components:
           nullable: true
         responsibleAgent:
           type: string
+          nullable: true
         usesAgriculturalMachinery:
           type: array
           items:
@@ -6848,6 +6780,7 @@ components:
           nullable: true
         responsibleAgent:
           type: string
+          nullable: true
         usesAgriculturalMachinery:
           type: array
           items:
@@ -6931,6 +6864,7 @@ components:
           nullable: true
         responsibleAgent:
           type: string
+          nullable: true
         usesAgriculturalMachinery:
           type: array
           items:
@@ -6960,26 +6894,12 @@ components:
         details:
           type: string
           nullable: true
-        hasStartDatetime:
+        phenomenonTime:
           type: string
           format: date-time
-        hasEndDatetime:
-          type: string
-          format: date-time
-          nullable: true
-        responsibleAgent:
-          type: string
-        usesAgriculturalMachinery:
-          type: array
-          items:
-            type: string
-            format: uuid
-        hasValue:
-          type: string
-        isMeasuredIn:
-          type: string
-          nullable: true
-        relatesToProperty:
+        hasResult:
+          $ref: '#/components/schemas/GenericQuantityValueField'
+        observedProperty:
           type: string
     PatchedPesticide:
       type: object

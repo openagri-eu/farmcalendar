@@ -277,8 +277,9 @@ class CropStressIndicatorObservationSerializer(ObservationSerializer):
             'id',
             'activityType', 'title', 'details',
             'phenomenonTime',
-            'responsibleAgent', 'usesAgriculturalMachinery',
-            'hasValue', 'isMeasuredIn', 'observedProperty'
+            # 'responsibleAgent', 'usesAgriculturalMachinery',
+            'hasResult',
+            'observedProperty',
         ]
 
     def to_representation(self, instance):
@@ -295,8 +296,9 @@ class CropGrowthStageObservationSerializer(ObservationSerializer):
             'id',
             'activityType', 'title', 'details',
             'phenomenonTime',
-            'responsibleAgent', 'usesAgriculturalMachinery',
-            'hasValue', 'isMeasuredIn', 'observedProperty'
+            # 'responsibleAgent', 'usesAgriculturalMachinery',
+            'hasResult',
+            'observedProperty',
         ]
 
     def to_representation(self, instance):
