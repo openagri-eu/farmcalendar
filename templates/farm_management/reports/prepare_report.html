@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block extra_css %}
+
+{% endblock extra_css %}
+
+
+{% block page_content_title %}Prepare report for {{ readable_report_type }}{% endblock %}
+
+{% block page_content_rows %}
+        <!-- Page Content Rows with Card -->
+        <div class="row">
+            <div class="col-xl-8 col-lg-8">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Select components to be included on the {{ readable_report_type }} Report</h6>
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <form method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success">Prepare Report</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+{% endblock %}
+
+
+
+
+{% block on_dom_load_js %}
+
+{% endblock on_dom_load_js %}
+
+{% block body_end_extra_scripts %}
+    <!-- alertifyjs js -->
+    <script src="{% static 'libs/alertifyjs/build/alertify.min.js' %}"></script>
+{% endblock body_end_extra_scripts %}
