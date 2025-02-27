@@ -34,6 +34,7 @@ from .views import (
     PesticideListView,
     PesticideUpdateView,
     AnimalGroupAutocomplete,
+    PrepareReportView,
 )
 
 
@@ -68,4 +69,5 @@ urlpatterns = [
 
     path("pesticides/", PesticideListView.as_view(), name="pesticides"),
     path("pesticides/<uuid:pk>/", PesticideUpdateView.as_view(), name="pesticide_edit"),
+    path("reports/<str:report_type>/", PrepareReportView.as_view(), name="prepare_report"),
 ]
