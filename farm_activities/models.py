@@ -56,11 +56,13 @@ class FarmCalendarActivity(models.Model):
         verbose_name = "Farm Activity"
         verbose_name_plural = "Farm Activities"
 
+    ACTIVITY_NAME = None
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, db_index=True, editable=False, unique=True,
                           blank=False, null=False, verbose_name='ID')
 
     activity_type = models.ForeignKey(FarmCalendarActivityType, on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, blank=True)
     start_datetime = models.DateTimeField(default=datetime.datetime.now)
     end_datetime = models.DateTimeField(blank=True, null=True)
 
@@ -82,8 +84,18 @@ class FarmCalendarActivity(models.Model):
     def __str__(self):
         return f"{self.title} ({self.start_datetime.strftime('%Y-%m-%d %H:%M')})"
 
+    def save(self, *args, **kwargs):
+        if self.activity_type is None and self.ACTIVITY_NAME is not None:
+            self.activity_type, _ = FarmCalendarActivityType.objects.get_or_create(name=self.ACTIVITY_NAME)
+
+        if self.title is None or self.title == '':
+            self.title = self.activity_type.name
+
+        super().save(*args, **kwargs)
+
 
 class FertilizationOperation(FarmCalendarActivity):
+    ACTIVITY_NAME = settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['fertilization']['name']
     class Meta:
         verbose_name = "Fertilization Operation"
         verbose_name_plural = "Fertilization Operations"
@@ -98,13 +110,11 @@ class FertilizationOperation(FarmCalendarActivity):
     operated_on = models.ForeignKey('farm_management.FarmParcel', on_delete=models.CASCADE)
     fertilizer = models.ForeignKey('farm_management.Fertilizer', on_delete=models.SET_NULL, blank=True, null=True)
 
-    def save(self, *args, **kwargs):
-        self.activity_type, _ = FarmCalendarActivityType.objects.get_or_create(name=settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['fertilization']['name'])
-        super().save(*args, **kwargs)
-
 
 
 class IrrigationOperation(FarmCalendarActivity):
+
+    ACTIVITY_NAME = settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['irrigation']['name']
 
     class Meta:
         verbose_name = "Irrigation Operation"
@@ -125,15 +135,14 @@ class IrrigationOperation(FarmCalendarActivity):
     irrigation_system = models.CharField(max_length=50, choices=IrrigationSystemChoices.choices,
                                         default=IrrigationSystemChoices.SPRINKLER)
 
-    # part_of_compost_operation = models.ForeignKey('farm_activities.CompostOperation', related_name="nested_%(class)ss", blank=True, null=True, on_delete=models.SET_NULL)
-
-    def save(self, *args, **kwargs):
-        self.activity_type, _ = FarmCalendarActivityType.objects.get_or_create(name=settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['irrigation']['name'])
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     self.activity_type, _ = FarmCalendarActivityType.objects.get_or_create(name=settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['irrigation']['name'])
+    #     super().save(*args, **kwargs)
 
 
 
 class CropProtectionOperation(FarmCalendarActivity):
+    ACTIVITY_NAME = settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['crop_protection']['name']
 
     class Meta:
         verbose_name = "Crop Protection Operation"
@@ -147,12 +156,9 @@ class CropProtectionOperation(FarmCalendarActivity):
     pesticide = models.ForeignKey('farm_management.Pesticide', on_delete=models.SET_NULL, blank=True, null=True)
 
 
-    def save(self, *args, **kwargs):
-        self.activity_type, _ = FarmCalendarActivityType.objects.get_or_create(name=settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['crop_protection']['name'])
-        super().save(*args, **kwargs)
-
 
 class Observation(FarmCalendarActivity):
+
     class Meta:
         verbose_name = "Observation"
         verbose_name_plural = "Observations"
@@ -164,18 +170,17 @@ class Observation(FarmCalendarActivity):
 
 class CropStressIndicatorObservation(Observation):
 
+    ACTIVITY_NAME = settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['crop_stress_indicator']['name']
+
     class Meta:
         verbose_name = "Crop Stress Indicator Observation"
         verbose_name_plural = "Crop Stress Indicator Observations"
 
     crop = models.ForeignKey('farm_management.FarmCrop', on_delete=models.CASCADE, blank=False, null=False)
 
-    def save(self, *args, **kwargs):
-        self.activity_type, _ = FarmCalendarActivityType.objects.get_or_create(name=settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['crop_stress_indicator']['name'])
-        super().save(*args, **kwargs)
-
 
 class CropGrowthStageObservation(Observation):
+    ACTIVITY_NAME = settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['crop_growth_stage']['name']
 
     class Meta:
         verbose_name = "Crop Growth Stage Observation"
@@ -184,47 +189,39 @@ class CropGrowthStageObservation(Observation):
     crop = models.ForeignKey('farm_management.FarmCrop', on_delete=models.CASCADE, blank=False, null=False)
 
     def save(self, *args, **kwargs):
-        self.activity_type, _ = FarmCalendarActivityType.objects.get_or_create(name=settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['crop_growth_stage']['name'])
-        # todo: fix this so that only change if this is the latest observation from that crop
         self.crop.growth_stage = self.value
         self.crop.save()
         super().save(*args, **kwargs)
 
 
 class CompostOperation(FarmCalendarActivity):
+    ACTIVITY_NAME = settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['compost_operation']['name']
+
     class Meta:
         verbose_name = "Compost Operation"
         verbose_name_plural = "Compost Operations"
 
     compost_pile_id = models.CharField('Operated On Compost Pile', max_length=355)
 
-    def save(self, *args, **kwargs):
-        self.activity_type, _ = FarmCalendarActivityType.objects.get_or_create(name=settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['compost_operation']['name'])
-        super().save(*args, **kwargs)
 
 
 class CompostTurningOperation(FarmCalendarActivity):
+    ACTIVITY_NAME = settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['compost_turning_operation']['name']
+
     class Meta:
         verbose_name = "Compost Turning Operation"
         verbose_name_plural = "Compost Turning Operations"
 
 
-    def save(self, *args, **kwargs):
-        self.activity_type, _ = FarmCalendarActivityType.objects.get_or_create(name=settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['compost_turning_operation']['name'])
-        super().save(*args, **kwargs)
-
-
 class AddRawMaterialOperation(FarmCalendarActivity):
+    ACTIVITY_NAME = settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['add_raw_material_operation']['name']
+
     class Meta:
         verbose_name = "Add Raw Material Operation"
         verbose_name_plural = "Add Raw Material Operations"
 
 
     compost_materials = models.ManyToManyField('farm_management.CompostMaterial', through='farm_activities.AddRawMaterialCompostQuantity')
-
-    def save(self, *args, **kwargs):
-        self.activity_type, _ = FarmCalendarActivityType.objects.get_or_create(name=settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['add_raw_material_operation']['name'])
-        super().save(*args, **kwargs)
 
 
 class AddRawMaterialCompostQuantity(models.Model):

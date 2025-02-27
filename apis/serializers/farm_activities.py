@@ -30,12 +30,36 @@ from .base import URNRelatedField, URNCharField
 from ..schemas import generate_urn
 
 
+def quantity_value_serializer_factory(unit_field, value_field):
+
+    class GenericQuantityValueFieldSerializer(serializers.Serializer):
+        unit = serializers.CharField(source=unit_field)
+        numericValue = serializers.DecimalField(source=value_field, max_digits=17, decimal_places=2)
+
+
+        def to_representation(self, instance):
+            value = getattr(instance, value_field)
+            unit = getattr(instance, unit_field)
+            uuid_orig_str = "".join([
+                str(getattr(instance, unit_field, '')),
+                str(getattr(instance, value_field, ''),)
+            ])
+            hash_uuid = str(uuid.uuid5(uuid.NAMESPACE_DNS, uuid_orig_str))
+            return {
+                '@id': generate_urn('QuantityValue',obj_id=hash_uuid),
+                '@type': 'QuantityValue',
+                'unit': unit,
+                'numericValue': value,
+            }
+    return GenericQuantityValueFieldSerializer
+
+
 class FarmCalendarActivitySerializer(serializers.ModelSerializer):
     activityType = URNRelatedField(class_names=['FarmCalendarActivityType'], source='activity_type', queryset=FarmCalendarActivityType.objects.all())
     hasStartDatetime = serializers.DateTimeField(source='start_datetime')
     hasEndDatetime = serializers.DateTimeField(source='end_datetime', allow_null=True)
 
-    responsibleAgent = serializers.CharField(source='responsible_agent')
+    responsibleAgent = serializers.CharField(source='responsible_agent', allow_null=True)
 
     usesAgriculturalMachinery = URNRelatedField(class_names=['AgriculturalMachine'], source='agricultural_machinery', many=True, queryset=AgriculturalMachine.objects.all())
 
@@ -203,18 +227,20 @@ class CropProtectionOperationSerializer(GenericOperationSerializer):
 
 
 class ObservationSerializer(FarmCalendarActivitySerializer):
-    isMeasuredIn = serializers.CharField(source='value_unit', allow_null=True)
-    hasValue = serializers.CharField(source='value')
-    relatesToProperty = serializers.CharField(source='observed_property')
+    phenomenonTime = serializers.DateTimeField(source='start_datetime')
+    observedProperty = serializers.CharField(source='observed_property')
+    hasResult = quantity_value_serializer_factory('value_unit', 'value')(source='*')
 
     class Meta:
         model = Observation
         fields = [
             'id',
-            'activityType', 'title', 'details',
-            'hasStartDatetime', 'hasEndDatetime',
-            'responsibleAgent', 'usesAgriculturalMachinery',
-            'hasValue', 'isMeasuredIn', 'relatesToProperty',
+            'activityType',
+            'title', 'details',
+            'phenomenonTime',
+            # 'responsibleAgent', 'usesAgriculturalMachinery',
+            'hasResult',
+            'observedProperty',
         ]
 
 
@@ -250,9 +276,9 @@ class CropStressIndicatorObservationSerializer(ObservationSerializer):
         fields = [
             'id',
             'activityType', 'title', 'details',
-            'hasStartDatetime', 'hasEndDatetime',
+            'phenomenonTime',
             'responsibleAgent', 'usesAgriculturalMachinery',
-            'hasValue', 'isMeasuredIn', 'relatesToProperty'
+            'hasValue', 'isMeasuredIn', 'observedProperty'
         ]
 
     def to_representation(self, instance):
@@ -268,9 +294,9 @@ class CropGrowthStageObservationSerializer(ObservationSerializer):
         fields = [
             'id',
             'activityType', 'title', 'details',
-            'hasStartDatetime', 'hasEndDatetime',
+            'phenomenonTime',
             'responsibleAgent', 'usesAgriculturalMachinery',
-            'hasValue', 'isMeasuredIn', 'relatesToProperty'
+            'hasValue', 'isMeasuredIn', 'observedProperty'
         ]
 
     def to_representation(self, instance):
