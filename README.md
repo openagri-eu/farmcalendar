@@ -66,7 +66,10 @@ Meanwhile, the REST API root is available at: [http://localhost:8002/api/v1/](ht
 
 Both the Web UI and REST API are only available after login in in the OpenAgri Gatekeeper, or if no Gatekeeper is bying used, then username and password of the local admin user sould be used.
 
-# Swagger Live Docs
+# API Docs
+## Overview
+An overview of the endpoints provided by the FarmCalendar API can be seen at the [API.md](/API.md) file.
+## Swagger Live Docs
 Use the [Online Swagger Editor](https://editor-next.swagger.io/?url=https://raw.githubusercontent.com/openagri-eu/farmcalendar/refs/heads/dev/schema.yml) to visualise the current API specification and documentation.
 
 
