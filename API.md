@@ -18,16 +18,147 @@ Endpoint operation description: Api v1 addrawmaterialoperations create.
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
+{
+  "@context": [
+    "https://w3id.org/ocsm/main-context.jsonld"
+  ],
+  "@graph": [
+    {
+      "@type": "AddRawMaterialOperation",
+      "@id": "urn:farmcalendar:AddRawMaterialOperation:45dae5d5-f930-48e2-bd4d-40ef8cff25e8",
+      "activityType": {
+        "@type": "FarmCalendarActivityType",
+        "@id": "urn:farmcalendar:FarmCalendarActivityType:00000000-0000-0000-0000-000000000007"
+      },
+      "title": "Add Raw Material Operation",
+      "details": "some details",
+      "hasStartDatetime": "2025-02-21T12:05:02Z",
+      "hasEndDatetime": null,
+      "responsibleAgent": null,
+      "usesAgriculturalMachinery": [],
+      "hasCompostMaterial": [
+        {
+          "@type": "CompostMaterial",
+          "@id": "urn:farmcalendar:CompostMaterial:7eced1b6-b79b-4184-b688-68530e87ff1e",
+          "typeName": "Straw",
+          "quantityValue": {
+            "@id": "urn:farmcalendar:QuantityValue:3e06dc96-0c81-5698-b37d-58a5ea781d13",
+            "@type": "QuantityValue",
+            "unit": "kg",
+            "numericValue": 10
+          }
+        },
+        {
+          "@type": "CompostMaterial",
+          "@id": "urn:farmcalendar:CompostMaterial:116b90b7-a3e5-4a6c-8a3c-f97d440f18da",
+          "typeName": "hay",
+          "quantityValue": {
+            "@id": "urn:farmcalendar:QuantityValue:9b0c0018-c507-5836-81bb-f4ab3cf732ea",
+            "@type": "QuantityValue",
+            "unit": "kg",
+            "numericValue": 2
+          }
+        }
+      ]
+    }
+  ]
+}
 
 ```
 
 ## Example Request/Response (POST/PUT/PATCH)
 
+Request:
 ```json
+{
+    "@type": "AddRawMaterialOperation",
+    "activityType": {
+        "@type": "FarmCalendarActivityType",
+        "@id": "urn:farmcalendar:FarmCalendarActivityType:00000000-0000-0000-0000-000000000007"
+    },
+    "title": "Add Raw Material Operation",
+    "details": "some details",
+    "hasStartDatetime": "2025-02-21T12:05:02Z",
+    "hasEndDatetime": null,
+    "responsibleAgent": null,
+    "usesAgriculturalMachinery": [],
+    "hasCompostMaterial": [
+    {
+        "@type": "CompostMaterial",
+        "@id": "urn:farmcalendar:CompostMaterial:7eced1b6-b79b-4184-b688-68530e87ff1e",
+        "typeName": "Straw",
+        "quantityValue": {
+            "@id": "urn:farmcalendar:QuantityValue:3e06dc96-0c81-5698-b37d-58a5ea781d13",
+            "@type": "QuantityValue",
+            "unit": "kg",
+            "numericValue": 10
+        }
+    },
+    {
+        "@type": "CompostMaterial",
+        "@id": "urn:farmcalendar:CompostMaterial:116b90b7-a3e5-4a6c-8a3c-f97d440f18da",
+        "typeName": "hay",
+        "quantityValue": {
+            "@id": "urn:farmcalendar:QuantityValue:9b0c0018-c507-5836-81bb-f4ab3cf732ea",
+            "@type": "QuantityValue",
+            "unit": "kg",
+            "numericValue": 2
+        }
+    }
+    ]
+}
+```
 
+Response:
+```json
+{
+    "@context": [
+        "https://w3id.org/ocsm/main-context.jsonld"
+    ],
+    "@graph": [
+        {
+            "@id": "urn:farmcalendar:AddRawMaterialOperation:45dae5d5-f930-48e2-bd4d-40ef8cff25e8",
+            "@type": "AddRawMaterialOperation",
+            "activityType": {
+                "@type": "FarmCalendarActivityType",
+                "@id": "urn:farmcalendar:FarmCalendarActivityType:00000000-0000-0000-0000-000000000007"
+            },
+            "title": "Add Raw Material Operation",
+            "details": "some details",
+            "hasStartDatetime": "2025-02-21T12:05:02Z",
+            "hasEndDatetime": null,
+            "responsibleAgent": null,
+            "usesAgriculturalMachinery": [],
+            "hasCompostMaterial": [
+            {
+                "@type": "CompostMaterial",
+                "@id": "urn:farmcalendar:CompostMaterial:7eced1b6-b79b-4184-b688-68530e87ff1e",
+                "typeName": "Straw",
+                "quantityValue": {
+                    "@id": "urn:farmcalendar:QuantityValue:3e06dc96-0c81-5698-b37d-58a5ea781d13",
+                    "@type": "QuantityValue",
+                    "unit": "kg",
+                    "numericValue": 10
+                }
+            },
+            {
+                "@type": "CompostMaterial",
+                "@id": "urn:farmcalendar:CompostMaterial:116b90b7-a3e5-4a6c-8a3c-f97d440f18da",
+                "typeName": "hay",
+                "quantityValue": {
+                    "@id": "urn:farmcalendar:QuantityValue:9b0c0018-c507-5836-81bb-f4ab3cf732ea",
+                    "@type": "QuantityValue",
+                    "unit": "kg",
+                    "numericValue": 2
+                }
+            }
+            ]
+        }
+    ]
+}
 ```
 
 # Endpoint: /api/v1/AddRawMaterialOperations/{id}/
@@ -64,17 +195,11 @@ Endpoint operation description: Api v1 addrawmaterialoperations destroy.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * **id** (string)[Required]: A UUID string identifying this Add Raw Material Operation..
 
-## Example Response (GET/DELETE)
-
-```json
-
-```
+## Example Response (GET)
+Request/response similar to this entity's (List endpoint)[#endpoint-apiv1addrawmaterialoperations]
 
 ## Example Request/Response (POST/PUT/PATCH)
-
-```json
-
-```
+Request/response similar to this entity's (List endpoint)[#endpoint-apiv1addrawmaterialoperations]
 
 # Endpoint: /api/v1/AgriculturalMachines/
 
@@ -95,17 +220,88 @@ Endpoint operation description: Api v1 agriculturalmachines create.
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
-
+{
+    "@context": [
+        "https://w3id.org/ocsm/main-context.jsonld"
+    ],
+    "@graph": [
+        {
+            "@type": "AgriculturalMachine",
+            "@id": "urn:farmcalendar:AgriculturalMachine:b03d5bf5-5d34-44c2-91c6-28835b941f7a",
+            "name": "Some Machine",
+            "description": "a machine",
+            "hasAgriParcel": {
+                "@type": "Parcel",
+                "@id": "urn:farmcalendar:Parcel:00000000-0000-0000-0000-000000000001"
+            },
+            "purchase_date": "2025-03-11",
+            "manufacturer": "The manufacturer",
+            "model": "some model",
+            "seria_number": "s1234",
+            "status": 1,
+            "invalidatedAtTime": null,
+            "dateCreated": "2025-03-10T16:26:12.554609Z",
+            "dateModified": "2025-03-10T16:26:12.554620Z"
+        }
+    ]
+}
 ```
 
 ## Example Request/Response (POST/PUT/PATCH)
 
+Request:
 ```json
-
+{
+    "@type": "AgriculturalMachine",
+    "name": "Some Machine",
+    "description": "a machine",
+    "hasAgriParcel": {
+        "@type": "Parcel",
+        "@id": "urn:farmcalendar:Parcel:00000000-0000-0000-0000-000000000001"
+    },
+    "purchase_date": "2025-03-11",
+    "manufacturer": "The manufacturer",
+    "model": "some model",
+    "seria_number": "s1234",
+    "status": 1,
+    "invalidatedAtTime": null,
+    "dateCreated": "2025-03-10T16:26:12.554609Z",
+    "dateModified": "2025-03-10T16:26:12.554620Z"
+}
 ```
+
+Response:
+```json
+{
+    "@context": [
+        "https://w3id.org/ocsm/main-context.jsonld"
+    ],
+    "@graph": [
+        {
+            "@type": "AgriculturalMachine",
+            "@id": "urn:farmcalendar:AgriculturalMachine:b03d5bf5-5d34-44c2-91c6-28835b941f7a",
+            "name": "Some Machine",
+            "description": "a machine",
+            "hasAgriParcel": {
+                "@type": "Parcel",
+                "@id": "urn:farmcalendar:Parcel:00000000-0000-0000-0000-000000000001"
+            },
+            "purchase_date": "2025-03-11",
+            "manufacturer": "The manufacturer",
+            "model": "some model",
+            "seria_number": "s1234",
+            "status": 1,
+            "invalidatedAtTime": null,
+            "dateCreated": "2025-03-10T16:26:12.554609Z",
+            "dateModified": "2025-03-10T16:26:12.554620Z"
+        }
+    ]
+}
+```
+
 
 # Endpoint: /api/v1/AgriculturalMachines/{id}/
 
@@ -141,17 +337,13 @@ Endpoint operation description: Api v1 agriculturalmachines destroy.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * **id** (string)[Required]: A UUID string identifying this Farm Machine..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
-```json
-
-```
+Request/response similar to this entity's (List endpoint)[#endpoint-apiv1agriculturalmachines]
 
 ## Example Request/Response (POST/PUT/PATCH)
 
-```json
-
-```
+Request/response similar to this entity's (List endpoint)[#endpoint-apiv1agriculturalmachines]
 
 # Endpoint: /api/v1/CompostOperations/
 
@@ -172,19 +364,154 @@ Endpoint operation description: Api v1 compostoperations create.
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
-
+{
+    "@context": [
+        "https://w3id.org/ocsm/main-context.jsonld"
+    ],
+    "@graph": [
+        {
+            "@type": "CompostOperation",
+            "@id": "urn:farmcalendar:CompostOperation:99896808-da5b-4e3b-90f2-fe509a4b519c",
+            "activityType": {
+                "@type": "FarmCalendarActivityType",
+                "@id": "urn:farmcalendar:FarmCalendarActivityType:00000000-0000-0000-0000-000000000006"
+            },
+            "title": "Compost Operation",
+            "details": "",
+            "hasStartDatetime": "2025-02-21T11:45:39Z",
+            "hasEndDatetime": "2025-02-21T18:47:00Z",
+            "responsibleAgent": "me",
+            "usesAgriculturalMachinery": [],
+            "isOperatedOn": {
+                "@type": "CompostPile",
+                "@id": "urn:farmcalendar:CompostPile:pile123"
+            },
+            "hasNestedOperation": [
+                {
+                    "@type": "CompostTurningOperation",
+                    "@id": "urn:farmcalendar:CompostTurningOperation:1fa6b780-90bb-459d-860d-cd9840f57c40"
+                },
+                {
+                    "@type": "IrrigationOperation",
+                    "@id": "urn:farmcalendar:IrrigationOperation:7e861f97-434d-4cb7-bf9c-fcfa28f8009c"
+                },
+                {
+                    "@type": "AddRawMaterialOperation",
+                    "@id": "urn:farmcalendar:AddRawMaterialOperation:45dae5d5-f930-48e2-bd4d-40ef8cff25e8"
+                }
+            ],
+            "hasMeasurement": [
+                {
+                    "@type": "Observation",
+                    "@id": "urn:farmcalendar:Observation:dbd06cd4-6704-4530-9a23-2ffa235f6d8a"
+                }
+            ]
+        }
+    ]
+}
 ```
 
 ## Example Request/Response (POST/PUT/PATCH)
+Request:
+```json
+{
+    "activityType": {
+        "@type": "FarmCalendarActivityType",
+        "@id": "urn:farmcalendar:FarmCalendarActivityType:00000000-0000-0000-0000-000000000006"
+    },
+    "title": "Compost Operation",
+    "details": "",
+    "hasStartDatetime": "2025-02-21T11:45:39Z",
+    "hasEndDatetime": "2025-02-21T18:47:00Z",
+    "responsibleAgent": "Some Farmer",
+    "usesAgriculturalMachinery": [],
+    "isOperatedOn": {
+        "@type": "CompostPile",
+        "@id": "urn:farmcalendar:CompostPile:pile123"
+    }
+}
+```
+Response:
 
 ```json
 
+{
+    "@context": [
+        "https://w3id.org/ocsm/main-context.jsonld"
+    ],
+    "@graph": [
+        {
+            "@type": "CompostOperation",
+            "@id": "urn:farmcalendar:CompostOperation:99896808-da5b-4e3b-90f2-fe509a4b519c",
+            "activityType": {
+                "@type": "FarmCalendarActivityType",
+                "@id": "urn:farmcalendar:FarmCalendarActivityType:00000000-0000-0000-0000-000000000006"
+            },
+            "title": "Compost Operation",
+            "details": "",
+            "hasStartDatetime": "2025-02-21T11:45:39Z",
+            "hasEndDatetime": "2025-02-21T18:47:00Z",
+            "responsibleAgent": "Some Farmer",
+            "usesAgriculturalMachinery": [],
+            "isOperatedOn": {
+                "@type": "CompostPile",
+                "@id": "urn:farmcalendar:CompostPile:pile123"
+            },
+            "hasNestedOperation": [
+            ],
+            "hasMeasurement": [
+            ]
+        }
+    ]
+}
 ```
 
+# Endpoint: /api/v1/CompostOperations/{id}/
+
+## GET
+Endpoint operation description: Api v1 compostoperations retrieve.
+
+### Parameters
+
+ * format (string): Forces a response format (i.e., Json or JsonLD)..
+ * **id** (string)[Required]: A UUID string identifying this Compost Operation..
+
+## PUT
+Endpoint operation description: Api v1 compostoperations update.
+
+### Parameters
+
+ * format (string): Forces a response format (i.e., Json or JsonLD)..
+ * **id** (string)[Required]: A UUID string identifying this Compost Operation..
+
+## PATCH
+Endpoint operation description: Api v1 compostoperations partial update.
+
+### Parameters
+
+ * format (string): Forces a response format (i.e., Json or JsonLD)..
+ * **id** (string)[Required]: A UUID string identifying this Compost Operation..
+
+## DELETE
+Endpoint operation description: Api v1 compostoperations destroy.
+
+### Parameters
+
+ * format (string): Forces a response format (i.e., Json or JsonLD)..
+ * **id** (string)[Required]: A UUID string identifying this Compost Operation..
+
+## Example Response (GET)
+
+Request/response similar to this entity (List endpoint)[#endpoint-apiv1compostoperations]
+
+## Example Request/Response (POST/PUT/PATCH)
+Request/response similar to this entity (List endpoint)[#endpoint-apiv1compostoperations]
+
 # Endpoint: /api/v1/CompostOperations/{compost_operation_pk}/AddRawMaterialOperations/
+This endpoint is used to manage the nested AddRawMaterialOperations on a compost operation.
 
 ## GET
 Endpoint operation description: Api v1 compostoperations addrawmaterialoperations list.
@@ -204,17 +531,12 @@ Endpoint operation description: Api v1 compostoperations addrawmaterialoperation
  * **compost_operation_pk** (string)[Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1addrawmaterialoperations]
 
 ## Example Request/Response (POST/PUT/PATCH)
-
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1addrawmaterialoperations]
 
 # Endpoint: /api/v1/CompostOperations/{compost_operation_pk}/AddRawMaterialOperations/{id}/
 
@@ -254,19 +576,16 @@ Endpoint operation description: Api v1 compostoperations addrawmaterialoperation
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * **id** (string)[Required]: A UUID string identifying this Add Raw Material Operation..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1addrawmaterialoperations]
 
 ## Example Request/Response (POST/PUT/PATCH)
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1addrawmaterialoperations]
 
-```json
-
-```
 
 # Endpoint: /api/v1/CompostOperations/{compost_operation_pk}/CompostTurningOperations/
+This endpoint is used to manage the nested CompostTurningOperations on a compost operation.
 
 ## GET
 Endpoint operation description: Api v1 compostoperations compostturningoperations list.
@@ -286,17 +605,13 @@ Endpoint operation description: Api v1 compostoperations compostturningoperation
  * **compost_operation_pk** (string)[Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1compostturningoperations]
 
 ## Example Request/Response (POST/PUT/PATCH)
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1compostturningoperations]
 
-```json
-
-```
 
 # Endpoint: /api/v1/CompostOperations/{compost_operation_pk}/CompostTurningOperations/{id}/
 
@@ -336,19 +651,15 @@ Endpoint operation description: Api v1 compostoperations compostturningoperation
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * **id** (string)[Required]: A UUID string identifying this Compost Turning Operation..
 
-## Example Response (GET/DELETE)
-
-```json
-
-```
+## Example Response (GET)
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1compostturningoperations]
 
 ## Example Request/Response (POST/PUT/PATCH)
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1compostturningoperations]
 
-```json
-
-```
 
 # Endpoint: /api/v1/CompostOperations/{compost_operation_pk}/IrrigationOperations/
+This endpoint is used to manage the nested IrrigationOperations on a compost operation.
 
 ## GET
 Endpoint operation description: Api v1 compostoperations irrigationoperations list.
@@ -369,17 +680,12 @@ Endpoint operation description: Api v1 compostoperations irrigationoperations cr
  * **compost_operation_pk** (string)[Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
-## Example Response (GET/DELETE)
-
-```json
-
-```
+## Example Response (GET)
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1irrigationoperations]
 
 ## Example Request/Response (POST/PUT/PATCH)
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1irrigationoperations]
 
-```json
-
-```
 
 # Endpoint: /api/v1/CompostOperations/{compost_operation_pk}/IrrigationOperations/{id}/
 
@@ -419,19 +725,14 @@ Endpoint operation description: Api v1 compostoperations irrigationoperations de
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * **id** (string)[Required]: A UUID string identifying this Irrigation Operation..
 
-## Example Response (GET/DELETE)
-
-```json
-
-```
+## Example Response (GET)
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1irrigationoperations]
 
 ## Example Request/Response (POST/PUT/PATCH)
-
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1irrigationoperations]
 
 # Endpoint: /api/v1/CompostOperations/{compost_operation_pk}/Observations/
+This endpoint is used to manage the nested Observations on a compost operation.
 
 ## GET
 Endpoint operation description: Api v1 compostoperations observations list.
@@ -452,17 +753,11 @@ Endpoint operation description: Api v1 compostoperations observations create.
  * **compost_operation_pk** (string)[Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
-## Example Response (GET/DELETE)
-
-```json
-
-```
+## Example Response (GET)
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1observations]
 
 ## Example Request/Response (POST/PUT/PATCH)
-
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1observations]
 
 # Endpoint: /api/v1/CompostOperations/{compost_operation_pk}/Observations/{id}/
 
@@ -502,63 +797,11 @@ Endpoint operation description: Api v1 compostoperations observations destroy.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * **id** (string)[Required]: A UUID string identifying this Observation..
 
-## Example Response (GET/DELETE)
-
-```json
-
-```
+## Example Response (GET)
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1observations]
 
 ## Example Request/Response (POST/PUT/PATCH)
-
-```json
-
-```
-
-# Endpoint: /api/v1/CompostOperations/{id}/
-
-## GET
-Endpoint operation description: Api v1 compostoperations retrieve.
-
-### Parameters
-
- * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Compost Operation..
-
-## PUT
-Endpoint operation description: Api v1 compostoperations update.
-
-### Parameters
-
- * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Compost Operation..
-
-## PATCH
-Endpoint operation description: Api v1 compostoperations partial update.
-
-### Parameters
-
- * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Compost Operation..
-
-## DELETE
-Endpoint operation description: Api v1 compostoperations destroy.
-
-### Parameters
-
- * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Compost Operation..
-
-## Example Response (GET/DELETE)
-
-```json
-
-```
-
-## Example Request/Response (POST/PUT/PATCH)
-
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1observations]
 
 # Endpoint: /api/v1/CompostTurningOperations/
 
@@ -578,7 +821,7 @@ Endpoint operation description: Api v1 compostturningoperations create.
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -624,7 +867,7 @@ Endpoint operation description: Api v1 compostturningoperations destroy.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * **id** (string)[Required]: A UUID string identifying this Compost Turning Operation..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -655,7 +898,7 @@ Endpoint operation description: Api v1 cropgrowthstageobservations create.
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -701,7 +944,7 @@ Endpoint operation description: Api v1 cropgrowthstageobservations destroy.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * **id** (string)[Required]: A UUID string identifying this Crop Growth Stage Observation..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -732,7 +975,7 @@ Endpoint operation description: Api v1 cropprotectionoperations create.
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -778,7 +1021,7 @@ Endpoint operation description: Api v1 cropprotectionoperations destroy.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * **id** (string)[Required]: A UUID string identifying this Crop Protection Operation..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -809,7 +1052,7 @@ Endpoint operation description: Api v1 cropstressindicatorobservations create.
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -855,7 +1098,7 @@ Endpoint operation description: Api v1 cropstressindicatorobservations destroy.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * **id** (string)[Required]: A UUID string identifying this Crop Stress Indicator Observation..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -885,7 +1128,7 @@ Endpoint operation description: Api v1 farm create.
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -931,7 +1174,7 @@ Endpoint operation description: Api v1 farm destroy.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * **id** (string)[Required]: A UUID string identifying this Farm..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -963,7 +1206,7 @@ Endpoint operation description: Api v1 farmanimals create.
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -1009,7 +1252,7 @@ Endpoint operation description: Api v1 farmanimals destroy.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * **id** (string)[Required]: A UUID string identifying this Farm Animal..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -1040,7 +1283,7 @@ Endpoint operation description: Api v1 farmcalendaractivities create.
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -1086,7 +1329,7 @@ Endpoint operation description: Api v1 farmcalendaractivities destroy.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * **id** (string)[Required]: A UUID string identifying this Farm Activity..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -1115,7 +1358,7 @@ Endpoint operation description: Api v1 farmcalendaractivitytypes create.
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -1161,7 +1404,7 @@ Endpoint operation description: Api v1 farmcalendaractivitytypes destroy.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * **id** (string)[Required]: A UUID string identifying this farm calendar activity type..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -1195,7 +1438,7 @@ Endpoint operation description: Api v1 farmcrops create.
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -1241,7 +1484,7 @@ Endpoint operation description: Api v1 farmcrops destroy.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * **id** (string)[Required]: A UUID string identifying this Farm Crop..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -1274,7 +1517,7 @@ Endpoint operation description: Api v1 farmparcels create.
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -1320,7 +1563,7 @@ Endpoint operation description: Api v1 farmparcels destroy.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * **id** (string)[Required]: A UUID string identifying this Farm Parcel..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -1351,7 +1594,7 @@ Endpoint operation description: Api v1 fertilizationoperations create.
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -1397,7 +1640,7 @@ Endpoint operation description: Api v1 fertilizationoperations destroy.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * **id** (string)[Required]: A UUID string identifying this Fertilization Operation..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -1427,7 +1670,7 @@ Endpoint operation description: Api v1 fertilizers create.
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -1473,7 +1716,7 @@ Endpoint operation description: Api v1 fertilizers destroy.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * **id** (string)[Required]: A UUID string identifying this Fertilizer..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -1504,7 +1747,7 @@ Endpoint operation description: Api v1 irrigationoperations create.
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -1550,7 +1793,7 @@ Endpoint operation description: Api v1 irrigationoperations destroy.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * **id** (string)[Required]: A UUID string identifying this Irrigation Operation..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -1581,7 +1824,7 @@ Endpoint operation description: Api v1 observations create.
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -1627,7 +1870,7 @@ Endpoint operation description: Api v1 observations destroy.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * **id** (string)[Required]: A UUID string identifying this Observation..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -1657,7 +1900,7 @@ Endpoint operation description: Api v1 pesticides create.
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
@@ -1703,7 +1946,7 @@ Endpoint operation description: Api v1 pesticides destroy.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * **id** (string)[Required]: A UUID string identifying this Pesticide..
 
-## Example Response (GET/DELETE)
+## Example Response (GET)
 
 ```json
 
