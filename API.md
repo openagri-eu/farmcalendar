@@ -120,7 +120,7 @@ Endpoint operation description: Api v1 addrawmaterialoperations retrieve.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Add Raw Material Operation..
+ * **id** (string) [Required]: A UUID string identifying this Add Raw Material Operation..
 
 ## PUT
 Endpoint operation description: Api v1 addrawmaterialoperations update.
@@ -128,7 +128,7 @@ Endpoint operation description: Api v1 addrawmaterialoperations update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Add Raw Material Operation..
+ * **id** (string) [Required]: A UUID string identifying this Add Raw Material Operation..
 
 ## PATCH
 Endpoint operation description: Api v1 addrawmaterialoperations partial update.
@@ -136,7 +136,7 @@ Endpoint operation description: Api v1 addrawmaterialoperations partial update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Add Raw Material Operation..
+ * **id** (string) [Required]: A UUID string identifying this Add Raw Material Operation..
 
 ## DELETE
 Endpoint operation description: Api v1 addrawmaterialoperations destroy.
@@ -144,7 +144,7 @@ Endpoint operation description: Api v1 addrawmaterialoperations destroy.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Add Raw Material Operation..
+ * **id** (string) [Required]: A UUID string identifying this Add Raw Material Operation..
 
 ## Example Response (GET)
 Request/response similar to this entity's (List endpoint)[API.md/#endpoint-apiv1addrawmaterialoperations]
@@ -232,7 +232,7 @@ Endpoint operation description: Api v1 agriculturalmachines retrieve.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Farm Machine..
+ * **id** (string) [Required]: A UUID string identifying this Farm Machine..
 
 ## PUT
 Endpoint operation description: Api v1 agriculturalmachines update.
@@ -240,7 +240,7 @@ Endpoint operation description: Api v1 agriculturalmachines update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Farm Machine..
+ * **id** (string) [Required]: A UUID string identifying this Farm Machine..
 
 ## PATCH
 Endpoint operation description: Api v1 agriculturalmachines partial update.
@@ -248,7 +248,7 @@ Endpoint operation description: Api v1 agriculturalmachines partial update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Farm Machine..
+ * **id** (string) [Required]: A UUID string identifying this Farm Machine..
 
 ## DELETE
 Endpoint operation description: Api v1 agriculturalmachines destroy.
@@ -256,7 +256,7 @@ Endpoint operation description: Api v1 agriculturalmachines destroy.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Farm Machine..
+ * **id** (string) [Required]: A UUID string identifying this Farm Machine..
 
 ## Example Response (GET)
 
@@ -363,7 +363,7 @@ Endpoint operation description: Api v1 compostoperations retrieve.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Compost Operation..
+ * **id** (string) [Required]: A UUID string identifying this Compost Operation..
 
 ## PUT
 Endpoint operation description: Api v1 compostoperations update.
@@ -371,7 +371,7 @@ Endpoint operation description: Api v1 compostoperations update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Compost Operation..
+ * **id** (string) [Required]: A UUID string identifying this Compost Operation..
 
 ## PATCH
 Endpoint operation description: Api v1 compostoperations partial update.
@@ -379,7 +379,7 @@ Endpoint operation description: Api v1 compostoperations partial update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Compost Operation..
+ * **id** (string) [Required]: A UUID string identifying this Compost Operation..
 
 ## DELETE
 Endpoint operation description: Api v1 compostoperations destroy.
@@ -387,7 +387,7 @@ Endpoint operation description: Api v1 compostoperations destroy.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Compost Operation..
+ * **id** (string) [Required]: A UUID string identifying this Compost Operation..
 
 ## Example Response (GET)
 
@@ -405,7 +405,7 @@ Endpoint operation description: Api v1 compostoperations addrawmaterialoperation
 ### Parameters
 
  * activity_type (string): ID of the farm calendar activity..
- * **compost_operation_pk** (string)[Required]: The compost operation pk.
+ * **compost_operation_pk** (string) [Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * title (string): title of the farm calendar activity..
 
@@ -414,7 +414,7 @@ Endpoint operation description: Api v1 compostoperations addrawmaterialoperation
 
 ### Parameters
 
- * **compost_operation_pk** (string)[Required]: The compost operation pk.
+ * **compost_operation_pk** (string) [Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
 ## Example Response (GET)
@@ -431,36 +431,36 @@ Endpoint operation description: Api v1 compostoperations addrawmaterialoperation
 
 ### Parameters
 
- * **compost_operation_pk** (string)[Required]: The compost operation pk.
+ * **compost_operation_pk** (string) [Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Add Raw Material Operation..
+ * **id** (string) [Required]: A UUID string identifying this Add Raw Material Operation..
 
 ## PUT
 Endpoint operation description: Api v1 compostoperations addrawmaterialoperations update.
 
 ### Parameters
 
- * **compost_operation_pk** (string)[Required]: The compost operation pk.
+ * **compost_operation_pk** (string) [Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Add Raw Material Operation..
+ * **id** (string) [Required]: A UUID string identifying this Add Raw Material Operation..
 
 ## PATCH
 Endpoint operation description: Api v1 compostoperations addrawmaterialoperations partial update.
 
 ### Parameters
 
- * **compost_operation_pk** (string)[Required]: The compost operation pk.
+ * **compost_operation_pk** (string) [Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Add Raw Material Operation..
+ * **id** (string) [Required]: A UUID string identifying this Add Raw Material Operation..
 
 ## DELETE
 Endpoint operation description: Api v1 compostoperations addrawmaterialoperations destroy.
 
 ### Parameters
 
- * **compost_operation_pk** (string)[Required]: The compost operation pk.
+ * **compost_operation_pk** (string) [Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Add Raw Material Operation..
+ * **id** (string) [Required]: A UUID string identifying this Add Raw Material Operation..
 
 ## Example Response (GET)
 
@@ -479,7 +479,7 @@ Endpoint operation description: Api v1 compostoperations compostturningoperation
 ### Parameters
 
  * activity_type (string): ID of the farm calendar activity..
- * **compost_operation_pk** (string)[Required]: The compost operation pk.
+ * **compost_operation_pk** (string) [Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * title (string): title of the farm calendar activity..
 
@@ -488,7 +488,7 @@ Endpoint operation description: Api v1 compostoperations compostturningoperation
 
 ### Parameters
 
- * **compost_operation_pk** (string)[Required]: The compost operation pk.
+ * **compost_operation_pk** (string) [Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
 ## Example Response (GET)
@@ -506,36 +506,36 @@ Endpoint operation description: Api v1 compostoperations compostturningoperation
 
 ### Parameters
 
- * **compost_operation_pk** (string)[Required]: The compost operation pk.
+ * **compost_operation_pk** (string) [Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Compost Turning Operation..
+ * **id** (string) [Required]: A UUID string identifying this Compost Turning Operation..
 
 ## PUT
 Endpoint operation description: Api v1 compostoperations compostturningoperations update.
 
 ### Parameters
 
- * **compost_operation_pk** (string)[Required]: The compost operation pk.
+ * **compost_operation_pk** (string) [Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Compost Turning Operation..
+ * **id** (string) [Required]: A UUID string identifying this Compost Turning Operation..
 
 ## PATCH
 Endpoint operation description: Api v1 compostoperations compostturningoperations partial update.
 
 ### Parameters
 
- * **compost_operation_pk** (string)[Required]: The compost operation pk.
+ * **compost_operation_pk** (string) [Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Compost Turning Operation..
+ * **id** (string) [Required]: A UUID string identifying this Compost Turning Operation..
 
 ## DELETE
 Endpoint operation description: Api v1 compostoperations compostturningoperations destroy.
 
 ### Parameters
 
- * **compost_operation_pk** (string)[Required]: The compost operation pk.
+ * **compost_operation_pk** (string) [Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Compost Turning Operation..
+ * **id** (string) [Required]: A UUID string identifying this Compost Turning Operation..
 
 ## Example Response (GET)
 Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1compostturningoperations]
@@ -553,7 +553,7 @@ Endpoint operation description: Api v1 compostoperations irrigationoperations li
 ### Parameters
 
  * activity_type (string): ID of the farm calendar activity..
- * **compost_operation_pk** (string)[Required]: The compost operation pk.
+ * **compost_operation_pk** (string) [Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * responsible_agent (string): The responsible agent for this activity..
  * title (string): title of the farm calendar activity..
@@ -563,7 +563,7 @@ Endpoint operation description: Api v1 compostoperations irrigationoperations cr
 
 ### Parameters
 
- * **compost_operation_pk** (string)[Required]: The compost operation pk.
+ * **compost_operation_pk** (string) [Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
 ## Example Response (GET)
@@ -580,36 +580,36 @@ Endpoint operation description: Api v1 compostoperations irrigationoperations re
 
 ### Parameters
 
- * **compost_operation_pk** (string)[Required]: The compost operation pk.
+ * **compost_operation_pk** (string) [Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Irrigation Operation..
+ * **id** (string) [Required]: A UUID string identifying this Irrigation Operation..
 
 ## PUT
 Endpoint operation description: Api v1 compostoperations irrigationoperations update.
 
 ### Parameters
 
- * **compost_operation_pk** (string)[Required]: The compost operation pk.
+ * **compost_operation_pk** (string) [Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Irrigation Operation..
+ * **id** (string) [Required]: A UUID string identifying this Irrigation Operation..
 
 ## PATCH
 Endpoint operation description: Api v1 compostoperations irrigationoperations partial update.
 
 ### Parameters
 
- * **compost_operation_pk** (string)[Required]: The compost operation pk.
+ * **compost_operation_pk** (string) [Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Irrigation Operation..
+ * **id** (string) [Required]: A UUID string identifying this Irrigation Operation..
 
 ## DELETE
 Endpoint operation description: Api v1 compostoperations irrigationoperations destroy.
 
 ### Parameters
 
- * **compost_operation_pk** (string)[Required]: The compost operation pk.
+ * **compost_operation_pk** (string) [Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Irrigation Operation..
+ * **id** (string) [Required]: A UUID string identifying this Irrigation Operation..
 
 ## Example Response (GET)
 Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1irrigationoperations]
@@ -626,7 +626,7 @@ Endpoint operation description: Api v1 compostoperations observations list.
 ### Parameters
 
  * activity_type (string): ID of the farm calendar activity..
- * **compost_operation_pk** (string)[Required]: The compost operation pk.
+ * **compost_operation_pk** (string) [Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
  * responsible_agent (string): The responsible agent for this activity..
  * title (string): title of the farm calendar activity..
@@ -636,7 +636,7 @@ Endpoint operation description: Api v1 compostoperations observations create.
 
 ### Parameters
 
- * **compost_operation_pk** (string)[Required]: The compost operation pk.
+ * **compost_operation_pk** (string) [Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
 ## Example Response (GET)
@@ -652,36 +652,36 @@ Endpoint operation description: Api v1 compostoperations observations retrieve.
 
 ### Parameters
 
- * **compost_operation_pk** (string)[Required]: The compost operation pk.
+ * **compost_operation_pk** (string) [Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Observation..
+ * **id** (string) [Required]: A UUID string identifying this Observation..
 
 ## PUT
 Endpoint operation description: Api v1 compostoperations observations update.
 
 ### Parameters
 
- * **compost_operation_pk** (string)[Required]: The compost operation pk.
+ * **compost_operation_pk** (string) [Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Observation..
+ * **id** (string) [Required]: A UUID string identifying this Observation..
 
 ## PATCH
 Endpoint operation description: Api v1 compostoperations observations partial update.
 
 ### Parameters
 
- * **compost_operation_pk** (string)[Required]: The compost operation pk.
+ * **compost_operation_pk** (string) [Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Observation..
+ * **id** (string) [Required]: A UUID string identifying this Observation..
 
 ## DELETE
 Endpoint operation description: Api v1 compostoperations observations destroy.
 
 ### Parameters
 
- * **compost_operation_pk** (string)[Required]: The compost operation pk.
+ * **compost_operation_pk** (string) [Required]: The compost operation pk.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Observation..
+ * **id** (string) [Required]: A UUID string identifying this Observation..
 
 ## Example Response (GET)
 Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1observations]
@@ -776,7 +776,7 @@ Endpoint operation description: Api v1 compostturningoperations retrieve.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Compost Turning Operation..
+ * **id** (string) [Required]: A UUID string identifying this Compost Turning Operation..
 
 ## PUT
 Endpoint operation description: Api v1 compostturningoperations update.
@@ -784,7 +784,7 @@ Endpoint operation description: Api v1 compostturningoperations update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Compost Turning Operation..
+ * **id** (string) [Required]: A UUID string identifying this Compost Turning Operation..
 
 ## PATCH
 Endpoint operation description: Api v1 compostturningoperations partial update.
@@ -792,7 +792,7 @@ Endpoint operation description: Api v1 compostturningoperations partial update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Compost Turning Operation..
+ * **id** (string) [Required]: A UUID string identifying this Compost Turning Operation..
 
 ## DELETE
 Endpoint operation description: Api v1 compostturningoperations destroy.
@@ -800,7 +800,7 @@ Endpoint operation description: Api v1 compostturningoperations destroy.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Compost Turning Operation..
+ * **id** (string) [Required]: A UUID string identifying this Compost Turning Operation..
 
 ## Example Response (GET)
 
@@ -901,7 +901,7 @@ Endpoint operation description: Api v1 cropgrowthstageobservations retrieve.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Crop Growth Stage Observation..
+ * **id** (string) [Required]: A UUID string identifying this Crop Growth Stage Observation..
 
 ## PUT
 Endpoint operation description: Api v1 cropgrowthstageobservations update.
@@ -909,7 +909,7 @@ Endpoint operation description: Api v1 cropgrowthstageobservations update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Crop Growth Stage Observation..
+ * **id** (string) [Required]: A UUID string identifying this Crop Growth Stage Observation..
 
 ## PATCH
 Endpoint operation description: Api v1 cropgrowthstageobservations partial update.
@@ -917,7 +917,7 @@ Endpoint operation description: Api v1 cropgrowthstageobservations partial updat
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Crop Growth Stage Observation..
+ * **id** (string) [Required]: A UUID string identifying this Crop Growth Stage Observation..
 
 ## DELETE
 Endpoint operation description: Api v1 cropgrowthstageobservations destroy.
@@ -925,7 +925,7 @@ Endpoint operation description: Api v1 cropgrowthstageobservations destroy.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Crop Growth Stage Observation..
+ * **id** (string) [Required]: A UUID string identifying this Crop Growth Stage Observation..
 
 ## Example Response (GET)
 
@@ -1035,7 +1035,7 @@ Endpoint operation description: Api v1 cropprotectionoperations retrieve.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Crop Protection Operation..
+ * **id** (string) [Required]: A UUID string identifying this Crop Protection Operation..
 
 ## PUT
 Endpoint operation description: Api v1 cropprotectionoperations update.
@@ -1043,7 +1043,7 @@ Endpoint operation description: Api v1 cropprotectionoperations update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Crop Protection Operation..
+ * **id** (string) [Required]: A UUID string identifying this Crop Protection Operation..
 
 ## PATCH
 Endpoint operation description: Api v1 cropprotectionoperations partial update.
@@ -1051,7 +1051,7 @@ Endpoint operation description: Api v1 cropprotectionoperations partial update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Crop Protection Operation..
+ * **id** (string) [Required]: A UUID string identifying this Crop Protection Operation..
 
 ## DELETE
 Endpoint operation description: Api v1 cropprotectionoperations destroy.
@@ -1059,7 +1059,7 @@ Endpoint operation description: Api v1 cropprotectionoperations destroy.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Crop Protection Operation..
+ * **id** (string) [Required]: A UUID string identifying this Crop Protection Operation..
 
 ## Example Response (GET)
 
@@ -1165,7 +1165,7 @@ Endpoint operation description: Api v1 cropstressindicatorobservations retrieve.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Crop Stress Indicator Observation..
+ * **id** (string) [Required]: A UUID string identifying this Crop Stress Indicator Observation..
 
 ## PUT
 Endpoint operation description: Api v1 cropstressindicatorobservations update.
@@ -1173,7 +1173,7 @@ Endpoint operation description: Api v1 cropstressindicatorobservations update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Crop Stress Indicator Observation..
+ * **id** (string) [Required]: A UUID string identifying this Crop Stress Indicator Observation..
 
 ## PATCH
 Endpoint operation description: Api v1 cropstressindicatorobservations partial update.
@@ -1181,7 +1181,7 @@ Endpoint operation description: Api v1 cropstressindicatorobservations partial u
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Crop Stress Indicator Observation..
+ * **id** (string) [Required]: A UUID string identifying this Crop Stress Indicator Observation..
 
 ## DELETE
 Endpoint operation description: Api v1 cropstressindicatorobservations destroy.
@@ -1189,7 +1189,7 @@ Endpoint operation description: Api v1 cropstressindicatorobservations destroy.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Crop Stress Indicator Observation..
+ * **id** (string) [Required]: A UUID string identifying this Crop Stress Indicator Observation..
 
 ## Example Response (GET)
 
@@ -1325,7 +1325,7 @@ Endpoint operation description: Api v1 farm retrieve.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Farm..
+ * **id** (string) [Required]: A UUID string identifying this Farm..
 
 ## PUT
 Endpoint operation description: Api v1 farm update.
@@ -1333,7 +1333,7 @@ Endpoint operation description: Api v1 farm update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Farm..
+ * **id** (string) [Required]: A UUID string identifying this Farm..
 
 ## PATCH
 Endpoint operation description: Api v1 farm partial update.
@@ -1341,7 +1341,7 @@ Endpoint operation description: Api v1 farm partial update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Farm..
+ * **id** (string) [Required]: A UUID string identifying this Farm..
 
 ## DELETE
 Endpoint operation description: Api v1 farm destroy.
@@ -1349,7 +1349,7 @@ Endpoint operation description: Api v1 farm destroy.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Farm..
+ * **id** (string) [Required]: A UUID string identifying this Farm..
 
 ## Example Response (GET)
 
@@ -1452,7 +1452,7 @@ Endpoint operation description: Api v1 farmanimals retrieve.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Farm Animal..
+ * **id** (string) [Required]: A UUID string identifying this Farm Animal..
 
 ## PUT
 Endpoint operation description: Api v1 farmanimals update.
@@ -1460,7 +1460,7 @@ Endpoint operation description: Api v1 farmanimals update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Farm Animal..
+ * **id** (string) [Required]: A UUID string identifying this Farm Animal..
 
 ## PATCH
 Endpoint operation description: Api v1 farmanimals partial update.
@@ -1468,7 +1468,7 @@ Endpoint operation description: Api v1 farmanimals partial update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Farm Animal..
+ * **id** (string) [Required]: A UUID string identifying this Farm Animal..
 
 ## DELETE
 Endpoint operation description: Api v1 farmanimals destroy.
@@ -1476,7 +1476,7 @@ Endpoint operation description: Api v1 farmanimals destroy.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Farm Animal..
+ * **id** (string) [Required]: A UUID string identifying this Farm Animal..
 
 ## Example Response (GET)
 
@@ -1574,7 +1574,7 @@ Endpoint operation description: Api v1 farmcalendaractivities retrieve.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Farm Activity..
+ * **id** (string) [Required]: A UUID string identifying this Farm Activity..
 
 ## PUT
 Endpoint operation description: Api v1 farmcalendaractivities update.
@@ -1582,7 +1582,7 @@ Endpoint operation description: Api v1 farmcalendaractivities update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Farm Activity..
+ * **id** (string) [Required]: A UUID string identifying this Farm Activity..
 
 ## PATCH
 Endpoint operation description: Api v1 farmcalendaractivities partial update.
@@ -1590,7 +1590,7 @@ Endpoint operation description: Api v1 farmcalendaractivities partial update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Farm Activity..
+ * **id** (string) [Required]: A UUID string identifying this Farm Activity..
 
 ## DELETE
 Endpoint operation description: Api v1 farmcalendaractivities destroy.
@@ -1598,7 +1598,7 @@ Endpoint operation description: Api v1 farmcalendaractivities destroy.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Farm Activity..
+ * **id** (string) [Required]: A UUID string identifying this Farm Activity..
 
 ## Example Response (GET)
 
@@ -1698,7 +1698,7 @@ Endpoint operation description: Api v1 farmcalendaractivitytypes retrieve.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this farm calendar activity type..
+ * **id** (string) [Required]: A UUID string identifying this farm calendar activity type..
 
 ## PUT
 Endpoint operation description: Api v1 farmcalendaractivitytypes update.
@@ -1706,7 +1706,7 @@ Endpoint operation description: Api v1 farmcalendaractivitytypes update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this farm calendar activity type..
+ * **id** (string) [Required]: A UUID string identifying this farm calendar activity type..
 
 ## PATCH
 Endpoint operation description: Api v1 farmcalendaractivitytypes partial update.
@@ -1714,7 +1714,7 @@ Endpoint operation description: Api v1 farmcalendaractivitytypes partial update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this farm calendar activity type..
+ * **id** (string) [Required]: A UUID string identifying this farm calendar activity type..
 
 ## DELETE
 Endpoint operation description: Api v1 farmcalendaractivitytypes destroy.
@@ -1722,7 +1722,7 @@ Endpoint operation description: Api v1 farmcalendaractivitytypes destroy.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this farm calendar activity type..
+ * **id** (string) [Required]: A UUID string identifying this farm calendar activity type..
 
 ## Example Response (GET)
 
@@ -1820,7 +1820,7 @@ Endpoint operation description: Api v1 farmcrops retrieve.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Farm Crop..
+ * **id** (string) [Required]: A UUID string identifying this Farm Crop..
 
 ## PUT
 Endpoint operation description: Api v1 farmcrops update.
@@ -1828,7 +1828,7 @@ Endpoint operation description: Api v1 farmcrops update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Farm Crop..
+ * **id** (string) [Required]: A UUID string identifying this Farm Crop..
 
 ## PATCH
 Endpoint operation description: Api v1 farmcrops partial update.
@@ -1836,7 +1836,7 @@ Endpoint operation description: Api v1 farmcrops partial update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Farm Crop..
+ * **id** (string) [Required]: A UUID string identifying this Farm Crop..
 
 ## DELETE
 Endpoint operation description: Api v1 farmcrops destroy.
@@ -1844,7 +1844,7 @@ Endpoint operation description: Api v1 farmcrops destroy.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Farm Crop..
+ * **id** (string) [Required]: A UUID string identifying this Farm Crop..
 
 ## Example Response (GET)
 
@@ -1988,7 +1988,7 @@ Endpoint operation description: Api v1 farmparcels retrieve.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Farm Parcel..
+ * **id** (string) [Required]: A UUID string identifying this Farm Parcel..
 
 ## PUT
 Endpoint operation description: Api v1 farmparcels update.
@@ -1996,7 +1996,7 @@ Endpoint operation description: Api v1 farmparcels update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Farm Parcel..
+ * **id** (string) [Required]: A UUID string identifying this Farm Parcel..
 
 ## PATCH
 Endpoint operation description: Api v1 farmparcels partial update.
@@ -2004,7 +2004,7 @@ Endpoint operation description: Api v1 farmparcels partial update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Farm Parcel..
+ * **id** (string) [Required]: A UUID string identifying this Farm Parcel..
 
 ## DELETE
 Endpoint operation description: Api v1 farmparcels destroy.
@@ -2012,7 +2012,7 @@ Endpoint operation description: Api v1 farmparcels destroy.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Farm Parcel..
+ * **id** (string) [Required]: A UUID string identifying this Farm Parcel..
 
 ## Example Response (GET)
 
@@ -2133,7 +2133,7 @@ Endpoint operation description: Api v1 fertilizationoperations retrieve.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Fertilization Operation..
+ * **id** (string) [Required]: A UUID string identifying this Fertilization Operation..
 
 ## PUT
 Endpoint operation description: Api v1 fertilizationoperations update.
@@ -2141,7 +2141,7 @@ Endpoint operation description: Api v1 fertilizationoperations update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Fertilization Operation..
+ * **id** (string) [Required]: A UUID string identifying this Fertilization Operation..
 
 ## PATCH
 Endpoint operation description: Api v1 fertilizationoperations partial update.
@@ -2149,7 +2149,7 @@ Endpoint operation description: Api v1 fertilizationoperations partial update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Fertilization Operation..
+ * **id** (string) [Required]: A UUID string identifying this Fertilization Operation..
 
 ## DELETE
 Endpoint operation description: Api v1 fertilizationoperations destroy.
@@ -2157,7 +2157,7 @@ Endpoint operation description: Api v1 fertilizationoperations destroy.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Fertilization Operation..
+ * **id** (string) [Required]: A UUID string identifying this Fertilization Operation..
 
 ## Example Response (GET)
 
@@ -2240,7 +2240,7 @@ Endpoint operation description: Api v1 fertilizers retrieve.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Fertilizer..
+ * **id** (string) [Required]: A UUID string identifying this Fertilizer..
 
 ## PUT
 Endpoint operation description: Api v1 fertilizers update.
@@ -2248,7 +2248,7 @@ Endpoint operation description: Api v1 fertilizers update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Fertilizer..
+ * **id** (string) [Required]: A UUID string identifying this Fertilizer..
 
 ## PATCH
 Endpoint operation description: Api v1 fertilizers partial update.
@@ -2256,7 +2256,7 @@ Endpoint operation description: Api v1 fertilizers partial update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Fertilizer..
+ * **id** (string) [Required]: A UUID string identifying this Fertilizer..
 
 ## DELETE
 Endpoint operation description: Api v1 fertilizers destroy.
@@ -2264,7 +2264,7 @@ Endpoint operation description: Api v1 fertilizers destroy.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Fertilizer..
+ * **id** (string) [Required]: A UUID string identifying this Fertilizer..
 
 ## Example Response (GET)
 
@@ -2368,7 +2368,7 @@ Endpoint operation description: Api v1 irrigationoperations retrieve.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Irrigation Operation..
+ * **id** (string) [Required]: A UUID string identifying this Irrigation Operation..
 
 ## PUT
 Endpoint operation description: Api v1 irrigationoperations update.
@@ -2376,7 +2376,7 @@ Endpoint operation description: Api v1 irrigationoperations update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Irrigation Operation..
+ * **id** (string) [Required]: A UUID string identifying this Irrigation Operation..
 
 ## PATCH
 Endpoint operation description: Api v1 irrigationoperations partial update.
@@ -2384,7 +2384,7 @@ Endpoint operation description: Api v1 irrigationoperations partial update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Irrigation Operation..
+ * **id** (string) [Required]: A UUID string identifying this Irrigation Operation..
 
 ## DELETE
 Endpoint operation description: Api v1 irrigationoperations destroy.
@@ -2392,7 +2392,7 @@ Endpoint operation description: Api v1 irrigationoperations destroy.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Irrigation Operation..
+ * **id** (string) [Required]: A UUID string identifying this Irrigation Operation..
 
 ## Example Response (GET)
 
@@ -2513,7 +2513,7 @@ Endpoint operation description: Api v1 observations retrieve.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Observation..
+ * **id** (string) [Required]: A UUID string identifying this Observation..
 
 ## PUT
 Endpoint operation description: Api v1 observations update.
@@ -2521,7 +2521,7 @@ Endpoint operation description: Api v1 observations update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Observation..
+ * **id** (string) [Required]: A UUID string identifying this Observation..
 
 ## PATCH
 Endpoint operation description: Api v1 observations partial update.
@@ -2529,7 +2529,7 @@ Endpoint operation description: Api v1 observations partial update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Observation..
+ * **id** (string) [Required]: A UUID string identifying this Observation..
 
 ## DELETE
 Endpoint operation description: Api v1 observations destroy.
@@ -2537,7 +2537,7 @@ Endpoint operation description: Api v1 observations destroy.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Observation..
+ * **id** (string) [Required]: A UUID string identifying this Observation..
 
 ## Example Response (GET)
 
@@ -2620,7 +2620,7 @@ Endpoint operation description: Api v1 pesticides retrieve.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Pesticide..
+ * **id** (string) [Required]: A UUID string identifying this Pesticide..
 
 ## PUT
 Endpoint operation description: Api v1 pesticides update.
@@ -2628,7 +2628,7 @@ Endpoint operation description: Api v1 pesticides update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Pesticide..
+ * **id** (string) [Required]: A UUID string identifying this Pesticide..
 
 ## PATCH
 Endpoint operation description: Api v1 pesticides partial update.
@@ -2636,7 +2636,7 @@ Endpoint operation description: Api v1 pesticides partial update.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Pesticide..
+ * **id** (string) [Required]: A UUID string identifying this Pesticide..
 
 ## DELETE
 Endpoint operation description: Api v1 pesticides destroy.
@@ -2644,7 +2644,7 @@ Endpoint operation description: Api v1 pesticides destroy.
 ### Parameters
 
  * format (string): Forces a response format (i.e., Json or JsonLD)..
- * **id** (string)[Required]: A UUID string identifying this Pesticide..
+ * **id** (string) [Required]: A UUID string identifying this Pesticide..
 
 ## Example Response (GET)
 
