@@ -21,6 +21,9 @@ class BaseTreatmentMaterialsSerializer(serializers.ModelSerializer):
     )
     isPricePer = serializers.CharField(source='price_unit')
     isTargetedTowards = serializers.CharField(source='targeted_towards')
+    dateCreated = serializers.DateTimeField(source='created_at', read_only=True)
+    dateModified = serializers.DateTimeField(source='updated_at', read_only=True)
+    invalidatedAtTime = serializers.DateTimeField(source='deleted_at', read_only=True)
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
@@ -43,7 +46,8 @@ class FertilizerSerializer(BaseTreatmentMaterialsSerializer):
             'hasCommercialName', 'description',
             'hasCost', 'isPricePer', 'hasActiveSubstance', 'isTargetedTowards',
             'hasNutrientConcentration',
-            'status', 'created_at', 'updated_at', 'deleted_at',
+            'status',
+            'dateCreated', 'dateModified', 'invalidatedAtTime',
         ]
 
     def to_representation(self, instance):
@@ -63,7 +67,8 @@ class PesticideSerializer(BaseTreatmentMaterialsSerializer):
             'hasCommercialName', 'description',
             'hasCost', 'isPricePer', 'hasActiveSubstance', 'isTargetedTowards',
             'hasPreharvestInterval',
-            'status', 'created_at', 'updated_at', 'deleted_at',
+            'status',
+            'dateCreated', 'dateModified', 'invalidatedAtTime',
         ]
 
     def to_representation(self, instance):
