@@ -227,10 +227,25 @@ class CropProtectionOperationSerializer(GenericOperationSerializer):
         return json_ld_representation
 
 
+class MadeBySensorFieldSerializer(serializers.Serializer):
+    name = serializers.CharField(source='sensor_id', allow_null=True)
+
+    def to_representation(self, instance):
+        uuid_orig_str = getattr(instance, 'sensor_id', '')
+        if uuid_orig_str is None or uuid_orig_str is '':
+            return {}
+        hash_uuid = str(uuid.uuid5(uuid.NAMESPACE_DNS, uuid_orig_str))
+        return {
+            '@id': generate_urn('Sensor',obj_id=hash_uuid),
+            '@type': 'Sensor',
+            'name': instance.sensor_id,
+        }
+
 class ObservationSerializer(FarmCalendarActivitySerializer):
     phenomenonTime = serializers.DateTimeField(source='start_datetime')
     observedProperty = serializers.CharField(source='observed_property')
     hasResult = quantity_value_serializer_factory('value_unit', 'value')(source='*')
+    madeBySensor = MadeBySensorFieldSerializer(source='*')
 
     class Meta:
         model = Observation
@@ -239,6 +254,7 @@ class ObservationSerializer(FarmCalendarActivitySerializer):
             'activityType',
             'title', 'details',
             'phenomenonTime',
+            'madeBySensor',
             # 'responsibleAgent', 'usesAgriculturalMachinery',
             'hasResult',
             'observedProperty',
@@ -259,17 +275,6 @@ class ObservationSerializer(FarmCalendarActivitySerializer):
 
         return super().create(validated_data)
 
-    def update(self, instance, validated_data):
-        compost_data = validated_data.pop('addrawmaterialcompostquantity_set', [])
-        instance = super().update(instance, validated_data)
-
-        instance.addrawmaterialcompostquantity_set.all().delete()
-        for compost in compost_data:
-            material = CompostMaterial.objects.get_or_create(name=compost.pop('material')['name'])[0]
-
-            AddRawMaterialCompostQuantity.objects.create(operation=instance, material=material, **compost)
-
-        return instance
 
 class CropStressIndicatorObservationSerializer(ObservationSerializer):
     hasAgriCrop = URNRelatedField(
@@ -283,6 +288,7 @@ class CropStressIndicatorObservationSerializer(ObservationSerializer):
             'id',
             'activityType', 'title', 'details',
             'phenomenonTime',
+            'madeBySensor',
             # 'responsibleAgent', 'usesAgriculturalMachinery',
             'hasAgriCrop',
             'hasResult',
@@ -308,6 +314,7 @@ class CropGrowthStageObservationSerializer(ObservationSerializer):
             'id',
             'activityType', 'title', 'details',
             'phenomenonTime',
+            'madeBySensor',
             # 'responsibleAgent', 'usesAgriculturalMachinery',
             'hasAgriCrop',
             'hasResult',

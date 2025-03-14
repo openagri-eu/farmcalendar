@@ -158,6 +158,7 @@ class CropProtectionOperation(FarmCalendarActivity):
 
 
 class Observation(FarmCalendarActivity):
+    sensor_id = models.CharField(_('Made By Sensor'), max_length=255, blank=True, null=True)
 
     class Meta:
         verbose_name = "Observation"
