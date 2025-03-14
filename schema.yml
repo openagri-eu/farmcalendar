@@ -6117,28 +6117,29 @@ components:
           - $ref: '#/components/schemas/StatusEnum'
           minimum: -2147483648
           maximum: 2147483647
-        created_at:
+        dateCreated:
           type: string
           format: date-time
           readOnly: true
-        updated_at:
+        dateModified:
           type: string
           format: date-time
           readOnly: true
-        deleted_at:
+        invalidatedAtTime:
           type: string
           format: date-time
-          nullable: true
+          readOnly: true
       required:
-      - created_at
+      - dateCreated
+      - dateModified
       - hasActiveSubstance
       - hasCommercialName
       - hasCost
       - hasNutrientConcentration
       - id
+      - invalidatedAtTime
       - isPricePer
       - isTargetedTowards
-      - updated_at
     GenericQuantityValueField:
       type: object
       properties:
@@ -6861,18 +6862,18 @@ components:
           - $ref: '#/components/schemas/StatusEnum'
           minimum: -2147483648
           maximum: 2147483647
-        created_at:
+        dateCreated:
           type: string
           format: date-time
           readOnly: true
-        updated_at:
+        dateModified:
           type: string
           format: date-time
           readOnly: true
-        deleted_at:
+        invalidatedAtTime:
           type: string
           format: date-time
-          nullable: true
+          readOnly: true
     PatchedIrrigationOperation:
       type: object
       properties:
@@ -6966,18 +6967,18 @@ components:
           - $ref: '#/components/schemas/StatusEnum'
           minimum: -2147483648
           maximum: 2147483647
-        created_at:
+        dateCreated:
           type: string
           format: date-time
           readOnly: true
-        updated_at:
+        dateModified:
           type: string
           format: date-time
           readOnly: true
-        deleted_at:
+        invalidatedAtTime:
           type: string
           format: date-time
-          nullable: true
+          readOnly: true
     Pesticide:
       type: object
       properties:
@@ -7007,28 +7008,29 @@ components:
           - $ref: '#/components/schemas/StatusEnum'
           minimum: -2147483648
           maximum: 2147483647
-        created_at:
+        dateCreated:
           type: string
           format: date-time
           readOnly: true
-        updated_at:
+        dateModified:
           type: string
           format: date-time
           readOnly: true
-        deleted_at:
+        invalidatedAtTime:
           type: string
           format: date-time
-          nullable: true
+          readOnly: true
       required:
-      - created_at
+      - dateCreated
+      - dateModified
       - hasActiveSubstance
       - hasCommercialName
       - hasCost
       - hasPreharvestInterval
       - id
+      - invalidatedAtTime
       - isPricePer
       - isTargetedTowards
-      - updated_at
     SexEnum:
       enum:
       - 0
