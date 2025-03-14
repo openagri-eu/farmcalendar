@@ -205,6 +205,7 @@ class CropProtectionOperationSerializer(GenericOperationSerializer):
     usesPesticide = URNRelatedField(
         class_names=['Pesticide'],
         queryset=Pesticide.objects.all(),
+        source='pesticide',
         allow_null=True
     )
     class Meta:
