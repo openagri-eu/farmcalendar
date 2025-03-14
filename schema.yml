@@ -5580,6 +5580,8 @@ components:
         phenomenonTime:
           type: string
           format: date-time
+        madeBySensor:
+          $ref: '#/components/schemas/MadeBySensorField'
         hasAgriCrop:
           type: string
           format: uuid
@@ -5592,6 +5594,7 @@ components:
       - hasAgriCrop
       - hasResult
       - id
+      - madeBySensor
       - observedProperty
       - phenomenonTime
     CropProtectionOperation:
@@ -5673,6 +5676,8 @@ components:
         phenomenonTime:
           type: string
           format: date-time
+        madeBySensor:
+          $ref: '#/components/schemas/MadeBySensorField'
         hasAgriCrop:
           type: string
           format: uuid
@@ -5685,6 +5690,7 @@ components:
       - hasAgriCrop
       - hasResult
       - id
+      - madeBySensor
       - observedProperty
       - phenomenonTime
     Farm:
@@ -6214,6 +6220,14 @@ components:
       required:
       - lat
       - long
+    MadeBySensorField:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+      required:
+      - name
     Observation:
       type: object
       properties:
@@ -6233,6 +6247,8 @@ components:
         phenomenonTime:
           type: string
           format: date-time
+        madeBySensor:
+          $ref: '#/components/schemas/MadeBySensorField'
         hasResult:
           $ref: '#/components/schemas/GenericQuantityValueField'
         observedProperty:
@@ -6241,6 +6257,7 @@ components:
       - activityType
       - hasResult
       - id
+      - madeBySensor
       - observedProperty
       - phenomenonTime
     PatchedAddRawMaterialOperation:
@@ -6418,6 +6435,8 @@ components:
         phenomenonTime:
           type: string
           format: date-time
+        madeBySensor:
+          $ref: '#/components/schemas/MadeBySensorField'
         hasAgriCrop:
           type: string
           format: uuid
@@ -6484,6 +6503,8 @@ components:
         phenomenonTime:
           type: string
           format: date-time
+        madeBySensor:
+          $ref: '#/components/schemas/MadeBySensorField'
         hasAgriCrop:
           type: string
           format: uuid
@@ -6910,6 +6931,8 @@ components:
         phenomenonTime:
           type: string
           format: date-time
+        madeBySensor:
+          $ref: '#/components/schemas/MadeBySensorField'
         hasResult:
           $ref: '#/components/schemas/GenericQuantityValueField'
         observedProperty:
