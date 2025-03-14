@@ -147,10 +147,10 @@ Endpoint operation description: Api v1 addrawmaterialoperations destroy.
  * **id** (string) [Required]: A UUID string identifying this Add Raw Material Operation..
 
 ## Example Response (GET)
-Request/response similar to this entity's (List endpoint)[API.md/#endpoint-apiv1addrawmaterialoperations]
+Request/response similar to this entity's [List endpoint](API.md/#endpoint-apiv1addrawmaterialoperations)
 
 ## Example Request (POST/PUT/PATCH)
-Request/response similar to this entity's (List endpoint)[API.md/#endpoint-apiv1addrawmaterialoperations]
+Request/response similar to this entity's [List endpoint](API.md/#endpoint-apiv1addrawmaterialoperations)
 
 # Endpoint: /api/v1/AgriculturalMachines/
 
@@ -260,11 +260,11 @@ Endpoint operation description: Api v1 agriculturalmachines destroy.
 
 ## Example Response (GET)
 
-Request/response similar to this entity's (List endpoint)[API.md/#endpoint-apiv1agriculturalmachines]
+Request/response similar to this entity's [List endpoint](API.md/#endpoint-apiv1agriculturalmachines)
 
 ## Example Request (POST/PUT/PATCH)
 
-Request/response similar to this entity's (List endpoint)[API.md/#endpoint-apiv1agriculturalmachines]
+Request/response similar to this entity's [List endpoint](API.md/#endpoint-apiv1agriculturalmachines)
 
 # Endpoint: /api/v1/CompostOperations/
 
@@ -391,10 +391,10 @@ Endpoint operation description: Api v1 compostoperations destroy.
 
 ## Example Response (GET)
 
-Request/response similar to this entity (List endpoint)[API.md/#endpoint-apiv1compostoperations]
+Request/response similar to this entity [List endpoint](API.md/#endpoint-apiv1compostoperations)
 
 ## Example Request (POST/PUT/PATCH)
-Request/response similar to this entity (List endpoint)[API.md/#endpoint-apiv1compostoperations]
+Request/response similar to this entity [List endpoint](API.md/#endpoint-apiv1compostoperations)
 
 # Endpoint: /api/v1/CompostOperations/{compost_operation_pk}/AddRawMaterialOperations/
 This endpoint is used to manage the nested AddRawMaterialOperations on a compost operation.
@@ -419,10 +419,10 @@ Endpoint operation description: Api v1 compostoperations addrawmaterialoperation
 
 ## Example Response (GET)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1addrawmaterialoperations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1addrawmaterialoperations)
 
 ## Example Request (POST/PUT/PATCH)
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1addrawmaterialoperations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1addrawmaterialoperations)
 
 # Endpoint: /api/v1/CompostOperations/{compost_operation_pk}/AddRawMaterialOperations/{id}/
 
@@ -464,10 +464,10 @@ Endpoint operation description: Api v1 compostoperations addrawmaterialoperation
 
 ## Example Response (GET)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1addrawmaterialoperations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1addrawmaterialoperations)
 
 ## Example Request (POST/PUT/PATCH)
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1addrawmaterialoperations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1addrawmaterialoperations)
 
 
 # Endpoint: /api/v1/CompostOperations/{compost_operation_pk}/CompostTurningOperations/
@@ -493,10 +493,10 @@ Endpoint operation description: Api v1 compostoperations compostturningoperation
 
 ## Example Response (GET)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1compostturningoperations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1compostturningoperations)
 
 ## Example Request (POST/PUT/PATCH)
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1compostturningoperations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1compostturningoperations)
 
 
 # Endpoint: /api/v1/CompostOperations/{compost_operation_pk}/CompostTurningOperations/{id}/
@@ -538,10 +538,10 @@ Endpoint operation description: Api v1 compostoperations compostturningoperation
  * **id** (string) [Required]: A UUID string identifying this Compost Turning Operation..
 
 ## Example Response (GET)
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1compostturningoperations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1compostturningoperations)
 
 ## Example Request (POST/PUT/PATCH)
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1compostturningoperations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1compostturningoperations)
 
 
 # Endpoint: /api/v1/CompostOperations/{compost_operation_pk}/IrrigationOperations/
@@ -567,10 +567,10 @@ Endpoint operation description: Api v1 compostoperations irrigationoperations cr
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
 ## Example Response (GET)
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1irrigationoperations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1irrigationoperations)
 
 ## Example Request (POST/PUT/PATCH)
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1irrigationoperations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1irrigationoperations)
 
 
 # Endpoint: /api/v1/CompostOperations/{compost_operation_pk}/IrrigationOperations/{id}/
@@ -612,10 +612,10 @@ Endpoint operation description: Api v1 compostoperations irrigationoperations de
  * **id** (string) [Required]: A UUID string identifying this Irrigation Operation..
 
 ## Example Response (GET)
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1irrigationoperations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1irrigationoperations)
 
 ## Example Request (POST/PUT/PATCH)
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1irrigationoperations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1irrigationoperations)
 
 # Endpoint: /api/v1/CompostOperations/{compost_operation_pk}/Observations/
 This endpoint is used to manage the nested Observations on a compost operation.
@@ -640,10 +640,10 @@ Endpoint operation description: Api v1 compostoperations observations create.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
 ## Example Response (GET)
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1observations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1observations)
 
 ## Example Request (POST/PUT/PATCH)
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1observations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1observations)
 
 # Endpoint: /api/v1/CompostOperations/{compost_operation_pk}/Observations/{id}/
 
@@ -684,10 +684,10 @@ Endpoint operation description: Api v1 compostoperations observations destroy.
  * **id** (string) [Required]: A UUID string identifying this Observation..
 
 ## Example Response (GET)
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1observations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1observations)
 
 ## Example Request (POST/PUT/PATCH)
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1observations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1observations)
 
 # Endpoint: /api/v1/CompostTurningOperations/
 
@@ -804,11 +804,11 @@ Endpoint operation description: Api v1 compostturningoperations destroy.
 
 ## Example Response (GET)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1compostturningoperations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1compostturningoperations)
 
 ## Example Request (POST/PUT/PATCH)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1compostturningoperations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1compostturningoperations)
 
 
 # Endpoint: /api/v1/CropGrowthStageObservations/
@@ -929,12 +929,12 @@ Endpoint operation description: Api v1 cropgrowthstageobservations destroy.
 
 ## Example Response (GET)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1cropgrowthstageobservations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1cropgrowthstageobservations)
 
 
 ## Example Request (POST/PUT/PATCH)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1cropgrowthstageobservations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1cropgrowthstageobservations)
 
 
 # Endpoint: /api/v1/CropProtectionOperations/
@@ -1063,11 +1063,11 @@ Endpoint operation description: Api v1 cropprotectionoperations destroy.
 
 ## Example Response (GET)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1cropprotectionoperations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1cropprotectionoperations)
 
 ## Example Request (POST/PUT/PATCH)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1cropprotectionoperations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1cropprotectionoperations)
 
 
 # Endpoint: /api/v1/CropStressIndicatorObservations/
@@ -1193,11 +1193,11 @@ Endpoint operation description: Api v1 cropstressindicatorobservations destroy.
 
 ## Example Response (GET)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1cropstressindicatorobservations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1cropstressindicatorobservations)
 
 ## Example Request (POST/PUT/PATCH)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1cropstressindicatorobservations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1cropstressindicatorobservations)
 
 # Endpoint: /api/v1/Farm/
 
@@ -1353,11 +1353,11 @@ Endpoint operation description: Api v1 farm destroy.
 
 ## Example Response (GET)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1farm]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1farm)
 
 ## Example Request (POST/PUT/PATCH)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1farm]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1farm)
 
 # Endpoint: /api/v1/FarmAnimals/
 
@@ -1480,11 +1480,11 @@ Endpoint operation description: Api v1 farmanimals destroy.
 
 ## Example Response (GET)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1farmanimals]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1farmanimals)
 
 ## Example Request (POST/PUT/PATCH)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1farmanimals]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1farmanimals)
 
 # Endpoint: /api/v1/FarmCalendarActivities/
 This endpoint returns all farm calendar activities, this includes operations, observations and etc. However, throught this endpoint only the basic information regarding the calendar representation is shown, so any specific fields for the activities in question won't be available through here.
@@ -1602,11 +1602,11 @@ Endpoint operation description: Api v1 farmcalendaractivities destroy.
 
 ## Example Response (GET)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1farmcalendaractivities]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1farmcalendaractivities)
 
 ## Example Request (POST/PUT/PATCH)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1farmcalendaractivities]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1farmcalendaractivities)
 
 # Endpoint: /api/v1/FarmCalendarActivityTypes/
 Built-in Farm Activtiy Types will mostly be represented by low sequential UUID such as: `00000000-0000-0000-0000-000000000001`, `00000000-0000-0000-0000-000000000002`, etc. Meanwhile, user-created activity types use UUID4 such as: `55cf0568-a998-43e8-9b4d-c49e74e853e7`.
@@ -1726,11 +1726,11 @@ Endpoint operation description: Api v1 farmcalendaractivitytypes destroy.
 
 ## Example Response (GET)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1farmcalendaractivitytypes]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1farmcalendaractivitytypes)
 
 ## Example Request (POST/PUT/PATCH)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1farmcalendaractivitytypes]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1farmcalendaractivitytypes)
 
 # Endpoint: /api/v1/FarmCrops/
 
@@ -1848,12 +1848,12 @@ Endpoint operation description: Api v1 farmcrops destroy.
 
 ## Example Response (GET)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1farmcrops]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1farmcrops)
 
 
 ## Example Request (POST/PUT/PATCH)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1farmcrops]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1farmcrops)
 
 # Endpoint: /api/v1/FarmParcels/
 
@@ -2016,12 +2016,12 @@ Endpoint operation description: Api v1 farmparcels destroy.
 
 ## Example Response (GET)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1farmparcels]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1farmparcels)
 
 
 ## Example Request (POST/PUT/PATCH)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1farmparcels]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1farmparcels)
 
 # Endpoint: /api/v1/FertilizationOperations/
 
@@ -2161,12 +2161,12 @@ Endpoint operation description: Api v1 fertilizationoperations destroy.
 
 ## Example Response (GET)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1fertilizationoperations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1fertilizationoperations)
 
 
 ## Example Request (POST/PUT/PATCH)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1fertilizationoperations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1fertilizationoperations)
 
 # Endpoint: /api/v1/Fertilizers/
 
@@ -2268,11 +2268,11 @@ Endpoint operation description: Api v1 fertilizers destroy.
 
 ## Example Response (GET)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1fertilizers]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1fertilizers)
 
 ## Example Request (POST/PUT/PATCH)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1fertilizers]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1fertilizers)
 
 # Endpoint: /api/v1/IrrigationOperations/
 The field for `operatedOn` can be left blank, in case the irrigation operation is not applied to a specific FarmParcel (i.e., irrigation operation from a composting operation).
@@ -2396,11 +2396,11 @@ Endpoint operation description: Api v1 irrigationoperations destroy.
 
 ## Example Response (GET)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1irrigationoperations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1irrigationoperations)
 
 ## Example Request (POST/PUT/PATCH)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1irrigationoperations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1irrigationoperations)
 
 # Endpoint: /api/v1/Observations/
 
@@ -2541,12 +2541,12 @@ Endpoint operation description: Api v1 observations destroy.
 
 ## Example Response (GET)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1observations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1observations)
 
 
 ## Example Request (POST/PUT/PATCH)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1observations]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1observations)
 
 # Endpoint: /api/v1/Pesticides/
 
@@ -2648,8 +2648,9 @@ Endpoint operation description: Api v1 pesticides destroy.
 
 ## Example Response (GET)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1pesticides]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1pesticides)
 
 ## Example Request (POST/PUT/PATCH)
 
-Request/response similar to this general entity (List endpoint)[API.md/#endpoint-apiv1pesticides]
+Request/response similar to this general entity [List endpoint](API.md/#endpoint-apiv1pesticides)
+
