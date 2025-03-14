@@ -823,7 +823,43 @@ Endpoint operation description: Api v1 compostturningoperations create.
 
 ## Example Response (GET)
 
+
 ```json
+{
+    "@context": [
+        "https://w3id.org/ocsm/main-context.jsonld"
+    ],
+    "@graph": [
+        {
+            "@type": "CompostTurningOperation",
+            "@id": "urn:farmcalendar:CompostTurningOperation:1fa6b780-90bb-459d-860d-cd9840f57c40",
+            "activityType": {
+                "@type": "FarmCalendarActivityType",
+                "@id": "urn:farmcalendar:FarmCalendarActivityType:00000000-0000-0000-0000-000000000008"
+            },
+            "title": "Compost Turning Operation",
+            "details": "",
+            "hasStartDatetime": "2025-02-21T11:45:57Z",
+            "hasEndDatetime": null,
+            "responsibleAgent": "Farmer",
+            "usesAgriculturalMachinery": []
+        },
+        {
+            "@type": "CompostTurningOperation",
+            "@id": "urn:farmcalendar:CompostTurningOperation:afa6b780-92bb-459d-860f-cd9840f57d55",
+            "activityType": {
+                "@type": "FarmCalendarActivityType",
+                "@id": "urn:farmcalendar:FarmCalendarActivityType:00000000-0000-0000-0000-000000000008"
+            },
+            "title": "Compost Turning Operation",
+            "details": "",
+            "hasStartDatetime": "2025-02-25T10:45:57Z",
+            "hasEndDatetime": null,
+            "responsibleAgent": "Farmer",
+            "usesAgriculturalMachinery": []
+        },
+    ]
+}
 
 ```
 
@@ -831,6 +867,19 @@ Endpoint operation description: Api v1 compostturningoperations create.
 
 ```json
 
+{
+    "@type": "CompostTurningOperation",
+    "activityType": {
+        "@type": "FarmCalendarActivityType",
+        "@id": "urn:farmcalendar:FarmCalendarActivityType:00000000-0000-0000-0000-000000000008"
+    },
+    "title": "Compost Turning Operation",
+    "details": "",
+    "hasStartDatetime": "2025-02-21T11:45:57Z",
+    "hasEndDatetime": null,
+    "responsibleAgent": "Farmer",
+    "usesAgriculturalMachinery": []
+}
 ```
 
 # Endpoint: /api/v1/CompostTurningOperations/{id}/
@@ -869,15 +918,12 @@ Endpoint operation description: Api v1 compostturningoperations destroy.
 
 ## Example Response (GET)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1compostturningoperations]
 
 ## Example Request/Response (POST/PUT/PATCH)
 
-```json
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1compostturningoperations]
 
-```
 
 # Endpoint: /api/v1/CropGrowthStageObservations/
 
@@ -901,13 +947,64 @@ Endpoint operation description: Api v1 cropgrowthstageobservations create.
 ## Example Response (GET)
 
 ```json
+{
+    "@context": [
+        "https://w3id.org/ocsm/main-context.jsonld"
+    ],
+    "@graph": [
+        {
+            "@type": "CropGrowthStageObservation",
+            "@id": "urn:farmcalendar:CropGrowthStageObservation:0cc526f6-ae17-41ef-86a4-e5541932c482",
+            "activityType": {
+                "@type": "FarmCalendarActivityType",
+                "@id": "urn:farmcalendar:FarmCalendarActivityType:00000000-0000-0000-0000-000000000005"
+            },
+            "title": "Crop Growth Stage Observation",
+            "details": "",
+            "phenomenonTime": "2025-03-14T13:10:00Z",
+            "madeBySensor": {},
+            "hasAgriCrop": {
+                "@type": "FarmCrop",
+                "@id": "urn:farmcalendar:FarmCrop:0159de17-1c67-4ebd-92a5-51bc3b8d5c84"
+            },
+            "hasResult": {
+                "@id": "urn:farmcalendar:QuantityValue:5a4474e6-a86b-5d64-b517-da2f4eebe5a0",
+                "@type": "QuantityValue",
+                "unit": null,
+                "hasValue": "Sprouting"
+            },
+            "observedProperty": "growthStage"
+        }
+    ]
+}
 
 ```
 
 ## Example Request/Response (POST/PUT/PATCH)
 
 ```json
+{
+    "@type": "CropGrowthStageObservation",
+    "activityType": {
+        "@type": "FarmCalendarActivityType",
+        "@id": "urn:farmcalendar:FarmCalendarActivityType:00000000-0000-0000-0000-000000000005"
+    },
+    "title": "Crop Growth Stage Observation",
+    "details": "",
+    "phenomenonTime": "2025-03-14T13:10:00Z",
+    "madeBySensor": {},
+    "hasAgriCrop": {
+        "@type": "FarmCrop",
+        "@id": "urn:farmcalendar:FarmCrop:0159de17-1c67-4ebd-92a5-51bc3b8d5c84"
+    },
+    "hasResult": {
+        "@type": "QuantityValue",
+        "unit": null,
+        "hasValue": "Sprouting"
+    },
+    "observedProperty": "growthStage"
 
+}
 ```
 
 # Endpoint: /api/v1/CropGrowthStageObservations/{id}/
@@ -946,15 +1043,13 @@ Endpoint operation description: Api v1 cropgrowthstageobservations destroy.
 
 ## Example Response (GET)
 
-```json
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1cropgrowthstageobservations]
 
-```
 
 ## Example Request/Response (POST/PUT/PATCH)
 
-```json
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1cropgrowthstageobservations]
 
-```
 
 # Endpoint: /api/v1/CropProtectionOperations/
 
@@ -978,13 +1073,72 @@ Endpoint operation description: Api v1 cropprotectionoperations create.
 ## Example Response (GET)
 
 ```json
-
+{
+    "@context": [
+        "https://w3id.org/ocsm/main-context.jsonld"
+    ],
+    "@graph": [
+        {
+            "@type": "CropProtectionOperation",
+            "@id": "urn:farmcalendar:CropProtectionOperation:aa62956c-9ac8-4ce5-a6e1-68e1ce223513",
+            "activityType": {
+                "@type": "FarmCalendarActivityType",
+                "@id": "urn:farmcalendar:FarmCalendarActivityType:00000000-0000-0000-0000-000000000003"
+            },
+            "title": "Pesticides",
+            "details": "",
+            "hasStartDatetime": "2025-03-14T13:20:00Z",
+            "hasEndDatetime": "2025-03-15T13:20:00Z",
+            "responsibleAgent": "Farmer",
+            "usesAgriculturalMachinery": [],
+            "hasAppliedAmount": {
+                "@id": "urn:farmcalendar:QuantityValue:e4e66fc3-e2cd-53e7-80ea-ef8960e060f6",
+                "@type": "QuantityValue",
+                "unit": "litres",
+                "numericValue": 10.0
+            },
+            "usesPesticide": {
+                "@type": "Pesticide",
+                "@id": "urn:farmcalendar:Pesticide:00975c81-f923-45b1-b421-d4e9f2812545"
+            },
+            "operatedOn": {
+                "@type": "Parcel",
+                "@id": "urn:farmcalendar:Parcel:00000000-0000-0000-0000-000000000001"
+            }
+        }
+    ]
+}
 ```
 
 ## Example Request/Response (POST/PUT/PATCH)
 
 ```json
-
+{
+    "@type": "CropProtectionOperation",
+    "activityType": {
+        "@type": "FarmCalendarActivityType",
+        "@id": "urn:farmcalendar:FarmCalendarActivityType:00000000-0000-0000-0000-000000000003"
+    },
+    "title": "Pesticides",
+    "details": "",
+    "hasStartDatetime": "2025-03-14T13:20:00Z",
+    "hasEndDatetime": "2025-03-15T13:20:00Z",
+    "responsibleAgent": "Farmer",
+    "usesAgriculturalMachinery": [],
+    "hasAppliedAmount": {
+        "@type": "QuantityValue",
+        "unit": "litres",
+        "numericValue": 10.0
+    },
+    "usesPesticide": {
+        "@type": "Pesticide",
+        "@id": "urn:farmcalendar:Pesticide:00975c81-f923-45b1-b421-d4e9f2812545"
+    },
+    "operatedOn": {
+        "@type": "Parcel",
+        "@id": "urn:farmcalendar:Parcel:00000000-0000-0000-0000-000000000001"
+    }
+}
 ```
 
 # Endpoint: /api/v1/CropProtectionOperations/{id}/
@@ -1023,15 +1177,12 @@ Endpoint operation description: Api v1 cropprotectionoperations destroy.
 
 ## Example Response (GET)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1cropprotectionoperations]
 
 ## Example Request/Response (POST/PUT/PATCH)
 
-```json
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1cropprotectionoperations]
 
-```
 
 # Endpoint: /api/v1/CropStressIndicatorObservations/
 
@@ -1055,13 +1206,69 @@ Endpoint operation description: Api v1 cropstressindicatorobservations create.
 ## Example Response (GET)
 
 ```json
-
+{
+    "@context": [
+        "https://w3id.org/ocsm/main-context.jsonld"
+    ],
+    "@graph": [
+        {
+            "@type": "CropStressIndicatorObservation",
+            "@id": "urn:farmcalendar:CropStressIndicatorObservation:7e67dc08-5e00-4927-8788-38de06c2c8e3",
+            "activityType": {
+                "@type": "FarmCalendarActivityType",
+                "@id": "urn:farmcalendar:FarmCalendarActivityType:00000000-0000-0000-0000-000000000004"
+            },
+            "title": "Crop Stress Indicator",
+            "details": "",
+            "phenomenonTime": "2025-03-13T13:25:00Z",
+            "madeBySensor": {
+                "@id": "urn:farmcalendar:Sensor:15786cae-f3a0-5712-a183-ce3a2fd24475",
+                "@type": "Sensor",
+                "name": "XYZ Sensor"
+            },
+            "hasAgriCrop": {
+                "@type": "FarmCrop",
+                "@id": "urn:farmcalendar:FarmCrop:0159de17-1c67-4ebd-92a5-51bc3b8d5c84"
+            },
+            "hasResult": {
+                "@id": "urn:farmcalendar:QuantityValue:8ee0824e-471e-5f2f-bf4a-115c5b03c99b",
+                "@type": "QuantityValue",
+                "unit": "percent",
+                "hasValue": "10"
+            },
+            "observedProperty": "cropStressLevel"
+        }
+    ]
+}
 ```
 
 ## Example Request/Response (POST/PUT/PATCH)
 
 ```json
-
+{
+    "@type": "CropStressIndicatorObservation",
+    "activityType": {
+        "@type": "FarmCalendarActivityType",
+        "@id": "urn:farmcalendar:FarmCalendarActivityType:00000000-0000-0000-0000-000000000004"
+    },
+    "title": "Crop Stress Indicator",
+    "details": "",
+    "phenomenonTime": "2025-03-13T13:25:00Z",
+    "madeBySensor": {
+        "@type": "Sensor",
+        "name": "XYZ Sensor"
+    },
+    "hasAgriCrop": {
+        "@type": "FarmCrop",
+        "@id": "urn:farmcalendar:FarmCrop:0159de17-1c67-4ebd-92a5-51bc3b8d5c84"
+    },
+    "hasResult": {
+        "@type": "QuantityValue",
+        "unit": "percent",
+        "hasValue": "10"
+    },
+    "observedProperty": "cropStressLevel"
+}
 ```
 
 # Endpoint: /api/v1/CropStressIndicatorObservations/{id}/
@@ -1100,15 +1307,11 @@ Endpoint operation description: Api v1 cropstressindicatorobservations destroy.
 
 ## Example Response (GET)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1cropstressindicatorobservations]
 
 ## Example Request/Response (POST/PUT/PATCH)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1cropstressindicatorobservations]
 
 # Endpoint: /api/v1/Farm/
 
@@ -1131,13 +1334,101 @@ Endpoint operation description: Api v1 farm create.
 ## Example Response (GET)
 
 ```json
-
+{
+    "@context": [
+        "https://w3id.org/ocsm/main-context.jsonld"
+    ],
+    "@graph": [
+        {
+            "status": 1,
+            "deleted_at": null,
+            "created_at": "2024-11-04T12:45:19.254000Z",
+            "updated_at": "2024-11-04T12:45:19.254000Z",
+            "name": "SIP X Farm",
+            "description": "Potato fields for SIP X",
+            "administrator": "Admin",
+            "telephone": "0000",
+            "vatID": "1111",
+            "hasAgriParcel": [
+                {
+                    "@type": "Parcel",
+                    "@id": "urn:farmcalendar:Parcel:00000000-0000-0000-0000-000000000001"
+                },
+                {
+                    "@type": "Parcel",
+                    "@id": "urn:farmcalendar:Parcel:00000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "@type": "Parcel",
+                    "@id": "urn:farmcalendar:Parcel:00000000-0000-0000-0000-000000000003"
+                }
+            ],
+            "contactPerson": {
+                "firstname": "SIP",
+                "lastname": "X",
+                "@id": "urn:farmcalendar:ContactPerson:4aa2f898-6091-5be9-bd91-a0ada73a4a9c",
+                "@type": "Person"
+            },
+            "address": {
+                "@id": "urn:farmcalendar:Address:9be9bf30-f93e-54a2-9afb-2a48cab8060d",
+                "@type": "Address",
+                "adminUnitL1": "Belgium",
+                "adminUnitL2": "Merelbeke",
+                "addressArea": "District A",
+                "municipality": "Municipality B",
+                "community": "Community C",
+                "locatorName": "SIPX Farms LTD"
+            },
+            "@id": "urn:farmcalendar:Farm:00000000-0000-0000-0000-000000000001",
+            "@type": "Farm"
+        }
+    ]
+}
 ```
 
 ## Example Request/Response (POST/PUT/PATCH)
 
 ```json
-
+{
+    "status": 1,
+    "deleted_at": null,
+    "created_at": "2024-11-04T12:45:19.254000Z",
+    "updated_at": "2024-11-04T12:45:19.254000Z",
+    "name": "SIP X Farm",
+    "description": "Potato fields for SIP X",
+    "administrator": "Admin",
+    "telephone": "0000",
+    "vatID": "1111",
+    "hasAgriParcel": [
+        {
+            "@type": "Parcel",
+            "@id": "urn:farmcalendar:Parcel:00000000-0000-0000-0000-000000000001"
+        },
+        {
+            "@type": "Parcel",
+            "@id": "urn:farmcalendar:Parcel:00000000-0000-0000-0000-000000000002"
+        },
+        {
+            "@type": "Parcel",
+            "@id": "urn:farmcalendar:Parcel:00000000-0000-0000-0000-000000000003"
+        }
+    ],
+    "contactPerson": {
+        "firstname": "SIP",
+        "lastname": "X",
+        "@type": "Person"
+    },
+    "address": {
+        "@type": "Address",
+        "adminUnitL1": "Belgium",
+        "adminUnitL2": "Merelbeke",
+        "addressArea": "District A",
+        "municipality": "Municipality B",
+        "community": "Community C",
+        "locatorName": "SIPX Farms LTD"
+    },
+    "@type": "Farm"
+}
 ```
 
 # Endpoint: /api/v1/Farm/{id}/
@@ -1176,15 +1467,11 @@ Endpoint operation description: Api v1 farm destroy.
 
 ## Example Response (GET)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1farm]
 
 ## Example Request/Response (POST/PUT/PATCH)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1farm]
 
 # Endpoint: /api/v1/FarmAnimals/
 
@@ -1209,13 +1496,66 @@ Endpoint operation description: Api v1 farmanimals create.
 ## Example Response (GET)
 
 ```json
-
+{
+    "@context": [
+        "https://w3id.org/ocsm/main-context.jsonld"
+    ],
+    "@graph": [
+        {
+            "@type": "Animal",
+            "@id": "urn:farmcalendar:FarmAnimal:99daeecc-bbdb-4851-89ab-682105f9ac1c",
+            "nationalID": "NL 123",
+            "name": "Spotty",
+            "description": "A cow.",
+            "hasAgriParcel": {
+                "@type": "Parcel",
+                "@id": "urn:farmcalendar:Parcel:00000000-0000-0000-0000-000000000001"
+            },
+            "sex": 1,
+            "isCastrated": true,
+            "species": "Cow",
+            "breed": "Brown spotted",
+            "birthdate": "2025-03-13T13:32:00Z",
+            "isMemberOfAnimalGroup": {
+                "@id": "urn:farmcalendar:AnimalGroup:7c74acb2-ffa0-5c67-9cfa-d5b1953a5472",
+                "@type": "AnimalGroup",
+                "hasName": "Some group"
+            },
+            "status": 1,
+            "invalidatedAtTime": null,
+            "dateCreated": "2025-03-14T12:32:18.808790Z",
+            "dateModified": "2025-03-14T12:32:18.808797Z"
+        }
+    ]
+}
 ```
 
 ## Example Request/Response (POST/PUT/PATCH)
 
 ```json
-
+{
+    "@type": "Animal",
+    "nationalID": "NL 123",
+    "name": "Spotty",
+    "description": "A cow.",
+    "hasAgriParcel": {
+        "@type": "Parcel",
+        "@id": "urn:farmcalendar:Parcel:00000000-0000-0000-0000-000000000001"
+    },
+    "sex": 1,
+    "isCastrated": true,
+    "species": "Cow",
+    "breed": "Brown spotted",
+    "birthdate": "2025-03-13T13:32:00Z",
+    "isMemberOfAnimalGroup": {
+        "@type": "AnimalGroup",
+        "hasName": "Some group"
+    },
+    "status": 1,
+    "invalidatedAtTime": null,
+    "dateCreated": "2025-03-14T12:32:18.808790Z",
+    "dateModified": "2025-03-14T12:32:18.808797Z"
+}
 ```
 
 # Endpoint: /api/v1/FarmAnimals/{id}/
@@ -1254,17 +1594,15 @@ Endpoint operation description: Api v1 farmanimals destroy.
 
 ## Example Response (GET)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1farmanimals]
 
 ## Example Request/Response (POST/PUT/PATCH)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1farmanimals]
 
 # Endpoint: /api/v1/FarmCalendarActivities/
+This endpoint returns all farm calendar activities, this includes operations, observations and etc. However, throught this endpoint only the basic information regarding the calendar representation is shown, so any specific fields for the activities in question won't be available through here.
+And therefore the POST/PUT/PATCH methods are discouraged, and it is not recomended the use of the GET for end-points, unless specifically looking for basic representation of the different calendar activities (operation, observations, etc...).
 
 ## GET
 Endpoint operation description: Api v1 farmcalendaractivities list.
@@ -1286,13 +1624,60 @@ Endpoint operation description: Api v1 farmcalendaractivities create.
 ## Example Response (GET)
 
 ```json
-
+{
+    "@context": [
+        "https://w3id.org/ocsm/main-context.jsonld"
+    ],
+    "@graph": [
+        {
+            "@type": "Operation",
+            "@id": "urn:farmcalendar:FarmCalendarActivity:aa62956c-9ac8-4ce5-a6e1-68e1ce223513",
+            "activityType": {
+                "@type": "FarmCalendarActivityType",
+                "@id": "urn:farmcalendar:FarmCalendarActivityType:00000000-0000-0000-0000-000000000003"
+            },
+            "title": "Pesticides",
+            "details": "",
+            "hasStartDatetime": "2025-03-14T13:20:00Z",
+            "hasEndDatetime": "2025-03-15T13:20:00Z",
+            "responsibleAgent": "Farmer",
+            "usesAgriculturalMachinery": []
+        },
+        {
+            "@type": "Operation",
+            "@id": "urn:farmcalendar:FarmCalendarActivity:0cc526f6-ae17-41ef-86a4-e5541932c482",
+            "activityType": {
+                "@type": "FarmCalendarActivityType",
+                "@id": "urn:farmcalendar:FarmCalendarActivityType:00000000-0000-0000-0000-000000000005"
+            },
+            "title": "Crop Growth Stage Observation",
+            "details": "",
+            "hasStartDatetime": "2025-03-14T13:10:00Z",
+            "hasEndDatetime": null,
+            "responsibleAgent": null,
+            "usesAgriculturalMachinery": []
+        },
+        ....
+    ]
+}
 ```
 
 ## Example Request/Response (POST/PUT/PATCH)
 
 ```json
-
+{
+    "@type": "Operation",
+    "activityType": {
+        "@type": "FarmCalendarActivityType",
+        "@id": "urn:farmcalendar:FarmCalendarActivityType:00000000-0000-0000-0000-000000000003"
+    },
+    "title": "Pesticides",
+    "details": "Spraying at parcel.",
+    "hasStartDatetime": "2025-03-14T13:20:00Z",
+    "hasEndDatetime": "2025-03-15T13:20:00Z",
+    "responsibleAgent": "Farmer",
+    "usesAgriculturalMachinery": []
+}
 ```
 
 # Endpoint: /api/v1/FarmCalendarActivities/{id}/
@@ -1331,17 +1716,16 @@ Endpoint operation description: Api v1 farmcalendaractivities destroy.
 
 ## Example Response (GET)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1farmcalendaractivities]
 
 ## Example Request/Response (POST/PUT/PATCH)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1farmcalendaractivities]
 
 # Endpoint: /api/v1/FarmCalendarActivityTypes/
+Built-in Farm Activtiy Types will mostly be represented by low sequential UUID such as: `00000000-0000-0000-0000-000000000001`, `00000000-0000-0000-0000-000000000002`, etc. Meanwhile, user-created activity types use UUID4 such as: `55cf0568-a998-43e8-9b4d-c49e74e853e7`.
+
+The color fields (background, border, and text_color) refers to the colors used in the WebUI calendar page for the activitities of this type.
 
 ## GET
 Endpoint operation description: Api v1 farmcalendaractivitytypes list.
@@ -1361,13 +1745,63 @@ Endpoint operation description: Api v1 farmcalendaractivitytypes create.
 ## Example Response (GET)
 
 ```json
-
+{
+    "@context": [
+        "https://w3id.org/ocsm/main-context.jsonld"
+    ],
+    "@graph": [
+        {
+            "@type": "FarmActivityType",
+            "@id": "urn:farmcalendar:FarmActivityType:55cf0568-a998-43e8-9b4d-c49e74e853e7",
+            "name": "THI Observation",
+            "description": null,
+            "background_color": "#5E910A",
+            "border_color": "#FFE800",
+            "text_color": "#000000"
+        },
+        {
+            "@type": "FarmActivityType",
+            "@id": "urn:farmcalendar:FarmActivityType:00000000-0000-0000-0000-000000000003",
+            "name": "Pesticides",
+            "description": "Pesticide application",
+            "background_color": "#C5E1A5",
+            "border_color": "#8E7F2F",
+            "text_color": "#4E342E"
+        },
+        {
+            "@type": "FarmActivityType",
+            "@id": "urn:farmcalendar:FarmActivityType:3e0ceecf-7aea-45b9-8e50-525dd5fa3775",
+            "name": "Compost pH Observation",
+            "description": null,
+            "background_color": "#007bff",
+            "border_color": "#007bff",
+            "text_color": "#000000"
+        },
+        {
+            "@type": "FarmActivityType",
+            "@id": "urn:farmcalendar:FarmActivityType:00000000-0000-0000-0000-000000000006",
+            "name": "Compost Operation",
+            "description": "Compost Operation",
+            "background_color": "#A3C585",
+            "border_color": "#6B4226",
+            "text_color": "#3E4A34"
+        }
+        ....
+    ]
+}
 ```
 
 ## Example Request/Response (POST/PUT/PATCH)
 
 ```json
-
+{
+    "@type": "FarmActivityType",
+    "name": "Irrigation",
+    "description": "Irrigation operation",
+    "background_color": "#B3E5FC",
+    "border_color": "#0288D1",
+    "text_color": "#01579B"
+}
 ```
 
 # Endpoint: /api/v1/FarmCalendarActivityTypes/{id}/
@@ -1406,15 +1840,11 @@ Endpoint operation description: Api v1 farmcalendaractivitytypes destroy.
 
 ## Example Response (GET)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1farmcalendaractivitytypes]
 
 ## Example Request/Response (POST/PUT/PATCH)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1farmcalendaractivitytypes]
 
 # Endpoint: /api/v1/FarmCrops/
 
@@ -1439,15 +1869,62 @@ Endpoint operation description: Api v1 farmcrops create.
  * format (string): Forces a response format (i.e., Json or JsonLD)..
 
 ## Example Response (GET)
+## Example Response (GET)
 
 ```json
-
+{
+    "@context": [
+        "https://w3id.org/ocsm/main-context.jsonld"
+    ],
+    "@graph": [
+        {
+            "@type": "Crop",
+            "@id": "urn:farmcalendar:FarmCrop:0159de17-1c67-4ebd-92a5-51bc3b8d5c84",
+            "status": 1,
+            "invalidatedAtTime": null,
+            "dateCreated": "2025-03-14T12:06:20.902444Z",
+            "dateModified": "2025-03-14T12:06:20.902453Z",
+            "name": "Some Crop",
+            "description": "Important crop for the fields",
+            "hasAgriParcel": {
+                "@type": "Parcel",
+                "@id": "urn:farmcalendar:Parcel:00000000-0000-0000-0000-000000000001"
+            },
+            "cropSpecies": {
+                "@id": "urn:farmcalendar:CropType:8c6dcfa7-2792-53bd-ae27-86d4bf3b832c",
+                "@type": "CropType",
+                "name": "A Species",
+                "variety": "A Species"
+            },
+            "growth_stage": "seedling"
+        }
+    ]
+}
 ```
 
 ## Example Request/Response (POST/PUT/PATCH)
 
 ```json
-
+{
+    "@type": "Crop",
+    "status": 1,
+    "invalidatedAtTime": null,
+    "dateCreated": "2025-03-14T12:06:20.902444Z",
+    "dateModified": "2025-03-14T12:06:20.902453Z",
+    "name": "Some Crop",
+    "description": "Important crop for the fields",
+    "hasAgriParcel": {
+        "@type": "Parcel",
+        "@id": "urn:farmcalendar:Parcel:00000000-0000-0000-0000-000000000001"
+    },
+    "cropSpecies": {
+        "@id": "urn:farmcalendar:CropType:8c6dcfa7-2792-53bd-ae27-86d4bf3b832c",
+        "@type": "CropType",
+        "name": "A Species",
+        "variety": "A Species"
+    },
+    "growth_stage": "seedling"
+}
 ```
 
 # Endpoint: /api/v1/FarmCrops/{id}/
