@@ -9,6 +9,7 @@ from farm_management.models import (
     Pesticide,
     CompostMaterial,
     FarmParcel,
+    FarmCrop,
     AgriculturalMachine
 )
 
@@ -33,8 +34,8 @@ from ..schemas import generate_urn
 def quantity_value_serializer_factory(unit_field, value_field):
 
     class GenericQuantityValueFieldSerializer(serializers.Serializer):
-        unit = serializers.CharField(source=unit_field)
-        numericValue = serializers.DecimalField(source=value_field, max_digits=17, decimal_places=2)
+        unit = serializers.CharField(source=unit_field, allow_null=True)
+        hasValue = serializers.CharField(source=value_field)
 
 
         def to_representation(self, instance):
@@ -49,7 +50,7 @@ def quantity_value_serializer_factory(unit_field, value_field):
                 '@id': generate_urn('QuantityValue',obj_id=hash_uuid),
                 '@type': 'QuantityValue',
                 'unit': unit,
-                'numericValue': value,
+                'hasValue': value,
             }
     return GenericQuantityValueFieldSerializer
 
@@ -271,6 +272,11 @@ class ObservationSerializer(FarmCalendarActivitySerializer):
         return instance
 
 class CropStressIndicatorObservationSerializer(ObservationSerializer):
+    hasAgriCrop = URNRelatedField(
+        class_names=['FarmCrop'],
+        queryset=FarmCrop.objects.all(),
+        source='crop'
+    )
     class Meta:
         model = CropStressIndicatorObservation
         fields = [
@@ -278,6 +284,7 @@ class CropStressIndicatorObservationSerializer(ObservationSerializer):
             'activityType', 'title', 'details',
             'phenomenonTime',
             # 'responsibleAgent', 'usesAgriculturalMachinery',
+            'hasAgriCrop',
             'hasResult',
             'observedProperty',
         ]
@@ -290,6 +297,11 @@ class CropStressIndicatorObservationSerializer(ObservationSerializer):
         return json_ld_representation
 
 class CropGrowthStageObservationSerializer(ObservationSerializer):
+    hasAgriCrop = URNRelatedField(
+        class_names=['FarmCrop'],
+        queryset=FarmCrop.objects.all(),
+        source='crop'
+    )
     class Meta:
         model = CropGrowthStageObservation
         fields = [
@@ -297,6 +309,7 @@ class CropGrowthStageObservationSerializer(ObservationSerializer):
             'activityType', 'title', 'details',
             'phenomenonTime',
             # 'responsibleAgent', 'usesAgriculturalMachinery',
+            'hasAgriCrop',
             'hasResult',
             'observedProperty',
         ]

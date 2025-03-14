@@ -5580,12 +5580,16 @@ components:
         phenomenonTime:
           type: string
           format: date-time
+        hasAgriCrop:
+          type: string
+          format: uuid
         hasResult:
           $ref: '#/components/schemas/GenericQuantityValueField'
         observedProperty:
           type: string
       required:
       - activityType
+      - hasAgriCrop
       - hasResult
       - id
       - observedProperty
@@ -5669,12 +5673,16 @@ components:
         phenomenonTime:
           type: string
           format: date-time
+        hasAgriCrop:
+          type: string
+          format: uuid
         hasResult:
           $ref: '#/components/schemas/GenericQuantityValueField'
         observedProperty:
           type: string
       required:
       - activityType
+      - hasAgriCrop
       - hasResult
       - id
       - observedProperty
@@ -6130,12 +6138,11 @@ components:
       properties:
         unit:
           type: string
-        numericValue:
+          nullable: true
+        hasValue:
           type: string
-          format: decimal
-          pattern: ^-?\d{0,15}(?:\.\d{0,2})?$
       required:
-      - numericValue
+      - hasValue
       - unit
     GeometrySerializerField:
       type: object
@@ -6411,6 +6418,9 @@ components:
         phenomenonTime:
           type: string
           format: date-time
+        hasAgriCrop:
+          type: string
+          format: uuid
         hasResult:
           $ref: '#/components/schemas/GenericQuantityValueField'
         observedProperty:
@@ -6474,6 +6484,9 @@ components:
         phenomenonTime:
           type: string
           format: date-time
+        hasAgriCrop:
+          type: string
+          format: uuid
         hasResult:
           $ref: '#/components/schemas/GenericQuantityValueField'
         observedProperty:
