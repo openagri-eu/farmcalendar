@@ -1918,7 +1918,6 @@ Endpoint operation description: Api v1 farmcrops create.
         "@id": "urn:farmcalendar:Parcel:00000000-0000-0000-0000-000000000001"
     },
     "cropSpecies": {
-        "@id": "urn:farmcalendar:CropType:8c6dcfa7-2792-53bd-ae27-86d4bf3b832c",
         "@type": "CropType",
         "name": "A Species",
         "variety": "A Species"
@@ -1963,15 +1962,12 @@ Endpoint operation description: Api v1 farmcrops destroy.
 
 ## Example Response (GET)
 
-```json
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1farmcrops]
 
-```
 
 ## Example Request/Response (POST/PUT/PATCH)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1farmcrops]
 
 # Endpoint: /api/v1/FarmParcels/
 
@@ -1997,13 +1993,105 @@ Endpoint operation description: Api v1 farmparcels create.
 ## Example Response (GET)
 
 ```json
-
+{
+    "@context": [
+        "https://w3id.org/ocsm/main-context.jsonld"
+    ],
+    "@graph": [
+        {
+            "@type": "Parcel",
+            "@id": "urn:farmcalendar:FarmParcel:00000000-0000-0000-0000-000000000001",
+            "status": 1,
+            "deleted_at": null,
+            "created_at": "2024-11-04T12:51:14.074000Z",
+            "updated_at": "2025-03-14T12:54:27.094123Z",
+            "identifier": "T1 A (1)",
+            "description": "Farm parcel T1 A (1) in Merelbeke",
+            "validFrom": null,
+            "validTo": null,
+            "area": "0.94",
+            "hasIrrigationFlow": "100.00",
+            "category": "Potato Field",
+            "inRegion": "Merelbeke, Belgium",
+            "hasToponym": "Aardappelveld",
+            "isNitroArea": false,
+            "isNatura2000Area": false,
+            "isPdopgArea": false,
+            "isIrrigated": false,
+            "isCultivatedInLevels": false,
+            "isGroundSlope": false,
+            "depiction": "",
+            "hasGeometry": {
+                "@id": "urn:farmcalendar:Geometry:81d1db67-aed2-506d-b9f6-d1608429adbf",
+                "@type": "Geometry",
+                "asWKT": "GEOMETRYCOLLECTION(MULTIPOLYGON (((3.763138334299517 50.975673175018, 3.763821317532035 50.97576496966823, 3.764007697455795 50.975827472797, 3.764006632347743 50.97582871324892, 3.764061000468175 50.9758461006125, 3.764983170535003 50.97477770613214, 3.764931997399592 50.97475797797846, 3.764928926944344 50.97476152071972, 3.764940502424819 50.97476599758799, 3.764940211693563 50.97476635077933, 3.764209885998442 50.97448417231766, 3.764207009669899 50.97448666161281, 3.764170843495563 50.97447300579999, 3.763825380011593 50.97487130998596, 3.763678129950689 50.97504326413318, 3.763683152468031 50.97504500731477, 3.763388822137993 50.97538408195327, 3.763386827486241 50.97538341110485, 3.763138843391756 50.97567296222812, 3.763138549682591 50.97567293098999, 3.763138334299517 50.975673175018))))"
+            },
+            "location": {
+                "@id": "81d1db67-aed2-506d-b9f6-d1608429adbf",
+                "@type": "Point",
+                "lat": 50.975673175018,
+                "long": 3.76313833429952
+            },
+            "hasAgriCrop": [
+                {
+                    "@type": "Crop",
+                    "@id": "urn:farmcalendar:Crop:0159de17-1c67-4ebd-92a5-51bc3b8d5c84"
+                }
+            ],
+            "farm": {
+                "@type": "Farm",
+                "@id": "urn:farmcalendar:Farm:00000000-0000-0000-0000-000000000001"
+            }
+        }
+    ...
+]
 ```
 
 ## Example Request/Response (POST/PUT/PATCH)
 
 ```json
-
+{
+    "@type": "Parcel",
+    "status": 1,
+    "deleted_at": null,
+    "created_at": "2024-11-04T12:51:14.074000Z",
+    "updated_at": "2025-03-14T12:54:27.094123Z",
+    "identifier": "T1 A (1)",
+    "description": "Farm parcel T1 A (1) in Merelbeke",
+    "validFrom": null,
+    "validTo": null,
+    "area": "0.94",
+    "hasIrrigationFlow": "100.00",
+    "category": "Potato Field",
+    "inRegion": "Merelbeke, Belgium",
+    "hasToponym": "Aardappelveld",
+    "isNitroArea": false,
+    "isNatura2000Area": false,
+    "isPdopgArea": false,
+    "isIrrigated": false,
+    "isCultivatedInLevels": false,
+    "isGroundSlope": false,
+    "depiction": "",
+    "hasGeometry": {
+        "@type": "Geometry",
+        "asWKT": "GEOMETRYCOLLECTION(MULTIPOLYGON (((3.763138334299517 50.975673175018, 3.763821317532035 50.97576496966823, 3.764007697455795 50.975827472797, 3.764006632347743 50.97582871324892, 3.764061000468175 50.9758461006125, 3.764983170535003 50.97477770613214, 3.764931997399592 50.97475797797846, 3.764928926944344 50.97476152071972, 3.764940502424819 50.97476599758799, 3.764940211693563 50.97476635077933, 3.764209885998442 50.97448417231766, 3.764207009669899 50.97448666161281, 3.764170843495563 50.97447300579999, 3.763825380011593 50.97487130998596, 3.763678129950689 50.97504326413318, 3.763683152468031 50.97504500731477, 3.763388822137993 50.97538408195327, 3.763386827486241 50.97538341110485, 3.763138843391756 50.97567296222812, 3.763138549682591 50.97567293098999, 3.763138334299517 50.975673175018))))"
+    },
+    "location": {
+        "@type": "Point",
+        "lat": 50.975673175018,
+        "long": 3.76313833429952
+    },
+    "hasAgriCrop": [
+        {
+            "@type": "Crop",
+            "@id": "urn:farmcalendar:Crop:0159de17-1c67-4ebd-92a5-51bc3b8d5c84"
+        }
+    ],
+    "farm": {
+        "@type": "Farm",
+        "@id": "urn:farmcalendar:Farm:00000000-0000-0000-0000-000000000001"
+    }
+}
 ```
 
 # Endpoint: /api/v1/FarmParcels/{id}/
@@ -2042,15 +2130,12 @@ Endpoint operation description: Api v1 farmparcels destroy.
 
 ## Example Response (GET)
 
-```json
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1farmparcels]
 
-```
 
 ## Example Request/Response (POST/PUT/PATCH)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1farmparcels]
 
 # Endpoint: /api/v1/FertilizationOperations/
 
@@ -2074,13 +2159,84 @@ Endpoint operation description: Api v1 fertilizationoperations create.
 ## Example Response (GET)
 
 ```json
-
+{
+    "@context": [
+        "https://w3id.org/ocsm/main-context.jsonld"
+    ],
+    "@graph": [
+        {
+            "@type": "FertilizationOperation",
+            "@id": "urn:farmcalendar:FertilizationOperation:3aa2e704-cd36-4198-9721-e98848ce7337",
+            "activityType": {
+                "@type": "FarmCalendarActivityType",
+                "@id": "urn:farmcalendar:FarmCalendarActivityType:00000000-0000-0000-0000-000000000001"
+            },
+            "title": "Fertilization",
+            "details": "",
+            "hasStartDatetime": "2025-03-14T18:04:00Z",
+            "hasEndDatetime": "2025-03-14T19:04:00Z",
+            "responsibleAgent": "Farmer",
+            "usesAgriculturalMachinery": [
+                {
+                    "@type": "AgriculturalMachine",
+                    "@id": "urn:farmcalendar:AgriculturalMachine:b03d5bf5-5d34-44c2-91c6-28835b941f7a"
+                }
+            ],
+            "hasAppliedAmount": {
+                "@id": "urn:farmcalendar:QuantityValue:88299eed-a51a-5516-9e90-3beebb759f5c",
+                "@type": "QuantityValue",
+                "unit": "Kg",
+                "numericValue": 23.0
+            },
+            "hasApplicationMethod": "Dispersion",
+            "usesFertilizer": {
+                "@type": "Fertilizer",
+                "@id": "urn:farmcalendar:Fertilizer:2da60656-6b58-4470-a0b3-710a7e75f3b2"
+            },
+            "operatedOn": {
+                "@type": "Parcel",
+                "@id": "urn:farmcalendar:Parcel:00000000-0000-0000-0000-000000000002"
+            }
+        }
+    ]
+}
 ```
 
 ## Example Request/Response (POST/PUT/PATCH)
 
 ```json
-
+{
+    "@type": "FertilizationOperation",
+    "activityType": {
+        "@type": "FarmCalendarActivityType",
+        "@id": "urn:farmcalendar:FarmCalendarActivityType:00000000-0000-0000-0000-000000000001"
+    },
+    "title": "Fertilization",
+    "details": "",
+    "hasStartDatetime": "2025-03-14T18:04:00Z",
+    "hasEndDatetime": "2025-03-14T19:04:00Z",
+    "responsibleAgent": "Farmer",
+    "usesAgriculturalMachinery": [
+        {
+            "@type": "AgriculturalMachine",
+            "@id": "urn:farmcalendar:AgriculturalMachine:b03d5bf5-5d34-44c2-91c6-28835b941f7a"
+        }
+    ],
+    "hasAppliedAmount": {
+        "@type": "QuantityValue",
+        "unit": "Kg",
+        "numericValue": 23.0
+    },
+    "hasApplicationMethod": "Dispersion",
+    "usesFertilizer": {
+        "@type": "Fertilizer",
+        "@id": "urn:farmcalendar:Fertilizer:2da60656-6b58-4470-a0b3-710a7e75f3b2"
+    },
+    "operatedOn": {
+        "@type": "Parcel",
+        "@id": "urn:farmcalendar:Parcel:00000000-0000-0000-0000-000000000002"
+    }
+}
 ```
 
 # Endpoint: /api/v1/FertilizationOperations/{id}/
@@ -2119,15 +2275,12 @@ Endpoint operation description: Api v1 fertilizationoperations destroy.
 
 ## Example Response (GET)
 
-```json
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1fertilizationoperations]
 
-```
 
 ## Example Request/Response (POST/PUT/PATCH)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1fertilizationoperations]
 
 # Endpoint: /api/v1/Fertilizers/
 
@@ -2150,13 +2303,47 @@ Endpoint operation description: Api v1 fertilizers create.
 ## Example Response (GET)
 
 ```json
-
+{
+    "@context": [
+        "https://w3id.org/ocsm/main-context.jsonld"
+    ],
+    "@graph": [
+        {
+            "@id": "urn:farmcalendar:Fertilizer:2da60656-6b58-4470-a0b3-710a7e75f3b2",
+            "hasCommercialName": "ENTEC 20-8-10",
+            "description": "Complex NPK fertilizer that combines the excellent properties of nitrophoska fertilizers (perfect granulation, no dust, low cadmium content, no N in ureic form and high solubility), with one of the most efficient fertilizer technologies to improve the absorption of nutrients, especially nitrogen.",
+            "hasCost": "10.00",
+            "isPricePer": "EUR",
+            "hasActiveSubstance": "+2Mgo+3S",
+            "isTargetedTowards": "Olive trees or citrus fruits",
+            "hasNutrientConcentration": "20.00",
+            "status": 1,
+            "dateCreated": "2025-03-14T13:04:09.524024Z",
+            "dateModified": "2025-03-14T13:04:09.524034Z",
+            "invalidatedAtTime": null,
+            "@type": "Fertilizer"
+        }
+    ]
+}
 ```
 
 ## Example Request/Response (POST/PUT/PATCH)
 
 ```json
-
+{
+    "hasCommercialName": "ENTEC 20-8-10",
+    "description": "Complex NPK fertilizer that combines the excellent properties of nitrophoska fertilizers (perfect granulation, no dust, low cadmium content, no N in ureic form and high solubility), with one of the most efficient fertilizer technologies to improve the absorption of nutrients, especially nitrogen.",
+    "hasCost": "10.00",
+    "isPricePer": "EUR",
+    "hasActiveSubstance": "+2Mgo+3S",
+    "isTargetedTowards": "Olive trees or citrus fruits",
+    "hasNutrientConcentration": "20.00",
+    "status": 1,
+    "dateCreated": "2025-03-14T13:04:09.524024Z",
+    "dateModified": "2025-03-14T13:04:09.524034Z",
+    "invalidatedAtTime": null,
+    "@type": "Fertilizer"
+}
 ```
 
 # Endpoint: /api/v1/Fertilizers/{id}/
@@ -2195,17 +2382,14 @@ Endpoint operation description: Api v1 fertilizers destroy.
 
 ## Example Response (GET)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1fertilizers]
 
 ## Example Request/Response (POST/PUT/PATCH)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1fertilizers]
 
 # Endpoint: /api/v1/IrrigationOperations/
+The field for `operatedOn` can be left blank, in case the irrigation operation is not applied to a specific FarmParcel (i.e., irrigation operation from a composting operation).
 
 ## GET
 Endpoint operation description: Api v1 irrigationoperations list.
@@ -2227,13 +2411,67 @@ Endpoint operation description: Api v1 irrigationoperations create.
 ## Example Response (GET)
 
 ```json
-
+{
+    "@context": [
+        "https://w3id.org/ocsm/main-context.jsonld"
+    ],
+    "@graph": [
+        {
+            "@type": "IrrigationOperation",
+            "@id": "urn:farmcalendar:IrrigationOperation:711f24f8-c058-4bcc-9462-5ba33b5253d2",
+            "activityType": {
+                "@type": "FarmCalendarActivityType",
+                "@id": "urn:farmcalendar:FarmCalendarActivityType:00000000-0000-0000-0000-000000000002"
+            },
+            "title": "Irrigation",
+            "details": "",
+            "hasStartDatetime": "2025-03-14T13:17:11Z",
+            "hasEndDatetime": null,
+            "responsibleAgent": "Farmer",
+            "usesAgriculturalMachinery": [],
+            "hasAppliedAmount": {
+                "@id": "urn:farmcalendar:QuantityValue:e4e66fc3-e2cd-53e7-80ea-ef8960e060f6",
+                "@type": "QuantityValue",
+                "unit": "litres",
+                "numericValue": 10.0
+            },
+            "usesIrrigationSystem": "sprinkler",
+            "operatedOn": {
+                "@type": "Parcel",
+                "@id": "urn:farmcalendar:Parcel:00000000-0000-0000-0000-000000000002"
+            }
+        },
+        ...
+    ]
+}
 ```
 
 ## Example Request/Response (POST/PUT/PATCH)
 
 ```json
-
+{
+    "@type": "IrrigationOperation",
+    "activityType": {
+        "@type": "FarmCalendarActivityType",
+        "@id": "urn:farmcalendar:FarmCalendarActivityType:00000000-0000-0000-0000-000000000002"
+    },
+    "title": "Irrigation",
+    "details": "",
+    "hasStartDatetime": "2025-03-14T13:17:11Z",
+    "hasEndDatetime": null,
+    "responsibleAgent": "Farmer",
+    "usesAgriculturalMachinery": [],
+    "hasAppliedAmount": {
+        "@type": "QuantityValue",
+        "unit": "litres",
+        "numericValue": 10.0
+    },
+    "usesIrrigationSystem": "sprinkler",
+    "operatedOn": {
+        "@type": "Parcel",
+        "@id": "urn:farmcalendar:Parcel:00000000-0000-0000-0000-000000000002"
+    }
+}
 ```
 
 # Endpoint: /api/v1/IrrigationOperations/{id}/
@@ -2272,15 +2510,11 @@ Endpoint operation description: Api v1 irrigationoperations destroy.
 
 ## Example Response (GET)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1irrigationoperations]
 
 ## Example Request/Response (POST/PUT/PATCH)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1irrigationoperations]
 
 # Endpoint: /api/v1/Observations/
 
@@ -2304,13 +2538,85 @@ Endpoint operation description: Api v1 observations create.
 ## Example Response (GET)
 
 ```json
-
+{
+    "@context": [
+        "https://w3id.org/ocsm/main-context.jsonld"
+    ],
+    "@graph": [
+        {
+            "@type": "Observation",
+            "@id": "urn:farmcalendar:Observation:7e67dc08-5e00-4927-8788-38de06c2c8e3",
+            "activityType": {
+                "@type": "FarmCalendarActivityType",
+                "@id": "urn:farmcalendar:FarmCalendarActivityType:00000000-0000-0000-0000-000000000004"
+            },
+            "title": "Crop Stress Indicator",
+            "details": "",
+            "phenomenonTime": "2025-03-13T13:25:00Z",
+            "madeBySensor": {
+                "@id": "urn:farmcalendar:Sensor:15786cae-f3a0-5712-a183-ce3a2fd24475",
+                "@type": "Sensor",
+                "name": "XYZ Sensor"
+            },
+            "hasResult": {
+                "@id": "urn:farmcalendar:QuantityValue:8ee0824e-471e-5f2f-bf4a-115c5b03c99b",
+                "@type": "QuantityValue",
+                "unit": "percent",
+                "hasValue": "10"
+            },
+            "observedProperty": "cropStressLevel"
+        },
+        {
+            "@type": "Observation",
+            "@id": "urn:farmcalendar:Observation:0614051b-ee38-4718-a1a1-c4e5b72d68f2",
+            "activityType": {
+                "@type": "FarmCalendarActivityType",
+                "@id": "urn:farmcalendar:FarmCalendarActivityType:55cf0568-a998-43e8-9b4d-c49e74e853e7"
+            },
+            "title": "THI Observation",
+            "details": "",
+            "phenomenonTime": "2025-02-27T15:15:02Z",
+            "madeBySensor": {
+                "@id": "urn:farmcalendar:Sensor:e2152083-8bad-5a5b-976e-8af3a45ecb92",
+                "@type": "Sensor",
+                "name": "some sensor"
+            },
+            "hasResult": {
+                "@id": "urn:farmcalendar:QuantityValue:37b4cbab-1fa1-56c7-b72e-44464d52c21e",
+                "@type": "QuantityValue",
+                "unit": null,
+                "hasValue": "37.16"
+            },
+            "observedProperty": "temperature_humidity_index"
+        },
+    ...
+    ]
+}
 ```
 
 ## Example Request/Response (POST/PUT/PATCH)
 
 ```json
-
+{
+    "@type": "Observation",
+    "activityType": {
+        "@type": "FarmCalendarActivityType",
+        "@id": "urn:farmcalendar:FarmCalendarActivityType:55cf0568-a998-43e8-9b4d-c49e74e853e7"
+    },
+    "title": "THI Observation",
+    "details": "",
+    "phenomenonTime": "2025-02-27T15:15:02Z",
+    "madeBySensor": {
+        "@type": "Sensor",
+        "name": "some sensor"
+    },
+    "hasResult": {
+        "@type": "QuantityValue",
+        "unit": null,
+        "hasValue": "37.16"
+    },
+    "observedProperty": "temperature_humidity_index"
+}
 ```
 
 # Endpoint: /api/v1/Observations/{id}/
@@ -2349,15 +2655,12 @@ Endpoint operation description: Api v1 observations destroy.
 
 ## Example Response (GET)
 
-```json
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1observations]
 
-```
 
 ## Example Request/Response (POST/PUT/PATCH)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1observations]
 
 # Endpoint: /api/v1/Pesticides/
 
@@ -2380,13 +2683,47 @@ Endpoint operation description: Api v1 pesticides create.
 ## Example Response (GET)
 
 ```json
-
+{
+    "@context": [
+        "https://w3id.org/ocsm/main-context.jsonld"
+    ],
+    "@graph": [
+        {
+            "@id": "urn:farmcalendar:Pesticide:00975c81-f923-45b1-b421-d4e9f2812545",
+            "hasCommercialName": "BORDELESA 20 WP",
+            "description": "Short description.",
+            "hasCost": "20.00",
+            "isPricePer": "EUR",
+            "hasActiveSubstance": "Bordeaux mixture",
+            "isTargetedTowards": "Powdery mildew",
+            "hasPreharvestInterval": 1,
+            "status": 1,
+            "dateCreated": "2025-03-14T12:19:51.268292Z",
+            "dateModified": "2025-03-14T12:19:51.268311Z",
+            "invalidatedAtTime": null,
+            "@type": "Pesticide"
+        }
+    ]
+}
 ```
 
 ## Example Request/Response (POST/PUT/PATCH)
 
 ```json
-
+{
+    "hasCommercialName": "BORDELESA 20 WP",
+    "description": "Short description.",
+    "hasCost": "20.00",
+    "isPricePer": "EUR",
+    "hasActiveSubstance": "Bordeaux mixture",
+    "isTargetedTowards": "Powdery mildew",
+    "hasPreharvestInterval": 1,
+    "status": 1,
+    "dateCreated": "2025-03-14T12:19:51.268292Z",
+    "dateModified": "2025-03-14T12:19:51.268311Z",
+    "invalidatedAtTime": null,
+    "@type": "Pesticide"
+}
 ```
 
 # Endpoint: /api/v1/Pesticides/{id}/
@@ -2425,12 +2762,8 @@ Endpoint operation description: Api v1 pesticides destroy.
 
 ## Example Response (GET)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1pesticides]
 
 ## Example Request/Response (POST/PUT/PATCH)
 
-```json
-
-```
+Request/response similar to this general entity (List endpoint)[#endpoint-apiv1pesticides]
