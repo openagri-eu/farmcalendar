@@ -138,6 +138,7 @@ class FertilizationOperationSerializer(GenericOperationSerializer):
     usesFertilizer = URNRelatedField(
         class_names=['Fertilizer'],
         queryset=Fertilizer.objects.all(),
+        source='fertilizer',
         allow_null=True
     )
     hasApplicationMethod = serializers.CharField(source='application_method', allow_null=True)
