@@ -40,3 +40,13 @@ class Pesticide(TreatmentMaterials):
 
     def __str__(self):
         return f'{self.name} - {self.active_substance} - {self.preharvest_interval}'
+
+
+class CompostMaterial(NamedHistoricalBaseModel):
+    class Meta:
+        verbose_name = "Compost Material"
+        verbose_name_plural = "Compost Materials"
+
+
+    def __str__(self):
+        return f'{self.name}'

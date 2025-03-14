@@ -9,6 +9,9 @@ from farm_activities.models import (
     Observation,
     CropStressIndicatorObservation,
     CropGrowthStageObservation,
+    CompostOperation,
+    AddRawMaterialOperation,
+    CompostTurningOperation,
 )
 from ..serializers import (
     FarmCalendarActivitySerializer,
@@ -19,6 +22,9 @@ from ..serializers import (
     ObservationSerializer,
     CropStressIndicatorObservationSerializer,
     CropGrowthStageObservationSerializer,
+    CompostOperationSerializer,
+    AddRawMaterialOperationSerializer,
+    CompostTurningOperationSerializer,
 )
 
 
@@ -30,6 +36,8 @@ class FarmCalendarActivityViewSet(viewsets.ModelViewSet):
     serializer_class = FarmCalendarActivitySerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    filterset_fields = ['title', 'activity_type', 'responsible_agent']
+
 
 class FarmCalendarActivityTypeViewSet(viewsets.ModelViewSet):
     """
@@ -38,6 +46,7 @@ class FarmCalendarActivityTypeViewSet(viewsets.ModelViewSet):
     queryset = FarmCalendarActivityType.objects.all().order_by('-name')
     serializer_class = FarmCalendarActivityTypeSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['name', ]
 
 
 class FertilizationOperationViewSet(viewsets.ModelViewSet):
@@ -47,6 +56,7 @@ class FertilizationOperationViewSet(viewsets.ModelViewSet):
     queryset = FertilizationOperation.objects.all().order_by('-start_datetime')
     serializer_class = FertilizationOperationSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['title', 'activity_type', 'responsible_agent']
 
 
 class IrrigationOperationViewSet(viewsets.ModelViewSet):
@@ -56,6 +66,13 @@ class IrrigationOperationViewSet(viewsets.ModelViewSet):
     queryset = IrrigationOperation.objects.all().order_by('-start_datetime')
     serializer_class = IrrigationOperationSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['title', 'activity_type', 'responsible_agent']
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.kwargs.get('compost_operation_pk'):
+            queryset = queryset.filter(parent_activity=self.kwargs['compost_operation_pk'])
+        return queryset
 
 
 class CropProtectionOperationViewSet(viewsets.ModelViewSet):
@@ -65,7 +82,7 @@ class CropProtectionOperationViewSet(viewsets.ModelViewSet):
     queryset = CropProtectionOperation.objects.all().order_by('-start_datetime')
     serializer_class = CropProtectionOperationSerializer
     permission_classes = [permissions.IsAuthenticated]
-
+    filterset_fields = ['title', 'activity_type', 'responsible_agent']
 
 
 class ObservationViewSet(viewsets.ModelViewSet):
@@ -75,8 +92,13 @@ class ObservationViewSet(viewsets.ModelViewSet):
     queryset = Observation.objects.all().order_by('-start_datetime')
     serializer_class = ObservationSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['title','activity_type', 'responsible_agent']
 
-
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.kwargs.get('compost_operation_pk'):
+            queryset = queryset.filter(parent_activity=self.kwargs['compost_operation_pk'])
+        return queryset
 
 class CropStressIndicatorObservationViewSet(viewsets.ModelViewSet):
     """
@@ -85,6 +107,7 @@ class CropStressIndicatorObservationViewSet(viewsets.ModelViewSet):
     queryset = CropStressIndicatorObservation.objects.all().order_by('-start_datetime')
     serializer_class = CropStressIndicatorObservationSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['title','activity_type', 'responsible_agent']
 
 
 class CropGrowthStageObservationViewSet(viewsets.ModelViewSet):
@@ -94,6 +117,45 @@ class CropGrowthStageObservationViewSet(viewsets.ModelViewSet):
     queryset = CropGrowthStageObservation.objects.all().order_by('-start_datetime')
     serializer_class = CropGrowthStageObservationSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['title','activity_type', 'responsible_agent']
 
 
+class CompostOperationViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows CompostOperation to be viewed or edited.
+    """
+    queryset = CompostOperation.objects.all().prefetch_related('nested_activities').order_by('-start_datetime')
+    serializer_class = CompostOperationSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['title','activity_type', 'compost_pile_id']
 
+
+class AddRawMaterialOperationViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows AddRawMaterialOperation to be viewed or edited.
+    """
+    queryset = AddRawMaterialOperation.objects.all().order_by('-start_datetime')
+    serializer_class = AddRawMaterialOperationSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['title', 'activity_type']
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.kwargs.get('compost_operation_pk'):
+            queryset = queryset.filter(parent_activity=self.kwargs['compost_operation_pk'])
+        return queryset
+
+class CompostTurningOperationViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows CompostTurningOperation to be viewed or edited.
+    """
+    queryset = CompostTurningOperation.objects.all().order_by('-start_datetime')
+    serializer_class = CompostTurningOperationSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['title', 'activity_type']
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.kwargs.get('compost_operation_pk'):
+            queryset = queryset.filter(parent_activity=self.kwargs['compost_operation_pk'])
+        return queryset

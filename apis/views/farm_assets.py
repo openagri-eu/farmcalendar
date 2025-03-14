@@ -20,6 +20,7 @@ class FarmCropViewSet(viewsets.ModelViewSet):
     queryset = FarmCrop.objects.all().order_by('-created_at')
     serializer_class = FarmCropSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['name', 'parcel', 'species', 'variety', 'growth_stage', 'status']
 
 
 class FarmAnimalViewSet(viewsets.ModelViewSet):
@@ -29,6 +30,7 @@ class FarmAnimalViewSet(viewsets.ModelViewSet):
     queryset = FarmAnimal.objects.all().order_by('-created_at')
     serializer_class = FarmAnimalSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['name', 'parcel', 'animal_group', 'status']
 
 
 class AgriculturalMachineViewSet(viewsets.ModelViewSet):
@@ -38,4 +40,6 @@ class AgriculturalMachineViewSet(viewsets.ModelViewSet):
     queryset = AgriculturalMachine.objects.all().order_by('-created_at')
     serializer_class = AgriculturalMachineSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['name', 'parcel', 'status']
+
 

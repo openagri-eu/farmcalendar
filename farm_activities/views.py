@@ -1,7 +1,11 @@
+from django.db.models import Q
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
+from django.conf import settings
+
 
 from .models import (
     FarmCalendarActivity,
@@ -10,7 +14,6 @@ from .models import (
 from .forms import (
     FarmCalendarActivityTypeSelectionForm,
     FarmCalendarActivityTypeForm,
-    FarmCalendarActivityForm,
     get_generic_farm_calendar_activity_form,
 )
 
@@ -55,7 +58,7 @@ class FarmCalendarActivityCreateByTypeView(LoginRequiredMixin, View):
         if GenericActivityForm is None:
             redirect('pre_register_calendar_activity')
         activity_type_instance = FarmCalendarActivityType.objects.get(name=activity_type)
-        form = GenericActivityForm(initial={'activity_type': activity_type_instance})
+        form = GenericActivityForm(initial={'activity_type': activity_type_instance, 'title': activity_type_instance.name})
         return render(request, self.template_name, {'form': form})
 
     def post(self, request, activity_type):
@@ -80,5 +83,72 @@ class FarmCalendarActivityListView(LoginRequiredMixin, View):
                 'backgroundColor': activity.activity_type.background_color,
                 'borderColor': activity.activity_type.border_color,
                 'textColor': activity.activity_type.text_color,
+                'detail_url': reverse('calendar_activity_edit', kwargs={'pk': activity.pk})
             })
         return JsonResponse(activities_json_data, safe=False)
+
+
+class FarmCalendarActivityEdit(LoginRequiredMixin, View):
+    template_name = 'farm_activities/activities/activity_form.html'
+
+    def get_specific_activity_object_and_form(self, pk):
+        base_object = get_object_or_404(FarmCalendarActivity, pk=pk)
+        GenericActivityForm = get_generic_farm_calendar_activity_form(activity_type=base_object.activity_type.name)
+        main_object = get_object_or_404(GenericActivityForm.Meta.model.objects.prefetch_related('activity_type', 'nested_activities'), pk=pk)
+        return main_object, GenericActivityForm
+
+    def get_asset_delete_api_url(self, model_name, pk):
+        asset_base_api_url = reverse_lazy(
+            f'{model_name}-detail',
+            kwargs={'version': settings.SHORT_API_VERSION, 'pk':pk}
+        )
+        return asset_base_api_url
+
+    def get(self, request, pk):
+        main_object, GenericActivityForm = self.get_specific_activity_object_and_form(pk)
+        form = GenericActivityForm(instance=main_object)
+        delete_url = self.get_asset_delete_api_url(main_object._meta.model_name, pk)
+        context = {
+            'form': form,
+            'is_edit': True,
+            'delete_url': delete_url
+        }
+        return render(request, self.template_name, context=context)
+
+    def post(self, request, pk):
+        main_object, GenericActivityForm = self.get_specific_activity_object_and_form(pk)
+        form = GenericActivityForm(request.POST, instance=main_object)
+        if form.is_valid():
+            form.save()
+            return redirect('calendar')
+        delete_url = self.get_asset_delete_api_url(main_object.Meta.model_name, pk)
+        context = {
+            'form': form,
+            'is_edit': True,
+            'delete_url': delete_url
+        }
+        return render(request, self.template_name, context=context)
+
+
+class FarmCalendarActivityAutocomplete(View):
+    def get(self, request, *args, **kwargs):
+        search_term = request.GET.get('term', '')
+
+        if search_term:
+            # Filter queryset by title or start_datetime
+            qs_values = FarmCalendarActivity.objects.filter(
+                Q(title__icontains=search_term) | Q(start_datetime__icontains=search_term)
+            ).values('pk', 'title', 'start_datetime')
+
+            # Create list of the string representations using __str__()
+            objs = [
+                {
+                    'pk': activity['pk'],
+                    'activity': str(FarmCalendarActivity(**activity))
+                }
+                for activity in qs_values
+            ]
+
+            return JsonResponse(objs, safe=False)
+
+        return JsonResponse([], safe=False)

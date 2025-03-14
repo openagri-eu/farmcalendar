@@ -17,6 +17,7 @@ class FertilizerViewSet(viewsets.ModelViewSet):
     queryset = Fertilizer.objects.all().order_by('-created_at')
     serializer_class = FertilizerSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['name', 'status']
 
 
 
@@ -27,4 +28,5 @@ class PesticideViewSet(viewsets.ModelViewSet):
     queryset = Pesticide.objects.all().order_by('-created_at')
     serializer_class = PesticideSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['name', 'status']
 

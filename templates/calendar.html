@@ -40,6 +40,7 @@ var calendarEl = document.getElementById('calendar');
 var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
     events: '{% url 'calendar_activity_list' %}',  // Fetch operations (events in FullCalendar) from the Django view
+    timeZone: 'local',
     headerToolbar: {
         left: 'prev,next today',
         center: 'title',
@@ -47,10 +48,10 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
     },
     height: 'auto',  // Adjust height to fit content
     contentHeight: 'auto', // Alternatively, you can use a specific height like '600px'
-    defaultTimedEventDuration: '00:10',  // Fallback for timed events (10 minutes)
+    defaultTimedEventDuration: '00:30',  // Fallback for timed events (10 minutes)
     defaultAllDayEventDuration: { days: 1 },  // Fallback for all-day events (1 day)
     eventClick: function(info) {
-        alert('Event: ' + info.event.title + '\nDetails: ' + info.event.extendedProps.details);
+        window.location.href = info.event.extendedProps.detail_url;
     },
 });
 

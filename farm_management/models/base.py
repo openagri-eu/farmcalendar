@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -10,8 +12,8 @@ class BaseModel(models.Model):
         ACTIVE = 1, 'Active'
         DELETED = 2, 'Deleted'
 
-    id = models.AutoField(primary_key=True, db_column='id', db_index=True, editable=False, unique=True, blank=False,
-                          null=False, verbose_name='ID')
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, db_index=True, editable=False, unique=True,
+                          blank=False, null=False, verbose_name='ID')
 
     status = models.IntegerField(choices=BaseModelStatus.choices, default=BaseModelStatus.ACTIVE, verbose_name='Status')
     deleted_at = models.DateTimeField(null=True, blank=True, verbose_name='Deleted At')
@@ -31,15 +33,22 @@ class BaseModel(models.Model):
 
 
 class LocationBaseModel(models.Model):
-    latitude = models.DecimalField(_('Latitude'), max_digits=15, decimal_places=2, blank=True, null=True)
-    longitude = models.DecimalField(_('Longitude'), max_digits=15, decimal_places=2, blank=True, null=True)
+    latitude = models.DecimalField(_('Latitude'), max_digits=17, decimal_places=14, blank=True, null=True)
+    longitude = models.DecimalField(_('Longitude'), max_digits=17, decimal_places=14, blank=True, null=True)
 
-    geometry = models.TextField(_('Geometry (WKT)'), blank=True, null=True)
-    geo_id = models.CharField(_('Geographic Data ID'), unique=False, blank=True, null=True)
-    # coordinates = models.CharField(attribute='_get_full_name', readonly=True)  # virtual field for rep coordinates
+    geometry = models.TextField(_('Geometry (WKT EPSG:4326)'), blank=True, null=True)
+    geo_id = models.UUIDField(_('Geographic Data ID'), unique=True, blank=True, null=True)
 
     class Meta:
         abstract = True
+
+    def save(self, *args, **kwargs):
+        if self.geometry:
+            # Generate UUID based on the geometry string
+            self.geo_id = uuid.uuid5(uuid.NAMESPACE_DNS, self.geometry)
+        elif not self.geometry:
+            self.geo_id = None
+        super().save(*args, **kwargs)
 
     @property
     def coordinates(self):

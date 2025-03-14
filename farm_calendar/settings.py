@@ -15,6 +15,7 @@ from decouple import config, Csv
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_ROOT = str(BASE_DIR / "static")
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -31,6 +32,22 @@ EXTRA_ALLOWED_HOSTS = os.environ.get('EXTRA_ALLOWED_HOSTS', None)
 if EXTRA_ALLOWED_HOSTS is not None:
     EXTRA_ALLOWED_HOSTS = EXTRA_ALLOWED_HOSTS.split(',')
     ALLOWED_HOSTS.extend(EXTRA_ALLOWED_HOSTS)
+
+def default_crsf_from_allowed_host_format(host_list):
+    crsf_host_format = []
+    for host in host_list:
+        if host.startswith('['):
+            continue
+        crsf_host = host
+        if crsf_host.startswith('.'):
+            crsf_host = f'*{crsf_host}'
+        crsf_host_format.append(f'http://{crsf_host}')
+        crsf_host_format.append(f'https://{crsf_host}')
+    return ','.join(crsf_host_format)
+
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', cast=Csv(), default=default_crsf_from_allowed_host_format(ALLOWED_HOSTS))
+
+APP_PORT = config('APP_PORT', default='8002')
 
 # Application definition
 DEFAULT_APPS = [
@@ -50,23 +67,39 @@ LOCAL_APPS =[
 ]
 
 THIRD_PARTY_APPS = [
+    'django_filters',
     'rest_framework',
     'simple_history',
     'drf_spectacular',
     'crispy_forms',
-    'crispy_bootstrap5',
+    'crispy_bootstrap4',
+    'dal',
+    'dal_select2',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
 GATEKEEPER_LOGIN_URL = os.environ.get('GATEKEEPER_LOGIN_URL', None)
-
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-
-CRISPY_TEMPLATE_PACK = "bootstrap5"
+GATEKEEPER_LOGOUT_API_URL = os.environ.get('GATEKEEPER_LOGOUT_API_URL', None)
 
 if GATEKEEPER_LOGIN_URL == '':
     GATEKEEPER_LOGIN_URL = None
+if GATEKEEPER_LOGOUT_API_URL == '':
+    GATEKEEPER_LOGOUT_API_URL = None
+
+INTERNAL_SERVICE_NAME = config('INTERNAL_SERVICE_NAME', default='farmcalendar')
+INTERNAL_SERVICE_URL = config('INTERNAL_SERVICE_URL', default=f'http://{INTERNAL_SERVICE_NAME}:{APP_PORT}/')
+GATEKEEPER_API_LOGIN_URL = None
+GATEKEEPER_ENDPOINT_REG_URL = None
+FARMCALENDAR_GATEKEEPER_USER = None
+FARMCALENDAR_GATEKEEPER_PASSWORD = None
+if GATEKEEPER_LOGIN_URL is not None:
+    GATEKEEPER_API_LOGIN_URL = config('GATEKEEPER_API_LOGIN_URL')
+    GATEKEEPER_ENDPOINT_REG_URL = config('GATEKEEPER_ENDPOINT_REG_URL')
+
+    FARMCALENDAR_GATEKEEPER_USER = config('FARMCALENDAR_GATEKEEPER_USER')
+    FARMCALENDAR_GATEKEEPER_PASSWORD = config('FARMCALENDAR_GATEKEEPER_PASSWORD')
+
 
 AUTHENTICATION_BACKENDS = (
     'farm_calendar.utils.auth_backends.CustomJWTAuthenticationBackend',
@@ -74,6 +107,9 @@ AUTHENTICATION_BACKENDS = (
 if GATEKEEPER_LOGIN_URL is None:
     AUTHENTICATION_BACKENDS = AUTHENTICATION_BACKENDS + ('django.contrib.auth.backends.ModelBackend',)
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # AUTH_USER_MODEL = "harvesthand.DefaultAuthUserExtend"
 
@@ -92,6 +128,7 @@ JWT_SIGNING_KEY = get_env_var('JWT_SIGNING_KEY')
 JWT_COOKIE_NAME = get_env_var('JWT_COOKIE_NAME')
 JWT_LOCAL_USER_ID_FIELD = os.environ.get('JWT_LOCAL_USER_ID_FIELD', 'username')
 AUTO_CREATE_AUTH_USER = os.environ.get('AUTO_CREATE_AUTH_USER', 'True').lower() == 'true'
+POST_AUTH_TOKEN_ATTRIBUTE = os.environ.get('POST_AUTH_TOKEN_ATTRIBUTE', 'access_token')
 
 #lets igore RSA-based signing for now...
 # with open(str(BASE_DIR / 'public.pem'), 'r') as f:
@@ -102,14 +139,15 @@ AUTO_CREATE_AUTH_USER = os.environ.get('AUTO_CREATE_AUTH_USER', 'True').lower() 
 DEFAULT_API_VERSION = config('DEFAULT_API_VERSION', default='1.0.0')
 SHORT_API_VERSION = f'v{DEFAULT_API_VERSION.split(".")[0]}'
 
+API_SCHEMA_FILE_PATH = BASE_DIR / 'schema.yml'
 
 REST_FRAMEWORK = {
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
     'DEFAULT_VERSION': SHORT_API_VERSION,
     'ALLOWED_VERSIONS': ['v1',],
     'VERSION_PARAM': 'version',
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,
+    'DEFAULT_PAGINATION_CLASS': None,
+    # 'PAGE_SIZE': 99999999,
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 
     'DEFAULT_RENDERER_CLASSES': [
@@ -117,6 +155,18 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
     ],
+    # 'DEFAULT_PARSER_CLASSES': [
+    #     'apis.parsers.JSONLDParser',
+    #     'rest_framework.parsers.JSONParser',
+    #     'rest_framework.parsers.FormParser',
+    #     'rest_framework.parsers.MultiPartParser',
+    # ],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'farm_calendar.utils.auth_backends.CustomJWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+
 }
 
 SPECTACULAR_SETTINGS = {
@@ -159,6 +209,7 @@ MIDDLEWARE = [
     'simple_history.middleware.HistoryRequestMiddleware',
     'farm_calendar.utils.auth_middlewares.JWTAuthenticationMiddleware',
 ]
+
 
 ROOT_URLCONF = 'farm_calendar.urls'
 
@@ -233,7 +284,9 @@ MESSAGE_TAGS = {
 LANGUAGE_CODE = 'en-gb'
 
 TIME_ZONE = 'UTC'
+# TIME_ZONE = 'Europe/Amsterdam'
 
+USE_L10N = True
 USE_I18N = True
 
 USE_TZ = True
@@ -263,14 +316,16 @@ DEFAULT_CALENDAR_ACTIVITY_TYPES = {
         'description': 'Fertilization operation',
         "background_color": "#F5E8C7",
         "border_color": "#8B4513",
-        "text_color": "#2F4F4F"
+        "text_color": "#2F4F4F",
+        "id": "00000000-0000-0000-0000-000000000001",
     },
     'irrigation': {
         'name': 'Irrigation',
         'description': 'Irrigation operation',
         'background_color': '#B3E5FC',
         'border_color': '#0288D1',
-        'text_color': '#01579B'
+        'text_color': '#01579B',
+        "id": "00000000-0000-0000-0000-000000000002",
     },
     'crop_protection':{
         'name': 'Pesticides',
@@ -278,6 +333,7 @@ DEFAULT_CALENDAR_ACTIVITY_TYPES = {
         'background_color': '#C5E1A5',
         'border_color': '#8E7F2F',
         'text_color': '#4E342E',
+        "id": "00000000-0000-0000-0000-000000000003",
     },
     'crop_stress_indicator':{
         'name': 'Crop Stress Indicator',
@@ -285,12 +341,38 @@ DEFAULT_CALENDAR_ACTIVITY_TYPES = {
         'background_color': '#FFCCCB',
         'border_color': '#C62828',
         'text_color': '#BF360C',
+        "id": "00000000-0000-0000-0000-000000000004",
     },
     'crop_growth_stage':{
         'name': 'Crop Growth Stage Observation',
         'description': 'Crop Stress Indicator Observation',
         "background_color": "#F5E8C7",
         "border_color": "#8B4513",
-        "text_color": "#2F4F4F"
+        "text_color": "#2F4F4F",
+        "id": "00000000-0000-0000-0000-000000000005",
+    },
+    'compost_operation':{
+        'name': 'Compost Operation',
+        'description': 'Compost Operation',
+        'background_color': '#A3C585',
+        'border_color': '#6B4226',
+        'text_color': '#3E4A34',
+        'id': '00000000-0000-0000-0000-000000000006',
+    },
+    'add_raw_material_operation':{
+        'name': 'Add Raw Material Operation',
+        'description': 'Add Raw Material Operation',
+        'background_color': '#D9E58A',
+        'border_color': '#8A5A2B',
+        'text_color': '#4A5320',
+        'id': '00000000-0000-0000-0000-000000000007',
+    },
+    'compost_turning_operation': {
+        'name': 'Compost Turning Operation',
+        'description': 'Compost Turning Operation',
+        'background_color': '#BFD982',
+        'border_color': '#72512D',
+        'text_color': '#3C4F2E',
+        'id': '00000000-0000-0000-0000-000000000008',
     }
 }

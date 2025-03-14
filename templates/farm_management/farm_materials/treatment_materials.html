@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}{{ model_name }}{% endblock title %}
+
+{% block extra_css %}
+    <!-- Page-specific stylesheets -->
+    <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+    <link href="{% static 'libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet">
+
+    <!-- Responsive datatable examples -->
+    <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <!-- alertifyjs Css -->
+    <link href="{% static 'libs/alertifyjs/build/css/alertify.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <!-- alertifyjs default themes  Css -->
+    <link href="{% static 'libs/alertifyjs/build/css/themes/default.min.css' %}" rel="stylesheet" type="text/css" />
+{% endblock extra_css %}
+
+{% block page_content_title %}{{ model_name }}{% endblock %}
+
+{% block page_content_rows %}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card shadow mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="card-title mb-0">{% if is_edit %}Edit{% else %}Add{% endif %} {{ model_name }}</h4>
+                <!-- Toggle button to show/hide the form -->
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#dataFormCollapse"
+                        aria-expanded="true" aria-controls="dataFormCollapse">
+                    <i class="fas fa-chevron-down"></i> <!-- Icon for collapsing -->
+                </button>
+            </div>
+
+            <div id="dataFormCollapse" class="card-body collapse{% if is_edit or form.errors %} show{% endif %}">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+
+                    {% if is_edit %}
+                        <!-- Show Update button for edit mode -->
+                        <button class="btn btn-primary w-md" type="submit" id="submit_btn">Update</button>
+                        <button type="button" class="btn btn-danger w-md" onclick="location.href='{{asset_base_url}}'">Cancel</button>
+                    {% else %}
+                        <!-- Show Submit button for add mode -->
+                        <button class="btn btn-success w-md" type="submit" id="submit_btn">Submit</button>
+                        <button class="btn btn-secondary w-md" type="reset" id="reset">Reset</button>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% if is_edit %}
+{% else %}
+<!-- DataTable - Only displayed in add mode -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">{{ model_name }} Available</h4>
+            </div>
+            <div class="card-body">
+                {% include 'snippets/data_tables/_data_tables.html' with data=data_json data_form=form datatable_fields=datatable_fields row_id_field='pk' asset_base_url=asset_base_url asset_base_api_url=asset_base_api_url table_id='assetsDatatable' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block body_end_extra_scripts %}
+    <!-- Required datatable js -->
+    <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+
+    <!-- Responsive datatables -->
+    <script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
+
+    <script src="{% static 'libs/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
+
+    <!-- Column visibility -->
+    <script src="{% static 'libs/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
+
+    <!-- alertifyjs js -->
+    <script src="{% static 'libs/alertifyjs/build/alertify.min.js' %}"></script>
+{% endblock body_end_extra_scripts %}

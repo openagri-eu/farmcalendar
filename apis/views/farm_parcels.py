@@ -13,18 +13,20 @@ class FarmViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows Farm to be viewed or edited.
     """
-    queryset = Farm.objects.all().order_by('-created_at')
+    queryset = Farm.objects.all().prefetch_related('farm_parcels').order_by('-created_at')
     serializer_class = FarmSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['name', 'status']
 
 
 class FarmParcelViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows FarmParcel to be viewed or edited.
     """
-    queryset = FarmParcel.objects.all().order_by('-created_at')
+    queryset = FarmParcel.objects.all().prefetch_related('farmcrops').order_by('-created_at')
     serializer_class = FarmParcelSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['identifier', 'farm', 'parcel_type', 'geo_id', 'status']
 
 
 

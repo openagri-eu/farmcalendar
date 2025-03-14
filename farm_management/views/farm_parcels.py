@@ -75,13 +75,16 @@ class FarmParcelView(LoginRequiredMixin, TemplateView):
             farm_parcel = None
             form = FarmParcelsForm(request.POST)
 
+        context = self.get_context_data(**kwargs)
         # Validate form and handle redirection or re-rendering with errors
         if form.is_valid():
             form.save()
             return redirect(self.success_url)
 
-        context = self.get_context_data(**kwargs)
-        context['form'] = form
+        context.update({
+            'form': form,
+            'is_edit': bool(pk)
+        })
         return render(request, self.template_name, context)
 
     # Handle DELETE requests for deleting

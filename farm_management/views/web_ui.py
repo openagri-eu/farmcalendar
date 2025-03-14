@@ -2,10 +2,14 @@ from urllib.parse import urlencode
 
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+
+import requests
+
+from farm_calendar.utils.jwt_utils import get_user_id_from_token, get_token_from_jwt_request
 
 
 def index_view(request):
@@ -13,7 +17,7 @@ def index_view(request):
 
 
 def post_authentication(request):
-    auth_token = request.GET.get('auth_token', None)
+    auth_token = request.GET.get(settings.POST_AUTH_TOKEN_ATTRIBUTE, None)
     user = authenticate(request, token=auth_token)
     response = None
     if user is not None:
@@ -41,3 +45,19 @@ def login_view(request):
         else:
             messages.error(request, 'Invalid username or password')
     return render(request, 'auth/login.html')
+
+
+@login_required
+def logout_view(request):
+    response  = redirect('login')
+    if settings.GATEKEEPER_LOGOUT_API_URL is not None:
+        token = get_token_from_jwt_request(request)
+        payload = {
+            'refresh': token
+        }
+        req = requests.post(settings.GATEKEEPER_LOGOUT_API_URL, json=payload)
+        if req.status_code != 200:
+            messages.error(request, 'Failed to logout current user at gatekeeper')
+    response.delete_cookie(settings.JWT_COOKIE_NAME)
+    logout(request)
+    return response

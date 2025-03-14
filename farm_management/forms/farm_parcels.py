@@ -117,20 +117,20 @@ class FarmParcelsForm(forms.ModelForm):
         required=False, label="Irrigation Flow (units)",
         widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Flow rate'})
     )
-    geo_id = forms.CharField(
+    geo_id = forms.UUIDField(
         required=False, label="Geographic Data ID",
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Geographic UUID'})
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Geographic UUID', 'readonly': 'readonly'})
     )
 
-    latitude = forms.DecimalField(
-        max_digits=15, decimal_places=2, required=False, label="Latitude",
-        widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Latitude'})
-    )
+    # latitude = forms.DecimalField(
+    #     max_digits=15, decimal_places=2, required=False, label="Latitude",
+    #     widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Latitude'})
+    # )
 
-    longitude = forms.DecimalField(
-        max_digits=15, decimal_places=2, required=False, label="Longitude",
-        widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Longitude'})
-    )
+    # longitude = forms.DecimalField(
+    #     max_digits=15, decimal_places=2, required=False, label="Longitude",
+    #     widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Longitude'})
+    # )
 
     geometry = forms.CharField(
         required=False, label="Geometry (WKT)",
@@ -144,5 +144,5 @@ class FarmParcelsForm(forms.ModelForm):
         fields = [
             'farm', 'identifier', 'description', 'parcel_type', 'valid_from', 'valid_to', 'in_region', 'has_toponym',
             'area', 'is_nitro_area', 'is_natura2000_area', 'is_pdopg_area', 'is_irrigated', 'is_cultivated_in_levels',
-            'is_ground_slope', 'depiction', 'irrigation_flow', 'geo_id', 'latitude', 'longitude', 'geometry'
+            'is_ground_slope', 'depiction', 'irrigation_flow', 'latitude', 'longitude', 'geometry', 'geo_id',
         ]
