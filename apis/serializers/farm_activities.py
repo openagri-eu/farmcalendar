@@ -574,18 +574,28 @@ class CompostOperationSerializer(FarmCalendarActivitySerializer):
         )
         for json_activity, nested_activity in json_and_instances_list:
             class_name = 'Observation'
-            for field in ['addrawmaterialoperation', 'irrigationoperation', 'compostturningoperation']:
+            for field in ['addrawmaterialoperation', 'irrigationoperation', 'compostturningoperation', 'observation']:
                 try:
-                    class_name = getattr(nested_activity, field).__class__.__name__
+                    nested_instance = getattr(nested_activity, field)
+                    class_name = nested_instance.__class__.__name__
+                    if field == 'observation':
+                        try:
+                            class_name = getattr(nested_instance, 'npkobservationcollection').__class__.__name__
+                            break
+                        except ObjectDoesNotExist as e:
+                            continue
                     break
                 except ObjectDoesNotExist as e:
                     continue
-
             fixed_id = json_activity['@id'].format(class_name=class_name)
-            fixed_type = json_activity['@type'].format(class_name=class_name)
+            if 'npk' in class_name.lower():
+                fixed_type = json_activity['@type'].format(class_name='ObservationCollection')
+            else:
+                fixed_type = json_activity['@type'].format(class_name=class_name)
+
             json_activity['@id'] = fixed_id
             json_activity['@type'] = fixed_type
-            if class_name == 'Observation':
+            if 'Observation' in class_name:
                 clean_nested_obs.append(json_activity)
             else:
                 clean_nested_activities.append(json_activity)
