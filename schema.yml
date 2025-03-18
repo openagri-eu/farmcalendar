@@ -1313,6 +1313,267 @@ paths:
       responses:
         '204':
           description: No response body
+  /api/v1/CompostOperations/{compost_operation_pk}/NPKObservationCollections/:
+    get:
+      operationId: api_v1_CompostOperations_NPKObservationCollections_list
+      description: API endpoint that allows NPKObservationCollection to be viewed
+        or edited.
+      parameters:
+      - in: query
+        name: activity_type
+        schema:
+          type: string
+          format: uuid
+      - in: path
+        name: compost_operation_pk
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: query
+        name: responsible_agent
+        schema:
+          type: string
+      - in: query
+        name: title
+        schema:
+          type: string
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NPKObservationCollection'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NPKObservationCollection'
+          description: ''
+    post:
+      operationId: api_v1_CompostOperations_NPKObservationCollections_create
+      description: API endpoint that allows NPKObservationCollection to be viewed
+        or edited.
+      parameters:
+      - in: path
+        name: compost_operation_pk
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NPKObservationCollection'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/NPKObservationCollection'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/NPKObservationCollection'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/NPKObservationCollection'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NPKObservationCollection'
+          description: ''
+  /api/v1/CompostOperations/{compost_operation_pk}/NPKObservationCollections/{id}/:
+    get:
+      operationId: api_v1_CompostOperations_NPKObservationCollections_retrieve
+      description: API endpoint that allows NPKObservationCollection to be viewed
+        or edited.
+      parameters:
+      - in: path
+        name: compost_operation_pk
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this NPK Observation Collection.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/NPKObservationCollection'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NPKObservationCollection'
+          description: ''
+    put:
+      operationId: api_v1_CompostOperations_NPKObservationCollections_update
+      description: API endpoint that allows NPKObservationCollection to be viewed
+        or edited.
+      parameters:
+      - in: path
+        name: compost_operation_pk
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this NPK Observation Collection.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NPKObservationCollection'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/NPKObservationCollection'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/NPKObservationCollection'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/NPKObservationCollection'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NPKObservationCollection'
+          description: ''
+    patch:
+      operationId: api_v1_CompostOperations_NPKObservationCollections_partial_update
+      description: API endpoint that allows NPKObservationCollection to be viewed
+        or edited.
+      parameters:
+      - in: path
+        name: compost_operation_pk
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this NPK Observation Collection.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedNPKObservationCollection'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedNPKObservationCollection'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedNPKObservationCollection'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/NPKObservationCollection'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NPKObservationCollection'
+          description: ''
+    delete:
+      operationId: api_v1_CompostOperations_NPKObservationCollections_destroy
+      description: API endpoint that allows NPKObservationCollection to be viewed
+        or edited.
+      parameters:
+      - in: path
+        name: compost_operation_pk
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this NPK Observation Collection.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
   /api/v1/CompostOperations/{compost_operation_pk}/Observations/:
     get:
       operationId: api_v1_CompostOperations_Observations_list
@@ -4710,6 +4971,237 @@ paths:
       responses:
         '204':
           description: No response body
+  /api/v1/NPKObservationCollections/:
+    get:
+      operationId: api_v1_NPKObservationCollections_list
+      description: API endpoint that allows NPKObservationCollection to be viewed
+        or edited.
+      parameters:
+      - in: query
+        name: activity_type
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: query
+        name: responsible_agent
+        schema:
+          type: string
+      - in: query
+        name: title
+        schema:
+          type: string
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NPKObservationCollection'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NPKObservationCollection'
+          description: ''
+    post:
+      operationId: api_v1_NPKObservationCollections_create
+      description: API endpoint that allows NPKObservationCollection to be viewed
+        or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NPKObservationCollection'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/NPKObservationCollection'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/NPKObservationCollection'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/NPKObservationCollection'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NPKObservationCollection'
+          description: ''
+  /api/v1/NPKObservationCollections/{id}/:
+    get:
+      operationId: api_v1_NPKObservationCollections_retrieve
+      description: API endpoint that allows NPKObservationCollection to be viewed
+        or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this NPK Observation Collection.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/NPKObservationCollection'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NPKObservationCollection'
+          description: ''
+    put:
+      operationId: api_v1_NPKObservationCollections_update
+      description: API endpoint that allows NPKObservationCollection to be viewed
+        or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this NPK Observation Collection.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NPKObservationCollection'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/NPKObservationCollection'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/NPKObservationCollection'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/NPKObservationCollection'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NPKObservationCollection'
+          description: ''
+    patch:
+      operationId: api_v1_NPKObservationCollections_partial_update
+      description: API endpoint that allows NPKObservationCollection to be viewed
+        or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this NPK Observation Collection.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedNPKObservationCollection'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedNPKObservationCollection'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedNPKObservationCollection'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/NPKObservationCollection'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NPKObservationCollection'
+          description: ''
+    delete:
+      operationId: api_v1_NPKObservationCollections_destroy
+      description: API endpoint that allows NPKObservationCollection to be viewed
+        or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this NPK Observation Collection.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
   /api/v1/Observations/:
     get:
       operationId: api_v1_Observations_list
@@ -6229,6 +6721,34 @@ components:
           nullable: true
       required:
       - name
+    NPKObservationCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        activityType:
+          type: string
+          format: uuid
+        title:
+          type: string
+          maxLength: 200
+        details:
+          type: string
+          nullable: true
+        phenomenonTime:
+          type: string
+          format: date-time
+        madeBySensor:
+          allOf:
+          - $ref: '#/components/schemas/MadeBySensorField'
+          nullable: true
+      required:
+      - activityType
+      - id
+      - madeBySensor
+      - phenomenonTime
     Observation:
       type: object
       properties:
@@ -6912,6 +7432,29 @@ components:
         operatedOn:
           type: string
           format: uuid
+          nullable: true
+    PatchedNPKObservationCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        activityType:
+          type: string
+          format: uuid
+        title:
+          type: string
+          maxLength: 200
+        details:
+          type: string
+          nullable: true
+        phenomenonTime:
+          type: string
+          format: date-time
+        madeBySensor:
+          allOf:
+          - $ref: '#/components/schemas/MadeBySensorField'
           nullable: true
     PatchedObservation:
       type: object
