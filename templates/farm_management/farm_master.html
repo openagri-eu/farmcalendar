@@ -140,7 +140,7 @@
     <script src="{% static 'libs/moment/js/moment.min.js' %}"></script>
 
     <script>
-        const farms = JSON.parse('{{ farms|safe }}');
+        const farms = JSON.parse('{{ farms|escapejs }}');
 
         $('#datatable').DataTable({
             data: farms,
