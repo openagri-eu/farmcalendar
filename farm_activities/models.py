@@ -156,17 +156,6 @@ class CropProtectionOperation(FarmCalendarActivity):
     pesticide = models.ForeignKey('farm_management.Pesticide', on_delete=models.SET_NULL, blank=True, null=True)
 
 
-
-class NPKObservationCollection(FarmCalendarActivity):
-
-    ACTIVITY_NAME = settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['npk_observation']['name']
-
-    class Meta:
-        verbose_name = "NPK Observation Collection"
-        verbose_name_plural = "NPK Observation Collections"
-
-
-
 class Observation(FarmCalendarActivity):
     sensor_id = models.CharField(_('Made By Sensor'), max_length=255, blank=True, null=True)
 
@@ -178,14 +167,23 @@ class Observation(FarmCalendarActivity):
     value_unit = models.CharField(max_length=255, blank=True, null=True)
     observed_property = models.CharField(max_length=255)
 
-    observation_group = models.ForeignKey(
-        NPKObservationCollection,
-        on_delete=models.SET_NULL,
-        related_name="observations",
-        null=True,
-        blank=True
-    )
 
+class NPKObservationCollection(Observation):
+
+    ACTIVITY_NAME = settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['npk_observation']['name']
+
+    class Meta:
+        verbose_name = "NPK Observation Collection"
+        verbose_name_plural = "NPK Observation Collections"
+
+
+    value2 = models.CharField(_('Phosphorus Value'), max_length=255)
+    value_unit2 = models.CharField(_('Phosphorus Unit'), max_length=255, blank=True, null=True)
+    observed_property2 = models.CharField(_('Phosphorus Propery Name'), max_length=255)
+
+    value3 = models.CharField(_('Potassium Value'), max_length=255)
+    value_unit3 = models.CharField(_('Potassium Unit'), max_length=255, blank=True, null=True)
+    observed_property3 = models.CharField(_('Potassium Propery Name'), max_length=255)
 
 
 

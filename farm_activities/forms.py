@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from django import forms
 from django.conf import settings
 from django.forms import modelform_factory
+from django.utils.translation import gettext_lazy as _
 from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
 from django.urls import reverse
@@ -79,23 +80,16 @@ def get_nested_activities_form(base_activity_form_cls):
     return CustomNestedActivityForm
 
 
-def get_observation_collection_form(base_activity_form_cls):
-    class CustomObservationCollectionActivityForm(base_activity_form_cls):
-        observations = forms.ModelMultipleChoiceField(
-            queryset=FarmCalendarActivity.objects.none(),  # Default to empty queryset
-            required=False,
-            label="Observation Collection",
-            widget=ReadOnlyNestedActivitiesWidget(),
-        )
+def get_npk_observation_collection_form(base_activity_form_cls):
+    class NPKObservationCollectionActivityForm(base_activity_form_cls):
 
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
+            self.fields['value'].label = _('Nitrogen Value')
+            self.fields['value_unit'].label = _('Nitrogen Unit')
+            self.fields['observed_property'].label = _('Nitrogen Property Name')
 
-            if self.instance and self.instance.pk:
-                self.fields['observations'].queryset = self.instance.observations.all()
-                self.initial['observations'] = self.instance.observations.all()
-
-    return CustomObservationCollectionActivityForm
+    return NPKObservationCollectionActivityForm
 
 
 def get_parent_activity_form(base_activity_form_cls):
@@ -260,7 +254,6 @@ def get_generic_farm_calendar_activity_form(activity_type):
             'end_datetime': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
             'activity_type': forms.HiddenInput(),
             'nested_activities': ReadOnlyNestedActivitiesWidget(),  # Replace widget here
-            'observations': ReadOnlyNestedActivitiesWidget(),  # Replace widget here
         },
     )
 
@@ -270,7 +263,7 @@ def get_generic_farm_calendar_activity_form(activity_type):
         GenericActivityForm = get_nested_activities_form(BaseGenericActivityForm)
 
     if activity_type == settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['npk_observation']['name']:
-        GenericActivityForm = get_observation_collection_form(BaseGenericActivityForm)
+        GenericActivityForm = get_npk_observation_collection_form(BaseGenericActivityForm)
 
     if activity_type in nested_compost_activities:
         GenericNestedActivityForm = get_parent_activity_form(BaseGenericActivityForm)

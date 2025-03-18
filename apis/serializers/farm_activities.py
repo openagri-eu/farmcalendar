@@ -279,9 +279,65 @@ class ObservationSerializer(FarmCalendarActivitySerializer):
         return super().create(validated_data)
 
 
+def npk_observation_serializer_factory(observed_property_field, value_field, unit_field):
+    class NPKObservationSerializer(serializers.Serializer):
+        observedProperty = serializers.CharField(source=observed_property_field)
+        hasResult = quantity_value_serializer_factory(unit_field, value_field)(source="*")
+
+        def to_representation(self, instance):
+            representation = super().to_representation(instance)
+
+            json_ld_representation = {
+                '@type': 'Observation',
+                '@id': generate_urn('Observation', obj_id=instance.id),
+                **representation
+            }
+
+            return json_ld_representation
+
+    return NPKObservationSerializer
+
+
+class NPKObservationListSerializer(serializers.Serializer):
+    """
+    Serializer for handling a list of three observations.
+    - Works for both input (deserialization) and output (serialization).
+    """
+
+    def to_representation(self, obj):
+        """ Convert model instance to JSON format (output). """
+        n_property = npk_observation_serializer_factory("observed_property", "value", "value_unit")(obj)
+        p_property = npk_observation_serializer_factory("observed_property2", "value2", "value_unit2")(obj)
+        k_property = npk_observation_serializer_factory("observed_property3", "value3", "value_unit3")(obj)
+
+        n_rep = n_property.to_representation(obj)
+        p_rep = p_property.to_representation(obj)
+        k_rep = k_property.to_representation(obj)
+        return [
+            n_rep,
+            p_rep,
+            k_rep,
+        ]
+
+    def to_internal_value(self, data):
+        if not isinstance(data, list) or len(data) != 3:
+            raise serializers.ValidationError("NPK hasMember must be a list of exactly 3 observations.")
+
+        n_property = npk_observation_serializer_factory("observed_property", "value", "value_unit")(self)
+        p_property = npk_observation_serializer_factory("observed_property2", "value2", "value_unit2")(self)
+        k_property = npk_observation_serializer_factory("observed_property3", "value3", "value_unit3")(self)
+        ret_data = {}
+        ret_data.update(n_property.to_internal_value(data[0]))
+        ret_data.update(p_property.to_internal_value(data[1]))
+        ret_data.update(k_property.to_internal_value(data[2]))
+        return ret_data
+
+
+
 class NPKObservationCollectionSerializer(FarmCalendarActivitySerializer):
     phenomenonTime = serializers.DateTimeField(source='start_datetime')
-    hasMember = ObservationSerializer(source='observations', many=True)
+    hasMember = NPKObservationListSerializer(source='*')
+    madeBySensor = MadeBySensorFieldSerializer(source='*', allow_null=True)
 
     class Meta:
         model = NPKObservationCollection
@@ -290,12 +346,14 @@ class NPKObservationCollectionSerializer(FarmCalendarActivitySerializer):
             'activityType',
             'title', 'details',
             'phenomenonTime',
+            'madeBySensor',
             'hasMember',
         ]
 
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
+
         representation.update({'@type': 'ObservationCollection'})
         json_ld_representation = representation
 
@@ -305,34 +363,7 @@ class NPKObservationCollectionSerializer(FarmCalendarActivitySerializer):
         if self.context['view'].kwargs.get('compost_operation_pk'):
             validated_data['parent_activity'] = CompostOperation.objects.get(pk=self.context['view'].kwargs.get('compost_operation_pk'))
 
-        observations_data = validated_data.pop('observations', [])
-        import ipdb; ipdb.set_trace()
-        instance = super().create(validated_data)
-
-        for obs in observations_data:
-            instance.observations.create(**obs)
-
-        return instance
-
-    # def update(self, instance, validated_data):
-    #     compost_data = validated_data.pop('observation_set', [])
-    #     instance = super().update(instance, validated_data)
-
-    #     instance.observation_set.all().delete()
-    #     for compost in compost_data:
-    #         material = CompostMaterial.objects.get_or_create(name=compost.pop('material')['name'])[0]
-
-    #         AddRawMaterialCompostQuantity.objects.create(operation=instance, material=material, **compost)
-
-    #     return instance
-
-
-
-
-
-
-
-
+        return super().create(validated_data)
 
 
 class CropStressIndicatorObservationSerializer(ObservationSerializer):
