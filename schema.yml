@@ -5581,7 +5581,9 @@ components:
           type: string
           format: date-time
         madeBySensor:
-          $ref: '#/components/schemas/MadeBySensorField'
+          allOf:
+          - $ref: '#/components/schemas/MadeBySensorField'
+          nullable: true
         hasAgriCrop:
           type: string
           format: uuid
@@ -5677,7 +5679,9 @@ components:
           type: string
           format: date-time
         madeBySensor:
-          $ref: '#/components/schemas/MadeBySensorField'
+          allOf:
+          - $ref: '#/components/schemas/MadeBySensorField'
+          nullable: true
         hasAgriCrop:
           type: string
           format: uuid
@@ -6249,7 +6253,9 @@ components:
           type: string
           format: date-time
         madeBySensor:
-          $ref: '#/components/schemas/MadeBySensorField'
+          allOf:
+          - $ref: '#/components/schemas/MadeBySensorField'
+          nullable: true
         hasResult:
           $ref: '#/components/schemas/GenericQuantityValueField'
         observedProperty:
@@ -6437,7 +6443,9 @@ components:
           type: string
           format: date-time
         madeBySensor:
-          $ref: '#/components/schemas/MadeBySensorField'
+          allOf:
+          - $ref: '#/components/schemas/MadeBySensorField'
+          nullable: true
         hasAgriCrop:
           type: string
           format: uuid
@@ -6505,7 +6513,9 @@ components:
           type: string
           format: date-time
         madeBySensor:
-          $ref: '#/components/schemas/MadeBySensorField'
+          allOf:
+          - $ref: '#/components/schemas/MadeBySensorField'
+          nullable: true
         hasAgriCrop:
           type: string
           format: uuid
@@ -6933,7 +6943,9 @@ components:
           type: string
           format: date-time
         madeBySensor:
-          $ref: '#/components/schemas/MadeBySensorField'
+          allOf:
+          - $ref: '#/components/schemas/MadeBySensorField'
+          nullable: true
         hasResult:
           $ref: '#/components/schemas/GenericQuantityValueField'
         observedProperty:
