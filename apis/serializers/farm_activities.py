@@ -247,7 +247,7 @@ class ObservationSerializer(FarmCalendarActivitySerializer):
     phenomenonTime = serializers.DateTimeField(source='start_datetime')
     observedProperty = serializers.CharField(source='observed_property')
     hasResult = quantity_value_serializer_factory('value_unit', 'value')(source='*')
-    madeBySensor = MadeBySensorFieldSerializer(source='*')
+    madeBySensor = MadeBySensorFieldSerializer(source='*', allow_null=True)
 
     class Meta:
         model = Observation
