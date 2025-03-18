@@ -24,6 +24,7 @@ from .models import (
     CropStressIndicatorObservation,
     CropGrowthStageObservation,
     CompostTurningOperation,
+    NPKObservationCollection,
 )
 from farm_management.models import CompostMaterial
 
@@ -76,6 +77,25 @@ def get_nested_activities_form(base_activity_form_cls):
                 self.initial['nested_activities'] = self.instance.nested_activities.all()
 
     return CustomNestedActivityForm
+
+
+def get_observation_collection_form(base_activity_form_cls):
+    class CustomObservationCollectionActivityForm(base_activity_form_cls):
+        observations = forms.ModelMultipleChoiceField(
+            queryset=FarmCalendarActivity.objects.none(),  # Default to empty queryset
+            required=False,
+            label="Observation Collection",
+            widget=ReadOnlyNestedActivitiesWidget(),
+        )
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+
+            if self.instance and self.instance.pk:
+                self.fields['observations'].queryset = self.instance.observations.all()
+                self.initial['observations'] = self.instance.observations.all()
+
+    return CustomObservationCollectionActivityForm
 
 
 def get_parent_activity_form(base_activity_form_cls):
@@ -212,6 +232,7 @@ def get_generic_farm_calendar_activity_form(activity_type):
         settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['compost_operation']['name']: CompostOperation,
         settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['add_raw_material_operation']['name']: AddRawMaterialOperation,
         settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['compost_turning_operation']['name']: CompostTurningOperation,
+        settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['npk_observation']['name']: NPKObservationCollection,
     }
     nested_compost_activities = [
         settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['irrigation']['name'],
@@ -239,6 +260,7 @@ def get_generic_farm_calendar_activity_form(activity_type):
             'end_datetime': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
             'activity_type': forms.HiddenInput(),
             'nested_activities': ReadOnlyNestedActivitiesWidget(),  # Replace widget here
+            'observations': ReadOnlyNestedActivitiesWidget(),  # Replace widget here
         },
     )
 
@@ -246,6 +268,9 @@ def get_generic_farm_calendar_activity_form(activity_type):
     # If the activity is "add_raw_material_operation", add a parent_activities field
     if activity_type == settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['compost_operation']['name']:
         GenericActivityForm = get_nested_activities_form(BaseGenericActivityForm)
+
+    if activity_type == settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['npk_observation']['name']:
+        GenericActivityForm = get_observation_collection_form(BaseGenericActivityForm)
 
     if activity_type in nested_compost_activities:
         GenericNestedActivityForm = get_parent_activity_form(BaseGenericActivityForm)

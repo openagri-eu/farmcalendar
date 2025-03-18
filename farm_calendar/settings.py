@@ -374,5 +374,13 @@ DEFAULT_CALENDAR_ACTIVITY_TYPES = {
         'border_color': '#72512D',
         'text_color': '#3C4F2E',
         'id': '00000000-0000-0000-0000-000000000008',
+    },
+    'npk_observation': {
+        'name': 'NPK Observation',
+        'description': 'NPK Observation',
+        'background_color': '#8FBC8F',
+        'border_color': '#556B2F',
+        'text_color': '#2E4A2E',
+        'id': '00000000-0000-0000-0000-000000000009',
     }
 }

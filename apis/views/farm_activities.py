@@ -12,6 +12,7 @@ from farm_activities.models import (
     CompostOperation,
     AddRawMaterialOperation,
     CompostTurningOperation,
+    NPKObservationCollection
 )
 from ..serializers import (
     FarmCalendarActivitySerializer,
@@ -25,6 +26,7 @@ from ..serializers import (
     CompostOperationSerializer,
     AddRawMaterialOperationSerializer,
     CompostTurningOperationSerializer,
+    NPKObservationCollectionSerializer,
 )
 
 
@@ -159,3 +161,22 @@ class CompostTurningOperationViewSet(viewsets.ModelViewSet):
         if self.kwargs.get('compost_operation_pk'):
             queryset = queryset.filter(parent_activity=self.kwargs['compost_operation_pk'])
         return queryset
+
+
+
+class NPKObservationCollectionViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows NPKObservationCollection to be viewed or edited.
+    """
+    queryset = NPKObservationCollection.objects.all().order_by('-start_datetime')
+    serializer_class = NPKObservationCollectionSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['title','activity_type', 'responsible_agent']
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.kwargs.get('compost_operation_pk'):
+            queryset = queryset.filter(parent_activity=self.kwargs['compost_operation_pk'])
+        return queryset
+
+

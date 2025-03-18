@@ -25,6 +25,7 @@ from farm_activities.models import (
     AddRawMaterialOperation,
     AddRawMaterialCompostQuantity,
     CompostTurningOperation,
+    NPKObservationCollection,
 )
 
 from .base import URNRelatedField, URNCharField
@@ -276,6 +277,62 @@ class ObservationSerializer(FarmCalendarActivitySerializer):
             validated_data['parent_activity'] = CompostOperation.objects.get(pk=self.context['view'].kwargs.get('compost_operation_pk'))
 
         return super().create(validated_data)
+
+
+class NPKObservationCollectionSerializer(FarmCalendarActivitySerializer):
+    phenomenonTime = serializers.DateTimeField(source='start_datetime')
+    hasMember = ObservationSerializer(source='observations', many=True)
+
+    class Meta:
+        model = NPKObservationCollection
+        fields = [
+            'id',
+            'activityType',
+            'title', 'details',
+            'phenomenonTime',
+            'hasMember',
+        ]
+
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation.update({'@type': 'ObservationCollection'})
+        json_ld_representation = representation
+
+        return json_ld_representation
+
+    def create(self, validated_data):
+        if self.context['view'].kwargs.get('compost_operation_pk'):
+            validated_data['parent_activity'] = CompostOperation.objects.get(pk=self.context['view'].kwargs.get('compost_operation_pk'))
+
+        observations_data = validated_data.pop('observations', [])
+        import ipdb; ipdb.set_trace()
+        instance = super().create(validated_data)
+
+        for obs in observations_data:
+            instance.observations.create(**obs)
+
+        return instance
+
+    # def update(self, instance, validated_data):
+    #     compost_data = validated_data.pop('observation_set', [])
+    #     instance = super().update(instance, validated_data)
+
+    #     instance.observation_set.all().delete()
+    #     for compost in compost_data:
+    #         material = CompostMaterial.objects.get_or_create(name=compost.pop('material')['name'])[0]
+
+    #         AddRawMaterialCompostQuantity.objects.create(operation=instance, material=material, **compost)
+
+    #     return instance
+
+
+
+
+
+
+
+
 
 
 class CropStressIndicatorObservationSerializer(ObservationSerializer):

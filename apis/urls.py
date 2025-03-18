@@ -25,6 +25,7 @@ from .views import (
     CompostOperationViewSet,
     AddRawMaterialOperationViewSet,
     CompostTurningOperationViewSet,
+    NPKObservationCollectionViewSet,
 )
 
 router = routers.DefaultRouter()
@@ -47,13 +48,15 @@ router.register(r'CropGrowthStageObservations', CropGrowthStageObservationViewSe
 router.register(r'AddRawMaterialOperations', AddRawMaterialOperationViewSet)
 router.register(r'CompostOperations', CompostOperationViewSet)
 router.register(r'CompostTurningOperations', CompostTurningOperationViewSet)
+router.register(r'NPKObservationCollections', NPKObservationCollectionViewSet)
 
 
 compost_operations_router = routers.NestedSimpleRouter(router, r'CompostOperations', lookup='compost_operation')
 compost_operations_router.register(r'AddRawMaterialOperations', AddRawMaterialOperationViewSet, basename=f'compost-operation-addrawmaterialoperation')
 compost_operations_router.register(r'IrrigationOperations', IrrigationOperationViewSet, basename=f'compost-operation-irrigationoperation')
 compost_operations_router.register(r'Observations', ObservationViewSet, basename=f'compost-operation-observation')
-compost_operations_router.register(r'CompostTurningOperations', CompostTurningOperationViewSet, basename=f'compost-turning-operation-observation')
+compost_operations_router.register(r'CompostTurningOperations', CompostTurningOperationViewSet, basename=f'compost-operation-compostturningoperation')
+compost_operations_router.register(r'NPKObservationCollections', NPKObservationCollectionViewSet, basename=f'compost-operation-npkobservationcollection')
 
 
 
