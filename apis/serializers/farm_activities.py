@@ -34,7 +34,7 @@ from ..schemas import generate_urn
 def quantity_value_serializer_factory(unit_field, value_field):
 
     class GenericQuantityValueFieldSerializer(serializers.Serializer):
-        unit = serializers.CharField(source=unit_field, allow_null=True)
+        unit = serializers.CharField(source=unit_field, allow_null=True, required=False)
         hasValue = serializers.CharField(source=value_field)
 
 
