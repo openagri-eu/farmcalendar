@@ -172,7 +172,7 @@
     <script src="{% static 'libs/flatpickr/flatpickr_v4.6.13.js' %}"></script>
 
     <script>
-        const farm_parcels = JSON.parse('{{ farm_parcels|safe }}');
+        const farm_parcels = JSON.parse('{{ farm_parcels|escapejs }}');
 
             $('#datatable').DataTable({
                 data: farm_parcels,
