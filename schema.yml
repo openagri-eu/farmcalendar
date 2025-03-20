@@ -5596,7 +5596,6 @@ components:
       - hasAgriCrop
       - hasResult
       - id
-      - madeBySensor
       - observedProperty
       - phenomenonTime
     CropProtectionOperation:
@@ -5694,7 +5693,6 @@ components:
       - hasAgriCrop
       - hasResult
       - id
-      - madeBySensor
       - observedProperty
       - phenomenonTime
     Farm:
@@ -6154,7 +6152,6 @@ components:
           type: string
       required:
       - hasValue
-      - unit
     GeometrySerializerField:
       type: object
       properties:
@@ -6264,7 +6261,6 @@ components:
       - activityType
       - hasResult
       - id
-      - madeBySensor
       - observedProperty
       - phenomenonTime
     PatchedAddRawMaterialOperation:
