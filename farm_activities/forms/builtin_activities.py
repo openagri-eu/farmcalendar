@@ -39,7 +39,6 @@ from .widgets import CompostMaterialsWidget
 class FertilizationOperationForm(FarmCalendarActivityForm):
     class Meta(FarmCalendarActivityForm.Meta):
         model = FertilizationOperation
-        # widgets = FarmCalendarActivityForm.Meta.widgets
 
 
 class CropProtectionOperationForm(FarmCalendarActivityForm):
