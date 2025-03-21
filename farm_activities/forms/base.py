@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import modelform_factory
 
+from dal import autocomplete
 
 from ..models import FarmCalendarActivityType, FarmCalendarActivity, Observation
 from .widgets import ReadOnlyNestedActivitiesWidget
@@ -29,48 +30,27 @@ class FarmCalendarActivityTypeForm(forms.ModelForm):
 class FarmCalendarActivityForm(forms.ModelForm):
     class Meta:
         model = FarmCalendarActivity
-        fields = [
-            "activity_type",
-            "title",
-            "start_datetime",
-            "end_datetime",
-            "details",
-            "responsible_agent",
-            "agricultural_machinery",
-            # "parent_activity",
+        fields = '__all__'
+        exclude = [
+            'id',
+            'parent_activity'
         ]
-        widgets={
+        widgets = {
             "start_datetime": forms.DateTimeInput(attrs={"type": "datetime-local"}),
             "end_datetime": forms.DateTimeInput(attrs={"type": "datetime-local"}),
             "activity_type": forms.HiddenInput(),
-            # "nested_activities": ReadOnlyNestedActivitiesWidget(),
-        },
-
-
-class ObservationForm(FarmCalendarActivityForm):
-    class Meta:
-        model = Observation
-        fields = FarmCalendarActivityForm.Meta.fields + ['parent_activitiy']
-        widgets = {
-            "background_color": forms.TextInput(attrs={"class": "color-picker"}),
-            "border_color": forms.TextInput(attrs={"class": "color-picker"}),
-            "text_color": forms.TextInput(attrs={"class": "color-picker"}),
         }
 
 
 class ParentActivityForm(FarmCalendarActivityForm):
     nested_activities = forms.ModelMultipleChoiceField(
-        queryset=FarmCalendarActivity.objects.none(),  # Default to empty queryset
+        queryset=FarmCalendarActivity.objects.none(),
         required=False,
         label="Nested Activities",
         widget=ReadOnlyNestedActivitiesWidget(),
     )
-    class Meta:
-        widgets = FarmCalendarActivityForm.Meta.widgets.copy()
-        widgets.update(
-            {
-                'nested_activities': ReadOnlyNestedActivitiesWidget(),
-            })
+    class Meta(FarmCalendarActivityForm.Meta):
+        pass
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -87,3 +67,13 @@ class NestedActivityForm(FarmCalendarActivityForm):
         widget=autocomplete.ModelSelect2(url='activities-autocomplete', attrs={'class': 'select2'}),
         label="Part of Activity"
     )
+
+    class Meta(FarmCalendarActivityForm.Meta):
+        pass
+
+class ObservationForm(NestedActivityForm):
+    class Meta(NestedActivityForm.Meta):
+        model = Observation
+        _parent_exc = NestedActivityForm.Meta.exclude.copy()
+        _parent_exc.remove('parent_activity')
+        exclude = _parent_exc

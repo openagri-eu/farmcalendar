@@ -28,36 +28,59 @@ from ..models import (
 from farm_management.models import CompostMaterial
 
 from .base import (
+    FarmCalendarActivityForm,
+    ObservationForm,
     NestedActivityForm,
     ParentActivityForm,
 )
 from .widgets import CompostMaterialsWidget
 
-        settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['fertilization']['name']: FertilizationOperation,
-        settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['irrigation']['name']: IrrigationOperation,
-        settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['crop_protection']['name']: CropProtectionOperation,
-        settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['crop_stress_indicator']['name']: CropStressIndicatorObservation,
-        settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['crop_growth_stage']['name']: CropGrowthStageObservation,
-        settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['compost_operation']['name']: CompostOperation,
-        settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['add_raw_material_operation']['name']: AddRawMaterialOperation,
-        settings.DEFAULT_CALENDAR_ACTIVITY_TYPES['compost_turning_operation']['name']: CompostTurningOperation,
+
+class FertilizationOperationForm(FarmCalendarActivityForm):
+    class Meta(FarmCalendarActivityForm.Meta):
+        model = FertilizationOperation
+        # widgets = FarmCalendarActivityForm.Meta.widgets
 
 
-CompostOperationForm = modelform_factory(CompostOperation, form=ParentActivityForm)
-FertilizationOperationForm = modelform_factory(CompostOperation, form=ParentActivityForm)
-CompostOperation = modelform_factory(CompostOperation, form=ParentActivityForm)
+class CropProtectionOperationForm(FarmCalendarActivityForm):
+    class Meta(FarmCalendarActivityForm.Meta):
+        model = CropProtectionOperation
 
-class RawMaterialNestedActivityForm(NestedActivityForm):
+
+class CropStressIndicatorObservationForm(ObservationForm):
+    class Meta(ObservationForm.Meta):
+        model = CropStressIndicatorObservation
+
+
+class CropGrowthStageObservationForm(ObservationForm):
+    class Meta(ObservationForm.Meta):
+        model = CropGrowthStageObservation
+
+
+class CompostOperationForm(ParentActivityForm):
+    class Meta(ParentActivityForm.Meta):
+        model = CompostOperation
+
+
+class IrrigationOperationForm(NestedActivityForm):
+    class Meta(NestedActivityForm.Meta):
+        model = IrrigationOperation
+
+
+class CompostTurningOperationForm(NestedActivityForm):
+    class Meta(NestedActivityForm.Meta):
+        model = CompostTurningOperation
+
+class AddRawMaterialOperationForm(NestedActivityForm):
     compost_materials_json = forms.JSONField(
         label='Compost Materials',
         required=False,  # Make this field optional if needed
         widget=CompostMaterialsWidget()
     )
 
-    class Meta:
+    class Meta(NestedActivityForm.Meta):
         model = AddRawMaterialOperation
         exclude = ['compost_materials']
-        widgets = NestedActivityForm.Meta.widgets
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

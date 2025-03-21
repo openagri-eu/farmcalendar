@@ -8,7 +8,6 @@ from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
 from django.urls import reverse
 
-from dal import autocomplete
 
 
 class ReadOnlyNestedActivitiesWidget(forms.Widget):
