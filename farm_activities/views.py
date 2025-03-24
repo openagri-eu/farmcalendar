@@ -1,11 +1,11 @@
-from django.db.models import Q
+from django.conf import settings
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import CharField
+from django.db.models.functions import Concat
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
-from django.conf import settings
-
 
 from .models import (
     FarmCalendarActivity,
@@ -135,12 +135,23 @@ class FarmCalendarActivityAutocomplete(View):
         search_term = request.GET.get('term', '')
 
         if search_term:
-            # Filter queryset by title or start_datetime
-            qs_values = FarmCalendarActivity.objects.filter(
-                Q(title__icontains=search_term) | Q(start_datetime__icontains=search_term)
-            ).values('pk', 'title', 'start_datetime')
 
-            # Create list of the string representations using __str__()
+            search_parts = search_term.split()
+
+            # Annotate by concatenating the title and start_datetime
+            annotated_qs = FarmCalendarActivity.objects.annotate(
+                activity_str=Concat('title', 'start_datetime', output_field=CharField())
+            )
+
+            filtered_qs = None
+            for part in search_parts:
+                if filtered_qs is None:
+                    filtered_qs = annotated_qs.filter(activity_str__icontains=part)
+                else:
+                    filtered_qs = filtered_qs.filter(activity_str__icontains=part)
+
+
+            qs_values = filtered_qs.values('pk', 'title', 'start_datetime')
             objs = [
                 {
                     'pk': activity['pk'],

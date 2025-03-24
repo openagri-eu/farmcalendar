@@ -68,7 +68,7 @@
 
 {% if form.parent_activity %}
     $('#id_parent_activity').select2({
-        placeholder: 'Select a Compost Operation',
+        placeholder: 'Select a Activity',
         allowClear: true,
         ajax: {
             url: "{% url 'activities-autocomplete' %}",  // Use the reverse URL lookup for your autocomplete view
