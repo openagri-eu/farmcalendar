@@ -17,7 +17,7 @@ from farm_management.forms import get_generic_farm_asset_form
 
 
 
-class BaseFarmAssetListManagementView(ListView, FormMixin, LoginRequiredMixin):
+class BaseFarmAssetListManagementView(LoginRequiredMixin, ListView, FormMixin):
     model = FarmAsset
     template_name = "farm_management/farm_assets/farm_assets.html"
     context_object_name = 'objects'
