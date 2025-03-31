@@ -16,7 +16,7 @@ from farm_management.constants import ERROR_PROCESSING
 from farm_management.forms import get_generic_treatment_materials_form
 
 
-class BaseTreatmentMaterialsListManagementView(ListView, FormMixin, LoginRequiredMixin):
+class BaseTreatmentMaterialsListManagementView(LoginRequiredMixin, FormMixin, ListView):
     model = None
     template_name = 'farm_management/farm_materials/treatment_materials.html'
     context_object_name = 'objects'
