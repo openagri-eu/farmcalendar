@@ -9,6 +9,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 from .views import (
     FarmViewSet,
     FarmParcelViewSet,
+    GenericFarmAssetSerializerViewSet,
     FarmCropViewSet,
     FarmAnimalViewSet,
     AgriculturalMachineViewSet,
@@ -31,6 +32,7 @@ router = routers.DefaultRouter()
 
 router.register(r'Farm', FarmViewSet)
 router.register(r'FarmParcels', FarmParcelViewSet)
+router.register(r'GenericFarmAssets', GenericFarmAssetSerializerViewSet)
 router.register(r'FarmCrops', FarmCropViewSet)
 router.register(r'FarmAnimals', FarmAnimalViewSet)
 router.register(r'AgriculturalMachines', AgriculturalMachineViewSet)

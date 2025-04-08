@@ -4485,6 +4485,239 @@ paths:
       responses:
         '204':
           description: No response body
+  /api/v1/GenericFarmAssets/:
+    get:
+      operationId: api_v1_GenericFarmAssets_list
+      description: API endpoint that allows GenericFarmAsset to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: query
+        name: name
+        schema:
+          type: string
+      - in: query
+        name: parcel
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: status
+        schema:
+          type: integer
+          enum:
+          - 0
+          - 1
+          - 2
+        description: |-
+          * `0` - Inactive
+          * `1` - Active
+          * `2` - Deleted
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GenericFarmAsset'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GenericFarmAsset'
+          description: ''
+    post:
+      operationId: api_v1_GenericFarmAssets_create
+      description: API endpoint that allows GenericFarmAsset to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericFarmAsset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GenericFarmAsset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GenericFarmAsset'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/GenericFarmAsset'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericFarmAsset'
+          description: ''
+  /api/v1/GenericFarmAssets/{id}/:
+    get:
+      operationId: api_v1_GenericFarmAssets_retrieve
+      description: API endpoint that allows GenericFarmAsset to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Generic Farm Asset.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/GenericFarmAsset'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericFarmAsset'
+          description: ''
+    put:
+      operationId: api_v1_GenericFarmAssets_update
+      description: API endpoint that allows GenericFarmAsset to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Generic Farm Asset.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericFarmAsset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GenericFarmAsset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GenericFarmAsset'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/GenericFarmAsset'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericFarmAsset'
+          description: ''
+    patch:
+      operationId: api_v1_GenericFarmAssets_partial_update
+      description: API endpoint that allows GenericFarmAsset to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Generic Farm Asset.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedGenericFarmAsset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedGenericFarmAsset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedGenericFarmAsset'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/GenericFarmAsset'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericFarmAsset'
+          description: ''
+    delete:
+      operationId: api_v1_GenericFarmAssets_destroy
+      description: API endpoint that allows GenericFarmAsset to be viewed or edited.
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - jsonld
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Generic Farm Asset.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
   /api/v1/IrrigationOperations/:
     get:
       operationId: api_v1_IrrigationOperations_list
@@ -6142,6 +6375,46 @@ components:
       - invalidatedAtTime
       - isPricePer
       - isTargetedTowards
+    GenericFarmAsset:
+      type: object
+      properties:
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        invalidatedAtTime:
+          type: string
+          format: date-time
+          readOnly: true
+        dateCreated:
+          type: string
+          format: date-time
+          readOnly: true
+        dateModified:
+          type: string
+          format: date-time
+          readOnly: true
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+        hasAgriParcel:
+          type: string
+          format: uuid
+      required:
+      - dateCreated
+      - dateModified
+      - hasAgriParcel
+      - id
+      - invalidatedAtTime
+      - name
     GenericQuantityValueField:
       type: object
       properties:
@@ -6880,6 +7153,39 @@ components:
           type: string
           format: date-time
           readOnly: true
+    PatchedGenericFarmAsset:
+      type: object
+      properties:
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        invalidatedAtTime:
+          type: string
+          format: date-time
+          readOnly: true
+        dateCreated:
+          type: string
+          format: date-time
+          readOnly: true
+        dateModified:
+          type: string
+          format: date-time
+          readOnly: true
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+        hasAgriParcel:
+          type: string
+          format: uuid
     PatchedIrrigationOperation:
       type: object
       properties:

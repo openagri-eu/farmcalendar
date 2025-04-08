@@ -11,7 +11,10 @@ from django.views.generic.edit import FormMixin, UpdateView
 from django.conf import settings
 
 
-from farm_management.models import FarmAsset, FarmCrop, FarmAnimal, AgriculturalMachine
+from farm_management.models import (
+    FarmAsset, GenericFarmAsset,
+    FarmCrop, FarmAnimal, AgriculturalMachine
+)
 from farm_management.constants import ERROR_PROCESSING
 from farm_management.forms import get_generic_farm_asset_form
 
@@ -97,6 +100,21 @@ class BaseFarmAssetUpdateView(UpdateView):
         context['asset_base_url'] = self.success_url
         context['model_name'] = self.model._meta.verbose_name
         return context
+
+class GenericFarmAssetUpdateView(BaseFarmAssetUpdateView):
+    model = GenericFarmAsset
+    form_class = get_generic_farm_asset_form(GenericFarmAsset)
+    template_name = 'farm_management/farm_assets/farm_assets.html'
+    success_url = reverse_lazy('generic_farm_assets')
+
+
+class GenericFarmAssetListView(BaseFarmAssetListManagementView):
+    model = GenericFarmAsset
+    template_name = "farm_management/farm_assets/farm_assets.html"
+    success_url = reverse_lazy('generic_farm_assets')
+    asset_base_url = reverse_lazy('generic_farm_assets')
+    form_class = get_generic_farm_asset_form(GenericFarmAsset)
+    datatable_fields = ['name', 'parcel']
 
 
 class FarmCropUpdateView(BaseFarmAssetUpdateView):
