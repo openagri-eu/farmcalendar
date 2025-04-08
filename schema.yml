@@ -5580,6 +5580,10 @@ components:
         phenomenonTime:
           type: string
           format: date-time
+        hasEndDatetime:
+          type: string
+          format: date-time
+          nullable: true
         madeBySensor:
           allOf:
           - $ref: '#/components/schemas/MadeBySensorField'
@@ -5594,6 +5598,7 @@ components:
       required:
       - activityType
       - hasAgriCrop
+      - hasEndDatetime
       - hasResult
       - id
       - observedProperty
@@ -5677,6 +5682,10 @@ components:
         phenomenonTime:
           type: string
           format: date-time
+        hasEndDatetime:
+          type: string
+          format: date-time
+          nullable: true
         madeBySensor:
           allOf:
           - $ref: '#/components/schemas/MadeBySensorField'
@@ -5691,6 +5700,7 @@ components:
       required:
       - activityType
       - hasAgriCrop
+      - hasEndDatetime
       - hasResult
       - id
       - observedProperty
@@ -6249,6 +6259,10 @@ components:
         phenomenonTime:
           type: string
           format: date-time
+        hasEndDatetime:
+          type: string
+          format: date-time
+          nullable: true
         madeBySensor:
           allOf:
           - $ref: '#/components/schemas/MadeBySensorField'
@@ -6259,6 +6273,7 @@ components:
           type: string
       required:
       - activityType
+      - hasEndDatetime
       - hasResult
       - id
       - observedProperty
@@ -6438,6 +6453,10 @@ components:
         phenomenonTime:
           type: string
           format: date-time
+        hasEndDatetime:
+          type: string
+          format: date-time
+          nullable: true
         madeBySensor:
           allOf:
           - $ref: '#/components/schemas/MadeBySensorField'
@@ -6508,6 +6527,10 @@ components:
         phenomenonTime:
           type: string
           format: date-time
+        hasEndDatetime:
+          type: string
+          format: date-time
+          nullable: true
         madeBySensor:
           allOf:
           - $ref: '#/components/schemas/MadeBySensorField'
@@ -6938,6 +6961,10 @@ components:
         phenomenonTime:
           type: string
           format: date-time
+        hasEndDatetime:
+          type: string
+          format: date-time
+          nullable: true
         madeBySensor:
           allOf:
           - $ref: '#/components/schemas/MadeBySensorField'
