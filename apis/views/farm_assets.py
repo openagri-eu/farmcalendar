@@ -1,16 +1,28 @@
 from rest_framework import permissions, viewsets
 
 from farm_management.models import (
+    GenericFarmAsset,
     FarmCrop,
     FarmAnimal,
     AgriculturalMachine,
 )
 from ..serializers import (
+    GenericFarmAssetSerializer,
     FarmCropSerializer,
     FarmAnimalSerializer,
     AgriculturalMachineSerializer,
 )
 
+
+
+class GenericFarmAssetSerializerViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows GenericFarmAsset to be viewed or edited.
+    """
+    queryset = GenericFarmAsset.objects.all().order_by('-created_at')
+    serializer_class = GenericFarmAssetSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['name', 'parcel', 'status']
 
 
 class FarmCropViewSet(viewsets.ModelViewSet):
