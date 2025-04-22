@@ -16,6 +16,18 @@ class FarmAsset(NamedHistoricalBaseModel):
                                related_name="%(class)ss")
 
 
+class GenericFarmAsset(NamedHistoricalBaseModel):
+    class Meta:
+        verbose_name = "Generic Farm Asset"
+        verbose_name_plural = "Generic Farm Assets"
+
+    description = models.TextField(blank=True, null=True)
+    parcel = models.ForeignKey('FarmParcel', on_delete=models.SET_NULL,blank=True, null=True,
+                               related_name="%(class)ss")
+
+    def __str__(self):
+        return f"{self.name}"
+
 
 class FarmCrop(FarmAsset):
     class Meta:

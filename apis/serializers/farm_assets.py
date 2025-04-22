@@ -5,7 +5,11 @@ from rest_framework import serializers
 from ..schemas import generate_urn
 from .base import URNRelatedField
 
-from farm_management.models import FarmCrop, FarmAnimal, AgriculturalMachine, FarmParcel
+from farm_management.models import (
+    GenericFarmAsset,
+    FarmCrop, FarmAnimal,
+    AgriculturalMachine, FarmParcel
+)
 
 
 class BaseFarmAssetSerializer(serializers.ModelSerializer):
@@ -28,6 +32,29 @@ class BaseFarmAssetSerializer(serializers.ModelSerializer):
 
         return json_ld_representation
 
+
+class GenericFarmAssetSerializer(BaseFarmAssetSerializer):
+
+    class Meta:
+        model = GenericFarmAsset
+        fields = [
+            'status', 'invalidatedAtTime', 'dateCreated', 'dateModified',
+            'id', 'name', 'description',
+            'hasAgriParcel',
+        ]
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+
+        json_ld_representation = {
+            '@type': 'FarmAsset',
+            **representation
+        }
+
+        return json_ld_representation
+
+
+
 class CropSpeciesSerializerField(serializers.Serializer):
     name = serializers.CharField(source='species')
     variety = serializers.CharField()
@@ -45,7 +72,6 @@ class CropSpeciesSerializerField(serializers.Serializer):
             'name': getattr(instance, 'species', ''),
             'variety': getattr(instance, 'species', ''),
         }
-
 
 
 class FarmCropSerializer(BaseFarmAssetSerializer):

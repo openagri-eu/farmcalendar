@@ -23,6 +23,8 @@ from .views import (
     FarmParcelView,
     FarmView,
     AjaxHandlerView,
+    GenericFarmAssetListView,
+    GenericFarmAssetUpdateView,
     FarmCropListView,
     FarmCropUpdateView,
     FarmAnimalListView,
@@ -56,6 +58,8 @@ urlpatterns = [
     path("farm-parcels/", FarmParcelView.as_view(), name="farm_parcels"),
     path("farm-parcels/<uuid:pk>/", view=FarmParcelView.as_view(), name="farm_parcel_edit",),
 
+    path("generic-assets/", GenericFarmAssetListView.as_view(), name="generic_farm_assets"),
+    path("generic-assets/<uuid:pk>/", GenericFarmAssetUpdateView.as_view(), name="generic_farm_asset_edit"),
     path("farm-crops/", FarmCropListView.as_view(), name="farm_crops"),
     path("farm-crops/<uuid:pk>/", FarmCropUpdateView.as_view(), name="farm_crop_edit"),
     path("farm-animals/", FarmAnimalListView.as_view(), name="farm_animals"),

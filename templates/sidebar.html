@@ -68,6 +68,12 @@
                 <span>Machines</span></a>
         </li>
 
+        <li class="nav-item{% if active_page == 'generic_assets' %} active{% endif %}">
+            <a class="nav-link" href="{% url 'generic_farm_assets' %}">
+                <i class="fas fa-fw fa-cube"></i>
+                <span>Other Assets</span>
+            </a>
+        </li>
 
         <li class="nav-item{% if active_page == 'materials' %} active{% endif %}">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMaterials"
