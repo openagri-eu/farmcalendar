@@ -128,7 +128,8 @@ class FarmAnimalListView(BaseFarmAssetListManagementView):
     success_url = reverse_lazy('farm_animals')
     asset_base_url = reverse_lazy('farm_animals')
     form_class = get_generic_farm_asset_form(FarmAnimal)
-    datatable_fields = ['national_id', 'species', 'breed', 'animal_group', 'parcel']
+    datatable_fields = ['national_id', 'species', 'breed', 'animal_group', 'parcel', 'entry_date', 'leaving_date',
+                        'previous_owner']
 
 
 class AgriculturalMachineUpdateView(BaseFarmAssetUpdateView):

@@ -49,6 +49,9 @@ class FarmAnimal(FarmAsset):
     sex = models.IntegerField(choices=SexChoices.choices, default=SexChoices.NONE)
     castrated = models.BooleanField(default=False)
     animal_group = models.CharField(max_length=255, blank=True, null=True)
+    entry_date = models.DateField(null=True, blank=True)
+    leaving_date = models.DateField(null=True, blank=True)
+    previous_owner = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         s = f"{self.species} - {self.breed}"
