@@ -14,6 +14,10 @@ def get_generic_farm_asset_form(model):
             'birth_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
             'purchase_date': forms.DateInput(attrs={'type': 'date'}, format='%Y-%m-%d'),
             'animal_group': autocomplete.ListSelect2(url='animal-group-autocomplete'),
+
+            'entry_date': forms.DateInput(attrs={'type': 'date'}, format='%Y-%m-%d'),
+            'leaving_date': forms.DateInput(attrs={'type': 'date'}, format='%Y-%m-%d'),
+            'previous_owner': forms.TextInput(attrs={'placeholder': 'Previous owner name'}),
         },
     )
     return GenericFarmAssetForm
