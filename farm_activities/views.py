@@ -77,6 +77,7 @@ class FarmCalendarActivityListView(LoginRequiredMixin, View):
             end_time = activity.end_datetime.isoformat() if activity.end_datetime else None
             activities_json_data.append({
                 'title': activity.title,
+                'activity_type_id': activity.activity_type.pk,
                 'start': activity.start_datetime.isoformat(),
                 'end': end_time,
                 'details': activity.details,

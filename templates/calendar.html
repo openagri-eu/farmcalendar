@@ -8,55 +8,84 @@
 
 {% block page_content_rows %}
 
-        <!-- Page Content Rows with Card -->
-        <div class="row">
-          <div class="col-xl-12 col-lg-12">
-              <div class="card shadow mb-4">
-                  <!-- Card Header - Dropdown -->
-                  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                      <h6 class="m-0 font-weight-bold text-primary">Farm Activities Calendar</h6>
-                      {% block card_header_action %}
-                      <!-- Optional Action Buttons or Dropdowns -->
-                      {% endblock %}
-                  </div>
+<div class="row">
+  <div class="col-xl-12 col-lg-12">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Farm Activities Calendar</h6>
+        {% block card_header_action %}
+        {% endblock %}
+      </div>
 
-                  <!-- Card Body -->
-                  <div class="card-body">
-                    <a href="{% url 'create_activity_type' %}" class="btn btn-primary mb-3">Register New Calendar Activity Type</a>
-                    <a href="{% url 'pre_register_calendar_activity' %}" class="btn btn-primary mb-3">Register New Calendar Activity</a>
-                    <div id='calendar'></div>
-                  </div>
-              </div>
-          </div>
+      <div class="card-body">
+        <div class="d-flex flex-wrap align-items-center mb-3 filter-container">
+          <label for="activityFilter" class="mr-2 font-weight-bold">Filter by Type:</label>
+          <button value="all" class="btn btn-outline-secondary btn-sm filter mr-2">All</button>
+          <button value="00000000-0000-0000-0000-000000000002" class="btn btn-outline-secondary btn-sm filter mr-2">University</button>
+          <button value="school" class="btn btn-outline-secondary btn-sm filter mr-2">School</button>
+          <!-- Add more buttons as needed, values must match groupId fields -->
+        </div>
 
+        <a href="{% url 'create_activity_type' %}" class="btn btn-primary mb-3">Register New Calendar Activity Type</a>
+        <a href="{% url 'pre_register_calendar_activity' %}" class="btn btn-primary mb-3">Register New Calendar Activity</a>
+        <div id='calendar'></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
 
 
-
 {% block on_dom_load_js %}
-var calendarEl = document.getElementById('calendar');
+let calendar;
+let allEvents = [];
+let filter_option = "all";
 
-var calendar = new FullCalendar.Calendar(calendarEl, {
+const calendarEl = document.getElementById('calendar');
+
+calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
-    events: '{% url 'calendar_activity_list' %}',  // Fetch operations (events in FullCalendar) from the Django view
     timeZone: 'local',
     headerToolbar: {
         left: 'prev,next today',
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
     },
-    height: 'auto',  // Adjust height to fit content
-    contentHeight: 'auto', // Alternatively, you can use a specific height like '600px'
-    defaultTimedEventDuration: '01:00',  // Fallback for timed events (10 minutes)
-    defaultAllDayEventDuration: { days: 1 },  // Fallback for all-day events (1 day)
+    height: 'auto',
+    contentHeight: 'auto',
+    defaultTimedEventDuration: '01:00',
+    defaultAllDayEventDuration: { days: 1 },
+
+    events: function(fetchInfo, successCallback, failureCallback) {
+        let filtered = allEvents;
+        if (filter_option !== "all") {
+            filtered = allEvents.filter(event => event.activity_type_id === filter_option);
+            console.log('here');
+        }
+        successCallback(filtered);
+    },
+
     eventClick: function(info) {
         window.location.href = info.event.extendedProps.detail_url;
-    },
+    }
 });
 
 calendar.render();
 
+fetch("{% url 'calendar_activity_list' %}")
+    .then(response => response.json())
+    .then(data => {
+        allEvents = data;
+        calendar.refetchEvents();
+    });
+
+document.querySelectorAll(".filter-container .filter").forEach(el => {
+    el.addEventListener("click", function() {
+        filter_option = this.value;
+        calendar.refetchEvents();
+    });
+});
 {% endblock on_dom_load_js %}
 
 {% block body_end_extra_scripts %}
