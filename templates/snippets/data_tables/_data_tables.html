@@ -17,12 +17,19 @@ document.addEventListener('DOMContentLoaded', function() {
             data: null,
             title: 'Operations',
             render: function(data, type, row) {
-                const buttonClass = row.fields.status ? 'btn-success' : 'btn-danger';
-                return `
+                {% if ignore_dt_status %}
+                    return `
                     <button class="btn btn-primary btn-sm edit-row p-2" data-id="${row.pk}"><i class="fas fa-pencil-alt d-block font-size-16"></i></button>
                     <button class="btn btn-danger btn-sm delete-row p-2" data-id="${row.pk}"><i class="fas fa-trash-alt d-block font-size-16"></i></button>
-                    <button class="btn btn-sm toggle-active p-2 ${buttonClass}" data-id="${row.pk}"><i class="fas fa-check d-block font-size-16"></i></button>
-                `;
+                    `;
+                {% else %}
+                    const buttonClass = row.fields.status ? 'btn-success' : 'btn-danger';
+                    return `
+                        <button class="btn btn-primary btn-sm edit-row p-2" data-id="${row.pk}"><i class="fas fa-pencil-alt d-block font-size-16"></i></button>
+                        <button class="btn btn-danger btn-sm delete-row p-2" data-id="${row.pk}"><i class="fas fa-trash-alt d-block font-size-16"></i></button>
+                        <button class="btn btn-sm toggle-active p-2 ${buttonClass}" data-id="${row.pk}"><i class="fas fa-check d-block font-size-16"></i></button>
+                    `;
+                {% endif %}
             }
         }
     ];

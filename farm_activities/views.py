@@ -1,3 +1,5 @@
+import json
+
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import CharField
@@ -5,6 +7,7 @@ from django.db.models.functions import Concat
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
+from django.views.generic import ListView, UpdateView
 from django.views import View
 
 from .models import (
@@ -23,6 +26,49 @@ class CalendarView(LoginRequiredMixin, View):
         return render(request, self.template_name)
 
 
+class FarmCalendarActivityTypeListView(LoginRequiredMixin, ListView):
+    model = FarmCalendarActivityType
+    template_name = "farm_activities/activities/activity_types.html"
+    context_object_name = 'objects'
+    asset_base_url = reverse_lazy('list_activity_type')
+    datatable_fields = ['name', ]
+
+    def get_asset_base_api_url(self):
+        asset_base_api_url = reverse_lazy(f'{self.model._meta.model_name}-list', kwargs={'version': settings.SHORT_API_VERSION})
+        return asset_base_api_url
+
+    def pre_serialize_query_set(self):
+        queryset = self.get_queryset()
+
+        annotated_data = []
+        for obj in queryset:
+            fields = {field.name: str(getattr(obj, field.name)) for field in obj._meta.fields}
+            annotated_data.append({
+                'pk': str(obj.pk),
+                'fields': fields,
+            })
+        return annotated_data
+
+    def get_context_data(self, **kwargs):
+        context = ListView.get_context_data(self, **kwargs)
+        form = FarmCalendarActivityTypeForm()
+
+        context['data_form'] = form
+        context['data_json'] = json.dumps(list(self.pre_serialize_query_set()))
+        context['row_id_field'] = 'pk'  # Use 'pk' as the unique identifier
+        context['asset_base_url'] = self.asset_base_url
+        context['asset_base_api_url'] = self.get_asset_base_api_url()
+        context['table_id'] = f'{self.model.__name__}Table'
+        context['datatable_fields'] = self.datatable_fields
+        context['model_name'] = self.model._meta.verbose_name
+        context['id_edit'] = False
+        return context
+
+    def render_to_response(self, context, **response_kwargs):
+        return super().render_to_response(context, **response_kwargs)
+
+
+
 class FarmCalendarActivityTypeCreateView(LoginRequiredMixin, View):
     def get(self, request):
         form = FarmCalendarActivityTypeForm()
@@ -34,6 +80,17 @@ class FarmCalendarActivityTypeCreateView(LoginRequiredMixin, View):
             form.save()
             return redirect('calendar')
         return render(request, 'farm_activities/activities/activity_type_form.html', {'form': form})
+
+class FarmCalendarActivityTypeEditView(LoginRequiredMixin, UpdateView):
+    model = FarmCalendarActivityType
+    form_class = FarmCalendarActivityTypeForm
+    template_name = 'farm_activities/activities/activity_type_form.html'
+    success_url = reverse_lazy('calendar')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['is_edit'] = True
+        return context
 
 
 class PreRegisterCalendarActivityView(LoginRequiredMixin, View):

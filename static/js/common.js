@@ -1,4 +1,4 @@
-const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+const csrftoken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');;
 $.ajaxSetup({
     headers: { "X-CSRFToken": csrftoken }
 });

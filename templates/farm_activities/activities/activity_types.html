@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Calendar Activity Types{% endblock title %}
+
+{% block extra_css %}
+    <!-- Page-specific stylesheets -->
+    <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+    <link href="{% static 'libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet">
+
+    <!-- Responsive datatable examples -->
+    <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <!-- alertifyjs Css -->
+    <link href="{% static 'libs/alertifyjs/build/css/alertify.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <!-- alertifyjs default themes  Css -->
+    <link href="{% static 'libs/alertifyjs/build/css/themes/default.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="{% static 'vendor/select2/css/select2.min.css' %}">
+
+{% endblock extra_css %}
+
+{% block page_content_title %}Farm Calendar Activity Types{% endblock %}
+
+{% block page_content_rows %}
+
+<!-- DataTable - Only displayed in add mode -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Manage Calendar Activity Types</h4>
+            </div>
+
+            <!-- Card Body -->
+            <div class="card-body">
+             <a href="{% url 'create_activity_type' %}" class="btn btn-primary mb-3">Register New Calendar Activity Type</a>
+            </div>
+
+            <div class="card-body">
+                {% include 'snippets/data_tables/_data_tables.html' with ignore_dt_status=True data=data_json data_form=data_form datatable_fields=datatable_fields row_id_field='pk' asset_base_url=asset_base_url asset_base_api_url=asset_base_api_url table_id='assetsDatatable' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block body_end_extra_scripts %}
+    <!-- Required datatable js -->
+    <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+
+    <!-- Responsive datatables -->
+    <script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
+
+    <script src="{% static 'libs/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
+
+    <!-- Column visibility -->
+    <script src="{% static 'libs/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
+
+    <!-- alertifyjs js -->
+    <script src="{% static 'libs/alertifyjs/build/alertify.min.js' %}"></script>
+
+{% endblock body_end_extra_scripts %}
+
+
+{% block on_dom_load_js %}
+
+{% endblock on_dom_load_js %}
