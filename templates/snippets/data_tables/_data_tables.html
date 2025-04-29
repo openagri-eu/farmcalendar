@@ -17,12 +17,19 @@ document.addEventListener('DOMContentLoaded', function() {
             data: null,
             title: 'Operations',
             render: function(data, type, row) {
-                const buttonClass = row.fields.status ? 'btn-success' : 'btn-danger';
-                return `
+                {% if ignore_dt_status %}
+                    return `
                     <button class="btn btn-primary btn-sm edit-row p-2" data-id="${row.pk}"><i class="fas fa-pencil-alt d-block font-size-16"></i></button>
                     <button class="btn btn-danger btn-sm delete-row p-2" data-id="${row.pk}"><i class="fas fa-trash-alt d-block font-size-16"></i></button>
-                    <button class="btn btn-sm toggle-active p-2 ${buttonClass}" data-id="${row.pk}"><i class="fas fa-check d-block font-size-16"></i></button>
-                `;
+                    `;
+                {% else %}
+                    const buttonClass = row.fields.status ? 'btn-success' : 'btn-danger';
+                    return `
+                        <button class="btn btn-primary btn-sm edit-row p-2" data-id="${row.pk}"><i class="fas fa-pencil-alt d-block font-size-16"></i></button>
+                        <button class="btn btn-danger btn-sm delete-row p-2" data-id="${row.pk}"><i class="fas fa-trash-alt d-block font-size-16"></i></button>
+                        <button class="btn btn-sm toggle-active p-2 ${buttonClass}" data-id="${row.pk}"><i class="fas fa-check d-block font-size-16"></i></button>
+                    `;
+                {% endif %}
             }
         }
     ];
@@ -70,6 +77,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const id = $(this).data('id');
         const $row = $(this).closest('tr');
         if (confirm('Are you sure you want to delete this item?')) {
+            {% if extra_deletion_confirmation_message %}
+                const extraConfirmation = '{{ extra_deletion_confirmation_message }}';
+                if (!confirm(extraConfirmation)) {
+                    return;
+                }
+            {% endif %}
             $.ajax({
                 url: '{{ asset_base_api_url|default:"" }}' + id + '/',
                 method: 'DELETE',

@@ -20,9 +20,10 @@
                       {% endblock %}
                   </div>
 
+                  {% csrf_token %}
                   <!-- Card Body -->
                   <div class="card-body">
-                    <a href="{% url 'create_activity_type' %}" class="btn btn-primary mb-3">Register New Calendar Activity Type</a>
+                    <a href="{% url 'list_activity_type' %}" class="btn btn-primary mb-3">Manage Calendar Activity Types</a>
                     <a href="{% url 'pre_register_calendar_activity' %}" class="btn btn-primary mb-3">Register New Calendar Activity</a>
                     <div id='calendar'></div>
                   </div>
