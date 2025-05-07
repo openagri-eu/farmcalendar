@@ -113,6 +113,18 @@ if AGSTACK_ASSET_REGISTY_API_URL is not None:
     }
 
 
+
+
+# REPORTING_API_ROOT = config('REPORTING_API_ROOT', default='http://localhost:8011/api/v1/')
+REPORTING_API_ROOT = config('REPORTING_API_ROOT')
+REPORTING_ENDPOINTS = {
+    'irrigation': f'{REPORTING_API_ROOT}openagri-report/irrigation-report/',
+    'compost': f'{REPORTING_API_ROOT}openagri-report/compost-report/',
+    'livestock': f'{REPORTING_API_ROOT}openagri-report/animal-report/',
+    'report_result_base': f'{REPORTING_API_ROOT}openagri-report/',
+}
+
+
 AUTHENTICATION_BACKENDS = (
     'farm_calendar.utils.auth_backends.CustomJWTAuthenticationBackend',
 )
