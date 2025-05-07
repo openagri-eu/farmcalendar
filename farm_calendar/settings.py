@@ -101,6 +101,18 @@ if GATEKEEPER_LOGIN_URL is not None:
     FARMCALENDAR_GATEKEEPER_PASSWORD = config('FARMCALENDAR_GATEKEEPER_PASSWORD')
 
 
+
+
+# REPORTING_API_ROOT = config('REPORTING_API_ROOT', default='http://localhost:8011/api/v1/')
+REPORTING_API_ROOT = config('REPORTING_API_ROOT')
+REPORTING_ENDPOINTS = {
+    'irrigation': f'{REPORTING_API_ROOT}openagri-report/irrigation-report/',
+    'compost': f'{REPORTING_API_ROOT}openagri-report/compost-report/',
+    'livestock': f'{REPORTING_API_ROOT}openagri-report/animal-report/',
+    'report_result_base': f'{REPORTING_API_ROOT}openagri-report/',
+}
+
+
 AUTHENTICATION_BACKENDS = (
     'farm_calendar.utils.auth_backends.CustomJWTAuthenticationBackend',
 )

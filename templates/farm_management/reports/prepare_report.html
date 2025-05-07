@@ -3,31 +3,49 @@
 {% load crispy_forms_tags %}
 
 {% block extra_css %}
-
+<style>
+    .report-status {
+        display: none;
+        margin-top: 15px;
+    }
+    .progress {
+        height: 20px;
+        margin-bottom: 15px;
+    }
+</style>
 {% endblock extra_css %}
 
 
 {% block page_content_title %}Prepare report for {{ readable_report_type }}{% endblock %}
 
 {% block page_content_rows %}
-        <!-- Page Content Rows with Card -->
-        <div class="row">
-            <div class="col-xl-8 col-lg-8">
-                <div class="card shadow mb-4">
-                    <!-- Card Header - Dropdown -->
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Select components to be included on the {{ readable_report_type }} Report</h6>
-                    </div>
+<!-- Page Content Rows with Card -->
+<div class="row">
+    <div class="col-xl-8 col-lg-8">
+        <div class="card shadow mb-4">
 
-                    <!-- Card Body -->
-                    <div class="card-body">
-                        <form method="post">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-success">Prepare Report</button>
-                        </form>
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">{{ readable_report_type }} Report</h6>
+            </div>
+
+            <!-- Card Body -->
+            <div class="card-body">
+                <form id="reportForm" method="post">
+                    <button type="submit" class="btn btn-success">Prepare Report</button>
+                </form>
+
+                <div id="reportStatus" class="report-status">
+                    <div class="progress">
+                        <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated"
+                             role="progressbar" style="width: 0%"></div>
+                    </div>
+                    <div id="statusMessage" class="alert alert-info">
+                        Preparing your report...
                     </div>
                 </div>
             </div>
+
 
 {% endblock %}
 
@@ -36,6 +54,106 @@
 
 {% block on_dom_load_js %}
 
+let checkInterval;
+let reportUuid = null;
+const accessToken = '{{ access_token }}';  // From context
+
+$('#reportForm').on('submit', function(e) {
+    e.preventDefault();
+
+    $('#reportStatus').show();
+    $('#progressBar').css('width', '10%');
+
+    // Disable submit button to prevent multiple requests
+    $(this).find('button[type="submit"]').prop('disabled', true);
+
+    $.ajax({
+        url: '{{ report_endpoint }}',
+        type: 'POST',
+        crossDomain: true,
+        headers: {
+            'Authorization': `Bearer ${accessToken}`
+        },
+        success: function(response) {
+            reportUuid = response.uuid;
+            $('#progressBar').css('width', '30%');
+            $('#statusMessage').text('Report generation started. Waiting for completion...');
+
+            // Start checking for report completion every 3 seconds
+            checkInterval = setInterval(checkReportStatus, 3000);
+        },
+        error: function(xhr) {
+            alertify.error('Failed to start report generation: ' + (xhr.responseJSON?.detail || xhr.statusText));
+            $('#reportForm button[type="submit"]').prop('disabled', false);
+            $('#reportStatus').hide();
+        }
+    });
+});
+
+function checkReportStatus() {
+    if (!reportUuid) return;
+
+    // Construct the download URL
+    const downloadUrl = '{{ report_result_base_endpoint }}' + reportUuid;
+
+    // Try to download the file
+    $.ajax({
+        url: downloadUrl,
+        type: 'GET',
+        crossDomain: true,
+        headers: {
+            'Authorization': `Bearer ${accessToken}`
+        },
+        xhrFields: {
+            responseType: 'blob' // Important for file download
+        },
+        success: function(data, status, xhr) {
+            const contentType = xhr.getResponseHeader('content-type');
+            if (contentType === 'application/pdf' || contentType === 'application/octet-stream') {
+                clearInterval(checkInterval);
+                $('#progressBar').css('width', '100%');
+                $('#statusMessage').text('Report ready! Downloading...');
+
+                // Create a download link and trigger click
+                const blob = new Blob([data], {type: contentType});
+                const link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = '{{ report_type }}_report_' + reportUuid + '.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                // Reset form after a short delay
+                setTimeout(function() {
+                    $('#reportStatus').hide();
+                    $('#reportForm button[type="submit"]').prop('disabled', false);
+                    $('#progressBar').css('width', '0%');
+                    reportUuid = null;
+                }, 2000);
+            } else {
+                // Increment progress bar (but don't go over 90% until download)
+                const currentWidth = parseInt($('#progressBar').css('width'));
+                if (currentWidth < 90) {
+                    $('#progressBar').css('width', (currentWidth + 5) + '%');
+                }
+            }
+        },
+        error: function(xhr) {
+            if (xhr.status === 404) {
+                // Report not ready yet - this is expected
+                const currentWidth = parseInt($('#progressBar').css('width'));
+                if (currentWidth < 90) {
+                    $('#progressBar').css('width', (currentWidth + 2) + '%');
+                }
+            } else {
+                // Other error - stop checking
+                clearInterval(checkInterval);
+                alertify.error('Error checking report status: ' + (xhr.responseJSON?.detail || xhr.statusText));
+                $('#reportForm button[type="submit"]').prop('disabled', false);
+            }
+        }
+    });
+}
 {% endblock on_dom_load_js %}
 
 {% block body_end_extra_scripts %}
