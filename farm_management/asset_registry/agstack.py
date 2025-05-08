@@ -1,10 +1,8 @@
-import hashlib
-import hmac
-import urllib.parse
+from urllib.parse import urljoin
+from django.conf import settings
 
 import requests
 
-from django.conf import settings
 
 class AgstackClient:
     """
@@ -12,48 +10,45 @@ class AgstackClient:
     """
 
     def __init__(self):
-        self.api_url = settings.AGSTACK_API_URL
+        self.api_url = settings.AGSTACK_ASSET_REGISTY_API_URL
 
+    def register_field_boundary(self, wkt_geometry, threshold=95, s2_index=(8, 13)):
+        s2_index_str = ",".join(map(str, s2_index))
 
-    def get_or_create_asset_for_field(self, wkt_geometry):
-        """
-        Get or create an asset in AgStack for the given WKT geometry.
-        """
-        endpoint = settings.AGSTACK_ENDPOINTS['get_or_create_asset_for_field']
+        headers = {
+            "API-KEYS-AUTHENTICATION": "true",
+            "API-KEY": settings.AGSTACK_API_KEY,
+            "CLIENT-SECRET": settings.AGSTACK_CLIENT_SECRET,
+            # # (Optional)
+            # "AUTOMATED-FIELD": "1"
+        }
 
         data = {
-            'bound': wkt_geometry,
-            'create': 1,
-            'access_key': settings.AGSTACK_ACCESS_KEY,
+            "wkt": wkt_geometry,
+            # "threshold": threshold,  # Optional, defaults to 95 if not provided
+            # "s2_index": s2_index_str  # Optional: comma-separated S2 indices if needed
         }
-        signature = self._generate_signature(data)
-        data.update({
-            'signature': signature,
-        })
-        req = requests.get(endpoint, params=data)
-        if req.status_code == 200:
-            # {
-            #     "geoid": "string",
-            #     "domain": "test.com",
-            #     "intersection": 0.5,
-            #     "inclusion": 0.9,
-            #     "overlap": 0.7,
-            #     "resolution_level": 13
-            # }
-            response = req.json()
-            if response.get('geoid'):
-                return response
+        endpoint_url = urljoin(self.api_url, settings.AGSTACK_ENDPOINTS['register_field_boundary'])
+        resp = requests.post(endpoint_url, json=data, headers=headers)
+
+        geo_id = None
+        try:
+            result = resp.json()
+            if 'Geo Id' in result:
+                geo_id = result['Geo Id']
+            elif 'matched geo ids' in result:
+                geo_id = result['matched geo ids'][0]
             else:
                 raise ValueError("Invalid response from AgStack API")
-        else:
-            raise ValueError(f"Error {req.status_code}: {req.text}")
-    def _generate_signature(self, data):
-        """
-        Generate a signature for the given data using the AgStack API secret key.
-        """
+        except Exception as e:
+            raise ValueError("Invalid response from AgStack API")
+        return geo_id
 
-        sorted_params = sorted(params.items())
-        query_string = urllib.parse.urlencode(sorted_params)
 
-        # Step 2: Generate HMAC-SHA256 signature
-        signature = hmac.new(client_secret, query_string.encode('utf-8'), hashlib.sha256).hexdigest()
+if __name__ == '__main__':
+
+    client = AgstackClient()
+
+    wkt_geometry = "POLYGON((5.714800882907841 50.83967331197391,5.714729694830028 50.839206943235155,5.716022320453463 50.839169065366434,5.715939892152838 50.83967094463168,5.714800882907841 50.83967331197391))"
+    print(client.register_field_boundary(wkt_geometry))
+

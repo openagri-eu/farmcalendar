@@ -101,15 +101,15 @@ if GATEKEEPER_LOGIN_URL is not None:
     FARMCALENDAR_GATEKEEPER_PASSWORD = config('FARMCALENDAR_GATEKEEPER_PASSWORD')
 
 none_if_empty_cast = lambda x: None if x == '' else x
-AGSTACK_API_URL = config('AGSTACK_API_URL', default=None, cast=none_if_empty_cast)
+AGSTACK_ASSET_REGISTY_API_URL = config('AGSTACK_ASSET_REGISTY_API_URL', default=None, cast=none_if_empty_cast)
 
 AGSTACK_CLIENT_SECRET = None
 AGSTACK_API_KEY = None
-if AGSTACK_API_URL is not None:
+if AGSTACK_ASSET_REGISTY_API_URL is not None:
     AGSTACK_CLIENT_SECRET = config('AGSTACK_CLIENT_SECRET')
     AGSTACK_API_KEY = config('AGSTACK_API_KEY')
     AGSTACK_ENDPOINTS = {
-        'get_or_create_asset_for_field': config('AGSTACK_ENDPOINT_GET_OR_CREATE_ASSET_FOR_FIELD', default='/findAssetForField'),
+        'register_field_boundary': config('AGSTACK_ENDPOINT_REGISTER_FIELD_BOUNDARY', default='/register-field-boundary'),
     }
 
 
