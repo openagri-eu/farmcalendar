@@ -3805,7 +3805,6 @@ paths:
         name: geo_id
         schema:
           type: string
-          format: uuid
       - in: query
         name: identifier
         schema:
