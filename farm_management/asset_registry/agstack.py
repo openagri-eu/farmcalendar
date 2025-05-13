@@ -13,7 +13,7 @@ class AgstackClient:
         self.api_url = settings.AGSTACK_ASSET_REGISTY_API_URL
 
     def register_field_boundary(self, wkt_geometry, threshold=95, s2_index=(8, 13)):
-        s2_index_str = ",".join(map(str, s2_index))
+        # s2_index_str = ",".join(map(str, s2_index))
 
         headers = {
             "API-KEYS-AUTHENTICATION": "true",
