@@ -2,7 +2,7 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ ci-build ]
+    branches: [ main ]
 
 jobs:
   build-and-push:
@@ -33,6 +33,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository }}:ci-build
+          tags: ghcr.io/${{ github.repository }}:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
