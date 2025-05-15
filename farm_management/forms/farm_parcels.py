@@ -117,7 +117,7 @@ class FarmParcelsForm(forms.ModelForm):
         required=False, label="Irrigation Flow (units)",
         widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Flow rate'})
     )
-    geo_id = forms.UUIDField(
+    geo_id = forms.CharField(
         required=False, label="Geographic Data ID",
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Geographic UUID', 'readonly': 'readonly'})
     )

@@ -100,12 +100,27 @@ if GATEKEEPER_LOGIN_URL is not None:
     FARMCALENDAR_GATEKEEPER_USER = config('FARMCALENDAR_GATEKEEPER_USER')
     FARMCALENDAR_GATEKEEPER_PASSWORD = config('FARMCALENDAR_GATEKEEPER_PASSWORD')
 
+none_if_empty_cast = lambda x: None if x == '' else x
+AGSTACK_ASSET_REGISTY_API_URL = config('AGSTACK_ASSET_REGISTY_API_URL', default=None, cast=none_if_empty_cast)
+
+AGSTACK_CLIENT_SECRET = None
+AGSTACK_API_KEY = None
+if AGSTACK_ASSET_REGISTY_API_URL is not None:
+    AGSTACK_CLIENT_SECRET = config('AGSTACK_CLIENT_SECRET')
+    AGSTACK_API_KEY = config('AGSTACK_API_KEY')
+    AGSTACK_ENDPOINTS = {
+        'register_field_boundary': config('AGSTACK_ENDPOINT_REGISTER_FIELD_BOUNDARY', default='/register-field-boundary'),
+    }
+
 
 AUTHENTICATION_BACKENDS = (
     'farm_calendar.utils.auth_backends.CustomJWTAuthenticationBackend',
 )
 if GATEKEEPER_LOGIN_URL is None:
     AUTHENTICATION_BACKENDS = AUTHENTICATION_BACKENDS + ('django.contrib.auth.backends.ModelBackend',)
+
+
+
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 

@@ -1,9 +1,14 @@
 import uuid
 
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from simple_history.models import HistoricalRecords
+
+
+
+from farm_management.asset_registry.agstack import AgstackClient
 
 
 class BaseModel(models.Model):
@@ -37,15 +42,30 @@ class LocationBaseModel(models.Model):
     longitude = models.DecimalField(_('Longitude'), max_digits=17, decimal_places=14, blank=True, null=True)
 
     geometry = models.TextField(_('Geometry (WKT EPSG:4326)'), blank=True, null=True)
-    geo_id = models.UUIDField(_('Geographic Data ID'), unique=True, blank=True, null=True)
+    geo_id = models.CharField(_('Geographic Data ID'), unique=True, blank=True, null=True)
 
     class Meta:
         abstract = True
 
+    def _check_geometry_is_new(self, geometry):
+        if self.pk is None:
+            return True
+
+        query = self.__class__.objects.filter(pk=self.pk).values('geometry')
+        if not query.exists():
+            return True
+        prev_geometry = query.get()['geometry']
+        return prev_geometry != geometry
+
     def save(self, *args, **kwargs):
         if self.geometry:
-            # Generate UUID based on the geometry string
-            self.geo_id = uuid.uuid5(uuid.NAMESPACE_DNS, self.geometry)
+            if settings.AGSTACK_ASSET_REGISTY_API_URL:
+                if self._check_geometry_is_new(self.geometry):
+                    agstack_client = AgstackClient()
+                    self.geo_id = agstack_client.register_field_boundary(self.geometry)
+            else:
+                # Generate UUID based on the geometry string
+                self.geo_id = uuid.uuid5(uuid.NAMESPACE_DNS, self.geometry)
         elif not self.geometry:
             self.geo_id = None
         super().save(*args, **kwargs)
