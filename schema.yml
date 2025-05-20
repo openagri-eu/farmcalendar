@@ -5595,10 +5595,8 @@ components:
       required:
       - activityType
       - hasCompostMaterial
-      - hasEndDatetime
       - hasStartDatetime
       - id
-      - responsibleAgent
       - usesAgriculturalMachinery
     AddressField:
       type: object
@@ -5737,13 +5735,11 @@ components:
           readOnly: true
       required:
       - activityType
-      - hasEndDatetime
       - hasMeasurement
       - hasNestedOperation
       - hasStartDatetime
       - id
       - isOperatedOn
-      - responsibleAgent
       - usesAgriculturalMachinery
     CompostTurningOperation:
       type: object
@@ -5778,10 +5774,8 @@ components:
             format: uuid
       required:
       - activityType
-      - hasEndDatetime
       - hasStartDatetime
       - id
-      - responsibleAgent
       - usesAgriculturalMachinery
     ContactPersonField:
       type: object
@@ -5830,7 +5824,6 @@ components:
       required:
       - activityType
       - hasAgriCrop
-      - hasEndDatetime
       - hasResult
       - id
       - observedProperty
@@ -5878,11 +5871,9 @@ components:
       required:
       - activityType
       - hasAppliedAmount
-      - hasEndDatetime
       - hasStartDatetime
       - id
       - operatedOn
-      - responsibleAgent
       - usesAgriculturalMachinery
       - usesPesticide
     CropSpeciesSerializerField:
@@ -5932,7 +5923,6 @@ components:
       required:
       - activityType
       - hasAgriCrop
-      - hasEndDatetime
       - hasResult
       - id
       - observedProperty
@@ -6094,10 +6084,8 @@ components:
             format: uuid
       required:
       - activityType
-      - hasEndDatetime
       - hasStartDatetime
       - id
-      - responsibleAgent
       - usesAgriculturalMachinery
     FarmCalendarActivityType:
       type: object
@@ -6325,11 +6313,9 @@ components:
       - activityType
       - hasApplicationMethod
       - hasAppliedAmount
-      - hasEndDatetime
       - hasStartDatetime
       - id
       - operatedOn
-      - responsibleAgent
       - usesAgriculturalMachinery
       - usesFertilizer
     Fertilizer:
@@ -6483,11 +6469,9 @@ components:
       required:
       - activityType
       - hasAppliedAmount
-      - hasEndDatetime
       - hasStartDatetime
       - id
       - operatedOn
-      - responsibleAgent
       - usesAgriculturalMachinery
       - usesIrrigationSystem
     LocationSerializerField:
@@ -6545,7 +6529,6 @@ components:
           type: string
       required:
       - activityType
-      - hasEndDatetime
       - hasResult
       - id
       - observedProperty
