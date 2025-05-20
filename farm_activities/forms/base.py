@@ -69,11 +69,15 @@ class NestedActivityForm(FarmCalendarActivityForm):
     )
 
     class Meta(FarmCalendarActivityForm.Meta):
-        pass
+        _parent_exc = FarmCalendarActivityForm.Meta.exclude.copy()
+        if 'parent_activity' in _parent_exc:
+            _parent_exc.remove('parent_activity')
+        exclude = _parent_exc
 
 class ObservationForm(NestedActivityForm):
     class Meta(NestedActivityForm.Meta):
         model = Observation
         _parent_exc = NestedActivityForm.Meta.exclude.copy()
-        _parent_exc.remove('parent_activity')
+        if 'parent_activity' in _parent_exc:
+            _parent_exc.remove('parent_activity')
         exclude = _parent_exc
