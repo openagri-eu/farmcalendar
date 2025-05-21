@@ -58,9 +58,9 @@ def quantity_value_serializer_factory(unit_field, value_field):
 class FarmCalendarActivitySerializer(serializers.ModelSerializer):
     activityType = URNRelatedField(class_names=['FarmCalendarActivityType'], source='activity_type', queryset=FarmCalendarActivityType.objects.all())
     hasStartDatetime = serializers.DateTimeField(source='start_datetime')
-    hasEndDatetime = serializers.DateTimeField(source='end_datetime', allow_null=True)
+    hasEndDatetime = serializers.DateTimeField(source='end_datetime', allow_null=True, required=False)
 
-    responsibleAgent = serializers.CharField(source='responsible_agent', allow_null=True)
+    responsibleAgent = serializers.CharField(source='responsible_agent', allow_null=True, required=False)
 
     usesAgriculturalMachinery = URNRelatedField(class_names=['AgriculturalMachine'], source='agricultural_machinery', many=True, queryset=AgriculturalMachine.objects.all())
 
