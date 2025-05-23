@@ -78,14 +78,7 @@
                                         <div id="map" class="map"></div>
                                         <div class="col-auto">
                                             <span class="input-group">
-                                            <label class="input-group-text" for="geo_type">Geometry type:</label>
-                                            <select class="form-select" id="geo_type">
-                                                <option value="Polygon">Polygon</option>
-                                                <option value="Point">Point</option>
-                                                <option value="LineString">LineString</option>
-                                                <option value="Circle">Circle</option>
-                                            </select>
-                                            <input class="form-control" type="button" value="Remove All" id="geo_remove">
+                                            <input class="form-control" type="button" value="Remove Polygon" id="geo_remove">
                                             </span>
                                         </div>
                                     </div>
@@ -337,18 +330,18 @@ const map = new ol.Map({
     target: 'map',
     view: new ol.View({
         center: [22.48994006427307, 37.42592004044673], // Set initial center
-        projection: 'EPSG:3857', // Set the map projection to EPSG:4326
+        projection: 'EPSG:3857', // Set the map projection to EPSG:3857
         zoom: 12, // Set initial zoom level
     }),
 });
 
 
-const typeSelect = document.getElementById('geo_type');
+//const typeSelect = document.getElementById('geo_type');
 let draw; // global so we can remove it later
 
 // Function to add drawing interaction
 function addInteraction() {
-    const value = typeSelect.value;
+    const value = 'Polygon';
     if (value !== 'None') {
         draw = new ol.interaction.Draw({
             source: source,
@@ -356,6 +349,12 @@ function addInteraction() {
         });
         map.addInteraction(draw);
     }
+
+    // Before starting to draw a new polygon, clear any existing features
+    draw.on('drawstart', function (event) {
+        source.clear();  // Remove any existing polygons
+    });
+
     // Center the map around the existing features, if any
     if (initial_features.length > 0) {
         const extent = source.getExtent();
@@ -364,10 +363,10 @@ function addInteraction() {
 }
 
 // Handle change event for shape selection
-typeSelect.onchange = function () {
-    map.removeInteraction(draw);
-    addInteraction();
-};
+//typeSelect.onchange = function () {
+//    map.removeInteraction(draw);
+//    addInteraction();
+//};
 
 
 $('#geo_remove').on('click', function() {
