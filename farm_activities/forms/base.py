@@ -19,7 +19,7 @@ class FarmCalendarActivityTypeSelectionForm(forms.Form):
 class FarmCalendarActivityTypeForm(forms.ModelForm):
     class Meta:
         model = FarmCalendarActivityType
-        fields = ["name", "background_color", "border_color", "text_color"]
+        fields = ["name", "category","background_color", "border_color", "text_color"]
         widgets = {
             "background_color": forms.TextInput(attrs={"class": "color-picker"}),
             "border_color": forms.TextInput(attrs={"class": "color-picker"}),

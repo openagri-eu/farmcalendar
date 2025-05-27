@@ -42,6 +42,15 @@ class FarmCalendarActivityType(models.Model):
         default='#000000',  # Default text color
     )
 
+    class ActivityCategoryChoices(models.TextChoices):
+        ACTIVITY = 'activity', _('Activity')
+        OBSERVATION = 'observation', _('Observation')
+        ALERT = 'alert', _('Alert')
+
+    category = models.CharField(max_length=50, choices=ActivityCategoryChoices.choices,
+                                        default=ActivityCategoryChoices.ACTIVITY)
+
+
     def __str__(self):
         return self.name
 
@@ -72,6 +81,8 @@ class FarmCalendarActivity(models.Model):
     # need to change this into a operation model instead...
     agricultural_machinery = models.ManyToManyField('farm_management.AgriculturalMachine', related_name='used_in_operations', blank=True)
     # weather_observation = models.ManyToManyField('farm_management.AgriculturalMachine', related_name='used_in_operations', blank=True, null=True)?
+
+
 
     parent_activity = models.ForeignKey(
         "self",

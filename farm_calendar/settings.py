@@ -344,6 +344,7 @@ DEFAULT_CALENDAR_ACTIVITY_TYPES = {
         "background_color": "#F5E8C7",
         "border_color": "#8B4513",
         "text_color": "#2F4F4F",
+        'category': 'activity',
         "id": "00000000-0000-0000-0000-000000000001",
     },
     'irrigation': {
@@ -352,6 +353,7 @@ DEFAULT_CALENDAR_ACTIVITY_TYPES = {
         'background_color': '#B3E5FC',
         'border_color': '#0288D1',
         'text_color': '#01579B',
+        'category': 'activity',
         "id": "00000000-0000-0000-0000-000000000002",
     },
     'crop_protection':{
@@ -360,6 +362,7 @@ DEFAULT_CALENDAR_ACTIVITY_TYPES = {
         'background_color': '#C5E1A5',
         'border_color': '#8E7F2F',
         'text_color': '#4E342E',
+        'category': 'activity',
         "id": "00000000-0000-0000-0000-000000000003",
     },
     'crop_stress_indicator':{
@@ -368,6 +371,7 @@ DEFAULT_CALENDAR_ACTIVITY_TYPES = {
         'background_color': '#FFCCCB',
         'border_color': '#C62828',
         'text_color': '#BF360C',
+        'category': 'observation',
         "id": "00000000-0000-0000-0000-000000000004",
     },
     'crop_growth_stage':{
@@ -376,6 +380,7 @@ DEFAULT_CALENDAR_ACTIVITY_TYPES = {
         "background_color": "#F5E8C7",
         "border_color": "#8B4513",
         "text_color": "#2F4F4F",
+        'category': 'observation',
         "id": "00000000-0000-0000-0000-000000000005",
     },
     'compost_operation':{
@@ -384,6 +389,7 @@ DEFAULT_CALENDAR_ACTIVITY_TYPES = {
         'background_color': '#A3C585',
         'border_color': '#6B4226',
         'text_color': '#3E4A34',
+        'category': 'activity',
         'id': '00000000-0000-0000-0000-000000000006',
     },
     'add_raw_material_operation':{
@@ -392,6 +398,7 @@ DEFAULT_CALENDAR_ACTIVITY_TYPES = {
         'background_color': '#D9E58A',
         'border_color': '#8A5A2B',
         'text_color': '#4A5320',
+        'category': 'activity',
         'id': '00000000-0000-0000-0000-000000000007',
     },
     'compost_turning_operation': {
@@ -400,6 +407,7 @@ DEFAULT_CALENDAR_ACTIVITY_TYPES = {
         'background_color': '#BFD982',
         'border_color': '#72512D',
         'text_color': '#3C4F2E',
+        'category': 'activity',
         'id': '00000000-0000-0000-0000-000000000008',
     }
 }

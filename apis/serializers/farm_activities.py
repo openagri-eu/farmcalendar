@@ -91,7 +91,7 @@ class FarmCalendarActivityTypeSerializer(serializers.ModelSerializer):
 
         fields = [
             'id',
-            'name', 'description',
+            'name', 'description', 'category',
             'background_color', 'border_color', 'text_color',
         ]
 

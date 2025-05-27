@@ -5688,6 +5688,16 @@ components:
       required:
       - numericValue
       - unit
+    CategoryEnum:
+      enum:
+      - activity
+      - observation
+      - alert
+      type: string
+      description: |-
+        * `activity` - Activity
+        * `observation` - Observation
+        * `alert` - Alert
     CompostOperation:
       type: object
       properties:
@@ -6100,6 +6110,8 @@ components:
         description:
           type: string
           nullable: true
+        category:
+          $ref: '#/components/schemas/CategoryEnum'
         background_color:
           type: string
           pattern: ^#[0-9A-Fa-f]{6}$
@@ -6940,6 +6952,8 @@ components:
         description:
           type: string
           nullable: true
+        category:
+          $ref: '#/components/schemas/CategoryEnum'
         background_color:
           type: string
           pattern: ^#[0-9A-Fa-f]{6}$
