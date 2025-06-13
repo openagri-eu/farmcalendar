@@ -94,6 +94,7 @@ class FarmCalendarActivityTypeEditView(LoginRequiredMixin, UpdateView):
 
 
 class PreRegisterCalendarActivityView(LoginRequiredMixin, View):
+
     template_name = 'farm_activities/activities/pre_activity_form.html'
     def get(self, request):
         form = FarmCalendarActivityTypeSelectionForm()
