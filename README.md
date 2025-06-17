@@ -1,6 +1,8 @@
 # OpenAgri Digital Farm Calendar
+🇪🇺
+*"This service was created in the context of OpenAgri project (https://horizon-openagri.eu/). OpenAgri has received funding from the EU’s Horizon Europe research and innovation programme under Grant Agreement no. 101134083."*
 
-The “OpenAgri Digital Farm Calendar” service addresses the data capture needs of farms including the manual recording of: farmers operations, farmers observations, parcels properties and recording of farms’ assets. The Farm Calendar follows a mixed model (edge-cloud) approach, offering (reduced) functionality even without internet connectivity.
+
 A Web User Interface (UI) is provided which allows the users the visualize and navigate through the farm calendar of activities and to facilitate the management of the farm assets.
 Moreover, all these operations and farm assets can be managed through a REST API, which provides these resources in a linked data format (i.e., using JSON-LD) and conforms to the OpenAgri Common Semantic Model (OCSM).
 
