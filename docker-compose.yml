@@ -26,7 +26,7 @@ services:
 
   web:
     build: .
-    image: ghcr.io/agstack/OpenAgri-FarmCalendar:latest
+    image: ghcr.io/agstack/openagri-farmcalendar:latest
     command: /var/www/entrypoint.sh
     ports:
       - "${APP_PORT}:${APP_PORT}"
